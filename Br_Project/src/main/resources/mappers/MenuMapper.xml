@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MenuMapper">
+	<!-- Integer가 들어있는 java.lang은 import 필요없음 -->
+	
+	<select id="selectAllDrinks" resultType="com.br.dto.DrinkDto">
+		<![CDATA[
+			SELECT  drinks_idx AS drinksIdx,
+	        name AS name,
+	        img AS img,
+	        tag AS tag,
+	        background_color AS backgroundColor,
+	        font_color AS fontColor
+			FROM    drinks
+			ORDER BY drinks_idx ASC
+		]]>
+	</select>
+	
+	
+	<select id="selectDrink" resultType="com.br.dto.DrinkDto">
+		<![CDATA[
+			SELECT  name AS name,
+			        img AS img,
+			        background_color AS background_color,
+			        name_eng AS name_eng,
+			        description AS description 
+			FROM    drinks
+			WHERE   drinks_idx = #{drinksIdx}
+		]]>
+	</select>
+	
+	
+	<select id="selectDrinkDetailMenu" resultType="com.br.dto.DrinkDetailMenuDto">
+		<![CDATA[
+			SELECT  name AS name,
+			        serving_size AS servingSize,
+			        calories AS calories,
+			        sugars AS sugars,
+			        protein AS protein,
+			        saturated_fat AS saturatedFat,
+			        sodium AS sodium,
+			        caffeine AS caffeine,
+			        allergens AS allergens,
+			        price AS price
+			FROM    drinks_detail
+			WHERE   drinks_idx = #{drinksIdx}
+		]]>
+	</select>
+	
+	
+</mapper>

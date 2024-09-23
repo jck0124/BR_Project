@@ -1,0 +1,105 @@
+@charset "UTF-8";
+.fl {float : left}
+.fr {float : right}
+.border {border : 1px solid red}
+a {text-decoration : none}
+
+/*이름과 가격정보*/
+#content {
+	margin: 0 auto;
+    width: 985px;
+    margin-top: 200px;
+}
+.product_name {
+	width: 1500px;
+	margin-bottom : 50px;
+}
+.half_round {
+	background-color: #fbeaad;
+	overflow: hidden;
+    position: relative;
+    width: 482px;
+    height: 534px;
+    border-radius: 50% 50% 0 0;
+}
+.half_round > img {
+	width : 434px;
+	bottom: -16px;
+    max-width: 90%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+#letter {
+	margin-top: 200px;
+    margin-left: 50px;
+}
+.pink_color {
+	color: #ff87a0;
+    font-family: var(--font-family-en);
+    font-weight: var(--font-weight-sd-extrabold);
+    font-size: 13px;
+    line-height: 1;
+}
+.eng_bold {
+	font-weight: var(--font-weight-sd-semibold);
+    font-family: var(--font-family-en);
+    font-size: 22px;
+}
+.kor_bold {
+	margin-top: 16px;
+    font-size: 42px;
+    font-weight: var(--font-weight-sd-extrabold);
+    line-height: 1.2;
+}
+.kor_thin {
+	margin-top: 16px;
+    font-weight: var(--font-weight-sd-medium);
+    font-size: 17px;
+    line-height: 1.3333333333;
+}
+.price {
+	margin-top: 20px;
+    font-weight: var(--font-weight-sd-bold);
+    font-size: 17px;
+    line-height: 1.3333333333;
+}
+
+/*영양정보*/
+.border_top {
+    border-top: 1px solid #c6c1bf;
+    margin-top: 80px;
+}
+
+.nutrition_title {
+    color: var(--brown-color-1);
+    font-weight: var(--font-weight-sd-bold);
+    font-size: 23px;
+}
+
+.nutrition_menu_name {
+    font-weight: var(--font-weight-sd-bold);
+    font-size: 18px;
+    margin-top: 30px;
+}
+
+
+#nutrition {
+    display: flex;
+    justify-content: space-between; /* 여백을 자동으로 분배 */
+}
+#nutrition > div {
+	text-align: center;
+}
+
+.nutrition_black {
+	color: var(--brown-color-1);
+	font-weight: var(--font-weight-sd-medium);
+    font-size: 15px;
+}
+.nutrition_pink {
+	margin-top: 10px;
+    color: #ff3f67;
+    font-weight: var(--font-weight-sd-medium);
+    font-size: 15px;
+}
