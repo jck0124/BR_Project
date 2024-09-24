@@ -15,7 +15,7 @@
 	<!-- 페이지 이동 -->
 	<div id="menu_location">
 		<a href="">이달의 맛</a>
-		<a href="">아이스크림</a>
+		<a href="${pageContext.request.contextPath}/menu_icecream">아이스크림</a>
 		<a href="">아이스크림케이크</a>
 		<a href="${pageContext.request.contextPath}/menu_drinks">음료</a>
 	</div>

@@ -5,6 +5,7 @@
 <mapper namespace="MenuMapper">
 	<!-- Integer가 들어있는 java.lang은 import 필요없음 -->
 	
+	<!-- 찬균 -->
 	<select id="selectAllDrinks" resultType="com.br.dto.DrinkDto">
 		<![CDATA[
 			SELECT  drinks_idx AS drinksIdx,
@@ -49,5 +50,23 @@
 		]]>
 	</select>
 	
+	<!-- 수연 -->
+	<select id="getAllIcecream" resultType="com.br.dto.IcecreamDto">
+		<![CDATA[
+			SELECT icecream_idx AS icecreamIdx
+			, name_kor AS nameKor
+			, name_eng AS nameEng
+			, img_url AS imgUrl
+			, detail_img AS detailImg
+			, info
+			, hashtag
+			, background_color AS backgroundColor
+			, text_color AS textColor
+			FROM icecream
+			ORDER BY icecreamIdx ASC
+		]]>
+	</select>
+
 	
+	<!-- 수빈 -->
 </mapper>

@@ -18,7 +18,7 @@
             <div class="header_left">
 
                 <div class="header_logo">
-                    <a href="">
+                    <a href="${pageContext.request.contextPath}/menu_icecream">
                         <img src="${pageContext.request.contextPath}/resources/img/h_logo_white.png" alt="">
                     </a>
                 </div>
@@ -37,7 +37,7 @@
                                         <a href="">이달의 맛</a>
                                     </div>
                                     <div>
-                                        <a href="">아이스크림</a>
+                                        <a href="${pageContext.request.contextPath}/menu_icecream">아이스크림</a>
                                     </div>
                                     <div>
                                         <a href="">아이스크림케이크</a>
@@ -81,7 +81,7 @@
                                                 <a href="">배라광장</a>
                                             </div>
                                             <div>
-                                                <a href="">BR레시피</a>
+                                                <a href="${pageContext.request.contextPath}/br_recipe">BR레시피</a>
                                             </div>
                                             <div>
                                                 <a href="">마이플레이버리스트</a>
@@ -131,7 +131,7 @@
                                         </div>
                                         <div>
                                             <div>
-                                                <a href="">매장 찾기</a>
+                                                <a href="${pageContext.request.contextPath}/store_map">매장 찾기</a>
                                             </div>
                                             <div>
                                                 <a href="">100flavor 플래그십스토어</a>

@@ -9,6 +9,7 @@ import com.br.dao.MenuDao;
 import com.br.dto.DrinkDetailDto;
 import com.br.dto.DrinkDetailMenuDto;
 import com.br.dto.DrinkDto;
+import com.br.dto.IcecreamDto;
 
 @Service
 public class MenuServiceImpl implements MenuService {
@@ -16,16 +17,13 @@ public class MenuServiceImpl implements MenuService {
 	@Autowired
 	private MenuDao mDao;
 	
-	
-	
+	// 찬균
 	@Override
 	public ArrayList<DrinkDto> getDrinksList() {
 		
 		ArrayList<DrinkDto> drinkList = mDao.selectDrinksList();
 		return drinkList;
 	}
-	
-	
 	
 	@Override
 	public DrinkDetailDto getDrinkDetail(int drinksIDx) {
@@ -36,6 +34,14 @@ public class MenuServiceImpl implements MenuService {
 		return new DrinkDetailDto(dDto, drinkDetailMenuList);
 	}
 	
-	
+	// 수연
+	@Override
+	public ArrayList<IcecreamDto> getIcecreamList() {
+		
+		ArrayList<IcecreamDto> icecreamList = new ArrayList<IcecreamDto>();
+		icecreamList = mDao.selectIcecreamList();
+		
+		return icecreamList;
+	}
 	
 }

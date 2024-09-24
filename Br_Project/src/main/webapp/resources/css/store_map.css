@@ -1,0 +1,395 @@
+@charset "UTF-8";
+body {
+    margin: 0px;
+    height: 1000px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+.fl {float : left}
+.fr {float : right}
+.border {boarder : 1px solid red}
+.center {margin: 0 auto}
+
+/* 메인 컨테이너 */
+#main_container {
+	width: 100%;
+	height: auto;
+	padding: 60px 0 0;
+	background-color: aliceblue;
+	margin-top: 90px;
+	
+}
+#delivery_store {
+	cursor : pointer;
+	color: #f986bd;
+	margin-top: 25px;
+    text-align: center;
+}
+#delivery_store > a {
+	text-decoration: none;
+	color: #f986bd;
+	margin-right :10px;
+	border-right : 1px solid #f986bd;
+	padding-right: 10px;
+}
+#delivery_store > a:last-child {
+	border: 0;
+}
+#delivery_store_header {
+	width: 1500px;
+	height: auto;
+}
+.page_header {
+	margin-top: 70px;
+	width: 1500px;
+	height: 200px;
+}
+.page_header_inner {
+	width: 1500px;
+	height: 200px;
+}
+.header_title {
+	width: 1500px;
+	height: 90px;
+	margin: 0;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    color: #f986bd;
+    font-family: var(--font-family-scoop);
+    font-weight: 700;
+    font-size: 90px;
+    letter-spacing: -.025em;
+    line-height: 1;
+}
+#map_container {
+	width: 100%;
+	height: 1190px;
+	display: flex;
+}
+#side_bar {
+	width: 370px;
+	height: 1190px;
+	/* background-color: mistyrose; */
+}
+#option_box {
+    padding: 20px 20px 15px;
+}
+#choose_option {
+	width: 329.38px;
+	height: 58px;
+}
+.btn_option {
+	width: 329.38px;
+	height: 58px;
+	display: inline-block;
+	padding: 0 18px 0 20px;
+	z-index: 20;
+    background: #fff;
+    border: 1px solid #c6c6c6;
+    color: #000;
+    text-align: left;
+    font-size: 17px;
+}
+.select_city_box {
+	width: 329.38px;
+	height: 58px;
+    display: flex;
+    justify-content: space-between;
+	margin: 10px 0 0;
+}
+#sido {
+	width: 159.69px;
+	height: 58px;
+	display: inline-block;
+	padding: 0 18px 0 20px;
+	border: 1px solid #c6c6c6;
+}
+#gugoon {
+	width: 159.69px;
+	height: 58px;
+	display: inline-block;
+	padding: 0 18px 0 20px;
+	border: 1px solid #c6c6c6;
+}
+#search_store {
+	width: 329px;
+	height: 58px;
+	margin-top: 10px;
+}
+#search_store input {
+	width: 306px;
+	height: 58px;
+	padding: 1px 2px 1px 20px;
+	display: block;
+	border: 1px solid #c6c6c6;
+	color: #000;
+	font-size: 17px;	
+}
+.btn_search {
+	width: 329px;
+	height: 58px;
+	margin-top: 13px;
+	background-color: #ff7c98;
+	color: #fff;
+	font-size: 17px;
+	border: none;
+	display: inline-block;
+	cursor: pointer;
+}
+footer {
+	width: 100%;
+	height: 593.17px;
+	background: #1c1b18;
+}
+#footer {
+	width: 1500px;
+	height: 497.17px;
+}
+#footer_top {
+	height: 18.39px;
+	padding: 41px 0 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+#footer_top a {
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+}
+#footer_middle {
+	width: 1500px;
+	height: 357.78px;
+	border-top: 1px solid #333230;
+    display: flex;
+    justify-content: space-between;
+}
+#footer_left_box {
+	width: auto;
+	height: 100%;
+}
+.footer_middle_inner {
+	padding: 37px 0 17px;
+}
+.footer_logo {
+	margin: 0;
+	width: 91px;
+	height: 104px;
+	background: url(https://www.baskinrobbins.co.kr/assets/images/common/h_logo_2.png) no-repeat;
+}
+.company_info {
+	margin-top: 28px;
+	color: #ffffff3b;
+	font-size: 12px;
+	font-weight: 500;
+}
+.company_info > p:first-child {
+	margin: 0;
+}
+.company_info p {
+	margin-bottom: 0;
+}
+.copyright {
+	margin-top: 40px;
+	color: #ffffff80;
+	font-weight: 500;
+}
+#footer_right_box {
+	width: 979.8px;
+	height: 100%;
+}
+.menu_item {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+    width: fit-content;
+}
+.menu_title {
+	color: #fff2;
+	font-size: 24px;
+	font-weight: 600;
+	text-decoration: none;
+}
+.menu_subtitle {
+	margin-top: 25px;
+}
+.menu_subtitle a {
+	height: 25px;
+	font-size: 15px;
+	color: #fff;
+	display: block;
+	padding: 5px 0;
+	text-decoration: none;
+	background-color: tansparent;
+}
+.footer_middle_inner > ul {
+    display: flex;
+    justify-content: space-between;
+}
+#footer_bottom {
+	width: 1500px;
+	height: 60px;
+	border-top : 1px solid #333230;
+    display: flex;
+    justify-content: space-between;
+}
+#footer_bottom_left {
+	width: 422px;
+	height: 59px;
+}
+#footer_bottom_left > div:first-child {
+	width: 100%;
+	height: 50px;
+	padding-top: 19px;
+}
+#relation_logo {
+	width: 422px;
+	height: 31px;
+	list-style: none;
+    display: flex;
+    align-items: flex-end;
+    padding: 0;
+    margin: 0;
+}
+#relation_logo > li:nth-child(2), #relation_logo > li:nth-child(3) {
+	margin-left: 45px;
+}
+#relation_logo > li:nth-child(4), #relation_logo > li:nth-child(5) {
+	margin-left: 8px;
+}
+#footer_bottom_right {
+	width: 535px;
+	height: 59px;
+	display: flex;
+}
+#footer_sns {
+	width: 318px;
+	height: 40px;
+	padding-top: 19px;
+}
+#footer_sns ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+    justify-content: space-between;
+}
+.instagram {
+	width: 37px;
+	height: 37px;
+}
+.youtube {
+	width: 48px;
+	hegiht: 34px;
+}
+.facebook {
+	width: 19px;
+	height: 37px;
+}
+.brmagazine {
+	width: 28px;
+	height: 37px;
+}
+#family_site {
+	width: 161px;
+	height: 40px;
+	margin-left: 56px;
+	padding-top: 19px;
+}
+#btn_family_site {
+	position: relative;
+    z-index: 10;
+    width: 161px;
+    height: 40px;
+    padding-left: 20px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    text-align: left;
+    cursor: pointer;
+    border: none;
+    background-color: #fff;
+}
+.arrow_icon {
+	display: inline-block;
+	position: absolute;
+	width: 9px;
+	height: 6px;
+	right: 19px;
+	top: 17px;
+    background: #fff url(https://www.baskinrobbins.co.kr/assets/images/common/icon_select.png) no-repeat center;
+    background-size: contain;
+    background-position: center;
+}
+#side_bar_list {
+	width: 369px;
+	height: 927px;
+}
+.search_result {
+	width: 369px;
+	height: 19.5px;
+	color: #000;
+	font-size: 17px;
+	padding: 0 20px;
+	box-sizing: border-box;
+}
+.pink_text {
+	color: #ff3f68 !important;
+}
+#map_list_container {
+	width: 369px;
+    height: 855px;
+	box-sizing: border-box;
+	margin-top: 15px;
+	overflow-y : scroll;
+	overflow-x: hidden;
+}
+#map_list_container ul {
+	width: 352px;
+	height: 18400px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+#map_list_container li {
+	border-top: 1px solid #e1e1e1;
+	padding: 20px 0;
+	margin: 0;
+	width: 352px;
+	height: 184px;
+	list-style: none;
+	box-sizing: border-box;
+}
+.map_list {
+	display: flex;
+    align-items: center;
+	width: 352px;
+	height: 143px;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0 20px;
+	cursor: pointer;
+	color: #000;
+    text-decoration: none;
+}
+.map_list_left {
+	width: auto;
+	height: 93.7px;
+}
+.map_list h3 {
+	font-size: 25px;
+	color: #2f231c;
+	font-weight: 500;
+	margin: 0;
+}
+.map_list_left p {
+	margin-top: 5px;
+	margin-bottom: 0;
+	height: 19.98px;
+}
+#store_map_field {
+	width: 100%;
+	height: 1190px;
+	overflow: hidden;
+	box-sizing: border-box;
+ 	background-color: mistyrose;
+}
