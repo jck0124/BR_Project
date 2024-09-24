@@ -1,0 +1,45 @@
+@charset "UTF-8";
+*{ margin : 0 auto;}
+body {
+    margin: 0 auto;
+    overflow-y: scroll;
+}
+.fl {float : left}
+.fr {float : right}
+.border {boarder : 1px solid red}
+
+/*상단 설명*/
+#manager {
+	text-align : center;
+	margin-top: 30px;
+}
+#manager > div:nth-child(1) {
+    color: #f986bd;
+    font-weight: 700;
+    font-size: 90px;
+    letter-spacing: -.025em;
+}
+#manager > div:nth-child(2){
+	margin-top: 20px;
+}
+#manager > div:nth-child(2),
+#manager > div:nth-child(3) {
+    padding: 0 25px;
+    color: #f986bd;
+    font-weight: var(--font-weight-sd-bold);
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+/*정보 넣기*/
+#insert {
+	width : 1000px;
+}
+.insert_info  {
+	text-align: center;
+    background-color: white;
+    margin: 10px;
+    padding: 30px;
+    border: 3px solid #f986bd;
+    border-radius : 20px;
+}

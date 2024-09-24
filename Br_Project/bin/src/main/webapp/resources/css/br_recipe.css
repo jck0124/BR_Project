@@ -1,0 +1,212 @@
+@charset "UTF-8";
+body {
+    margin: 0px;
+    height: 1000px;
+    overflow-y: scroll;
+}
+.fl {float : left}
+.fr {float : right}
+.border {boarder : 1px solid red}
+.center {margin: 0 auto}
+
+/* 메인 컨테이너 */
+#main_container {
+	width: 100%;
+	height: auto;
+	padding: 60px 0 170px;
+    margin-top: 90px;
+}
+#br_play {
+	cursor : pointer;
+	color: #f986bd;
+	margin-top: 25px;
+    text-align: center;
+}
+#br_play > a {
+	text-decoration: none;
+	color: #f986bd;
+	margin-right :10px;
+	border-right : 1px solid #f986bd;
+	padding-right: 10px;
+}
+#br_play > a:last-child {
+	border : 0;
+}
+#br_recipe_header {
+	width: 1500px;
+	height: auto;
+}
+.page_header {
+	margin-top: 70px;
+	width: 1500px;
+	height: 200px;
+}
+.page_header_inner {
+	width: 1500px;
+	height: 200px;
+}
+.header_title {
+	width: 1500px;
+	height: 90px;
+	margin: 0;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    color: #f986bd;
+    font-family: var(--font-family-scoop);
+    font-weight: 700;
+    font-size: 90px;
+    letter-spacing: -.025em;
+    line-height: 1;
+}
+.header_content {
+	width: 1500px;
+	height: 110px;
+    text-align: center;
+}
+.header_content_txt {
+	width: 736.94px;
+	height: 60px;
+	padding: 0 25px;
+	margin-top: 50px;
+	display: inline-block;
+    color: #f986bd;
+    font-weight: var(--font-weight-sd-bold);
+    font-size: 20px;
+    line-height: 1.5;
+}
+#recipe_container {
+	width: 100%;
+}
+
+.tab {
+	width: 1500px;
+	height: 61px;
+	display: flex;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	justify-content: center;
+	border-top: 0;	
+	border-right: 0;
+    border-left: 0;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+	width: 204px;
+	height: 61px;
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+	border: 1px solid #ddd;
+	color: #b1b1b1;
+	font-size: 18px;
+	border-radius: 16px 16px 0 0;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  	background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  	color: #111;
+  	border-bottom: 0;
+}
+
+/* Style the tab content */
+.tabcontent {
+	width: 1500px;
+	height: 1253px;
+	display: none;
+	padding-top: 30px;
+	border-top: none;
+}
+.card_list {
+	width: 1500px;
+	height: 1041px;
+	display: flex;
+	padding-left: 0;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+.card_list li {
+	width: 725px;
+	height: 297px;
+	list-style: none;
+	margin: 50px 0 0;
+	border: 1px solid #d4cdc0;
+	border-radius: 12px;
+	box-sizing: border-box;
+	/* width: calc(50% - 50px); */
+}
+.card_list a {
+	cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.card_list>li>a>img {
+	width: 295px;
+	height: 295px;
+	object-fit: cover;
+	border-radius: 12px;
+}
+.card_container {
+	width: 388px;
+	padding-right: 20px;
+	display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.card_title {
+	width: 368px;
+	height: 17.25px;
+	font-size: 15px;
+	color: #baa17a;
+}
+.card_list_eng {
+	width: 368px;
+	padding-top: 14px;
+	color: #000;
+	font-size: 22px;
+}
+.card_list_kor {
+	width: 368px;
+	padding-top: 14px;
+	color: #000;
+	font-size: 22px;
+}
+.pagination {
+	width: 1500px;
+	height: 112px;
+	margin-top: 70px;
+	position: absolute;
+    display: flex;
+    justify-content: center;
+}
+.pagination_inner {
+	width: 270px;
+	height: 42px;
+	margin-top: 70px;
+    display: flex;
+    justify-content: center;
+}
+.pagination_num {
+    display: flex;
+	width: 40px;
+	height: 42px;
+	margin: 0 7px;
+	border: 1px solid #d4cdc0;
+	border-radius: 20px 20px 0 0;
+	align-items: center;
+    justify-content: center;
+}

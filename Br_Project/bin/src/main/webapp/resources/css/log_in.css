@@ -1,0 +1,70 @@
+@charset "UTF-8";
+body {
+    margin: 0 auto;
+    overflow-y: scroll;
+    text-align : center;
+}
+.fl {float : left}
+.fr {float : right}
+.border {boarder : 1px solid red}
+a {text-decoration : none; color : black;}
+body {
+    margin: 0 auto;
+    overflow-y: scroll;
+}
+.fl {float : left}
+.fr {float : right}
+.border {boarder : 1px solid red}
+a {text-decoration : none; color : black;}
+
+
+/*상단 설명*/
+#info {
+	text-align : center;
+	margin-top: 200px;
+}
+#info > div:nth-child(1) {
+    color: #f986bd;
+    font-weight: 700;
+    font-size: 90px;
+    letter-spacing: -.025em;
+}
+#info > div:nth-child(2){
+	margin-top: 20px;
+}
+#info > div:nth-child(2),
+#info > div:nth-child(3) {
+    padding: 0 25px;
+    color: #f986bd;
+    font-weight: var(--font-weight-sd-bold);
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+/*로그인*/
+#write_login {
+	padding-top : 50px;
+}
+#write_login > input {
+    width: 500px;
+    height: 52px;
+    border: 1px solid #c6c1bf;
+    background: #f9f6f1;
+    color: #ac9181;
+    font-weight: var(--font-weight-sd-medium);
+    font-size: 18px;
+    text-align: center;
+    margin-bottom : 5px;
+}
+#write_login > input:nth-child(5) {
+	background: black;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    border : 1px solid black;
+    border-radius: 30px;
+}
+
+/*아이디찾기, 비밀번호 재발급*/
+#find {
+    margin: 30px 0;

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MenuMapper">
+	<!-- Integer가 들어있는 java.lang은 import 필요없음 -->
+	
+	<!-- 찬균 -->
+	<select id="selectAllDrinks" resultType="com.br.dto.DrinkDto">
+		<![CDATA[
+			SELECT  drinks_idx AS drinksIdx,
+	        name AS name,
+	        img AS img,
+	        tag AS tag,
+	        background_color AS backgroundColor,
+	        font_color AS fontColor
+			FROM    drinks
+			ORDER BY drinks_idx ASC
+		]]>
+	</select>
+	
+	
+	<select id="selectDrink" resultType="com.br.dto.DrinkDto">
+		<![CDATA[
+			SELECT  name AS name,
+			        img AS img,
+			        background_color AS background_color,
+			        name_eng AS name_eng,
+			        description AS description 
+			FROM    drinks
+			WHERE   drinks_idx = #{drinksIdx}
+		]]>
+	</select>
+	
+	
+	<select id="selectDrinkDetailMenu" resultType="com.br.dto.DrinkDetailMenuDto">
+		<![CDATA[
+			SELECT  name AS name,
+			        serving_size AS servingSize,
+			        calories AS calories,
+			        sugars AS sugars,
+			        protein AS protein,
+			        saturated_fat AS saturatedFat,
+			        sodium AS sodium,
+			        caffeine AS caffeine,
+			        allergens AS allergens,
+			        price AS price
+			FROM    drinks_detail
+			WHERE   drinks_idx = #{drinksIdx}
+		]]>
+	</select>
+	
+	<!-- 수연 -->
+	<select id="getAllIcecream" resultType="com.br.dto.IcecreamDto">
+		<![CDATA[
+			SELECT icecream_idx AS icecreamIdx
+			, name_kor AS nameKor
+			, name_eng AS nameEng
+			, img_url AS imgUrl
+			, detail_img AS detailImg
+			, info
+			, hashtag
+			, background_color AS backgroundColor
+			, text_color AS textColor
+			FROM icecream
+			ORDER BY icecreamIdx ASC
+		]]>
+	</select>
+
+	
+	<!-- 수빈 -->
+	
+	<!-- 아이스크림 케이크 보여주기 -->
+	<select id="selectAllCakes" resultType="com.br.dto.ShowIceCreamCakeDto">
+		<![CDATA[
+			SELECT t2.*
+			FROM (SELECT rownum rnum, t1.*
+			        FROM (  SELECT  name, 
+			                        img,
+			                        tag,
+			                		background_color AS backgroundColor
+			                FROM ice_cream_cake
+			                ORDER BY cake_idx ASC) t1) t2
+			WHERE rnum>=#{startNum} AND rnum<=#{endNum}
+		]]>
+	</select>
+	
+	<!-- 아이스크림 케이크 라스트 페이지 번호 -->
+	<select id="selectLastPageNumber" resultType="Integer">
+		<![CDATA[
+			SELECT COUNT(*) FROM ice_cream_cake
+		]]>
+	</select>
+	
+	<!-- 아이스크림 케이크 상세정보 -->
+	<select id="showCakeDetail" resultType="com.br.dto.ShowIceCreamCakeDetailDto">
+		<![CDATA[
+			SELECT  cake_img AS cakeImg,
+			        background_color AS backgroundColor,
+			        pink_letter AS pinkLetter,
+			        eng_name AS engName,
+			        kor_name AS korName,
+			        subtitle,
+			        price,
+			        one_time AS oneTime,
+			        kcal,
+			        fat,
+			        sodium,
+			        sugar,
+			        protein,
+			        allergy,
+			        info_img AS infoImg
+			FROM ice_cream_cake_detail
+			WHERE kor_name = #{korName}
+		]]>
+	</select>
+</mapper>
