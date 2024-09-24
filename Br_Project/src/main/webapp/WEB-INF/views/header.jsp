@@ -27,7 +27,7 @@
 
 
                     <div class="header_menu header_menu1">
-                        <a href="">Menu</a>
+                        <a href="${pageContext.request.contextPath}/menu_icecream">Menu</a>
 
                         <div class="header_menu_hover">
                             <div class="header_menu_hover_inner">
@@ -40,7 +40,7 @@
                                         <a href="${pageContext.request.contextPath}/menu_icecream">아이스크림</a>
                                     </div>
                                     <div>
-                                        <a href="">아이스크림케이크</a>
+                                        <a href="${pageContext.request.contextPath}/menu_ice_cream_cake">아이스크림케이크</a>
                                     </div>
                                     <div>
                                         <a href="${pageContext.request.contextPath}/menu_drinks">음료</a>
@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="header_menu header_menu2">
-                        <a href="">BR Play</a>
+                        <a href="${pageContext.request.contextPath}/event">BR Play</a>
 
                         <div class="header_menu_hover">
                             <div class="header_menu_hover_inner">
@@ -61,14 +61,14 @@
                                 <div class="header_menu2_hover"> 
                                     <div class="header_menu2_hover_left"> 
                                         <div>
-                                            <a href="">이벤트</a>
+                                            <a href="${pageContext.request.contextPath}/event">이벤트</a>
                                         </div>
                                         <div>
                                             <div>
-                                                <a href="">프로모션</a>
+                                                <a href="${pageContext.request.contextPath}/event">프로모션</a>
                                             </div>
                                             <div>
-                                                <a href="">제휴혜택</a>
+                                                <a href="${pageContext.request.contextPath}/event">제휴혜택</a>
                                             </div>
                                         </div>
                                     </div>
@@ -176,7 +176,7 @@
 
                     <!-- 로그인 되었을 때  -->
                     <div class="header_login_menu">
-                        <a href="">
+                        <a href="${pageContext.request.contextPath}/login">
                             <div class="header_login_list">Login</div>
                         </a>
                         <a href="">

@@ -69,4 +69,49 @@
 
 	
 	<!-- 수빈 -->
+	
+	<!-- 아이스크림 케이크 보여주기 -->
+	<select id="selectAllCakes" resultType="com.br.dto.ShowIceCreamCakeDto">
+		<![CDATA[
+			SELECT t2.*
+			FROM (SELECT rownum rnum, t1.*
+			        FROM (  SELECT  name, 
+			                        img,
+			                        tag,
+			                		background_color AS backgroundColor
+			                FROM ice_cream_cake
+			                ORDER BY cake_idx ASC) t1) t2
+			WHERE rnum>=#{startNum} AND rnum<=#{endNum}
+		]]>
+	</select>
+	
+	<!-- 아이스크림 케이크 라스트 페이지 번호 -->
+	<select id="selectLastPageNumber" resultType="Integer">
+		<![CDATA[
+			SELECT COUNT(*) FROM ice_cream_cake
+		]]>
+	</select>
+	
+	<!-- 아이스크림 케이크 상세정보 -->
+	<select id="showCakeDetail" resultType="com.br.dto.ShowIceCreamCakeDetailDto">
+		<![CDATA[
+			SELECT  cake_img AS cakeImg,
+			        background_color AS backgroundColor,
+			        pink_letter AS pinkLetter,
+			        eng_name AS engName,
+			        kor_name AS korName,
+			        subtitle,
+			        price,
+			        one_time AS oneTime,
+			        kcal,
+			        fat,
+			        sodium,
+			        sugar,
+			        protein,
+			        allergy,
+			        info_img AS infoImg
+			FROM ice_cream_cake_detail
+			WHERE kor_name = #{korName}
+		]]>
+	</select>
 </mapper>

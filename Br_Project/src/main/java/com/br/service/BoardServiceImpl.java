@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.br.dao.BoardDao;
 import com.br.dto.RecipeDto;
+import com.br.dto.SelectEventDto;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -23,5 +24,12 @@ public class BoardServiceImpl implements BoardService {
 		
 		return recipeList;
 	}
-
+	
+	// event 게시판 보여주기
+	@Override
+	public ArrayList<SelectEventDto> selectEvent() {
+		ArrayList<SelectEventDto> selectEvent = new ArrayList<SelectEventDto>();
+		selectEvent = bDao.selectEvent();
+		return selectEvent;
+	}
 }

@@ -1,0 +1,89 @@
+@charset "UTF-8";
+*{ margin : 0 auto;}
+body {
+    margin: 0 auto;
+    overflow-y: scroll;
+}
+.fl {float : left}
+.fr {float : right}
+.border {boarder : 1px solid red}
+
+/*이동 탭*/
+#menu_location {
+	cursor : pointer;
+	color: #f986bd;
+	margin-top: 80px;
+    text-align: center;
+    margin-top : 200px;
+}
+#menu_location > a {
+	text-decoration: none;
+	color: #f986bd;
+	margin-right :10px;
+	border-right : 1px solid #f986bd;
+	padding-right: 10px;
+}
+#menu_location > a:last-child {
+	border : 0;
+}
+
+/*상단 설명*/
+#event {
+	text-align : center;
+	margin-top: 30px;
+}
+#event > div:nth-child(1) {
+    color: #f986bd;
+    font-weight: 700;
+    font-size: 90px;
+    letter-spacing: -.025em;
+}
+#event > div:nth-child(2){
+	margin-top: 20px;
+}
+#event > div:nth-child(2),
+#event > div:nth-child(3) {
+    padding: 0 25px;
+    color: #f986bd;
+    font-weight: var(--font-weight-sd-bold);
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+/*공지글*/
+#promotion_box {
+	width : 1550px;
+	height : auto;
+	padding-top: 30px;
+}
+.promotion{
+	width : 723px;
+	height : 294px;
+	border : 1px solid #d4d4d4;	
+	border-radius: 20px;
+	margin: 20px;
+}
+.promotion_img {
+	border : 1px solid #d4d4d4;	
+	border-radius: 20px;
+	width: 293px;
+}
+.promotion_letter {
+	margin-top : 80px;
+	margin-left : 20px;
+	width: 370px;
+}
+.top_blue {
+	color : #65c8ff;     
+	padding-bottom: 15px;
+    font-size: 15px;
+}
+.middle_black {
+	font-size: 22px;
+}
+.bottom_tag {
+	padding-top: 15px;
+    color: #666;
+    font-weight: var(--font-weight-sd-bold);
+    font-size: 15px;
+}

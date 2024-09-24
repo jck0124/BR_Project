@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import com.br.dto.DrinkDetailMenuDto;
 import com.br.dto.DrinkDto;
 import com.br.dto.IcecreamDto;
+import com.br.dto.ShowIceCreamCakeDetailDto;
+import com.br.dto.ShowIceCreamCakeDto;
 
 @Repository
 public class MenuDaoImpl implements MenuDao {
@@ -49,5 +51,38 @@ public class MenuDaoImpl implements MenuDao {
 
 	
 	// 수빈
+	// 아이스크림 리스트 
+	@Override
+	public ArrayList<ShowIceCreamCakeDto> showIceCreamCake(int pageNum) {
+		int endNum = pageNum * 10;
+		int startNum = endNum -9;
+		
+		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+		hmap.put("endNum", endNum);
+		hmap.put("startNum", startNum);
+		
+		List<ShowIceCreamCakeDto> cakesListTemp = sqlSession.selectList("MenuMapper.selectAllCakes", hmap);
+		ArrayList<ShowIceCreamCakeDto> cakesList = new ArrayList<ShowIceCreamCakeDto>();
+		cakesList.addAll(cakesListTemp);
+		return cakesList;
+	}
 	
+	// 아이스크림 리스트 페이지네이션
+	@Override
+	public int getLastPageNumber() {
+		int countRet = sqlSession.selectOne("MenuMapper.selectLastPageNumber");
+		return countRet/10 + (countRet%10>0 ? 1 : 0);
+	}
+	
+	// 아이스크림 디테일
+	@Override
+	public ShowIceCreamCakeDetailDto showIceCreamCakeDetail(String korName) {
+		// 이전의 pstmt의 역할로 hashmap 사용
+		HashMap<String,String> hmap = new HashMap<String,String>();
+		hmap.put("korName", korName);
+		
+		ShowIceCreamCakeDetailDto cakeDetail = sqlSession.selectOne("MenuMapper.showCakeDetail", hmap);
+		return cakeDetail;
+	}
+
 }

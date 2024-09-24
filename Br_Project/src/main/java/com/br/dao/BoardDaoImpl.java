@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.br.dto.RecipeDto;
+import com.br.dto.SelectEventDto;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -23,6 +24,15 @@ public class BoardDaoImpl implements BoardDao {
 		recipeList.addAll(recipeListTemp);
 		
 		return recipeList;
+	}
+	
+	// event 게시판 보여주기
+	@Override
+	public ArrayList<SelectEventDto> selectEvent() {
+		List<SelectEventDto> eventsTemp = sqlSession.selectList("BoardMapper.selectEvent");
+		ArrayList<SelectEventDto> events = new ArrayList<SelectEventDto>();
+		events.addAll(eventsTemp);
+		return events;
 	}
 	
 }
