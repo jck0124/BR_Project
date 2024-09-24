@@ -176,7 +176,7 @@
 
                     <!-- 로그인 되었을 때  -->
                     <div class="header_login_menu">
-                        <a href="${pageContext.request.contextPath}/login">
+                        <a href="${pageContext.request.contextPath}/loginPage">
                             <div class="header_login_list">Login</div>
                         </a>
                         <a href="">
