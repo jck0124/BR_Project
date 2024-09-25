@@ -54,16 +54,16 @@
 	<select id="getAllIcecream" resultType="com.br.dto.IcecreamDto">
 		<![CDATA[
 			SELECT icecream_idx AS icecreamIdx
-			, name_kor AS nameKor
-			, name_eng AS nameEng
-			, img_url AS imgUrl
-			, detail_img AS detailImg
-			, info
-			, hashtag
-			, background_color AS backgroundColor
-			, text_color AS textColor
+				, name_kor AS nameKor
+				, name_eng AS nameEng
+				, img_url AS imgUrl
+				, detail_img AS detailImg
+				, info
+				, hashtag
+				, background_color AS backgroundColor
+				, text_color AS textColor
 			FROM icecream
-			ORDER BY icecreamIdx ASC
+			ORDER BY order_num ASC
 		]]>
 	</select>
 
