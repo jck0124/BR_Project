@@ -11,6 +11,7 @@ import com.br.dao.MenuDao;
 import com.br.dto.DrinkDetailDto;
 import com.br.dto.DrinkDetailMenuDto;
 import com.br.dto.DrinkDto;
+import com.br.dto.DrinkPaginationDto;
 import com.br.dto.IcecreamDto;
 import com.br.dto.ShowIceCreamCakeDetailDto;
 import com.br.dto.ShowIceCreamCakeDto;
@@ -23,10 +24,35 @@ public class MenuServiceImpl implements MenuService {
 	
 	// 찬균
 	@Override
-	public ArrayList<DrinkDto> getDrinksList() {
+	public DrinkPaginationDto getPaginationDrinksList(int pageNum) {
 		
+		int totalPageNum = 1;
 		ArrayList<DrinkDto> drinkList = mDao.selectDrinksList();
-		return drinkList;
+		
+		if( drinkList.size()%10 != 0) {
+			totalPageNum = drinkList.size()/10 + 1;
+		} else {
+			totalPageNum = drinkList.size()/10;
+		}
+		
+		ArrayList<DrinkDto> paginationDrinkList = new ArrayList<DrinkDto>();
+		
+		
+		if(pageNum != totalPageNum) {
+			for(int i = (pageNum - 1)*10; i <= (pageNum*10 - 1); i++) {
+				paginationDrinkList.add( drinkList.get(i) );
+			}
+		} else {
+			for(int i = (pageNum - 1)*10; i < drinkList.size(); i++) {
+				paginationDrinkList.add( drinkList.get(i) );
+			}
+		}
+		
+		DrinkPaginationDto dDto = new DrinkPaginationDto();
+		dDto.setTotalPageNum(totalPageNum);
+		dDto.setDrinkList(paginationDrinkList);
+		
+		return dDto;
 	}
 	
 	@Override

@@ -24,6 +24,24 @@ public class MenuDaoTest {	// 제일 먼저 해야 하는 것 : 테스트!!!
 		System.out.println(dao != null);
 	}
 	
+	
+	@Test
+	public void testGetMenuList() {
+		ArrayList<DrinkDto> menuList = dao.selectDrinksList();
+		for(DrinkDto dto : menuList) {
+			System.out.println(dto.getName());
+		}
+	}
+	
+	
+	@Test
+	public void testGetMenuByIdx() {
+		DrinkDto dto = dao.selectDrinkByIdx(30);
+		System.out.println(dto.getName());
+		System.out.println(dto.getDescription());
+	}
+	
+	
 	// 아이스크림 케이크 리스트 이름 테스트
 	@Test
 	public void testConnect() {

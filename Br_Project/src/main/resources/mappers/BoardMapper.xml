@@ -3,6 +3,28 @@
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BoardMapper">
+
+	<select id="selectPlazaBoardList" resultType="com.br.dto.PlazaBoardDto">
+		<![CDATA[
+			SELECT  board_idx AS boardIdx,
+			        title AS title,
+			        content AS content,
+			        writer_id AS writerId,
+			        CASE WHEN (sysdate - write_date) <= 30 
+			                THEN 'T'
+			                ELSE 'F'
+			        END AS newMark,
+			        likes AS likes,
+			        writer_name AS writerName,
+			        show_name AS showName
+			FROM    plaza
+			ORDER BY boardIdx DESC
+		]]>
+	</select>
+	
+
+
+	
  	<select id="getAllRecipe" resultType="com.br.dto.RecipeDto">
 		<![CDATA[
 			SELECT r.recipe_idx AS recipeIdx

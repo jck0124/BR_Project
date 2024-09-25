@@ -44,8 +44,59 @@
 		<div style="clear:both"></div>
 	</div>
 	
+	<div class="pagination_btn_container">
+		<div class="pagination_btn">&lt;</div>
+		<c:forEach var="i" begin="1" end="${totalPageNum}">
+			
+			<div class="
+				pagination_btn
+				<c:if test="${i == pageNum}">pagination_btn_selected</c:if>
+			">
+				${i}
+			</div>
+		</c:forEach>
+		<div class="pagination_btn">&gt;</div>
+	</div>
+	
+	<form class="request_page" action="${pageContext.request.contextPath}/menu_drinks">
+		<input type="hidden" name="pageNum" value="2"/>
+	</form>
+	
 	
 	<%@ include file="../footer.jsp" %>
 </body>
 <script src="${pageContext.request.contextPath }/resources/js/menu_drinks.js"></script>
+<script>
+$(function() {
+	
+	$(".pagination_btn").click(function() {
+		
+		let pageNum =  parseInt( $(".pagination_btn_selected").text().trim(), 10);
+		let firstPageNum = parseInt( $(".pagination_btn_container").children().eq(1).text().trim(), 10);
+		let lastPageNum = parseInt( $(".pagination_btn_container").children().eq(-2).text().trim(), 10);
+		
+		let requestPageNum = $(this).text().trim();
+		
+		if(requestPageNum === "<") {
+			if(pageNum != firstPageNum) {
+				requestPageNum = pageNum - 1;
+			} else {
+				requestPageNum = firstPageNum;
+			}
+		} else if(requestPageNum === ">") {
+			if(pageNum != lastPageNum) {
+				requestPageNum = pageNum + 1;
+			} else {
+				requestPageNum = lastPageNum;
+			}
+		}
+		
+		$("input[name='pageNum']").val(requestPageNum);
+		$(".request_page").submit();
+	});
+	
+	
+})
+</script>
+
 </html>

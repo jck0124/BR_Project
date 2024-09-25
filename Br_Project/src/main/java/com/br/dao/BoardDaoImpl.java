@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.br.dto.PlazaBoardDto;
 import com.br.dto.RecipeDto;
 import com.br.dto.SelectEventDto;
 
@@ -16,6 +17,17 @@ public class BoardDaoImpl implements BoardDao {
 	
 	@Autowired
 	SqlSession sqlSession;
+	
+	// 찬균
+	@Override
+	public ArrayList<PlazaBoardDto> selectPlazaBoardList() {
+		List<PlazaBoardDto> plazaBoardList = sqlSession.selectList("BoardMapper.selectPlazaBoardList");
+		return new ArrayList<PlazaBoardDto>(plazaBoardList);
+	}
+	
+	
+	
+	// 수연
 	
 	@Override
 	public ArrayList<RecipeDto> selectRecipeList() {
@@ -26,6 +38,9 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return recipeList;
 	}
+	
+	
+	//수빈
 	
 	// event 게시판 보여주기
 	@Override

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.br.dto.DrinkDetailDto;
+import com.br.dto.DrinkPaginationDto;
 import com.br.service.MenuServiceImpl;
 
 @Controller
@@ -20,17 +21,24 @@ public class MenuController {
 	
 	//찬균
 	@RequestMapping("/menu_drinks")
-	public String menuDrinks(Model model) {
+	public String menuDrinks(
+				@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum, 
+				Model model) {
 		
-		model.addAttribute("drinksList", mSvc.getDrinksList());
-		return "menu/menu_drinks";
+		DrinkPaginationDto dDto = mSvc.getPaginationDrinksList(pageNum);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("drinksList", dDto.getDrinkList());
+		model.addAttribute("totalPageNum", dDto.getTotalPageNum());
+		
+		return "menu/menu_drinks";	
 		
 	}
 	
 	
 	@RequestMapping("/menu_drinks_detail")
 	public String menuDrinksDetail(
-				@RequestParam("drinksIdx") Integer drinksIdx, Model model) {
+				@RequestParam("drinksIdx") Integer drinksIdx, 
+				Model model) {
 		
 		DrinkDetailDto dto = mSvc.getDrinkDetail(drinksIdx);
 		model.addAttribute("drinkDto", dto.getDto());
@@ -77,4 +85,7 @@ public class MenuController {
 		return "menu/ice_cream_cake_detail";
 	}
 
+	
+	
+	
 }

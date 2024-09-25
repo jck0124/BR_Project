@@ -96,3 +96,30 @@ a {text-decoration : none}
 .backgroundColor {
 	display : hidden;
 }
+
+
+/* 페이지네이션 */
+
+.pagination_btn_container {
+	display: flex;
+	justify-content: center;
+}
+
+.pagination_btn {
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	border: 1px solid black;
+	text-align: center;
+	margin: 0 5px;
+}
+
+.pagination_btn.pagination_btn_selected {
+	background-color: black;
+	color: white;
+}
+
+
+
+
+

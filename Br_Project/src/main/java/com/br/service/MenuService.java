@@ -5,13 +5,14 @@ import java.util.Map;
 
 import com.br.dto.DrinkDetailDto;
 import com.br.dto.DrinkDto;
+import com.br.dto.DrinkPaginationDto;
 import com.br.dto.IcecreamDto;
 import com.br.dto.ShowIceCreamCakeDetailDto;
 
 public interface MenuService {
 	
 	// 찬균
-	ArrayList<DrinkDto> getDrinksList();
+	DrinkPaginationDto getPaginationDrinksList(int pageNum);
 	DrinkDetailDto getDrinkDetail(int drinksIDx);
 	
 	// 수연
