@@ -16,9 +16,9 @@
     <!-- main_container -->
     <div id="main_container" class="center">
     	<div id="br_play">
-    		<a href="">이벤트</a>
-    		<a href="">배라광장</a>
-    		<a href="">BR 레시피</a>
+    		<a href="${pageContext.request.contextPath}/event">이벤트</a>
+    		<a href="${pageContext.request.contextPath}/br_plaza">배라광장</a>
+    		<a href="${pageContext.request.contextPath}/br_recipe">BR 레시피</a>
     		<a href="">마이플레이버 리스트</a>
     	</div>
     	<div id="br_recipe_header" class="center">

@@ -13,9 +13,9 @@
 	<%@ include file="../header.jsp" %>
 	<!-- 페이지 이동 -->
 	<div id="menu_location">
-		<a href="">이벤트</a>
-		<a href="">베라광장</a>
-		<a href="">BR레시피</a>
+		<a href="${pageContext.request.contextPath}/event">이벤트</a>
+		<a href="${pageContext.request.contextPath}/br_plaza">베라광장</a>
+		<a href="${pageContext.request.contextPath}/br_recipe">BR레시피</a>
 		<a href="">마이플레이버 리스트</a>
 	</div>
 	
