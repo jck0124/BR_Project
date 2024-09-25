@@ -7,6 +7,7 @@ body {
 .fl {float : left}
 .fr {float : right}
 .border {boarder : 1px solid red}
+a {text-decoration : none;}
 
 /*이동 탭*/
 #menu_location {

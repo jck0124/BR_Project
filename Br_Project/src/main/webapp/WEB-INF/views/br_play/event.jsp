@@ -8,6 +8,18 @@
 	<title>Insert title here</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/event.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+    	let pageNum = ${pageNum};
+    	function draw_board_list(page) {
+    		$.ajax({
+    			type:'get',
+    			data : {page_num : page_num},	// 보내주는 데이터
+    			dataType: "json", // 응답 받을 데이터 타입
+    			// url : "BoardServiceImpl" 인터넷에서는 왜 안하지
+    		});
+    	}
+    </script>
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
@@ -26,7 +38,7 @@
 		<div>다양한 이벤트를 확인해보세요</div>
 	</div>
 	
-	<!-- 탭 -->
+	<!-- 탭 	-->
 	<div id="promotion_box">
 		<c:forEach var="event" items="${selectEvent}">
 			<div class="fl promotion">
@@ -41,8 +53,12 @@
 				<div style="clear:both;"></div>
 			</div>
 		</c:forEach>
-		<div style="claer:both"></div>
+		<div style="clear:both"></div>
 	</div>
+
+	
+	<c:set var="startNum" value="${startNnum != null && startNum >= 0 ? startNum : 1}"/>
+	<c:set var="endNum" value="${endNum != null && endNum >= 0 ? endNum : 1}"/>
 	
 	<div id="pagination">
 		<c:forEach var="i" begin="${startNum}" end="${endNum}">
@@ -56,13 +72,12 @@
 			</c:choose>
 		</c:forEach>
 		<c:if test="${endNum < lastPageNum}">
-			<a id="next" href="evetn?page=${endNum+1}">&lt;></a>
+			<a id="next" href="event?page=${endNum+1}">&lt;</a>
 		</c:if>
 	</div>
-	
+	  
 	<div style="clear:both;"></div>
 	<%@ include file="../footer.jsp" %>
 </body>
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 </html>

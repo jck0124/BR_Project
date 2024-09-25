@@ -50,12 +50,15 @@ public class BoardController {
 		
 		Map<String, Object> result = bSvc.selectEvent(pageNum);
 		
-		if(bSvc.selectEvent(pageNum) != null) {
-			model.addAttribute("selectEvent", bSvc.selectEvent(pageNum));
+		if(result != null) {
+			model.addAttribute("selectEvent", result.get("selectEvent"));
 			model.addAttribute("startNum", result.get("startNum"));
 			model.addAttribute("endNum", result.get("endNum"));
 			model.addAttribute("lastPageNum", result.get("lastPageNum"));
 		}
+		
+		model.addAttribute("pageNum", pageNum);
+		
 		return "br_play/event";
 	}
 	

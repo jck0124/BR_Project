@@ -181,7 +181,6 @@
 		    <version>5.7.12</version>
 		</dependency>
 		
-				
 	</dependencies>
     <build>
         <plugins>
