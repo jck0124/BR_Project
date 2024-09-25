@@ -9,5 +9,8 @@ public interface BoardDao {
 	ArrayList<RecipeDto> selectRecipeList();	//모든 레시피 목록
 	
 	// 이벤트 목록 
-	public ArrayList<SelectEventDto> selectEvent();
+	ArrayList<SelectEventDto> selectEvent(int pageNum);
+	
+	// 이벤트 lastPage
+	int getLastPageNumber();
 }

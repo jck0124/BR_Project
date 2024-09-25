@@ -87,3 +87,9 @@ body {
     font-weight: var(--font-weight-sd-bold);
     font-size: 15px;
 }
+
+/*페이지네이션*/
+#next, #prev {
+	text-decoration : none;
+}
+#pagination {width : 150px; margin : 0 auto;}

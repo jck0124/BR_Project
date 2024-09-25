@@ -9,7 +9,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu_ice_cream_cake.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 	<script>
@@ -84,7 +83,7 @@
 		<c:forEach var="i" begin="${startNum}" end="${endNum}">
 			<c:choose>
 				<c:when test="${i != pageNum}">
-                <a href="menu_ice_cream_cake?page=${i}">${i}</a>
+                	<a href="menu_ice_cream_cake?page=${i}">${i}</a>
 	            </c:when>
 	            <c:otherwise>
 	                <strong>${i}</strong> <!-- 현재 페이지는 강조 -->

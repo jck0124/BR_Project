@@ -19,12 +19,22 @@
 	<!-- 이벤트 보여주기 -->
 	<select id="selectEvent" resultType="com.br.dto.SelectEventDto">
 		<![CDATA[
-			SELECT  img,
-			        top_letter AS topLetter,
-			        title,
-			        period
-			FROM event
-			ORDER BY event_idx ASC
+			SELECT t2.*
+			FROM (SELECT rownum rnum, t1.*
+			        FROM    (SELECT img,
+			                        top_letter AS topLetter,
+			                        title,
+			                        period
+			                FROM event
+			                ORDER BY event_idx ASC) t1) t2
+			WHERE rnum>=#{startNum} AND rnum<=#{endNum}
+		]]>
+	</select>
+	
+	<!-- 이벤트 페이지네이션 -->
+	<select id="selectLastPageNumber" resultType="Integer" >
+		<![CDATA[
+			SELECT COUNT(*) FROM event
 		]]>
 	</select>
 </mapper>

@@ -18,6 +18,7 @@ public interface MenuService {
 	ArrayList<IcecreamDto> getIcecreamList();
 	
 	// 수빈
+	
 	// 아이스크림 케이크 목록
 	Map<String, Object> showIceCreamCake(int pageNum);
 	// 아이스크림 케이크 상세정보

@@ -1,6 +1,8 @@
 package com.br.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,9 +29,24 @@ public class BoardServiceImpl implements BoardService {
 	
 	// event 게시판 보여주기
 	@Override
-	public ArrayList<SelectEventDto> selectEvent() {
+	public Map<String,Object> selectEvent(int pageNum) {
 		ArrayList<SelectEventDto> selectEvent = new ArrayList<SelectEventDto>();
-		selectEvent = bDao.selectEvent();
-		return selectEvent;
+		selectEvent = bDao.selectEvent(pageNum);
+		
+		int startNum, endNum;
+		int lastPageNum = bDao.getLastPageNumber();
+		endNum = (pageNum/5+1)*5 - (pageNum%5==0 ? 5 : 0);
+		if(endNum > lastPageNum) {
+			endNum = lastPageNum;
+		}
+		startNum = endNum -4;
+		
+		Map<String,Object> result = new HashMap<>();
+		result.put("selectEvent", selectEvent);
+		result.put("startNum", startNum);
+		result.put("endNum", endNum);
+		result.put("lastPageNum", lastPageNum);
+		
+		return result;
 	}
 }

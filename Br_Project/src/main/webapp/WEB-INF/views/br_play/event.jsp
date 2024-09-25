@@ -8,12 +8,9 @@
 	<title>Insert title here</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/event.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
-	
 	<!-- 페이지 이동 -->
 	<div id="menu_location">
 		<a href="">이벤트</a>
@@ -47,6 +44,23 @@
 		<div style="claer:both"></div>
 	</div>
 	
+	<div id="pagination">
+		<c:forEach var="i" begin="${startNum}" end="${endNum}">
+			<c:choose>
+				<c:when test="${i!=pageNum}">
+					<a href="event?page=${i}">${i}</a> 
+				</c:when>
+				<c:otherwise>
+					<strong>${i}</strong>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${endNum < lastPageNum}">
+			<a id="next" href="evetn?page=${endNum+1}">&lt;></a>
+		</c:if>
+	</div>
+	
+	<div style="clear:both;"></div>
 	<%@ include file="../footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>

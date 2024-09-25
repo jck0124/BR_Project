@@ -1,5 +1,9 @@
 package com.br.controller;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +30,19 @@ public class BoardController {
 	
 	//수빈
 	@RequestMapping("/event")
-	public String event(Model model) {
-		if(bSvc.selectEvent() != null) {
-			model.addAttribute("selectEvent", bSvc.selectEvent());
+	public String event(HttpServletRequest request, Model model) {
+		int pageNum = 1;
+		try {
+			pageNum = Integer.parseInt(request.getParameter("page"));
+		}catch(Exception e) { }
+		
+		Map<String, Object> result = bSvc.selectEvent(pageNum);
+		
+		if(bSvc.selectEvent(pageNum) != null) {
+			model.addAttribute("selectEvent", bSvc.selectEvent(pageNum));
+			model.addAttribute("startNum", result.get("startNum"));
+			model.addAttribute("endNum", result.get("endNum"));
+			model.addAttribute("lastPageNum", result.get("lastPageNum"));
 		}
 		return "br_play/event";
 	}

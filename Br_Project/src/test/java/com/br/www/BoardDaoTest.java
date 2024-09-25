@@ -20,7 +20,7 @@ public class BoardDaoTest {
 	
 	@Test
 	public void testEvent() {
-		ArrayList<SelectEventDto> selectEvent = dao.selectEvent();
+		ArrayList<SelectEventDto> selectEvent = dao.selectEvent(0);
 		for(SelectEventDto dto : selectEvent) {
 			System.out.println(dto.getTitle());
 		}
