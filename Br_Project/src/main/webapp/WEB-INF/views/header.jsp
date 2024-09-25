@@ -78,7 +78,7 @@
                                         </div>
                                         <div>
                                             <div>
-                                                <a href="">배라광장</a>
+                                                <a href="${pageContext.request.contextPath}/br_plaza">배라광장</a>
                                             </div>
                                             <div>
                                                 <a href="${pageContext.request.contextPath}/br_recipe">BR레시피</a>

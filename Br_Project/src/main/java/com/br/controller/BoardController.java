@@ -13,6 +13,18 @@ public class BoardController {
 	BoardServiceImpl bSvc;
 	
 	// 찬균
+	@RequestMapping("/br_plaza")
+	public String brPlaza(Model model) {
+		
+		return "br_play/br_plaza";
+	}
+	
+	@RequestMapping("/br_plaza_detail")
+	public String brPlazaDetail(Model model) {
+		
+		return "br_play/br_plaza_detail";
+	}
+	
 	
 	//수연
 	@RequestMapping("/br_recipe")
