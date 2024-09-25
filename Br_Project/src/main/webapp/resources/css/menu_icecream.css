@@ -20,7 +20,7 @@ body {
 #menu_location {
 	cursor : pointer;
 	color: #f986bd;
-	margin-top: 25px;
+	margin-top: 50px;
     text-align: center;
 }
 #menu_location > a {
@@ -38,7 +38,7 @@ body {
 	height: auto;
 }
 .page_header {
-	margin-top: 70px;
+	margin-top: 39px;
 	width: 1500px;
 	height: 200px;
 }
@@ -69,7 +69,7 @@ body {
 	width: 736.94px;
 	height: 60px;
 	padding: 0 25px;
-	margin-top: 50px;
+	margin-top: 30px;
 	display: inline-block;
     color: #f986bd;
     font-weight: var(--font-weight-sd-bold);
@@ -95,12 +95,32 @@ body {
 	display: flex;
 	padding: 0;
     flex-wrap: wrap;
+    margin-top: -4px;
 }
 .menu_list_inner li {
 	list-style: none;
 	width: 260px;
 	margin: 17px 25px;
 }
+.menu_list_inner li:nth-of-type(1)
+, .menu_list_inner li:nth-of-type(6)
+, .menu_list_inner li:nth-of-type(11)
+, .menu_list_inner li:nth-of-type(16)
+, .menu_list_inner li:nth-of-type(21)
+, .menu_list_inner li:nth-of-type(26)
+, .menu_list_inner li:nth-of-type(31)
+{
+	margin-left: 0;
+}
+.menu_list_inner li:nth-of-type(1)
+, .menu_list_inner li:nth-of-type(2)
+, .menu_list_inner li:nth-of-type(3)
+, .menu_list_inner li:nth-of-type(4)
+, .menu_list_inner li:nth-of-type(5)
+{
+	margin-top: 0;
+}
+
 .menu_list_inner_border {
 	width: 260px;
 	height: 210px;

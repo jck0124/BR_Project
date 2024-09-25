@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/drinks_detail.css">
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
+<%@ include file="../header.jsp" %>
 	
 	<!-- 콘텐츠 -->
 	<div id="content">

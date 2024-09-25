@@ -134,4 +134,20 @@
     
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=022e6a3260371b2c8dc3e8b1437a10c1"></script>
+<script type="text/javascript">
+	//카카오맵 API
+    document.addEventListener("DOMContentLoaded", function() {
+        var container = document.getElementById('store_map_field');
+        var options = {
+        	//지도의 중심 위치를 설정
+            center: new kakao.maps.LatLng(37.566381, 126.977717),
+            //지도 확대/축소 레벨을 설정
+            level: 3
+        };
+		
+        //container에 지도 요소가 삽입, options에 위에서 정의한 설정 전달
+        var map = new kakao.maps.Map(container, options);
+    });
+</script>
 </html>
