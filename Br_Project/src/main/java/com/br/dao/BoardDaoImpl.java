@@ -62,7 +62,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int getLastPageNumber() {
 		int countRet = sqlSession.selectOne("BoardMapper.selectLastPageNumber");
-		return countRet/10 + (countRet%10>0 ? 1 : 0);
+		return countRet/4 + (countRet%4>0 ? 1 : 0);
 	}
 	
 }

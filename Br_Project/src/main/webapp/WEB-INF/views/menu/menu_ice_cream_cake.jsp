@@ -71,10 +71,6 @@
 		<div style="clear:both"></div>
 	</div>
 	
-	<c:if test="${cakesList == null}">
-    	<div>No cakes found.</div>
-	</c:if>
-	
 	<c:set var="startNum" value="${startNum != null && startNum >= 0 ? startNum : 1}" />
 	<c:set var="endNum" value="${endNum != null && endNum >= 0 ? endNum : 1}" />
 
