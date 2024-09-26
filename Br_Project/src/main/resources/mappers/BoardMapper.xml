@@ -11,12 +11,15 @@
 			        content AS content,
 			        writer_id AS writerId,
 			        CASE WHEN (sysdate - write_date) <= 30 
-			                THEN 'T'
-			                ELSE 'F'
+			                THEN 1
+			                ELSE 0
 			        END AS newMark,
 			        likes AS likes,
 			        writer_name AS writerName,
-			        show_name AS showName
+			        CASE WHEN show_name = 'T' 
+			                THEN 1
+			                ELSE 0
+			        END AS showName
 			FROM    plaza
 			ORDER BY boardIdx DESC
 		]]>

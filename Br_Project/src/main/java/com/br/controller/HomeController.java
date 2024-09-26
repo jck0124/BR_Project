@@ -11,4 +11,10 @@ public class HomeController {
 	public String login() {
 		return "etc/log_in";
 	}
+	
+	@RequestMapping("/errorPage")
+	public String error() {
+		return "etc/error";
+	}
+	
 }

@@ -25,5 +25,14 @@ public class BoardDaoTest {
 			System.out.println(dto.getTitle());
 		}
 	}
+	
+	@Test
+	public void testPlaza() {
+		ArrayList<PlazaBoardDto> boardList = dao.selectPlazaBoardList();
+		System.out.println(boardList.size());
+		
+	}
+	
+	
 
 }
