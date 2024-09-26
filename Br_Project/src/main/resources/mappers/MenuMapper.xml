@@ -51,6 +51,7 @@
 	</select>
 	
 	<!-- 수연 -->
+	<!-- 아이스크림 리스트 -->
 	<select id="getAllIcecream" resultType="com.br.dto.IcecreamDto">
 		<![CDATA[
 			SELECT icecream_idx AS icecreamIdx
@@ -66,7 +67,44 @@
 			ORDER BY order_num ASC
 		]]>
 	</select>
-
+	
+	<!-- 아이스크림 상세정보 -->
+	<select id="getIcecreamDetail" resultType="com.br.dto.IcecreamDto">
+		<![CDATA[
+			SELECT icecream_idx AS icecreamIdx
+			    , name_kor AS nameKor
+			    , name_eng AS nameEng
+			    , img_url AS imgUrl
+			    , detail_img AS detailImg
+			    , info
+			    , hashtag
+			    , background_color AS backgroundColor
+			    , text_color AS textColor
+			    , order_num AS orderNum
+			    , serving_size AS servingSize
+			    , calories
+			    , sugars
+			    , protein
+			    , saturated_fat AS saturatedFat
+			    , sodium
+			    , allergens
+			FROM icecream
+			WHERE icecream_idx = #{icecreamIdx}
+		]]>
+	</select>
+	
+	<!-- 재료 아이콘 -->
+	<select id="getIngredient" resultType="com.br.dto.IcecreamIngredientDto">
+		<![CDATA[
+			SELECT i.icecream_idx AS icecreamIdx
+			    , i.ingredient_idx AS ingredientIdx
+			    , ii.name
+			    , ii.img_url AS imgUrl
+			FROM ingredient i
+			LEFT JOIN ingredient_icon ii ON ii.ingredient_idx = i.ingredient_idx
+			WHERE i.icecream_idx = #{icecreamIdx}
+		]]>
+	</select>
 	
 	<!-- 수빈 -->
 	

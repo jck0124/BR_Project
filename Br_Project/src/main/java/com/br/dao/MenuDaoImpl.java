@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.br.dto.DrinkDetailMenuDto;
 import com.br.dto.DrinkDto;
 import com.br.dto.IcecreamDto;
+import com.br.dto.IcecreamIngredientDto;
 import com.br.dto.ShowIceCreamCakeDetailDto;
 import com.br.dto.ShowIceCreamCakeDto;
 
@@ -49,6 +50,25 @@ public class MenuDaoImpl implements MenuDao {
 		return icecreamList;
 	}
 
+	@Override
+	public IcecreamDto selectIcecreamDetail(int icecreamIdx) {
+		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+		hmap.put("icecreamIdx", icecreamIdx);
+		
+		IcecreamDto icecreamDetail =  sqlSession.selectOne("MenuMapper.getIcecreamDetail", hmap);
+		return icecreamDetail;
+	
+	}
+	
+	@Override
+	public ArrayList<IcecreamIngredientDto> selectIngredientList(int icecreamIdx) {
+		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+		hmap.put("icecreamIdx", icecreamIdx);
+		
+		List<IcecreamIngredientDto> ingredientListTemp = sqlSession.selectList("MenuMapper.getIngredient", hmap);
+		
+		return new ArrayList<IcecreamIngredientDto>(ingredientListTemp);
+	}
 	
 	// 수빈
 	// 아이스크림 리스트 

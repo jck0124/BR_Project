@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.br.dto.DrinkDetailDto;
-import com.br.dto.DrinkDto;
 import com.br.dto.DrinkPaginationDto;
 import com.br.dto.IcecreamDto;
+import com.br.dto.IcecreamIngredientDto;
 import com.br.dto.ShowIceCreamCakeDetailDto;
 
 public interface MenuService {
@@ -17,6 +17,8 @@ public interface MenuService {
 	
 	// 수연
 	ArrayList<IcecreamDto> getIcecreamList();
+	IcecreamDto getIcecreamDetail(int icecreamIdx);
+	ArrayList<IcecreamIngredientDto> getIngredient(int icecreamIdx);
 	
 	// 수빈
 	

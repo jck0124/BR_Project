@@ -16,11 +16,11 @@
 	<div id="main_container" class="center">
 		<!-- 페이지 이동 -->
 		<div id="menu_location">
-		<a href="">이달의 맛</a>
-		<a href="${pageContext.request.contextPath}/menu_icecream">아이스크림</a>
-		<a href="${pageContext.request.contextPath}/menu_ice_cream_cake">아이스크림케이크</a>
-		<a href="${pageContext.request.contextPath}/menu_drinks">음료</a>
-	</div>
+			<a href="">이달의 맛</a>
+			<a href="${pageContext.request.contextPath}/menu_icecream">아이스크림</a>
+			<a href="${pageContext.request.contextPath}/menu_ice_cream_cake">아이스크림케이크</a>
+			<a href="${pageContext.request.contextPath}/menu_drinks">음료</a>
+		</div>
 		<div id="icecream_container_header">
 			<!-- iceCream header -->
 			<div class="page_header">
@@ -40,12 +40,13 @@
 		<div id="div_menu" class="center">
 			<div class="menu_list center">
 				<ul class="menu_list_inner">
-				
+				<!-- 여기 -->
 				<c:forEach var="icecream" items="${icecreamList}">
 					<li class = "icecream">
-						<div class="menu_list_inner_border">
+						<div class="menu_list_inner_border" style="background-color: ${icecream.backgroundColor};"
+						 data-background-color="${icecream.backgroundColor}">
 							<a class="menu_btn" href="${pageContext.request.contextPath}/icecream_detail?icecreamIdx=${icecream.icecreamIdx}">
-								<span class="menu_info">${icecream.hashtag}</span>
+								<span class="menu_info" style="color: ${icecream.textColor};">${icecream.hashtag}</span>
 								<img class="menu_img"src="${icecream.imgUrl}">
 							</a>
 						</div>
@@ -68,20 +69,26 @@
 
 </style>
 <script>
-	$(function(){
-		$(".menu_info").hide();
-		$(".menu_list_inner_border").hover(function() {
-			/* mouse over */
-	        $(this).find(".menu_img").animate({ top: "90px" }, 100);
-	        
-	        var menuInfo = $(this).find(".menu_info");
-	        menuInfo.css("top", "0px").show();  // 위치 초기화 후 표시
-	        menuInfo.animate({ top: "50px" }, 200);  // 애니메이션 실행
-	    }, function() {
-	    	/* mouse out */
-	        $(this).find(".menu_img").animate({ top: "0" }, 100);
-	        $(this).find(".menu_info").hide();
-	    });
-	});
+$(function(){
+	$(".menu_info").hide();
+	$('.menu_list_inner_border').css('background-color', ''); 
+	$(".menu_list_inner_border").hover(function() {
+		/* mouse over */
+		/* $(this).css('background-color', backgroundColor); */
+        var backgroundColor = $(this).data('background-color');
+        $(this).find(".menu_img").animate({ top: "90px" }, 100);
+        $(this).css('background-color', backgroundColor);
+        
+        var menuInfo = $(this).find(".menu_info");
+        menuInfo.css("top", "0px").show();  // 위치 초기화 후 표시
+        menuInfo.animate({ top: "50px" }, 200);  // 애니메이션 실행
+    }, function() {
+    	/* mouse out */
+    	/* $(this).css('background-color', ''); */
+        $(this).find(".menu_img").animate({ top: "0" }, 100);
+        $(this).find(".menu_info").hide();
+        $(this).css('background-color', '');
+    });
+});
 </script>
 </html>
