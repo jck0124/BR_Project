@@ -17,8 +17,18 @@
     			data : {page_num : page_num},	// 보내주는 데이터
     			dataType: "json", // 응답 받을 데이터 타입
     			// url : "BoardServiceImpl" 인터넷에서는 왜 안하지
+    			success : function(res) {
+    				console.log(res);
+    			},
+    			error : function(r,s,e) {
+    				alert("[에러]code:" + r.status + ", message:" + r.responseText + ", error" + e);
+    			}
     		});
     	}
+    	
+    	$(function() {
+    		draw_board_list(page_num);
+    	});
     </script>
 </head>
 <body>
@@ -38,7 +48,7 @@
 		<div>다양한 이벤트를 확인해보세요</div>
 	</div>
 	
-	<!-- 탭 	-->
+	<!-- 탭 -->
 	<div id="promotion_box">
 		<c:forEach var="event" items="${selectEvent}">
 			<div class="fl promotion">
@@ -55,7 +65,6 @@
 		</c:forEach>
 		<div style="clear:both"></div>
 	</div>
-
 	
 	<c:set var="startNum" value="${startNnum != null && startNum >= 0 ? startNum : 1}"/>
 	<c:set var="endNum" value="${endNum != null && endNum >= 0 ? endNum : 1}"/>
@@ -75,7 +84,6 @@
 			<a id="next" href="event?page=${endNum+1}">&lt;</a>
 		</c:if>
 	</div>
-	  
 	<div style="clear:both;"></div>
 	<%@ include file="../footer.jsp" %>
 </body>

@@ -30,9 +30,25 @@ public class BoardServiceImpl implements BoardService {
 	// event 게시판 보여주기
 	@Override
 	public Map<String,Object> selectEvent(int pageNum) {
+		// 무한스크롤
+//			System.out.println(pageNum);
+//			
 		ArrayList<SelectEventDto> selectEvent = new ArrayList<SelectEventDto>();
 		selectEvent = bDao.selectEvent(pageNum);
+//			
+//			JSONArray array = new JSONArray();
+//			for(SelectEventDto dto : selectEvent) {
+//				JSONObject obj = new JSONObject();
+//				obj.put("img", dto.getImg());
+//				obj.put("topLetter", dto.getTopLetter());
+//				obj.put("title", dto.getTitle());
+//				obj.put("period", dto.getPeriod());
+//				array.add(obj);
+//			}
+//			response.setContentType("application/json; charset=utf-8");
+//			
 		
+		// 페이지 네이션
 		int startNum, endNum;
 		int lastPageNum = bDao.getLastPageNumber();
 		endNum = (pageNum/5+1)*5 - (pageNum%5==0 ? 5 : 0);
@@ -49,4 +65,16 @@ public class BoardServiceImpl implements BoardService {
 		
 		return result;
 	}
+	
+	  public void createEvent(String type, String title, String period, String imagePath) {
+	        Map<String, Object> eventInfo = new HashMap<>();
+	        eventInfo.put("type", type);
+	        eventInfo.put("title", title);
+	        eventInfo.put("period", period);
+	        eventInfo.put("imagePath", imagePath);
+	
+	        // Mapper를 통해 이벤트 정보 삽입
+	        //eventMapper.insertEvent(eventInfo);
+	    }
+
 }

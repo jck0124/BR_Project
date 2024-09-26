@@ -37,7 +37,7 @@
 		</form>
 		
 		<!-- br레시피 정보 넣기 -->
-		<form class="insert_info" action="" enctype="multipart/form-data">
+		<form class="insert_info" action="/uploadEvent" method="post" enctype="multipart/form-data">
 			BR Recipe 업로드 
 			<br/>
 			종류 : <input type="text" name="type"/>
@@ -51,6 +51,7 @@
 			<button type="submit">BR 레시피 작성하기</button>
 		</form>
 	</div>
+	<%@ include file = "../footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>

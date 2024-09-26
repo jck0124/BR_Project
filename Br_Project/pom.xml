@@ -181,6 +181,13 @@
 		    <version>5.7.12</version>
 		</dependency>
 		
+		<!-- 사진 업로드용 dependency -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		
 	</dependencies>
     <build>
         <plugins>
