@@ -6,7 +6,7 @@ body {
 }
 .fl {float : left}
 .fr {float : right}
-.border {boarder : 1px solid red}
+.border {border : 1px solid red}
 .center {margin: 0 auto}
 
 /* 메인 컨테이너 */
@@ -95,7 +95,7 @@ body {
 	display: flex;
 	padding: 0;
     flex-wrap: wrap;
-    margin-top: -4px;
+    margin-top: 0;
 }
 .menu_list_inner li {
 	list-style: none;
@@ -153,7 +153,13 @@ body {
     top: 0; 
     transition: top 0.3s ease;
 }
-.menu_list_inner li:nth-of-type(1) .menu_info {
+.textColor {
+	display: none;
+}
+.backgroundColor {
+	display: none;
+}
+/* .menu_list_inner li:nth-of-type(1) .menu_info {
 	color: #e66424;
 }
 .menu_list_inner li:nth-of-type(2) .menu_info {
@@ -334,7 +340,7 @@ body {
 }
 .menu_list_inner li:nth-of-type(30):hover .menu_list_inner_border {
     background-color: #67869b;
-}
+} */
 .menu_list_inner_border img {
 	position: absolute;
 	width: 260px;

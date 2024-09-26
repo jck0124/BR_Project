@@ -57,6 +57,12 @@ public class MenuDaoTest {	// 제일 먼저 해야 하는 것 : 테스트!!!
 		System.out.println(cakeDetail.getKorName());
 	}
 	
+	@Test
+	public void ingredientTest() {
+		ArrayList<IcecreamIngredientDto> dtoList = dao.selectIngredientList(6);
+		System.out.println(dtoList.size());
+	}
+	
 }
 
 

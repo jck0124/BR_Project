@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.br.dto.DrinkDetailMenuDto;
 import com.br.dto.DrinkDto;
 import com.br.dto.IcecreamDto;
+import com.br.dto.IcecreamIngredientDto;
 import com.br.dto.ShowIceCreamCakeDetailDto;
 import com.br.dto.ShowIceCreamCakeDto;
 
@@ -21,6 +22,12 @@ public interface MenuDao {
 	
 	// 아이스크림 리스트
 	ArrayList<IcecreamDto> selectIcecreamList();
+	
+	// 아이스크림 상세페이지
+	IcecreamDto selectIcecreamDetail(int icecreamIdx); 
+	
+	// 아이스크림 재료
+	ArrayList<IcecreamIngredientDto> selectIngredientList(int icecreamIdx);
 	
 	// 아이스크림 케이크 리스트
 	ArrayList<ShowIceCreamCakeDto> showIceCreamCake(int pageNum);

@@ -57,6 +57,17 @@ public class MenuController {
 		return "menu/menu_icecream";
 	}
 	
+	@RequestMapping("/icecream_detail")
+	public String icecreamDtail(int icecreamIdx, Model model) {
+//		IcecreamDto dto = mSvc.getIcecreamDetail(icecreamIdx);
+		model.addAttribute("icecreamIdx", icecreamIdx);
+		if(mSvc.getIcecreamDetail(icecreamIdx) != null) {
+			model.addAttribute("icecreamDetail", mSvc.getIcecreamDetail(icecreamIdx));
+			model.addAttribute("ingredientList", mSvc.getIngredient(icecreamIdx));
+		}
+		return "menu/icecream_detail";
+				
+	}
 	//수빈
 	@RequestMapping("/menu_ice_cream_cake")
 	public String menu_ice_cream_cake(HttpServletRequest request, Model model) {

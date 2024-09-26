@@ -13,6 +13,7 @@ import com.br.dto.DrinkDetailMenuDto;
 import com.br.dto.DrinkDto;
 import com.br.dto.DrinkPaginationDto;
 import com.br.dto.IcecreamDto;
+import com.br.dto.IcecreamIngredientDto;
 import com.br.dto.ShowIceCreamCakeDetailDto;
 import com.br.dto.ShowIceCreamCakeDto;
 
@@ -65,6 +66,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 	
 	// 수연
+	// 아이스크림 리스트
 	@Override
 	public ArrayList<IcecreamDto> getIcecreamList() {
 		
@@ -73,6 +75,24 @@ public class MenuServiceImpl implements MenuService {
 		
 		return icecreamList;
 	}
+	
+	// 아이스크림 상세페이지
+		@Override
+		public IcecreamDto getIcecreamDetail(int icecreamIdx) {
+			IcecreamDto icecreamDetail = new IcecreamDto();
+			icecreamDetail = mDao.selectIcecreamDetail(icecreamIdx);
+			
+			return icecreamDetail;
+		}
+		
+	// 아이스크림 재료
+		@Override
+		public ArrayList<IcecreamIngredientDto> getIngredient(int icecreamIdx) {
+			ArrayList<IcecreamIngredientDto> ingredientList = new ArrayList<IcecreamIngredientDto>();
+			ingredientList = mDao.selectIngredientList(icecreamIdx);
+			
+			return ingredientList;
+		}
 	
 	// 수빈
 	@Override
