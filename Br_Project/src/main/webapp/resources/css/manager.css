@@ -11,7 +11,7 @@ body {
 /*상단 설명*/
 #manager {
 	text-align : center;
-	margin-top: 30px;
+	margin-top: 200px;
 }
 #manager > div:nth-child(1) {
     color: #f986bd;

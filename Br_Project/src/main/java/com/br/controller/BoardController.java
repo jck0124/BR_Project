@@ -1,5 +1,9 @@
 package com.br.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.br.service.BoardServiceImpl;
 
@@ -62,8 +70,39 @@ public class BoardController {
 		return "br_play/event";
 	}
 	
+	// 매니저 board 업로드
 	@RequestMapping("/manager")
 	public String manager() {
+		
 		return "manager/manager";
+	}
+	
+	// Post 방식으로 파일 업로드 처리 
+	@PostMapping("/uploadEvent")
+	public String handleFileUpload(
+			@RequestParam("type") String type,
+			@RequestParam("title") String title,
+			@RequestParam("period") String period,
+			@RequestParam("img") MultipartFile file,
+			RedirectAttributes redirectAttributes) {
+		if(file.isEmpty()) {
+			redirectAttributes.addFlashAttribute("message", "파일을 선택해주세요.");
+			return "redirect:/manager";
+		}
+		
+		try {
+            // 파일 저장 로직
+            String uploadDir = "파일 저장 경로";
+            Path path = Paths.get(uploadDir + file.getOriginalFilename());
+            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+            // 성공 메시지 추가
+            redirectAttributes.addFlashAttribute("message", "파일 업로드 성공: " + file.getOriginalFilename());
+        } catch (Exception e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("message", "파일 업로드 실패.");
+        }
+
+        return "redirect:/manager";
 	}
 }
