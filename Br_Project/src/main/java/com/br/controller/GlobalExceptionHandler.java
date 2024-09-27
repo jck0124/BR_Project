@@ -10,6 +10,7 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(Exception.class)
 	public String handleAllExcepton(Exception e, Model model) {
+		e.printStackTrace();
 		model.addAttribute("errorMsg", "페이지 오류 잠시 후 다시 시도해주세요");
 		return "etc/error";
 	}

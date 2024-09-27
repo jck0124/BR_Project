@@ -4,25 +4,25 @@ import java.util.ArrayList;
 
 public class PlazaPaginationDto {
 
-	private int totalPagenum;
+	private int totalPageNum;
 	private ArrayList<PlazaBoardDto> boardList;
 	
 	public PlazaPaginationDto() {
 		
 	}
 
-	public PlazaPaginationDto(int totalPagenum, ArrayList<PlazaBoardDto> boardList) {
+	public PlazaPaginationDto(int totalPageNum, ArrayList<PlazaBoardDto> boardList) {
 		super();
-		this.totalPagenum = totalPagenum;
+		this.totalPageNum = totalPageNum;
 		this.boardList = boardList;
 	}
 
-	public int getTotalPagenum() {
-		return totalPagenum;
+	public int getTotalPageNum() {
+		return totalPageNum;
 	}
 
-	public void setTotalPagenum(int totalPagenum) {
-		this.totalPagenum = totalPagenum;
+	public void setTotalPageNum(int totalPageNum) {
+		this.totalPageNum = totalPageNum;
 	}
 
 	public ArrayList<PlazaBoardDto> getBoardList() {
