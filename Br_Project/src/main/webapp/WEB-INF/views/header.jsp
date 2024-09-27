@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="header_menu header_menu3">
-                        <a href="">BR Stroy</a>
+                        <a href="">BR Story</a>
 
                         <div class="header_menu_hover">
                             <div class="header_menu_hover_inner">
@@ -127,7 +127,7 @@
                                 <div class="header_menu4_hover">
                                     <div class="header_menu4_hover_left">
                                         <div>
-                                            <a href="">Store</a>
+                                            <a href="${pageContext.request.contextPath}/store_map">Store</a>
                                         </div>
                                         <div>
                                             <div>
