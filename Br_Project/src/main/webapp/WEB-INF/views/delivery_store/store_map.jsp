@@ -138,16 +138,79 @@
 <script type="text/javascript">
 	//카카오맵 API
     document.addEventListener("DOMContentLoaded", function() {
+    	var imgSrc = 'https://www.baskinrobbins.co.kr/assets/images/store/map/icon_map_marker_default.png';
+    	var imgSize = new kakao.maps.Size(135, 106);	// 마커이미지의 크기.
+    	var imgOption = {offset: new kakao.maps.Point(0, 0)}; // 마커이미지의 옵션.
+    	var markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize, imgOption);
+    	
         var container = document.getElementById('store_map_field');
         var options = {
         	//지도의 중심 위치를 설정
-            center: new kakao.maps.LatLng(37.566381, 126.977717),
+            center: new kakao.maps.LatLng(37.5021082, 127.0259519),
             //지도 확대/축소 레벨을 설정
             level: 3
         };
 		
         //container에 지도 요소가 삽입, options에 위에서 정의한 설정 전달
         var map = new kakao.maps.Map(container, options);
+        
+        var positions = [
+        	{
+		        title: 'SPC스퀘어', 
+		        latlng: new kakao.maps.LatLng(37.4943316, 127.0298345)
+		    },
+		    {
+		        title: '강남대로', 
+		        latlng: new kakao.maps.LatLng(37.5021082, 127.0259519)
+		    },
+		    {
+		        title: '강남신논현', 
+		        latlng: new kakao.maps.LatLng(37.5018395, 127.0246454)
+		    },
+		    {
+		        title: 'cafe31서초우성',
+		        latlng: new kakao.maps.LatLng(37.4926223, 127.0296532)
+		    }
+        ]
+        
+ 		/*        
+ 		var markers = positions.map(function(position) {  // 마커를 배열 단위로 묶음
+            return new kakao.maps.Marker({
+                position : new kakao.maps.LatLng(position.lat, position.lng),
+                title : position.title,
+                image : markerImage
+            });
+        });
+        
+        for (var i = 0; i < positions.length; i ++) {
+ 		   
+		    var marker = new kakao.maps.Marker({  // 마커 생성
+		        map: map, // 마커를 표시할 지도
+		        position: positions[i].latlng, // 마커를 표시할 위치
+		        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시 됨
+		    });
+		} */
+		
+		// 마커를 배열 단위로 묶음 (위 주석처리한 부분 통합)
+	    positions.forEach(function(position) {
+	        var marker = new kakao.maps.Marker({
+	            position: position.latlng,
+	            title: position.title,
+	            image: markerImage, // 변경된 이미지 사용
+	            map: map // 마커가 지도 위에 표시되도록 설정
+	        });
+	    });
+        
+		/* var marker = new kakao.maps.Marker({  // 마커 생성
+		    position: markerPosition
+		});
+
+		 */
+		
+		marker.setMap(map); // 마커가 지도 위에 표시되도록 설정
+
+		// 지도 위의 마커를 제거하는 코드
+		// marker.setMap(null);
     });
 </script>
 </html>

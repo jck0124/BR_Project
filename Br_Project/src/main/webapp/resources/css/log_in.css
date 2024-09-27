@@ -65,6 +65,24 @@ a {text-decoration : none; color : black;}
     border-radius: 30px;
 }
 
+/* 소셜로그인 */
+#social_login {
+	margin-top: 10px;
+}
+#btn_naver_login {
+	cursor: pointer;
+	margin-right: 5px;
+}
+#btn_kakao_login {
+	cursor: pointer;	
+}
+#btn_kakao_login {
+	margin-right: 5px;
+}
+.login_logo {
+    height: 45px;
+}
+
 /*아이디찾기, 비밀번호 재발급*/
 #find {
     margin: 30px 0;

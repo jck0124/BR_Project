@@ -384,7 +384,7 @@ footer {
 .map_list_left p {
 	margin-top: 5px;
 	margin-bottom: 0;
-	height: 19.98px;
+	height: auto;
 }
 #store_map_field {
 	width: 100%;
