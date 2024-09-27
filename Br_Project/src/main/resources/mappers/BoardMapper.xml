@@ -62,4 +62,12 @@
 			SELECT COUNT(*) FROM event
 		]]>
 	</select>
+	
+	<!-- 이벤트 insert -->
+	<select id="insertEvent">
+		<![CDATA[
+			INSERT INTO event(img, top_letter, title, period, event_idx)
+			VALUES (#{img}, #{topLetter}, #{title}, #{period}, EVENT_SEQUENCE.nextval)
+		]]>
+	</select>
 </mapper>

@@ -64,5 +64,19 @@ public class BoardDaoImpl implements BoardDao {
 		int countRet = sqlSession.selectOne("BoardMapper.selectLastPageNumber");
 		return countRet/4 + (countRet%4>0 ? 1 : 0);
 	}
+
+	// event insert
+	@Override
+	public void insertEvent(String img, String topLetter, String title, String period) {
+		
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("img", img);
+		hmap.put("topLetter", topLetter);
+		hmap.put("title", title);
+		hmap.put("period", period);
+		
+		sqlSession.insert("BoardMapper.insertEvent", hmap);
+		
+	}
 	
 }

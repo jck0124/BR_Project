@@ -1,11 +1,13 @@
 package com.br.controller;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ import com.br.service.BoardServiceImpl;
 public class BoardController {
 	@Autowired
 	BoardServiceImpl bSvc;
+	@Autowired
+	private ServletContext servletContext;
 	
 	// 찬균
 	@RequestMapping("/br_plaza")
@@ -80,11 +84,13 @@ public class BoardController {
 	// Post 방식으로 파일 업로드 처리 
 	@PostMapping("/uploadEvent")
 	public String handleFileUpload(
-			@RequestParam("type") String type,
-			@RequestParam("title") String title,
-			@RequestParam("period") String period,
-			@RequestParam("img") MultipartFile file,
-			RedirectAttributes redirectAttributes) {
+		@RequestParam("topLetter") String topLetter,
+		@RequestParam("title") String title,
+		@RequestParam("period") String period,
+		@RequestParam("img") MultipartFile file,
+		RedirectAttributes redirectAttributes,
+		HttpServletRequest request) {
+		
 		if(file.isEmpty()) {
 			redirectAttributes.addFlashAttribute("message", "파일을 선택해주세요.");
 			return "redirect:/manager";
@@ -92,10 +98,19 @@ public class BoardController {
 		
 		try {
             // 파일 저장 로직
-            String uploadDir = "파일 저장 경로";
+			// String uploadDir = "C:/uploads/";
+			String uploadDir = servletContext.getRealPath("/resources/uploads/");
+			File directory = new File(uploadDir);
+			if (!directory.exists()) {
+			    directory.mkdirs(); // 디렉토리 생성
+			}
             Path path = Paths.get(uploadDir + file.getOriginalFilename());
             Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-
+            
+            // 데이터베이스에 이벤트 정보 삽입
+            String imgPath = uploadDir + file.getOriginalFilename(); // 저장한 이미지 경로
+            bSvc.insertEvent(imgPath, topLetter, title, period); // 서비스 호출
+            
             // 성공 메시지 추가
             redirectAttributes.addFlashAttribute("message", "파일 업로드 성공: " + file.getOriginalFilename());
         } catch (Exception e) {

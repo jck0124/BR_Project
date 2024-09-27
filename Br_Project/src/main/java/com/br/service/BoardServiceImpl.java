@@ -1,11 +1,13 @@
 package com.br.service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.br.dao.BoardDao;
 import com.br.dto.PlazaBoardDto;
@@ -61,11 +63,11 @@ public class BoardServiceImpl implements BoardService {
 	// event 게시판 보여주기
 	@Override
 	public Map<String,Object> selectEvent(int pageNum) {
-		// 무한스크롤
-//			System.out.println(pageNum);
+	// 무한스크롤
+//	System.out.println(pageNum);
 //			
-		ArrayList<SelectEventDto> selectEvent = new ArrayList<SelectEventDto>();
-		selectEvent = bDao.selectEvent(pageNum);
+	ArrayList<SelectEventDto> selectEvent = new ArrayList<SelectEventDto>();
+	selectEvent = bDao.selectEvent(pageNum);
 //			
 //			JSONArray array = new JSONArray();
 //			for(SelectEventDto dto : selectEvent) {
@@ -78,7 +80,7 @@ public class BoardServiceImpl implements BoardService {
 //			}
 //			response.setContentType("application/json; charset=utf-8");
 //			
-		
+	
 		// 페이지 네이션
 		int startNum, endNum;
 		int lastPageNum = bDao.getLastPageNumber();
@@ -97,15 +99,12 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 	
-	  public void createEvent(String type, String title, String period, String imagePath) {
-	        Map<String, Object> eventInfo = new HashMap<>();
-	        eventInfo.put("type", type);
-	        eventInfo.put("title", title);
-	        eventInfo.put("period", period);
-	        eventInfo.put("imagePath", imagePath);
+	@Override
+	public void insertEvent(String imgPath, String topLetter, String title, String period) {
+		
+		bDao.insertEvent(imgPath, topLetter, title, period);
+	 }
+
 	
-	        // Mapper를 통해 이벤트 정보 삽입
-	        //eventMapper.insertEvent(eventInfo);
-	    }
 
 }

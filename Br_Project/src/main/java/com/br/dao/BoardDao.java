@@ -24,4 +24,7 @@ public interface BoardDao {
 	
 	// 이벤트 lastPage
 	int getLastPageNumber();
+	
+	// 이벤트 insert
+	void insertEvent(String img, String topLetter, String title, String period);
 }

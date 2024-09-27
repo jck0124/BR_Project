@@ -22,10 +22,10 @@
 	<!-- 정보 넣기 -->
 	<div id="insert">
 		<!-- 이벤트 정보 넣기 -->
-		<form class="insert_info" action="" enctype="multipart/form-data">
+		<form class="insert_info" action="uploadEvent" method="POST" enctype="multipart/form-data">
 			이벤트 업로드
 			<br/>
-			종류 : <input type="text" name="type"/>
+			종류 : <input type="text" name="topLetter"/>
 			<br/>
 			제목 :  <input type="text" name="title"/>
 			<br/>
