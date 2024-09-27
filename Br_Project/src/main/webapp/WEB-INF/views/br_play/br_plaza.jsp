@@ -30,6 +30,12 @@
 
 	<div class="plaza_container">
 		
+		<div class="plaza_write">글쓰기</div>
+		<div class="plaza_order">
+			<span>추천순</span>
+			<span>최신순</span>
+		</div>
+		
 		<c:forEach var="board" items="${boardList}">	
 			<div class="plaza_item">
 				<div class="plaza_item_header">
@@ -74,70 +80,119 @@ $(function() {
 	
 	let totalPageNum = parseInt( $("input[name='total_page_num']").val() );
 	
+	
 	$(window).on("mousewheel", function(e, delta) {
 		
 		let pageNum = parseInt( $("input[name='page_num']").val() );
 		
-		// delta < 0 : 마우스휠 내릴 때 
-		if(delta < 0) {
+		if(	checkScrollPosition() ) { // 스크롤 위치가 페이지의 상단 30% 아래
 			
-			if(pageNum <= totalPageNum) {
-				alert("이벤트");
-				$.ajax({
-					type: "GET",
-					async: true,
-					url: contextPath + "/api/plaza",
-					data: {
-						pageNum: pageNum
-					},
-					dataType: "json",
-					success: function(response) {
-						console.log("success");
-						response.forEach(board => {
-							
-							let newMark = board.newMark ? '<div class="plaza_item_header_new">NEW</div>' : '';
-									
-							let plazaBoard = 
-								'<div class="plaza_item">' +
-									'<div class="plaza_item_header">' +
-										newMark +
-										'<div class="plaza_item_header_text">' +
-											'<h4>' + board.title + '</h4>' +
-										'</div>' +
-									'</div>'+
-									'<div class="plaza_item_content">' +
-										board.content +
-									'</div>' +
-									'<div class="plaza_item_writer">' + board.writerId + '님</div>' +
-									'<div class="plaza_item_footer">' +
-										'<div class="plaza_item_footer_img"></div>' +
-										'<div class="plaza_item_footer_detail">' +
-											'<a href="' + contextPath + '/br_plaza_detail">자세히 보기</a>' +
-											'<form action="">' +
-												'<input type="hidden" name="board_idx" value="' + board.boardIdx + '"/>' +
-											'</form>' +
-										'</div>'+
-									'</div>' +
-								'</div>' 
-							;
+			if(delta < 0) { // delta < 0 : 마우스휠 내릴 때 
+				
+				if(pageNum <= totalPageNum) {
+					
+					$.ajax({
+						type: "GET",
+						async: true,
+						url: contextPath + "/api/plaza",
+						data: {
+							pageNum: pageNum
+						},
+						dataType: "json",
+						success: function(response) {
+							console.log("추가 페이지 불러오기 success");
+							response.forEach(board => {
 								
-							$(".plaza_container").append(plazaBoard);
+								let newMark = board.newMark ? '<div class="plaza_item_header_new">NEW</div>' : '';
+										
+								let plazaBoard = 
+									'<div class="plaza_item">' +
+										'<div class="plaza_item_header">' +
+											newMark +
+											'<div class="plaza_item_header_text">' +
+												'<h4>' + board.title + '</h4>' +
+											'</div>' +
+										'</div>'+
+										'<div class="plaza_item_content">' +
+											board.content +
+										'</div>' +
+										'<div class="plaza_item_writer">' + board.writerId + '님</div>' +
+										'<div class="plaza_item_footer">' +
+											'<div class="plaza_item_footer_img"></div>' +
+											'<div class="plaza_item_footer_detail">' +
+												'<a href="' + contextPath + '/br_plaza_detail">자세히 보기</a>' +
+												'<form action="">' +
+													'<input type="hidden" name="board_idx" value="' + board.boardIdx + '"/>' +
+												'</form>' +
+											'</div>'+
+										'</div>' +
+									'</div>' 
+								;
+									
+								$(".plaza_container").append(plazaBoard);
+								
+							})
 							
-						})
-						
-					}, error: function(response) {
-						console.log("error");
-					}, complete: function(response) {
-						console.log("complete");
-					}
-				}) // ajax
+						}, error: function(response) {
+							console.log("추가 페이지 불러오기 error");
+						}, complete: function(response) {
+							console.log("추가 페이지 불러오기 complete");
+						}
+					}) // ajax
+					
+				} // if문 - pageNum < totalPageNum
 				
+				$("input[name='page_num']").val(++pageNum);
 				
-			}// if문 - pageNum < totalPageNum
+			}  // if문 - delta < 0
 			
-		}  // if문 - delta
-		$("input[name='page_num']").val(++pageNum);
+		} // checkScrollHalf
+		
 	}) // 휠 이벤트
+	
+	
+	
+	// 스크롤 위치
+	function checkScrollPosition() {
+		// 현재 스크롤 위치
+	    const scrollTop = $(window).scrollTop();
+	    
+	    // 전체 문서의 높이
+	    const documentHeight = $(document).height();
+	    
+	    // 현재 창의 높이
+	    const windowHeight = $(window).height();
+	    
+	    // 스크롤이 페이지의 50%를 넘어섰는지 확인
+	    if (scrollTop > (documentHeight - windowHeight) * 0.3) {
+	    	return true;
+	    } else {
+	    	return false;
+	    }
+	}
+	
+	
+	$(".plaza_write").click(function() {
+		
+		$.ajax({
+			type: "GET",
+			async: true,
+			url: contextPath + "/api/loginCheck",
+			success: function(response) {
+				if(response) {
+					window.location.href = contextPath + "/br_plaza_write";
+				} else {
+					alert("로그인 후 이용가능합니다.");
+					window.location.href = contextPath + "/loginPage";
+				}
+			}, error: function() {
+				console.log("loginCheck error");
+			}
+		})
+		
+	})
+	
+	
 	
 	
 	

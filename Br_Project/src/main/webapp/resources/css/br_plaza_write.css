@@ -1,0 +1,109 @@
+@charset "UTF-8";
+body {
+    margin: 0 auto;
+    overflow-y: scroll;
+}
+.fl {float : left}
+.fr {float : right}
+.border {boarder : 1px solid red}
+a {text-decoration : none}
+
+
+
+/*이동 탭*/
+#menu_location {
+	cursor : pointer;
+	color: #f986bd;
+	margin-top: 200px;
+    text-align: center;
+}
+#menu_location > a {
+	text-decoration: none;
+	color: #f986bd;
+	margin-right :10px;
+	border-right : 1px solid #f986bd;
+	padding-right: 10px;
+}
+#menu_location > a:last-child {
+	border : 0;
+}
+
+/*상단 설명*/
+#iceCreamCake {
+	text-align : center;
+	margin-top: 30px;
+}
+#iceCreamCake > div:nth-child(1) {
+    color: #f986bd;
+    font-weight: 700;
+    font-size: 90px;
+    letter-spacing: -.025em;
+}
+#iceCreamCake > div:nth-child(2){
+	margin-top: 20px;
+}
+#iceCreamCake > div:nth-child(2),
+#iceCreamCake > div:nth-child(3) {
+    padding: 0 25px;
+    color: #f986bd;
+    font-weight: var(--font-weight-sd-bold);
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+table {
+	border: 1px solid black;
+	margin: 0 auto;
+	width: auto;
+	border-collapse: collapse;
+	padding: 5px 10px;
+	margin-top: 50px;
+}
+
+input[type='text'] {
+	width: 200px;
+	height: 30px;
+}
+
+th, tr,td {
+	text-align: center;
+	height: 50px;
+	border: 1px solid black;
+	padding: 5px 10px;
+}
+
+.text_align_left {
+	text-align: left;
+}
+
+textarea {	
+	min-width: 500px;
+}
+
+input[type='submit'] {
+	cursor: pointer;
+	width: 100px;
+	height: 50px;
+	border: 1px solid #f986bd;
+	border-radius: 5px;
+	background-color: #f986bd;
+	color: white;
+	margin-right: 30px;
+}
+
+button {
+	cursor: pointer;
+	width: 100px;
+	height: 50px;
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: black;
+	margin-left: 30px;
+}
+
+button > a {
+	color: white;
+	text-decoration: none;
+}
+
+
