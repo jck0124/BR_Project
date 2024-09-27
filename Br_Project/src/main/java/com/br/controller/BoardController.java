@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,17 @@ public class BoardController {
 		return "br_play/br_plaza";
 	}
 	
+	@RequestMapping("/br_plaza_write")
+	public String brPlazaWrite(HttpSession session) {
+		
+		
+		if( session.getAttribute("loginId")!= null  ) {
+			return "br_play/br_plaza_write";
+		} else {
+			return "etc/error";
+		}
+		
+	}
 	
 	@RequestMapping("/br_plaza_detail")
 	public String brPlazaDetail(Model model) {
