@@ -40,29 +40,57 @@
     					옵션 선택
     				</button>
     			</div>
+    			<div id="choose_option_box">
+    				<div id="option_box_inner">
+    					<div class="option_type">
+    						<div class="option_title">매장타입</div>
+    						<div class="option_content">
+    							<label>
+    								<input type="checkbox" style="margin-top: 0;">
+    								<span>BR31</span>
+    							</label>
+    							<label>
+	    							<input type="checkbox">
+	    							<span>100flavor</span>
+    							</label>
+    						</div>
+    					</div>
+    					<div id="option_type2" class="option_type">
+    						<div class="option_title">제공 서비스</div>
+    						<div class="option_content">
+    							<label>
+	    							<input type="checkbox" style="margin-top: 0;">
+	    							<span>주차</span> 
+    							</label>
+    							<label>
+	    							<input type="checkbox"> 
+	    							<span>배달</span> 
+    							</label>
+    							<label>
+	    							<input type="checkbox"> 
+	    							<span>픽업</span> 
+    							</label>
+    							<label>
+	    							<input type="checkbox"> 
+	    							<span>취식여부</span> 
+    							</label>
+    							<label>
+	    							<input type="checkbox">
+	    							<span>해피스테이션</span> 
+    							</label>
+    							<label>
+	    							<input type="checkbox">
+	    							<span>가챠머신</span> 
+    							</label>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
    				<div class="select_city_box">
-   					<select id="sido" name="sido">
-   						<option value="도/시 선택">도/시 선택</option>
-   						<option value="강원특별자치도">강원특별자치도</option>
-   						<option value="경기">경기</option>
-   						<option value="경남">경남</option>
-   						<option value="경북">경북</option>
-   						<option value="광주">광주</option>
-   						<option value="대구">대구</option>
-   						<option value="대전">대전</option>
-   						<option value="부산">부산</option>
-   						<option value="서울">서울</option>
-   						<option value="세종특별자치시">세종특별자치시</option>
-   						<option value="울산">울산</option>
-   						<option value="인천">인천</option>
-   						<option value="전남">전남</option>
-   						<option value="전북">전북</option>
-   						<option value="제주특별자치도">제주특별자치도</option>
-   						<option value="충남">충남</option>
-   						<option value="충북">충북</option>
-   					</select>
+   					<select id="sel1" name="sel1">
    					
-   					<select id="gugoon" name="gugoon">
+   					</select>
+   					<select id="sel2" name="sel2">
    					
    					</select>
    				</div>
@@ -135,82 +163,6 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=022e6a3260371b2c8dc3e8b1437a10c1"></script>
-<script type="text/javascript">
-	//카카오맵 API
-    document.addEventListener("DOMContentLoaded", function() {
-    	var imgSrc = 'https://www.baskinrobbins.co.kr/assets/images/store/map/icon_map_marker_default.png';
-    	var imgSize = new kakao.maps.Size(135, 106);	// 마커이미지의 크기.
-    	var imgOption = {offset: new kakao.maps.Point(0, 0)}; // 마커이미지의 옵션.
-    	var markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize, imgOption);
-    	
-        var container = document.getElementById('store_map_field');
-        var options = {
-        	//지도의 중심 위치를 설정
-            center: new kakao.maps.LatLng(37.5021082, 127.0259519),
-            //지도 확대/축소 레벨을 설정
-            level: 3
-        };
-		
-        //container에 지도 요소가 삽입, options에 위에서 정의한 설정 전달
-        var map = new kakao.maps.Map(container, options);
-        
-        var positions = [
-        	{
-		        title: 'SPC스퀘어', 
-		        latlng: new kakao.maps.LatLng(37.4943316, 127.0298345)
-		    },
-		    {
-		        title: '강남대로', 
-		        latlng: new kakao.maps.LatLng(37.5021082, 127.0259519)
-		    },
-		    {
-		        title: '강남신논현', 
-		        latlng: new kakao.maps.LatLng(37.5018395, 127.0246454)
-		    },
-		    {
-		        title: 'cafe31서초우성',
-		        latlng: new kakao.maps.LatLng(37.4926223, 127.0296532)
-		    }
-        ]
-        
- 		/*        
- 		var markers = positions.map(function(position) {  // 마커를 배열 단위로 묶음
-            return new kakao.maps.Marker({
-                position : new kakao.maps.LatLng(position.lat, position.lng),
-                title : position.title,
-                image : markerImage
-            });
-        });
-        
-        for (var i = 0; i < positions.length; i ++) {
- 		   
-		    var marker = new kakao.maps.Marker({  // 마커 생성
-		        map: map, // 마커를 표시할 지도
-		        position: positions[i].latlng, // 마커를 표시할 위치
-		        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시 됨
-		    });
-		} */
-		
-		// 마커를 배열 단위로 묶음 (위 주석처리한 부분 통합)
-	    positions.forEach(function(position) {
-	        var marker = new kakao.maps.Marker({
-	            position: position.latlng,
-	            title: position.title,
-	            image: markerImage, // 변경된 이미지 사용
-	            map: map // 마커가 지도 위에 표시되도록 설정
-	        });
-	    });
-        
-		/* var marker = new kakao.maps.Marker({  // 마커 생성
-		    position: markerPosition
-		});
-
-		 */
-		
-		marker.setMap(map); // 마커가 지도 위에 표시되도록 설정
-
-		// 지도 위의 마커를 제거하는 코드
-		// marker.setMap(null);
-    });
-</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/store_map.js"></script>
 </html>
