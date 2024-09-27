@@ -2,6 +2,7 @@ package com.br.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,10 @@ public class BoardServiceImpl implements BoardService {
 		int totalPageNum = 1;
 		ArrayList<PlazaBoardDto> boardList = bDao.selectPlazaBoardList();
 		
-		if( boardList.size()%4 != 0 ) {
-			totalPageNum = boardList.size()/4 + 1;
+		if( boardList.size()%8 != 0 ) {
+			totalPageNum = boardList.size()/8 + 1;
 		} else {
-			totalPageNum = boardList.size()/4;
+			totalPageNum = boardList.size()/8;
 		}
 		
 		ArrayList<PlazaBoardDto> paginationBoardList = new ArrayList<PlazaBoardDto>();
@@ -44,8 +45,42 @@ public class BoardServiceImpl implements BoardService {
 			}
 		}
 		
+//		for(PlazaBoardDto pDto : boardList) {
+//			paginationBoardList.add(pDto);
+//		}
+		
 		return new PlazaPaginationDto(totalPageNum, paginationBoardList);
 	}
+	
+	
+	@Override
+	public List<PlazaBoardDto> plazaInfiniteScroll(int pageNum) {
+		
+		int totalPageNum = 1;
+		ArrayList<PlazaBoardDto> boardList = bDao.selectPlazaBoardList();
+		
+		if( boardList.size()%8 != 0 ) {
+			totalPageNum = boardList.size()/8 + 1;
+		} else {
+			totalPageNum = boardList.size()/8;
+		}
+		
+		ArrayList<PlazaBoardDto> paginationBoardList = new ArrayList<PlazaBoardDto>();
+		
+		
+		if(pageNum != totalPageNum) {
+			for(int i = (pageNum - 1)*8; i <= (pageNum*8 - 1); i++) {
+				paginationBoardList.add( boardList.get(i) );
+			}
+		} else {
+			for(int i = (pageNum - 1)*8; i < boardList.size(); i++) {
+				paginationBoardList.add( boardList.get(i) );
+			}
+		}
+		
+		return paginationBoardList;
+	}
+	
 	
 	
 	@Override

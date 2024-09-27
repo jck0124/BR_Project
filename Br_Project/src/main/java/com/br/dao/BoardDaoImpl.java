@@ -28,7 +28,6 @@ public class BoardDaoImpl implements BoardDao {
 	
 	
 	// 수연
-	
 	@Override
 	public ArrayList<RecipeDto> selectRecipeList() {
 		

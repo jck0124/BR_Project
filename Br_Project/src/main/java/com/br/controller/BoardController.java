@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.br.dto.PlazaPaginationDto;
 import com.br.service.BoardServiceImpl;
 
 @Controller
@@ -26,10 +27,18 @@ public class BoardController {
 	
 	// 찬균
 	@RequestMapping("/br_plaza")
-	public String brPlaza(Model model) {
+	public String brPlaza(
+			@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+			Model model) {
+		
+		PlazaPaginationDto pDto = bSvc.getPalzaPaginationDto(pageNum);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("boardList", pDto.getBoardList());
+		model.addAttribute("totalPageNum", pDto.getTotalPageNum());
 		
 		return "br_play/br_plaza";
 	}
+	
 	
 	@RequestMapping("/br_plaza_detail")
 	public String brPlazaDetail(Model model) {

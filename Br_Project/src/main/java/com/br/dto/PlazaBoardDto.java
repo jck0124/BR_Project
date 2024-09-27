@@ -57,7 +57,14 @@ public class PlazaBoardDto {
 	}
 
 	public void setWriterId(String writerId) {
-		this.writerId = writerId;
+		// 아이디 앞자리 3글자 제외 *로 표시
+		StringBuffer sb = new StringBuffer( writerId.substring(0, 3) );
+		if(writerId.length() > 3) {
+			for(int i = 0; i < writerId.length() - 3; i++) {
+				sb.append("*");
+			}
+		}
+		this.writerId = sb.toString();
 	}
 
 	public boolean isNewMark() {
