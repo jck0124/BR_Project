@@ -3,6 +3,7 @@ package com.br.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,41 @@ public class BoardDaoImpl implements BoardDao {
 	SqlSession sqlSession;
 	
 	// 찬균
+	
+	// 배라광장 게시글 리스트 최신순
 	@Override
-	public ArrayList<PlazaBoardDto> selectPlazaBoardList() {
+	public ArrayList<PlazaBoardDto> selectPlazaBoardListOrderByLatest() {
 		List<PlazaBoardDto> plazaBoardList = sqlSession.selectList("BoardMapper.selectPlazaBoardList");
 		return new ArrayList<PlazaBoardDto>(plazaBoardList);
 	}
 	
+	// 배라광장 게시글 리스트 추천순 
+	@Override
+	public ArrayList<PlazaBoardDto> selectPlazaBoardListOrderByLikes() {
+		List<PlazaBoardDto> plazaBoardList = sqlSession.selectList("selectPlazaBoardListOrderByLikes");
+		return new ArrayList<PlazaBoardDto>(plazaBoardList);
+	}
+	
+	// 배라광장 게시글 작성
+	@Override
+	public void insertPlaza(String title, String content, String writerId, String writerName, char showName) {
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("title", title);
+		paramMap.put("content", content);
+		paramMap.put("writerId", writerId);
+		paramMap.put("writerName", writerName);
+		paramMap.put("showName", showName);
+		
+		sqlSession.insert("BoardMapper.insertPlaza", paramMap);
+	}
+	
+	// 배라광장 게시글 추천
+	@Override
+	public void updatePlazaLikes(int boardIdx) {
+		
+		sqlSession.update("BoardMapper.updatePlazaLikes", boardIdx);
+	}
 	
 	
 	// 수연

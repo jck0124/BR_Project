@@ -22,9 +22,18 @@ public class AjaxController {
 	// 배라광장 무한스크롤
 	@RequestMapping(value = "/api/plaza", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<PlazaBoardDto> getPlazaBoardList(
+			@RequestParam(value = "orderType", required = false, defaultValue = "latest") String orderType,
 			@RequestParam("pageNum") int pageNum ) {
 		
-		return bSvc.plazaInfiniteScroll(pageNum); 
+		return bSvc.palzaPagination(orderType, pageNum).getBoardList(); 
+	}
+	
+	// 배라광장 추천버튼
+	@RequestMapping("/api/increaseLikes")
+	public boolean increaseLikes(@RequestParam("boardIdx") int boardIdx) {
+		
+		bSvc.increaseLikes(boardIdx);
+		return true;
 	}
 	
 	// ajax 로그인 체크
@@ -32,8 +41,7 @@ public class AjaxController {
 	public boolean loginCheck(HttpSession session) {
 		
 		// 임시 로그인 
-		session.setAttribute("loginId", "test123");
-		
+		// session.setAttribute("loginId", "test123");
 		return session.getAttribute("loginId") != null;
 	}
 	

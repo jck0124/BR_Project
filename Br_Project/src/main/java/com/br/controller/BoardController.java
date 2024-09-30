@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,12 +34,14 @@ public class BoardController {
 	// 찬균
 	@RequestMapping("/br_plaza")
 	public String brPlaza(
+			@RequestParam(value = "orderType", required = false, defaultValue = "latest") String orderType,
 			@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
 			Model model) {
 		
-		PlazaPaginationDto pDto = bSvc.getPalzaPaginationDto(pageNum);
-		model.addAttribute("pageNum", pageNum);
+		PlazaPaginationDto pDto = bSvc.palzaPagination(orderType, pageNum);
 		model.addAttribute("boardList", pDto.getBoardList());
+		model.addAttribute("orderType", orderType);
+		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("totalPageNum", pDto.getTotalPageNum());
 		
 		return "br_play/br_plaza";
@@ -47,13 +50,23 @@ public class BoardController {
 	@RequestMapping("/br_plaza_write")
 	public String brPlazaWrite(HttpSession session) {
 		
-		
 		if( session.getAttribute("loginId")!= null  ) {
 			return "br_play/br_plaza_write";
 		} else {
 			return "etc/error";
 		}
+	}
+	
+	@RequestMapping("/br_plaza_insert_write")
+	public String brPlazaInsert(
+			@RequestParam(value = "writer_id") String writerId,
+			@RequestParam(value = "writer_name") String writerName,
+			@RequestParam(value = "title") String title,
+			@RequestParam(value = "content") String content,
+			@RequestParam(value = "agreement") String agreement) {
 		
+		bSvc.insertPlazaBoard(title, content, writerId, writerName, agreement);
+		return "redirect:/br_plaza";
 	}
 	
 	@RequestMapping("/br_plaza_detail")

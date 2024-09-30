@@ -32,8 +32,12 @@
 		
 		<div class="plaza_write">글쓰기</div>
 		<div class="plaza_order">
-			<span>추천순</span>
-			<span>최신순</span>
+			<span class="plaza_order_like">
+				<a href="${pageContext.request.contextPath}/br_plaza?orderType=likes">추천순</a>
+			</span>
+			<span class="plaza_order_latest">
+				<a href="${pageContext.request.contextPath}/br_plaza">최신순</a>
+			</span>
 		</div>
 		
 		<c:forEach var="board" items="${boardList}">	
@@ -54,14 +58,13 @@
 					<div class="plaza_item_footer_img"></div>
 					<div class="plaza_item_footer_detail">
 						<a href="${pageContext.request.contextPath}/br_plaza_detail">자세히 보기</a>
-						<form action="">
-							<input type="hidden" name="board_idx" value="${board.boardIdx}"/>
-						</form>
 					</div>
+					<input type="hidden" name="board_idx" value="${board.boardIdx}"/>
 				</div>
 			</div>
 		</c:forEach>		
 		
+		<input type="hidden" name="order_type" value="${orderType}" />
 		<input type="hidden" name="page_num" value="${pageNum}" />
 		<input type="hidden" name="total_page_num" value="${totalPageNum}" />
 		
@@ -80,23 +83,24 @@ $(function() {
 	
 	let totalPageNum = parseInt( $("input[name='total_page_num']").val() );
 	
-	
 	$(window).on("mousewheel", function(e, delta) {
 		
 		let pageNum = parseInt( $("input[name='page_num']").val() );
+		let orderType = $("input[name='order_type']").val();
 		
 		if(	checkScrollPosition() ) { // 스크롤 위치가 페이지의 상단 30% 아래
 			
 			if(delta < 0) { // delta < 0 : 마우스휠 내릴 때 
 				
-				if(pageNum <= totalPageNum) {
+				if(pageNum < totalPageNum) {
 					
 					$.ajax({
 						type: "GET",
 						async: true,
 						url: contextPath + "/api/plaza",
 						data: {
-							pageNum: pageNum
+							orderType : orderType,
+							pageNum: pageNum + 1
 						},
 						dataType: "json",
 						success: function(response) {
@@ -140,9 +144,9 @@ $(function() {
 						}
 					}) // ajax
 					
+					$("input[name='page_num']").val(++pageNum);
+					
 				} // if문 - pageNum < totalPageNum
-				
-				$("input[name='page_num']").val(++pageNum);
 				
 			}  // if문 - delta < 0
 			
@@ -172,28 +176,77 @@ $(function() {
 	}
 	
 	
-	$(".plaza_write").click(function() {
-		
-		$.ajax({
-			type: "GET",
-			async: true,
-			url: contextPath + "/api/loginCheck",
-			success: function(response) {
-				if(response) {
-					window.location.href = contextPath + "/br_plaza_write";
-				} else {
-					alert("로그인 후 이용가능합니다.");
-					window.location.href = contextPath + "/loginPage";
-				}
-			}, error: function() {
-				console.log("loginCheck error");
-			}
+	
+	// 로그인 체크
+	function loginCheck() {
+		return new Promise(function(resolve, reject) {
+			$.get(contextPath + "/api/loginCheck", function(response) {
+				// 응답받으면 resolve
+				resolve(response);
+			})
+			.fail(function() {
+				// 요청이 실패한 경우
+				reject("로그인 체크 실패");
+			})
 		})
+	}
+	
+	// 추천수 올리기
+	function increaseLikes(boardIdx) {
+		return new Promise(function(resolve, reject) {
+			$.get(
+					contextPath + "/api/increaseLikes", 
+					{boardIdx: boardIdx}, 
+					function(response) {
+						resolve(response);
+			}) 
+			.fail(function() {
+				reject("추천수 올리기 실패");
+			})
+		})
+	}
+	
+	
+	
+	
+	// 글쓰기 버튼
+	$(".plaza_write").click(async function() {
 		
+	    try {
+	        let loginCheckResponse = await loginCheck();
+	        if (loginCheckResponse) {
+	            window.location.href = contextPath + "/br_plaza_write";
+	        } else {
+	            alert("로그인 후 이용가능합니다.");
+	            window.location.href = contextPath + "/loginPage";
+	        }
+	        
+	    } catch(error) {
+	        console.log(error);
+	    }
+	    
 	})
 	
 	
-	
+	// 추천 버튼
+	$(".plaza_item_footer_img").click(async function() {
+		let boardIdx = $(this).siblings("input[name='board_idx']").val();
+		try {
+			let loginCheckResponse  = await loginCheck();
+			if(loginCheckResponse) {
+				let increaseLikesResponse = await increaseLikes(boardIdx);
+				alert("게시물을 추천했습니다!");
+			} else {
+				alert("로그인 후 이용가능합니다.");
+	            window.location.href = contextPath + "/loginPage";
+			}
+			
+		} catch(error) {
+			console.log(error);
+		}
+		
+	})
+		
 	
 	
 	

@@ -28,9 +28,14 @@ public class BoardDaoTest {
 	
 	@Test
 	public void testPlaza() {
-		ArrayList<PlazaBoardDto> boardList = dao.selectPlazaBoardList();
+		ArrayList<PlazaBoardDto> boardList = dao.selectPlazaBoardListOrderByLatest();
 		System.out.println(boardList.size());
 		
+	}
+	
+	@Test
+	public void testInsertPlaza() {
+		dao.insertPlaza("테스트제목", "테스트내용", "아이디", "이름", 'T');
 	}
 	
 	

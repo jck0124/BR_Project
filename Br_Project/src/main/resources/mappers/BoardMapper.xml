@@ -25,6 +25,63 @@
 		]]>
 	</select>
 	
+	<select id="selectPlazaBoardListOrderByLikes" resultType="com.br.dto.PlazaBoardDto">
+		<![CDATA[
+			SELECT  board_idx AS boardIdx,
+			        title AS title,
+			        content AS content,
+			        writer_id AS writerId,
+			        CASE WHEN (sysdate - write_date) <= 30 
+			                THEN 1
+			                ELSE 0
+			        END AS newMark,
+			        likes AS likes,
+			        writer_name AS writerName,
+			        CASE WHEN show_name = 'T' 
+			                THEN 1
+			                ELSE 0
+			        END AS showName
+			FROM    plaza
+			ORDER BY likes DESC
+		]]>
+	</select>
+	
+	<insert id="insertPlaza">
+		<![CDATA[
+			INSERT INTO plaza(
+			    board_idx,
+			    title,
+			    content,
+			    writer_id,
+			    writer_name,
+			    write_date,
+			    likes,
+			    show_name
+			)
+			VALUES( 
+			    (   SELECT  MAX(board_idx) 
+			        FROM    plaza) + 1,
+			    #{title},
+			    #{content},
+			    #{writerId},
+			    #{writerName},   
+			    SYSDATE,
+			    0,
+			    #{showName}
+			)
+		]]>
+	</insert>
+	
+	<update id="updatePlazaLikes">
+		<![CDATA[
+			UPDATE  plaza
+			SET     likes =  (  SELECT  likes
+			                    FROM    plaza
+			                    WHERE   board_idx = #{boardIdx} ) + 1
+			WHERE   board_idx = #{boardIdx}
+		]]>
+	</update>
+	
 
 
 	<!-- 레시피 리스트 -->
