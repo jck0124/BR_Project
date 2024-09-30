@@ -30,7 +30,7 @@
 
 	
 	<table>
-		<form action="${pageContext.request.contextPath}/br_plaza_write">
+		<form action="${pageContext.request.contextPath}/br_plaza_insert_write">
 			<input type="hidden" name="writer_id" value="${sessionScope.loginId}"/>
 			<tbody>
 				<tr>

@@ -12,8 +12,15 @@ import com.br.dto.RecipeDto;
 
 public interface BoardService {
 	
-	List<PlazaBoardDto> plazaInfiniteScroll(int pageNum);
-	PlazaPaginationDto getPalzaPaginationDto(int pageNum);
+	// 배라광장
+	PlazaPaginationDto palzaPagination(String orderType, int pageNum);
+	
+	// 배라광장 게시글 작성
+	void insertPlazaBoard(String title, String content, String writerId, String writerName, String showName);
+	
+	// 배라광장 추천 버튼
+	void increaseLikes(int boardIdx);
+	
 	
 	ArrayList<RecipeDto> getRecipeList();
 	// 이벤트 리스트 보여주기
