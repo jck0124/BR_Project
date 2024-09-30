@@ -27,7 +27,7 @@
 	
 
 
-	
+	<!-- 레시피 리스트 -->
  	<select id="getAllRecipe" resultType="com.br.dto.RecipeDto">
 		<![CDATA[
 			SELECT r.recipe_idx AS recipeIdx
@@ -40,6 +40,22 @@
 			LEFT JOIN recipe_category rc ON r.category_idx = rc.category_idx
 		]]>
 	</select> 
+	
+	<!-- 레시피 insert -->
+	<insert id="insertRecipeInfo">
+		<![CDATA[
+			INSERT INTO recipe(recipe_idx, category_idx, img_url, title_kor, title_eng)
+			VALUES (#{insertRecipeIdx}, #{categoryIdx}, #{imgUrl}, #{titleKor}, #{titleEng})
+		]]>
+	</insert>
+	
+	<!-- 등록할 recipe_idx -->
+	<select id="selectRecipeIdx" resultType="Integer">
+		<![CDATA[
+			SELECT MAX(recipe_idx) + 1 AS maxRecipeIdx
+			FROM recipe
+		]]>
+	</select>
 	
 	<!-- 이벤트 보여주기 -->
 	<select id="selectEvent" resultType="com.br.dto.SelectEventDto">

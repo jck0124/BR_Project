@@ -54,17 +54,27 @@
 	<!-- 아이스크림 리스트 -->
 	<select id="getAllIcecream" resultType="com.br.dto.IcecreamDto">
 		<![CDATA[
-			SELECT icecream_idx AS icecreamIdx
-				, name_kor AS nameKor
-				, name_eng AS nameEng
-				, img_url AS imgUrl
-				, detail_img AS detailImg
-				, info
-				, hashtag
-				, background_color AS backgroundColor
-				, text_color AS textColor
-			FROM icecream
-			ORDER BY order_num ASC
+			SELECT i2.* 
+			FROM (SELECT rownum rnum, i1.*
+			    FROM (SELECT icecream_idx AS icecreamIdx
+							, name_kor AS nameKor
+							, name_eng AS nameEng
+							, img_url AS imgUrl
+							, detail_img AS detailImg
+							, info
+							, hashtag
+							, background_color AS backgroundColor
+							, text_color AS textColor 
+			        FROM icecream 
+			        ORDER BY order_num ASC) i1) i2
+			WHERE rnum>=#{startNum} AND rnum<=#{endNum}
+		]]>
+	</select>
+	
+	<!-- 아이스크림 라스트 페이지 넘버 -->
+	<select id="selectIcecreamLastPageNum" resultType="Integer">
+		<![CDATA[
+			SELECT COUNT(*) FROM icecream
 		]]>
 	</select>
 	

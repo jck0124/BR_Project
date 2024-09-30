@@ -41,13 +41,25 @@ public class MenuDaoImpl implements MenuDao {
 	
 	// 수연
 	@Override
-	public ArrayList<IcecreamDto> selectIcecreamList() {
+	public ArrayList<IcecreamDto> selectIcecreamList(int pageNum) {
+		int endNum = pageNum * 10;
+		int startNum = endNum - 9;
 		
-		List<IcecreamDto> icecreamListTemp = sqlSession.selectList("MenuMapper.getAllIcecream");
+		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+		hmap.put("endNum", endNum);
+		hmap.put("startNum", startNum);
+		
+		List<IcecreamDto> icecreamListTemp = sqlSession.selectList("MenuMapper.getAllIcecream", hmap);
 		ArrayList<IcecreamDto> icecreamList = new ArrayList<IcecreamDto>();
 		icecreamList.addAll(icecreamListTemp);
 		
 		return icecreamList;
+	}
+	
+	@Override
+	public int getIcecreamLastPageNumber() {
+		int countRet = sqlSession.selectOne("MenuMapper.selectIcecreamLastPageNum");
+		return countRet/10 + (countRet%10>0 ? 1 : 0);
 	}
 
 	@Override

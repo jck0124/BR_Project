@@ -13,9 +13,11 @@ public interface BoardDao {
 	
 	
 	// 수연
-	
-	ArrayList<RecipeDto> selectRecipeList();	//모든 레시피 목록
-	
+	//모든 레시피 목록
+	ArrayList<RecipeDto> selectRecipeList();	
+	// 등록될 레시피idx
+	int selectRecipeIdx();	
+	void insertRecipe(int insertRecipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng);
 	
 	// 수빈
 	

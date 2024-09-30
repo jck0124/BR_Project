@@ -38,6 +38,26 @@ public class BoardDaoImpl implements BoardDao {
 		return recipeList;
 	}
 	
+	@Override
+	public int selectRecipeIdx() {
+		int recipeIdx = sqlSession.selectOne("BoardMapper.selectRecipeIdx");
+		return recipeIdx;
+	}
+	
+	@Override
+	public void insertRecipe(int recipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng) {
+		int InsertRecipeIdx = selectRecipeIdx();
+		
+		System.out.println("recipeIdx"+ InsertRecipeIdx);
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("recipeIdx", InsertRecipeIdx);
+		hmap.put("categoryIdx", categoryIdx);
+		hmap.put("imgUrl", imgUrl);
+		hmap.put("titleKor", titleKor);
+		hmap.put("titleEng", titleEng);
+		
+		sqlSession.insert("BoardMapper.insertRecipeInfo", hmap);
+	}
 	
 	//수빈
 	
@@ -75,7 +95,6 @@ public class BoardDaoImpl implements BoardDao {
 		hmap.put("period", period);
 		
 		sqlSession.insert("BoardMapper.insertEvent", hmap);
-		
 	}
 	
 }

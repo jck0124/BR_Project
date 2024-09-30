@@ -21,7 +21,10 @@ public interface MenuDao {
 	ArrayList<DrinkDetailMenuDto> selectDrinkDetailMenuList(int drinksIdx);
 	
 	// 아이스크림 리스트
-	ArrayList<IcecreamDto> selectIcecreamList();
+	ArrayList<IcecreamDto> selectIcecreamList(int pageNum);
+	
+	// 아이스크림 라스트 페이지 넘버
+	int getIcecreamLastPageNumber();
 	
 	// 아이스크림 상세페이지
 	IcecreamDto selectIcecreamDetail(int icecreamIdx); 

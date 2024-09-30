@@ -16,7 +16,7 @@ public interface MenuService {
 	DrinkDetailDto getDrinkDetail(int drinksIDx);
 	
 	// 수연
-	ArrayList<IcecreamDto> getIcecreamList();
+	Map<String, Object> getIcecreamList(int pageNum);
 	IcecreamDto getIcecreamDetail(int icecreamIdx);
 	ArrayList<IcecreamIngredientDto> getIngredient(int icecreamIdx);
 	
