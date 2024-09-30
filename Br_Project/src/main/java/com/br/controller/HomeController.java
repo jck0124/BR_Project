@@ -2,6 +2,7 @@ package com.br.controller;
 
 //추가
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.br.service.MemberService;
 import com.br.service.NaverLoginBO;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
@@ -99,6 +101,21 @@ public class HomeController {
     	return "etc/error";
     }
     
+    @Autowired
+    private MemberService ms;
+    // 카카오 로그인 
+    @RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
+    public String kakaoLogin(@RequestParam(value = "code", required = false)String code) {
+    	String access_Token = ms.getAccessToken(code);
+    	System.out.println("#########" + code);
+    	
+    	// access_Token을 보내 사용자 정보 얻기 
+    	HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
+    	System.out.println("###access_Token#### : " + access_Token);
+    	System.out.println("###nickname#### : " + userInfo.get("nickname"));
+    	System.out.println("###email#### : " + userInfo.get("email"));
+    	return "etc/log_in";
+    }
     	
     
 }
