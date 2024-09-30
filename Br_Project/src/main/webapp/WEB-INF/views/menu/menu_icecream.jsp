@@ -57,8 +57,24 @@
 				</ul>
 			</div>
 		</div>
+		<div id="pagination">
+			<%-- <c:out value="${startNum}"/> startNum 확인 --%>
+			<c:if test="${startNum > 1}">
+				<a id="prev" href="${pageContext.request.contextPath}/menu_icecream?page=${startNum-5}">&lt;</a>
+			</c:if>
+			<c:forEach var="i" begin="${startNum + 1}" end="${endNum}">
+				<c:if test="${i == pageNum}">
+					<span>${i}</span>
+				</c:if>
+				<c:if test="${i != pageNum}">
+					<a href="${pageContext.request.contextPath}/menu_icecream?page=${i}">${i}</a>
+				</c:if>
+			</c:forEach>
+			<c:if test="${lastPageNum < endNum}">
+				<a id="next" href="${pageContext.request.contextPath}/menu_icecream?page=${startNum+5}">&gt;</a>
+			</c:if>
+		</div>
 	</div>
-	
 	<%@ include file="../footer.jsp" %>
 
 </body>

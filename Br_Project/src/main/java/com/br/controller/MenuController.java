@@ -49,10 +49,18 @@ public class MenuController {
 	
 	//수연
 	@RequestMapping(value={"/", "/menu_icecream"})
-	public String home(Model model) {
+	public String home(HttpServletRequest request, Model model) {
+		int pageNum = 1;//현재페이지 (초기값: 1)
+		try {
+			pageNum = Integer.parseInt(request.getParameter("page"));
+		} catch (Exception e) { } 
 		
-		if(mSvc.getIcecreamList() != null) {
-			model.addAttribute("icecreamList", mSvc.getIcecreamList());
+		Map<String, Object> list = mSvc.getIcecreamList(pageNum);
+		if(list != null) {
+			model.addAttribute("icecreamList", list.get("icecreamList"));
+			model.addAttribute("startNum", list.get("startNum"));
+			model.addAttribute("endNum", list.get("endNum"));
+			model.addAttribute("lastPageNum", list.get("lastPageNum"));
 		}
 		return "menu/menu_icecream";
 	}

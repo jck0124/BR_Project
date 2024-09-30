@@ -95,6 +95,11 @@ public class BoardServiceImpl implements BoardService {
 		return recipeList;
 	}
 	
+	@Override
+	public void insertRecipe(int recipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng) {
+		bDao.insertRecipe(recipeIdx, categoryIdx, imgUrl, titleKor, titleEng);
+	}
+	
 	// event 게시판 보여주기
 	@Override
 	public Map<String,Object> selectEvent(int pageNum) {

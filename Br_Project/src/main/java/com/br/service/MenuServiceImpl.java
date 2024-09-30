@@ -68,13 +68,34 @@ public class MenuServiceImpl implements MenuService {
 	// 수연
 	// 아이스크림 리스트
 	@Override
-	public ArrayList<IcecreamDto> getIcecreamList() {
+	public Map<String, Object> getIcecreamList(int pageNum) {
 		
 		ArrayList<IcecreamDto> icecreamList = new ArrayList<IcecreamDto>();
-		icecreamList = mDao.selectIcecreamList();
+		icecreamList = mDao.selectIcecreamList(pageNum);
 		
-		return icecreamList;
+		
+		int startNum,  endNum;
+		int lastPageNum;
+	    
+	    lastPageNum = mDao.getIcecreamLastPageNumber();
+	    System.out.println("lastPageNum: "+ lastPageNum);
+	    endNum = (pageNum/5 + 1)*5 - (pageNum%5==0 ? 5 : 0);
+
+	 	if(endNum > lastPageNum)
+	 		endNum = lastPageNum;
+	 	startNum = endNum - 4;
+	 	System.out.println("startNum: " + startNum);
+	 	
+	 	Map<String, Object> list = new HashMap<>();
+	 	list.put("icecreamList", icecreamList);
+	 	list.put("startNum", startNum);
+	 	list.put("endNum", endNum);
+	 	list.put("lastPageNum", lastPageNum);
+	 	
+		return list;
 	}
+	
+	// 아이스크림 라스트 페이지 넘버
 	
 	// 아이스크림 상세페이지
 		@Override

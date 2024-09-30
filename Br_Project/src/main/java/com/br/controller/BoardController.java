@@ -72,6 +72,7 @@ public class BoardController {
 		}
 		return "br_play/br_recipe";
 	}
+
 	
 	//수빈
 	@RequestMapping("/event")
