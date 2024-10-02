@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.br.dto.SelectStoreDto;
 import com.br.dto.StoreDto;
 
 @Repository
@@ -23,5 +24,14 @@ public class StoreDaoImpl implements StoreDao {
 		storeList.addAll(storeListTemp);
 		
 		return storeList;
+	}
+	
+	// 수빈
+	@Override
+	public ArrayList<SelectStoreDto> selectStore() {
+		List<SelectStoreDto> storeTemp = sqlSession.selectList("StoreMapper.selectStores");
+		ArrayList<SelectStoreDto> store = new ArrayList<SelectStoreDto>();
+		store.addAll(storeTemp);
+		return store;
 	}
 }

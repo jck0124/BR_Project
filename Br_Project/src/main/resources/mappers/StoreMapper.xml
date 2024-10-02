@@ -14,4 +14,26 @@
 			FROM store
 		]]>
 	</select> 
+	
+	<select id="selectStores" resultType="com.br.dto.SelectStoreDto">
+		<![CDATA[
+			SELECT  store_idx storeIdx,
+			        store_name storeName,
+			        address,
+			        phone,
+			        business_hours businessHours,
+			        service,
+			        latitude,
+			        longitude,
+			        type_br typeBr,
+			        parking,
+			        delivery,
+			        pickup,
+			        here,
+			        happy_station happyStation,
+			        blind_box blindBox
+			FROM store
+			ORDER BY store_idx ASC	
+		]]>
+	</select>
 </mapper>

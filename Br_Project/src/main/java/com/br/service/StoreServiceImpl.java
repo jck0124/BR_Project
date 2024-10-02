@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.br.dao.StoreDao;
+import com.br.dto.SelectStoreDto;
 import com.br.dto.StoreDto;
 
 @Service
@@ -21,5 +22,12 @@ public class StoreServiceImpl implements StoreService {
 		storeList = sDao.selectStoreList();
 		
 		return storeList;
+	}
+
+	@Override
+	public ArrayList<SelectStoreDto> getStore() {
+		ArrayList<SelectStoreDto> selectStore = new ArrayList<SelectStoreDto>();
+		selectStore = sDao.selectStore();
+		return selectStore;
 	}
 }

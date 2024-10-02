@@ -16,8 +16,9 @@ public class StoreController {
 	@RequestMapping("/store_map")
 	public String store(Model model) {
 		
-		if(sSvc.getStoreList() != null) {
+		if(sSvc.getStoreList() != null && sSvc.getStore() != null) {
 			model.addAttribute("storeList", sSvc.getStoreList());
+			model.addAttribute("selectStore", sSvc.getStore());
 		}
 		return "delivery_store/store_map";
 	}
