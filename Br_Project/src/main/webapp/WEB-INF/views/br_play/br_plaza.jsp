@@ -229,25 +229,28 @@ $(function() {
 	
 	
 	// 추천 버튼
-	$(".plaza_item_footer_img").click(async function() {
-		let boardIdx = $(this).siblings("input[name='board_idx']").val();
-		try {
-			let loginCheckResponse  = await loginCheck();
-			if(loginCheckResponse) {
-				let increaseLikesResponse = await increaseLikes(boardIdx);
-				alert("게시물을 추천했습니다!");
-			} else {
-				alert("로그인 후 이용가능합니다.");
+	$(".plaza_container").on("click", ".plaza_item_footer_img", async function(event) {
+	    
+	    // 클릭된 요소에 대한 참조
+	    let $clickedElement = $(event.target);
+	    
+	    // 형제 input[name='board_idx'] 요소의 값을 가져옴
+	    let boardIdx = $clickedElement.closest(".plaza_item_footer").find("input[name='board_idx']").val();
+	    
+	    try {
+	        let loginCheckResponse = await loginCheck();
+	        if (loginCheckResponse) {
+	            let increaseLikesResponse = await increaseLikes(boardIdx);
+	            alert("게시물을 추천했습니다!");
+	        } else {
+	            alert("로그인 후 이용가능합니다.");
 	            window.location.href = contextPath + "/loginPage";
-			}
-			
-		} catch(error) {
-			console.log(error);
-		}
-		
-	})
-		
-	
+	        }
+	        
+	    } catch (error) {
+	        console.log(error);
+	    }
+	});
 	
 	
 })
