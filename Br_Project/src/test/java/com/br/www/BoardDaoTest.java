@@ -38,6 +38,17 @@ public class BoardDaoTest {
 		dao.insertPlaza("테스트제목", "테스트내용", "아이디", "이름", 'T');
 	}
 	
+	@Test
+	public void testSelectRecipeIdx() {
+		int a = dao.selectRecipeIdx();
+	}
 	
-
+	@Test
+	public void testInsertRecipe() {
+		int a = dao.selectRecipeIdx();
+		System.out.println("recipeIdx : "+ a);
+		dao.insertRecipe(a, 2, "79이미지url", "79타이틀", "79title");
+		
+	}
 }
+	

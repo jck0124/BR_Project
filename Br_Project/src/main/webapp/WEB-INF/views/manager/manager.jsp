@@ -37,23 +37,24 @@
 		</form>
 		
 		<!-- br레시피 정보 넣기 -->
-		<form class="insert_info" action="/uploadEvent" method="post" enctype="multipart/form-data">
+		<form class="insert_info" action="insert_recipe" method="post">
 			BR Recipe 업로드 
 			<br/>
 			종류 : 
-			<select name="type">
+			<select name="categoryIdx">
 				<option value="1">셰프 & 파티시에</option>
 				<option value="2">바리스타 & 바텐더</option>
 				<option value="3">아티스트</option>
 				<option value="4">인플루언서</option>
 			</select>
 			<br/>
-			제목 :  <input type="text" name="title"/>
+			제목 :  <input type="text" name="titleKor"/>
 			<br/>
-			부제목 : <input type="text" name="subtitle"/>
+			부제목 : <input type="text" name="titleEng"/>
 			<br/>
-			이미지 : <input type="file" name="img"/>
+			이미지 : <input type="text" name="imgUrl"/> 
 			<br/>
+			<input type="hidden" name="recipeIdx" value=""/>
 			<button type="submit">BR 레시피 작성하기</button>
 		</form>
 	</div>
