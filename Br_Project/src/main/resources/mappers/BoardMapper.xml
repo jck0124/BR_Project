@@ -109,7 +109,7 @@
 	<!-- 등록할 recipe_idx -->
 	<select id="selectRecipeIdx" resultType="Integer">
 		<![CDATA[
-			SELECT MAX(recipe_idx) + 1 AS maxRecipeIdx
+			SELECT (MAX(recipe_idx) + 1) AS maxRecipeIdx
 			FROM recipe
 		]]>
 	</select>

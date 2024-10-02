@@ -24,6 +24,8 @@ public interface BoardService {
 	
 	// 레시피 리스트
 	ArrayList<RecipeDto> getRecipeList();
+	// 레시피 등록될 idx
+	int getRecipeIdx();
 	//레시피 insert
 	void insertRecipe(int recipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng);
 	

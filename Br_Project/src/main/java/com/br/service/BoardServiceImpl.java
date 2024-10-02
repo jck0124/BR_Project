@@ -79,11 +79,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public ArrayList<RecipeDto> getRecipeList() {
 		ArrayList<RecipeDto> recipeList = new ArrayList<RecipeDto>();
-
 		// 메서드 실행시 트랜잭션 관리
 		recipeList = bDao.selectRecipeList();
 
 		return recipeList;
+	}
+	@Override
+	public int getRecipeIdx() {
+		int recipeIdx = bDao.selectRecipeIdx();
+		
+		return recipeIdx;
 	}
 	
 	@Override

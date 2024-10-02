@@ -86,6 +86,26 @@ public class BoardController {
 		return "br_play/br_recipe";
 	}
 
+	// insert recipe
+	@RequestMapping("/insert_recipe")
+	public String recipe(
+			@RequestParam int categoryIdx, 
+			@RequestParam String imgUrl, 
+			@RequestParam String titleKor, 
+			@RequestParam String titleEng,
+			HttpServletRequest request) {
+		
+		int recipeIdx = bSvc.getRecipeIdx();
+		
+		System.out.println("recipeIdx: " + recipeIdx);
+		System.out.println("categoryIdx: " + categoryIdx);
+	    System.out.println("titleKor: " + titleKor);
+	    System.out.println("titleEng: " + titleEng);
+	    System.out.println("imgUrl: " + imgUrl);
+		
+		bSvc.insertRecipe(recipeIdx, categoryIdx, imgUrl, titleKor, titleEng);
+		return "br_play/br_recipe";
+	}
 	
 	//수빈
 	@RequestMapping("/event")
