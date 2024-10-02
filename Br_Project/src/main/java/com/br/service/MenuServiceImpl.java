@@ -78,13 +78,11 @@ public class MenuServiceImpl implements MenuService {
 		int lastPageNum;
 	    
 	    lastPageNum = mDao.getIcecreamLastPageNumber();
-	    System.out.println("lastPageNum: "+ lastPageNum);
 	    endNum = (pageNum/5 + 1)*5 - (pageNum%5==0 ? 5 : 0);
 
 	 	if(endNum > lastPageNum)
 	 		endNum = lastPageNum;
 	 	startNum = endNum - 4;
-	 	System.out.println("startNum: " + startNum);
 	 	
 	 	Map<String, Object> list = new HashMap<>();
 	 	list.put("icecreamList", icecreamList);

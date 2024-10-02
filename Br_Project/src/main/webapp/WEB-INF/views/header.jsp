@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +75,7 @@
                                     </div>
                                     <div class="header_menu2_hover_right">
                                         <div>
-                                            <a href="">BR Play</a>
+                                            <a href="${pageContext.request.contextPath}/br_plaza">BR Play</a>
                                         </div>
                                         <div>
                                             <div>
@@ -119,7 +120,7 @@
                     </div>
 
                     <div class="header_menu header_menu4">
-                        <a href="">Delivery/Store</a>
+                        <a href="${pageContext.request.contextPath}/store_map">Delivery/Store</a>
 
                         <div class="header_menu_hover">
                             <div class="header_menu_hover_inner">
@@ -173,35 +174,38 @@
                 </div>
                 <div class="header_login">
                     <img src="${pageContext.request.contextPath}/resources/img/btn_user_menu_white.png" alt="">
-
-                    <!-- 로그인 되었을 때  -->
-                    <div class="header_login_menu">
-                        <a href="${pageContext.request.contextPath}/loginPage">
-                            <div class="header_login_list">Login</div>
-                        </a>
-                        <a href="">
-                            <div class="header_login_list">Join</div>
-                        </a>
-                        <a href="">
-                            <div class="header_login_list">CS CENTER</div>
-                        </a>
-                    </div>
-
-                    <!-- 로그아웃 되었을 때 -->
-                    <!--
-                    <div class="header_login_menu">
-                        <a href="">
-                            <div class="header_login_list">Logout</div>
-                        </a>
-                        <a href="">
-                            <div class="header_login_list">My Page</div>
-                        </a>
-                        <a href="">
-                            <div class="header_login_list">CS CENTER</div>
-                        </a>
-                    </div>
-                    -->
-
+					
+					<c:choose>
+						<c:when test="${sessionScope.loginId != null}">
+						 	<!-- 로그인 상태 -->
+		                    <div class="header_login_menu">
+		                        <a href="${pageContext.request.contextPath}/logout">
+		                            <div class="header_login_list">Logout</div>
+		                        </a>
+		                        <a href="">
+		                            <div class="header_login_list">My Page</div>
+		                        </a>
+		                        <a href="">
+		                            <div class="header_login_list">CS CENTER</div>
+		                        </a>
+		                    </div>
+						</c:when>
+						<c:otherwise>
+							<!-- 로그아웃 상태 -->
+		                    <div class="header_login_menu">
+		                        <a href="${pageContext.request.contextPath}/loginPage">
+		                            <div class="header_login_list">Login</div>
+		                        </a>
+		                        <a href="">
+		                            <div class="header_login_list">Join</div>
+		                        </a>
+		                        <a href="">
+		                            <div class="header_login_list">CS CENTER</div>
+		                        </a>
+		                    </div>
+						</c:otherwise>
+					</c:choose>
+					
                 </div>
             </div>
             
