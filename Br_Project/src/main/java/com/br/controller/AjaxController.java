@@ -41,7 +41,7 @@ public class AjaxController {
 	public boolean loginCheck(HttpSession session) {
 		
 		// 임시 로그인 
-		// session.setAttribute("loginId", "test123");
+		session.setAttribute("loginId", "test123");
 		return session.getAttribute("loginId") != null;
 	}
 	
