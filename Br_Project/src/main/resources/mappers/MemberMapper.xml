@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberMapper">
+
+	<select id="loginCheck" resultType="String">
+		<![CDATA[
+			SELECT id
+			FROM member
+			WHERE id = #{loginId}
+		]]>
+	</select>
+	
+	<select id="insertMember"  parameterType="HashMap">
+		<![CDATA[
+			INSERT INTO member (id, pw, name, admin)
+			VALUES (#{email}, null, #{nickname},'F')
+		]]>
+	</select>
+</mapper>

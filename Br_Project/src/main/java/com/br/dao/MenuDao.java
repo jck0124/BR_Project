@@ -34,8 +34,10 @@ public interface MenuDao {
 	
 	// 아이스크림 케이크 리스트
 	ArrayList<ShowIceCreamCakeDto> showIceCreamCake(int pageNum);
+	
 	// 아이스크림 케이크 리스트 페이지네이션 
 	int getLastPageNumber();
+	
 	// 아이스크림 케이크 디테일
 	ShowIceCreamCakeDetailDto showIceCreamCakeDetail(String korName);
 	

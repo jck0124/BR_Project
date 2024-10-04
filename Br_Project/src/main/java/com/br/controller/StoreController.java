@@ -1,10 +1,13 @@
 package com.br.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.br.service.MenuServiceImpl;
 import com.br.service.StoreServiceImpl;
 
 @Controller
@@ -22,4 +25,14 @@ public class StoreController {
 		}
 		return "delivery_store/store_map";
 	}
+	
+	// 주문 list 
+	@RequestMapping("/order_list")
+	public String orderList(Model model, String storeName) {
+		Map<String, Object> products = sSvc.getProducts();
+		model.addAttribute("products", products);
+		model.addAttribute("storeName", storeName);
+		return "delivery_store/order_list";
+	}
+	
 }

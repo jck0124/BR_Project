@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
              infowindow.close();
          }	
          // 클릭 시 표시할 인포윈도우 내용
-         var iwContent = '<div class="store_info_box">' + 
+         var iwContent = '<form action="order_list" class="store_info_box">' + 
 						    '<div><div>' + (position.typeBr==='T' ? 'Br 31' : '100flavor') + '</div></div>' + 
 						    '<div>' + position.title + '</div>' +
 						    '<div><span>매장주소</span> ' + position.address + '</div>' +
@@ -211,7 +211,9 @@ document.addEventListener("DOMContentLoaded", function() {
 						    (position.happyStation==='T' ? '해피스테이션' : '')  +
 						    (position.blindBox==='T' ? '가챠머신' : '') + '</div>' +
 						    '<div class="close"  style="cursor: pointer;" ></div>' +
-						    '</div>';
+						    '<button type="submit" class="submit_button"> 상품 리스트로 이동 </button>'+
+						    '<input type="hidden" name="storeName" value="' + position.title + '"/>'
+						    '</form>';
 	
                 //iwRemoveable = true; // x 버튼이 표시되는 옵션
 

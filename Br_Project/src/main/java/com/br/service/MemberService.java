@@ -11,13 +11,17 @@ import java.util.HashMap;
 
 import org.json.simple.JSONObject;  // json_simple 라이브러리 import
 import org.json.simple.parser.JSONParser;  // JSONParser import
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.br.dao.MemberDao;
 import com.fasterxml.jackson.core.JsonParser;
 import com.nimbusds.jose.shaded.json.parser.ParseException;
 
 @Service
 public class MemberService {
+	@Autowired MemberDao mDao;
+	
     public String getAccessToken(String authorize_code) {
         String access_Token = "";
         String refresh_Token = "";
@@ -115,6 +119,17 @@ public class MemberService {
             e.printStackTrace();
         }
         return userInfo;
+    }
+    
+    // 로그인 체크 메서드 
+    public boolean loginCheck(String email) {
+    	String loginId = mDao.login(email);
+    	return loginId != null; // 로그인 ID가 존재하면 true 반환
+    }
+    
+    // 회원가입 메서드
+    public void signUp(String email, String nickname) {
+    	mDao.SignUp(email, nickname);
     }
 
 }

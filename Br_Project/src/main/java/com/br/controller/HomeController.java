@@ -4,6 +4,7 @@ package com.br.controller;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -87,7 +88,7 @@ public class HomeController {
         session.setAttribute("sessionId", nickname); // 세션 생성
         model.addAttribute("result", apiResult);
 
-        return "etc/log_in";
+        return "c";
     }
     // 로그아웃
     @RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
@@ -106,7 +107,7 @@ public class HomeController {
     private MemberService ms;
     // 카카오 로그인 
     @RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
-    public String kakaoLogin(@RequestParam(value = "code", required = false)String code) {
+    public String kakaoLogin(@RequestParam(value = "code", required = false)String code, HttpServletRequest request) {
     	String access_Token = ms.getAccessToken(code);
     	System.out.println("#########" + code);
     	
@@ -115,10 +116,24 @@ public class HomeController {
     	System.out.println("###access_Token#### : " + access_Token);
     	System.out.println("###nickname#### : " + userInfo.get("nickname"));
     	System.out.println("###email#### : " + userInfo.get("email"));
-    	return "etc/log_in";
-    }
     	
-    
+    	// HttpSession을 이용해서 사용자 정보 저장 
+    	HttpSession session = request.getSession();
+    	String email = (String) userInfo.get("email");
+    	String nickname = (String) userInfo.get("nickname");
+    	
+    	// 로그인 체크 
+    	if(ms.loginCheck(email)) {
+    		// 이미 가입된 사용자 
+    		session.setAttribute("loginId", userInfo.get("nickname"));
+    		return "etc/log_in";
+    	} else {
+    		// 신규 회원, 회원가입 진행
+    		ms.signUp(email, nickname);
+    		session.setAttribute("loginId", userInfo.get("nickname"));
+    		return "etc/log_in";
+    	}
+    }
 }
 	
 

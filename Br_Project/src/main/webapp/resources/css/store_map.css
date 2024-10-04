@@ -471,6 +471,13 @@ footer {
 	font-size: 28px;
 	margin-top : 20px;
 }
+.submit_button {
+	height: 35px;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 10px;
+    margin-top: 10px;
+}
 .close {
 	position: absolute;
     top: -10px;

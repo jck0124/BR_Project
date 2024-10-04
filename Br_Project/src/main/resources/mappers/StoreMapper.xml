@@ -36,4 +36,44 @@
 			ORDER BY store_idx ASC	
 		]]>
 	</select>
+	
+	<!--  찬균  -->
+	<select id="selectAllDrinks" resultType="com.br.dto.DrinkDto">
+	<![CDATA[ 
+		SELECT 	drinks_idx AS drinksIdx, 
+				name AS name, 
+				img AS img, 
+				tag AS tag, 
+				background_color AS backgroundColor, 
+				font_color AS fontColor 
+		FROM drinks 
+		ORDER BY drinks_idx ASC 
+		]]>
+	</select>
+	
+	<select id="getAllIcecream" resultType="com.br.dto.IcecreamDto">
+	<![CDATA[ 
+		SELECT 	icecream_idx AS icecreamIdx , 
+				name_kor AS nameKor , 
+				name_eng AS nameEng , 
+				img_url AS imgUrl , 
+				detail_img AS detailImg , 
+				info , hashtag , 
+				background_color AS backgroundColor , 
+				text_color AS textColor 
+		FROM icecream
+		ORDER BY order_num ASC 
+		]]>
+	</select>
+	
+	<select id="selectAllCakes" resultType="com.br.dto.ShowIceCreamCakeDto">
+	<![CDATA[ 
+		SELECT 	name, 
+		        img, 
+		        tag, 
+		        background_color AS backgroundColor 
+		FROM ice_cream_cake 
+		ORDER BY cake_idx ASC
+	 ]]>
+	</select>
 </mapper>
