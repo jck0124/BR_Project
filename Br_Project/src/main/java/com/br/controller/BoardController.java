@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +30,9 @@ public class BoardController {
 	@Autowired
 	private ServletContext servletContext;
 	
+////	수연 업로드 패스: 임시
+//	@Resource(name = "uploadPath")
+//	private String uploadPath;
 	// 찬균
 	@RequestMapping("/br_plaza")
 	public String brPlaza(
@@ -104,7 +106,7 @@ public class BoardController {
 	    System.out.println("imgUrl: " + imgUrl);
 		
 		bSvc.insertRecipe(recipeIdx, categoryIdx, imgUrl, titleKor, titleEng);
-		return "br_play/br_recipe";
+		return "manager/manager";
 	}
 	
 	//수빈

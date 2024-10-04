@@ -34,7 +34,6 @@ public class MenuController {
 		
 	}
 	
-	
 	@RequestMapping("/menu_drinks_detail")
 	public String menuDrinksDetail(
 				@RequestParam("drinksIdx") Integer drinksIdx, 
