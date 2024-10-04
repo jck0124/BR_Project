@@ -252,7 +252,7 @@ header a {
     font-size: 14px;
 
     float: right;
-    position: relative;
+    position:   ; 
 }
 
 .header_search_close::before {
@@ -311,6 +311,94 @@ input[name='search_keyword']::placeholder {
     padding-top: 15px;
 }
 
+
+/* 채팅 */
+.header_chat_small.header_chat_hidden {
+	display: none;
+}
+.header_chat.header_chat_hidden {
+	display: none;
+}
+
+.header_chat_small {
+	width: 190px;
+	height: 50px;
+	z-index: 200;
+	border: 3px solid #f986bd;
+	border-radius: 10px;
+	padding: 10px 10px;
+		
+	background-color: aliceblue;
+	text-align: center;
+	line-height: 50px;
+	
+	position: absolute;
+	top: 840px;
+	right: -200px;
+}
+
+.header_chat_small > button {
+	cursor: pointer;
+	border: 1px solid #f986bd;
+	background-color: #f986bd;
+	color: white;
+}
+
+.header_chat {
+	width: 190px;
+	height: 300px;
+	z-index: 200;
+	border: 3px solid #f986bd;
+	border-radius: 2px;
+	padding: 10px 10px;
+	overflow-y: scroll;
+	border-radius: 10px;
+		
+	background-color: #ffffff;
+	
+	position: absolute;
+	top: 550px;
+	right: -200px;
+}
+
+.header_chat_close_btn {
+	cursor: pointer;
+	display: flex;
+	justify-content: flex-end;		
+}
+
+
+.header_chat_inner > div {
+	margin-top: 10px;
+}
+
+.header_chat_admin {
+	color: #2C3E50;
+}
+
+.header_chat_customer {
+	color: #3498DB;
+}
+
+.header_chat_insert {
+	width: 170px;
+	padding-top: 10px;
+	padding-left: 5px;
+	border-top: 1px solid #f986bd;
+	
+}
+
+input[name='header_chat'] {
+	width: 100px;
+	outline: none;
+	border: none;
+}
+
+input[name='header_chat']::placeholder {
+	font-size: 12px;
+	color: gray;
+	line-height: 15px;
+}
 
 
 

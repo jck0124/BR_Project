@@ -230,6 +230,57 @@
                 </div>
             </div>
 
+			
+			
+			<!-- 채팅 -->
+			<!-- header_chat_hidden -->
+			<div class="header_chat_small ">
+				<button type="button">실시간 채팅 상담</button>
+			</div>
+
+			<!-- header_chat_hidden -->
+			<div class="header_chat header_chat_hidden">
+				<div class="header_chat_close_btn ">
+					<img src="${pageContext.request.contextPath}/resources/img/icon_close_big.png"/>
+				</div>
+				<div class="header_chat_inner">
+					
+					<div class="header_chat_admin">
+						<div>상담원</div>
+						<div>상담원 채팅123</div>
+					</div>
+					
+					<div class="header_chat_customer">
+						<div>나</div>
+						<div>고객 채팅123</div>
+					</div>
+					
+					<div class="header_chat_customer">
+						<div>나</div>
+						<div>고객 채팅123</div>
+					</div>
+					
+					<div class="header_chat_admin">
+						<div>상담원</div>
+						<div>상담원 채팅123</div>
+					</div>
+					
+					
+					<div class="header_chat_insert">
+						<form action="">
+							<input type="text" name="header_chat" placeholder="내용입력"/>
+							<input type="submit" value="전송">										
+						</form>
+					</div>
+					
+				</div>
+				<!-- header_chat_inner -->
+				
+			</div>
+			<!-- header_chat -->
+
+
+
         </div>
         <!-- header_inner 종료 -->
     </header>
