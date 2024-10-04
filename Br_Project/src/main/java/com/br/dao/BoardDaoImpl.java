@@ -73,14 +73,15 @@ public class BoardDaoImpl implements BoardDao {
 		int recipeIdx = sqlSession.selectOne("BoardMapper.selectRecipeIdx");
 		return recipeIdx;
 	}
-	
+
+	// recipe insert
 	@Override
 	public void insertRecipe(int recipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng) {
 		int InsertRecipeIdx = selectRecipeIdx();
 		
 		System.out.println("recipeIdx"+ InsertRecipeIdx);
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
-		hmap.put("recipeIdx", InsertRecipeIdx);
+		hmap.put("insertRecipeIdx", InsertRecipeIdx);
 		hmap.put("categoryIdx", categoryIdx);
 		hmap.put("imgUrl", imgUrl);
 		hmap.put("titleKor", titleKor);
@@ -90,7 +91,7 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	//수빈
-	
+
 	// event 게시판 보여주기
 	@Override
 	public ArrayList<SelectEventDto> selectEvent(int pageNum) {

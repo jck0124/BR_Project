@@ -117,8 +117,14 @@ public class HomeController {
     	System.out.println("###email#### : " + userInfo.get("email"));
     	return "etc/log_in";
     }
-    	
     
+    // 결제 페이지
+    @RequestMapping("/payment")
+    public String payment() {
+    	
+    	return "etc/payment";
+    }
+
 }
 	
 

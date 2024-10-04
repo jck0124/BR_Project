@@ -35,4 +35,5 @@
 	<!-- JUnit 테스트용 -->
 	<!-- <bean id="dao" class="com.br.dao.MenuDaoImpl"></bean> -->
 	<!--  <bean id="dao" class="com.br.dao.StoreDaoImpl"></bean>-->
+	<!-- <bean id="dao" class="com.br.dao.BoardDaoImpl"></bean> -->
 </beans>

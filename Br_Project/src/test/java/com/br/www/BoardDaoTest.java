@@ -31,6 +31,7 @@ public class BoardDaoTest {
 		ArrayList<PlazaBoardDto> boardList = dao.selectPlazaBoardListOrderByLatest();
 		System.out.println(boardList.size());
 		
+		
 	}
 	
 	@Test
@@ -41,14 +42,14 @@ public class BoardDaoTest {
 	@Test
 	public void testSelectRecipeIdx() {
 		int a = dao.selectRecipeIdx();
+		System.out.println("recipeIdx : " + a);
 	}
 	
 	@Test
 	public void testInsertRecipe() {
 		int a = dao.selectRecipeIdx();
 		System.out.println("recipeIdx : "+ a);
-		dao.insertRecipe(a, 2, "79이미지url", "79타이틀", "79title");
-		
+		dao.insertRecipe(a, 2, "이미지테스트입니다.", "타이틀 kor", "title eng");
 	}
 }
 	

@@ -52,7 +52,7 @@
 			<br/>
 			부제목 : <input type="text" name="titleEng"/>
 			<br/>
-			이미지 : <input type="text" name="imgUrl"/> 
+			이미지 : <input type="file" name="imgUrl"/> 
 			<br/>
 			<input type="hidden" name="recipeIdx" value=""/>
 			<button type="submit">BR 레시피 작성하기</button>
