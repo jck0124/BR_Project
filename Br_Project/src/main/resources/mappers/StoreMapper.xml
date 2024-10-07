@@ -38,16 +38,13 @@
 	</select>
 	
 	<!--  찬균  -->
-	<select id="selectAllDrinks" resultType="com.br.dto.DrinkDto">
+	<select id="selectAllDrinks" resultType="com.br.dto.DrinkListDto">
 	<![CDATA[ 
-		SELECT 	drinks_idx AS drinksIdx, 
-				name AS name, 
-				img AS img, 
-				tag AS tag, 
-				background_color AS backgroundColor, 
-				font_color AS fontColor 
-		FROM drinks 
-		ORDER BY drinks_idx ASC 
+		SELECT  dd.name,
+		        dd.price,
+		        d.img
+		FROM drinks d
+		INNER JOIN drinks_detail dd ON d.drinks_idx = dd.drinks_idx
 		]]>
 	</select>
 	
@@ -66,14 +63,13 @@
 		]]>
 	</select>
 	
-	<select id="selectAllCakes" resultType="com.br.dto.ShowIceCreamCakeDto">
+	<select id="selectAllCakes" resultType="com.br.dto.IceCreamCakeListDto">
 	<![CDATA[ 
-		SELECT 	name, 
-		        img, 
-		        tag, 
-		        background_color AS backgroundColor 
-		FROM ice_cream_cake 
-		ORDER BY cake_idx ASC
+		SELECT  c.name,
+		        cd.price,
+		        c.img
+		FROM ice_cream_cake c
+		INNER JOIN ice_cream_cake_detail cd ON c.name = cd.kor_name
 	 ]]>
 	</select>
 </mapper>

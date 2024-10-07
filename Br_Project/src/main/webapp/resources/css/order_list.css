@@ -59,3 +59,38 @@ a {text-decoration : none}
  .count > input {
      width: 30px;
 }
+
+/*여기서부터*/
+#product_list {
+ 	width: 800px;
+    margin: 0 auto;
+    margin-top : 100px;
+}
+.list {
+	
+}
+.list > img {
+	width  : 50px;
+}
+.list > div {
+	padding: 10px;
+}
+.list > button {
+	background-color : white;
+	border : 1px solid #f986bd;
+	border-radius: 20px;
+	margin-top: 10px;
+}
+.list > input {
+	width: 30px;
+	margin-top: 10px;
+}
+
+#order {
+	width: 50px;
+    margin: 0 auto;
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    border : 1px solid #f986bd;
+}
