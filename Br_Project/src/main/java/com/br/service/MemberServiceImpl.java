@@ -15,12 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.br.dao.MemberDao;
-import com.fasterxml.jackson.core.JsonParser;
-import com.nimbusds.jose.shaded.json.parser.ParseException;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired MemberDao mDao;
+	
+	private NaverLoginBO naverLoginBO;
+	
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
 	
     public String getAccessToken(String authorize_code) {
         String access_Token = "";

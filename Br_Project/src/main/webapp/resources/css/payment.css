@@ -285,6 +285,7 @@ body {
 }
 .btn_pay > img{
 	width: 100px;	
+	cursor: pointer;
 }
 #btn_cancel {
 	background-color: #f986bd;

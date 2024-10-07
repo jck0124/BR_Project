@@ -44,9 +44,9 @@ public class BoardController {
 	private ServletContext servletContext;
 	
 //	수연 업로드 패스: 임시
-	@Resource(name = "uploadPath")
-	private String uploadPath;
-	
+	@Resource(name = "recipeUploadPath")
+	private String recipeUploadPath;
+
 	private static final Logger logger = Logger.getLogger(BoardController.class);
 	
 	// 찬균
@@ -137,7 +137,7 @@ public class BoardController {
 	@RequestMapping(value="file", method = RequestMethod.POST)
 	public String fileUpload(MultipartFile file) throws Exception {
 		logger.info("/request/file");
-		logger.info("uploadPath : "+ uploadPath);
+		logger.info("uploadPath : "+ recipeUploadPath);
 		
 		if (file.isEmpty()) {
 			return "FAIL";
@@ -151,7 +151,7 @@ public class BoardController {
 		byte[] fileData = file.getBytes();
 		
 		// 파일 업로드
-		String filePath = uploadPath;
+		String filePath = recipeUploadPath;
 		String fileName = file.getOriginalFilename();
 		File uploadFile = new File(filePath, fileName);
 		
@@ -242,8 +242,8 @@ public class BoardController {
 		
 		try {
             // 파일 저장 로직
-			// String uploadDir = "C:/uploads/";
-			String uploadDir = servletContext.getRealPath("/resources/uploads/");
+			String uploadDir = "C:/uploads/";
+			// String uploadDir = servletContext.getRealPath("/resources/uploads/");
 			File directory = new File(uploadDir);
 			if (!directory.exists()) {
 			    directory.mkdirs(); // 디렉토리 생성

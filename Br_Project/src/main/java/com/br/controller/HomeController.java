@@ -28,8 +28,9 @@ public class HomeController {
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
+	
 	@Autowired
-	private MemberServiceImpl ms;
+	private MemberServiceImpl mSvc;
 	
 	/* NaverLoginBO */
     private NaverLoginBO naverLoginBO;
@@ -46,22 +47,27 @@ public class HomeController {
     }
     
     
- // 로그인 첫 화면 요청 메소드
+    // 로그인 첫 화면 요청 메소드
     @RequestMapping(value = "/loginPage", method = { RequestMethod.GET, RequestMethod.POST })
     public String login(Model model, HttpSession session) {
-        /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO 클래스의 getAuthorizationUrl 메소드 호출 */
-        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-        
-        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&		
-        //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-        //System.out.println("네이버:" + naverAuthUrl);
-        //System.out.println("로그인 첫 화면 요청 메서드");
-        // 네이버 로그인 URL을 모델에 추가
-        model.addAttribute("url", naverAuthUrl);
-        
         return "etc/log_in";
     }
 
+    // 네이버 로그인
+    @RequestMapping(value="/naverLogin", method = { RequestMethod.GET })
+    public String naverLogin(Model model, HttpSession session) {
+    	  /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO 클래스의 getAuthorizationUrl 메소드 호출 */
+    	String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+        
+        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&		
+        //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+        model.addAttribute("url", naverAuthUrl);
+       
+//        return "redirect:";
+        return "redirect:" + naverAuthUrl;
+        
+    }
+    
     // 네이버 로그인 성공 시 callback 호출 메소드
     @RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
     public String callback(Model model, 
@@ -116,11 +122,11 @@ public class HomeController {
     // 카카오 로그인 
     @RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
     public String kakaoLogin(@RequestParam(value = "code", required = false)String code, HttpServletRequest request) {
-    	String access_Token = ms.getAccessToken(code);
+    	String access_Token = mSvc.getAccessToken(code);
     	System.out.println("#########" + code);
     	
     	// access_Token을 보내 사용자 정보 얻기 
-    	HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
+    	HashMap<String, Object> userInfo = mSvc.getUserInfo(access_Token);
     	System.out.println("###access_Token#### : " + access_Token);
     	System.out.println("###nickname#### : " + userInfo.get("nickname"));
     	System.out.println("###email#### : " + userInfo.get("email"));
@@ -131,13 +137,13 @@ public class HomeController {
     	String nickname = (String) userInfo.get("nickname");
     	
     	// 로그인 체크 
-    	if(ms.loginCheck(email)) {
+    	if(mSvc.loginCheck(email)) {
     		// 이미 가입된 사용자 
     		session.setAttribute("loginId", userInfo.get("nickname"));
     		return "etc/log_in";
     	} else {
     		// 신규 회원, 회원가입 진행
-    		ms.signUp(email, nickname);
+    		mSvc.signUp(email, nickname);
     		session.setAttribute("loginId", userInfo.get("nickname"));
     		return "etc/log_in";
     	}

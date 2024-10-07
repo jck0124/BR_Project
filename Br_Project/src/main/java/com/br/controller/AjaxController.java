@@ -6,14 +6,19 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.dao.MemberDaoImpl;
+import com.br.dto.KakaoPayOrderFormDto;
+import com.br.dto.KakaoPayReadyDto;
 import com.br.dto.PlazaBoardDto;
 import com.br.service.BoardServiceImpl;
-import com.br.service.MemberServiceImpl;
+import com.br.service.PaymentServiceImpl;
+import com.br.util.KakaoPaySessionUtils;
 
 @RestController
 public class AjaxController {
@@ -24,6 +29,9 @@ public class AjaxController {
 	// MemberServiceImpl로 변경 필요
 	@Autowired
 	MemberDaoImpl mDao;
+	
+	@Autowired
+	PaymentServiceImpl pSvc;
 	
 	// 배라광장 무한스크롤
 	@RequestMapping(value = "/api/plaza", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -60,6 +68,19 @@ public class AjaxController {
 		return mDao.loginCheck(loginId, loginPw);
 	}
 	
+	// ajax 카카오 페이
+	@RequestMapping("/api/payReady")
+    public @ResponseBody KakaoPayReadyDto payReady(@RequestBody KakaoPayOrderFormDto kakaoPayOrder) {
+        
+        String name = kakaoPayOrder.getName();
+        int totalPrice = kakaoPayOrder.getTotalPrice();
+
+        KakaoPayReadyDto readyResponse = pSvc.payReady(name, totalPrice);
+        // 세션에 결제 고유번호(tid) 저장
+        KakaoPaySessionUtils.addAttribute("tid", readyResponse.getTid());
+
+        return readyResponse;
+    }
 	
 	
 	
