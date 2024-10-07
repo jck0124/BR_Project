@@ -14,4 +14,7 @@ public interface MemberService {
 	
 	// 회원가입
 	void signUp(String email, String nickname);
+	
+	// 관리자 여부 체크
+	boolean adminCheck(String id);
 }

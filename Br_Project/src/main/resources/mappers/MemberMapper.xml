@@ -29,5 +29,14 @@
 		]]>
 	</select> 
 	
+	<select id="adminCheck" resultType="String">
+		<![CDATA[
+			SELECT  admin
+			FROM    member
+			WHERE   id = #{id}
+		]]>
+	</select>
+	
+	
 	
 </mapper>

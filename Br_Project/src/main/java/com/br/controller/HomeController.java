@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.br.service.MemberServiceImpl;
 import com.br.service.NaverLoginBO;
+import com.br.websocket.BroadSocket;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 @Controller
@@ -42,6 +43,11 @@ public class HomeController {
     		@RequestParam("id") String loginId ) {
     	
     	session.setAttribute("loginId", loginId);
+    	
+    	if(ms.adminCheck(loginId)) {
+    		BroadSocket.adminCheck = true;
+    		session.setAttribute("adminCheck", true);
+    	} 
     	return "redirect:/menu_icecream";
     }
     
@@ -103,7 +109,6 @@ public class HomeController {
     // 로그아웃
     @RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
     public String logout(HttpSession session) throws IOException {
-        System.out.println("logout");
         session.invalidate();
         return "redirect:menu_icecream";
     }

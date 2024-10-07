@@ -131,5 +131,11 @@ public class MemberServiceImpl implements MemberService {
     public void signUp(String email, String nickname) {
     	mDao.SignUp(email, nickname);
     }
-
+    
+    // 관리자 여부 체크
+    @Override
+    public boolean adminCheck(String id) {
+    	return mDao.adminCheck(id);
+    }
+    
 }

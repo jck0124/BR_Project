@@ -11,4 +11,7 @@ public interface MemberDao {
 	// 로그인 체크
 	boolean loginCheck(String id, String pw);
 	
+	// 관리자 여부 체크
+	boolean adminCheck(String id);
+	
 }
