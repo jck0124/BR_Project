@@ -8,9 +8,11 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.br.dto.PlazaBoardDto;
 import com.br.dto.RecipeDto;
+import com.br.dto.RecipeImgDto;
 import com.br.dto.SelectEventDto;
 
 @Repository
@@ -56,25 +58,24 @@ public class BoardDaoImpl implements BoardDao {
 		sqlSession.update("BoardMapper.updatePlazaLikes", boardIdx);
 	}
 	
-	
 	// 수연
 	@Override
 	public ArrayList<RecipeDto> selectRecipeList() {
-		
 		List<RecipeDto> recipeListTemp = sqlSession.selectList("BoardMapper.getAllRecipe");
 		ArrayList<RecipeDto> recipeList = new ArrayList<RecipeDto>();
-		recipeList.addAll(recipeListTemp);
 		
+		recipeList.addAll(recipeListTemp);
 		return recipeList;
 	}
 	
+	// 저장될 레시피idx select
 	@Override
 	public int selectRecipeIdx() {
 		int recipeIdx = sqlSession.selectOne("BoardMapper.selectRecipeIdx");
 		return recipeIdx;
 	}
 
-	// recipe insert
+	// 레시피 insert
 	@Override
 	public void insertRecipe(int recipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng) {
 		int InsertRecipeIdx = selectRecipeIdx();
@@ -88,6 +89,12 @@ public class BoardDaoImpl implements BoardDao {
 		hmap.put("titleEng", titleEng);
 		
 		sqlSession.insert("BoardMapper.insertRecipeInfo", hmap);
+	}
+	
+	// 레시피 이미지
+	@Override
+	public RecipeImgDto selectRecipeImg(int recipeIdx) {
+		return sqlSession.selectOne("BoardMapper.imgFile", recipeIdx);
 	}
 	
 	//수빈
@@ -108,7 +115,7 @@ public class BoardDaoImpl implements BoardDao {
 		return events;
 	}
 	
-	// evnet 페이지네이션
+	// event 페이지네이션
 	@Override
 	public int getLastPageNumber() {
 		int countRet = sqlSession.selectOne("BoardMapper.selectLastPageNumber");

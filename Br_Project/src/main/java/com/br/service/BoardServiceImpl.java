@@ -1,19 +1,17 @@
 package com.br.service;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.br.dao.BoardDao;
 import com.br.dto.PlazaBoardDto;
 import com.br.dto.PlazaPaginationDto;
 import com.br.dto.RecipeDto;
+import com.br.dto.RecipeImgDto;
 import com.br.dto.SelectEventDto;
 
 @Service
@@ -75,7 +73,7 @@ public class BoardServiceImpl implements BoardService {
 		bDao.updatePlazaLikes(boardIdx);
 	}	
 	
-	
+	// 레시피 출력
 	@Override
 	public ArrayList<RecipeDto> getRecipeList() {
 		ArrayList<RecipeDto> recipeList = new ArrayList<RecipeDto>();
@@ -84,6 +82,8 @@ public class BoardServiceImpl implements BoardService {
 
 		return recipeList;
 	}
+	
+	// 레시피 idx
 	@Override
 	public int getRecipeIdx() {
 		int recipeIdx = bDao.selectRecipeIdx();
@@ -91,9 +91,16 @@ public class BoardServiceImpl implements BoardService {
 		return recipeIdx;
 	}
 	
+	// 레시피 insert
 	@Override
 	public void insertRecipe(int recipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng) {
 		bDao.insertRecipe(recipeIdx, categoryIdx, imgUrl, titleKor, titleEng);
+	}
+	
+	// 레시피 이미지
+	@Override
+	public RecipeImgDto getRecipeImg(int recipeIdx) {
+		return bDao.selectRecipeImg(recipeIdx);
 	}
 	
 	// event 게시판 보여주기
@@ -117,7 +124,7 @@ public class BoardServiceImpl implements BoardService {
 //			response.setContentType("application/json; charset=utf-8");
 //			
 
-		// 페이지 네이션
+		// 페이지네이션
 		int startNum, endNum;
 		int lastPageNum = bDao.getLastPageNumber();
 		endNum = (pageNum / 5 + 1) * 5 - (pageNum % 5 == 0 ? 5 : 0);

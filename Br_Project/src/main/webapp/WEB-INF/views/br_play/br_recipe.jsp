@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +49,14 @@
 					<c:forEach var="recipe" items="${recipeList}">
 					<li>
 						<a href="#">
-							<img src="${recipe.imgUrl}">
+						   <c:choose>
+				                <c:when test="${fn:startsWith(recipe.imgUrl, 'https')}">
+				                    <img src="${recipe.imgUrl}">
+				                </c:when>
+				                <c:otherwise>
+				                    <img src="${pageContext.request.contextPath}/br_recipe/img?recipeIdx=${recipe.recipeIdx}">
+				                </c:otherwise>
+            				</c:choose>
 							<div class="card_container">
 								<div class="card_title">
 									${recipe.categoryName}
@@ -78,7 +85,14 @@
 						<c:if test="${recipe.categoryIdx == 1}">
 						<li>
 							<a href="#">
-								<img src="${recipe.imgUrl}">
+								<c:choose>
+					                <c:when test="${fn:startsWith(recipe.imgUrl, 'https')}">
+					                    <img src="${recipe.imgUrl}">
+					                </c:when>
+					                <c:otherwise>
+					                    <img src="${pageContext.request.contextPath}/br_recipe/img?recipeIdx=${recipe.recipeIdx}">
+					                </c:otherwise>
+            					</c:choose>
 								<div class="card_container">
 									<div class="card_title">
 										${recipe.categoryName}
@@ -109,7 +123,14 @@
 					<c:if test="${recipe.categoryIdx == 2}">
 					<li>
 						<a href="#">
-							<img src="${recipe.imgUrl}">
+							<c:choose>
+				                <c:when test="${fn:startsWith(recipe.imgUrl, 'https')}">
+				                    <img src="${recipe.imgUrl}">
+				                </c:when>
+				                <c:otherwise>
+				                    <img src="${pageContext.request.contextPath}/br_recipe/img?recipeIdx=${recipe.recipeIdx}">
+				                </c:otherwise>
+            				</c:choose>
 							<div class="card_container">
 								<div class="card_title">
 									${recipe.categoryName}
@@ -140,7 +161,14 @@
 					<c:if test="${recipe.categoryIdx == 3}">
 					<li>
 						<a href="#">
-							<img src="${recipe.imgUrl}">
+							<c:choose>
+				                <c:when test="${fn:startsWith(recipe.imgUrl, 'https')}">
+				                    <img src="${recipe.imgUrl}">
+				                </c:when>
+				                <c:otherwise>
+				                    <img src="${pageContext.request.contextPath}/br_recipe/img?recipeIdx=${recipe.recipeIdx}">
+				                </c:otherwise>
+            				</c:choose>
 							<div class="card_container">
 								<div class="card_title">
 									${recipe.categoryName}
@@ -171,7 +199,14 @@
 					<c:if test="${recipe.categoryIdx == 4}">
 					<li>
 						<a href="#">
-							<img src="${recipe.imgUrl}">
+							 <c:choose>
+				                <c:when test="${fn:startsWith(recipe.imgUrl, 'https')}">
+				                    <img src="${recipe.imgUrl}">
+				                </c:when>
+				                <c:otherwise>
+				                    <img src="${pageContext.request.contextPath}/br_recipe/img?recipeIdx=${recipe.recipeIdx}">
+				                </c:otherwise>
+            				</c:choose>
 							<div class="card_container">
 								<div class="card_title">
 									${recipe.categoryName}

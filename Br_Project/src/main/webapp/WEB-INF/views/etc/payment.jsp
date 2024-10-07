@@ -27,6 +27,7 @@
 				<img src="${pageContext.request.contextPath}/resources/img/logo_payment.png">
 				<span>배스킨라빈스 이대역</span>
 			</p>
+			<div class="title_txt">주문내역</div>
 			<div id="menu_container">
 				<ul class="menu_box">
 					<li>
@@ -94,22 +95,59 @@
 						</div>
 					</li>
 				</ul>
+			</div>
+			<div class="title_txt">결제금액</div>
+			<div class="title_txt">주소</div>
+			<div>
+				<form name="form" id="form" method="post">
+					<table id="address">
+						<colgroup>
+							<col style="width:20%"><col>
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>우편번호</th>
+								<td>
+								    <input type="hidden" id="confmKey" name="confmKey" value=""  >
+									<input type="text" id="zipNo" name="zipNo" readonly style="width:100px">
+									<input type="button"  value="주소검색" onclick="goPopup();">
+								</td>
+							</tr>
+							<tr>
+								<th>도로명주소</th>
+								<td><input type="text" id="roadAddrPart1" style="width:85%"></td>
+							</tr>
+							<tr>
+								<th>상세주소</th>
+								<td>
+									<input type="text" id="addrDetail" style="width:40%" value="">
+									<input type="text" id="roadAddrPart2"  style="width:40%" value="">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
 		</div>
-	</div>
 		
-	<!-- 결제 정보 -->
-	<div id="payment_container">
-		<button class="btn_pay">
-			<img src="${pageContext.request.contextPath}/resources/img/payment_naver.svg">
-		</button>
-		<button class="btn_pay">
-			<img src="${pageContext.request.contextPath}/resources/img/payment_kakao.png">
-		</button>
-		<button class="btn_pay">
-			<img src="${pageContext.request.contextPath}/resources/img/payment_nicepay.png">
-		</button>
-		<button id="btn_cancel">취소</button>
-	</div>
+		<!-- 결제 정보 -->
+		<div id="payment_container">
+		
+			<!-- 네이버 페이 -->
+			<button id="" class="btn_pay">
+				<img src="${pageContext.request.contextPath}/resources/img/payment_naver.svg">
+			</button>
+			<!-- 카카오 페이 -->
+			<button id="kakao" class="btn_pay">
+				<img src="${pageContext.request.contextPath}/resources/img/payment_kakao.png">
+			</button>
+			<!-- 나이스 페이 -->
+			<button id="" class="btn_pay">
+				<img src="${pageContext.request.contextPath}/resources/img/payment_nicepay.png">
+			</button>
+			<button id="btn_cancel">취소</button>
+			
+		</div>
 	</div>
 	<%@ include file="../footer.jsp" %>
 
@@ -117,4 +155,48 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <!-- 처음 script 위치 설정 <script src="js/header.js"></script> -->
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script>
+	$(function(){
+		// 카카오페이 결제 팝업창 연결
+		$("#kakao").click(function(){
+			const pathname = "/" + window.location.pathname.split("/")[1] + "/";
+			const origin = window.location.origin;
+			const contextPath = origin + pathname;
+			// 결제 버튼 클릭 시 
+			// 이름/ 배송지... 필수 정보 입력(유효성 검사)
+			
+			// @data 화면에서 입력받을 수 있는 기본 결제 정보만 넘겨주기 (나머지는 뒤에서 처리)
+			// return 카카오톡 결제요청 페이지
+			
+			alert("Kakao alert");
+			console.log("kakao alert까지 왔음");
+			
+			// 아래 데이터 외에도 필요한 데이터 원하는 대로 담고, Controller에서 @RequestBody로 받으면 됨.
+			let data = {
+					name: "상품명",	// 카카오페이에 보낼 대표 상품명
+					totalPrice: 5000	// 총 결제금액
+			};
+			
+			$.ajax({
+				type: "POST",
+				url: contextPath + "/pay/ready",
+			/* 	data: {
+					/* item_name : "menu",
+					quantity : "1",
+					total_amount : "5000",
+					tax_free_amount : "0" }, */
+				data: JSON.stringify(data),
+                contentType: 'application/json', 
+                success: function(response) {
+	            	console.log("성공적으로 컨트롤러로 요청 완료되었습니다.");
+                	location.href = response.next_redirect_pc_url;
+                },
+	            error:function(xhr, status, error) {
+	            	console.error("AJAX 요청 실패:", status, error);
+	            }
+			});
+			 console.log("ajax 완료!");
+		});
+	});
+</script>
 </html>
