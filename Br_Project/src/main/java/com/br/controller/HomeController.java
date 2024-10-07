@@ -24,14 +24,17 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
+	@Autowired
+	private MemberService ms;
+	
 	/* NaverLoginBO */
     private NaverLoginBO naverLoginBO;
     private String apiResult = null;
 
-    @Autowired
-    private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
-        this.naverLoginBO = naverLoginBO;
-    }
     
  // 로그인 첫 화면 요청 메소드
     @RequestMapping(value = "/loginPage", method = { RequestMethod.GET, RequestMethod.POST })
@@ -100,8 +103,6 @@ public class HomeController {
     	return "etc/error";
     }
     
-    @Autowired
-    private MemberService ms;
     // 카카오 로그인 
     @RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
     public String kakaoLogin(@RequestParam(value = "code", required = false)String code, HttpServletRequest request) {
@@ -131,6 +132,7 @@ public class HomeController {
     		return "etc/log_in";
     	}
     }
+
 }
 	
 

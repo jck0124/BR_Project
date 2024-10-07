@@ -16,8 +16,12 @@ public interface MenuService {
 	DrinkDetailDto getDrinkDetail(int drinksIDx);
 	
 	// 수연
+	
+	// 아이스크림 리스트
 	Map<String, Object> getIcecreamList(int pageNum);
+	// 아이스크림 상세 페이지
 	IcecreamDto getIcecreamDetail(int icecreamIdx);
+	// 아이스크림 재료
 	ArrayList<IcecreamIngredientDto> getIngredient(int icecreamIdx);
 	
 	// 수빈

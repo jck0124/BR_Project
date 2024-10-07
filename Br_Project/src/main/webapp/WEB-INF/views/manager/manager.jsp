@@ -37,7 +37,7 @@
 		</form>
 		
 		<!-- br레시피 정보 넣기 -->
-		<form class="insert_info" action="insert_recipe" method="post">
+		<form class="insert_info" action="insert_recipe" method="post" enctype="multipart/form-data">
 			BR Recipe 업로드 
 			<br/>
 			종류 : 

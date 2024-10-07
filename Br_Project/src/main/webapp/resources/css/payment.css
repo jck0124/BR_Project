@@ -44,12 +44,15 @@ body {
     line-height: 1;
 }
 .entire_container {
-	width: 1000px;
+	display: flex;
+	width: 1050px;
 	height: auto;
     text-align: center;
     border: 3px solid #f986bd;
     padding-bottom: 30px;
-    border-radius: 20px
+    border-radius: 20px;
+    flex-direction: column;
+    align-items: center;
 }
 .header_content_txt {
 	width: 1000px;
@@ -78,6 +81,19 @@ body {
     font-size: 22px;
     color: #000;
     font-weight: 700;
+}
+.title_txt {
+    box-sizing: border-box;
+    width: 1000px;
+    height: auto;
+    padding-left: 12px;
+    font-size: 24px;
+    padding-bottom: 15px;
+    font-weight: 700;
+    color: #000;
+    margin-top: 40px;
+    border-bottom: 2px solid #f986bd;
+    text-align: left;
 }
 .main_container_body {
 	width: 1557.5px;
@@ -198,8 +214,9 @@ body {
     color: #f986bd;
 }
 #menu_container {
-	width: 1000px;
-	box-sizing: border-box;
+    width: 1000px;
+    box-sizing: border-box;
+    padding-top: 15px;
 }
 .menu_box {
 	list-style: none;
@@ -210,12 +227,13 @@ body {
 .menu_box li {
 	text-align: left;
     width: 1000px;
-    font-size: 20px;
+    box-sizing: border-box;
     overflow: auto;
     margin-top: 10px;
     position: relative;
-    border-top: 2px solid #ddd;
+    border: 2px solid #ddd;
     padding-top: 10px;
+    border-radius: 15px;
 }
 .taste {
 	margin-top: 10px;

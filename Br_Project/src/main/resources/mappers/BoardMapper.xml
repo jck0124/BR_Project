@@ -106,6 +106,16 @@
 		]]>
 	</insert>
 	
+	<!-- 레시피 이미지 출력 -->
+	<select id="imgFile" resultType="com.br.dto.RecipeImgDto">
+		<![CDATA[
+			SELECT recipe_idx AS recipeIdx
+			    , img_Url AS imgUrl
+			FROM recipe
+			WHERE recipe_idx = #{recipeIdx}
+		]]>
+	</select>
+	
 	<!-- 등록할 recipe_idx -->
 	<select id="selectRecipeIdx" resultType="Integer">
 		<![CDATA[

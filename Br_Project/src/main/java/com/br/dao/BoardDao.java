@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.br.dto.PlazaBoardDto;
 import com.br.dto.RecipeDto;
+import com.br.dto.RecipeImgDto;
 import com.br.dto.SelectEventDto;
 
 public interface BoardDao {
@@ -23,11 +24,18 @@ public interface BoardDao {
 	void updatePlazaLikes(int boardIdx);
 	
 	// 수연
+	
 	//모든 레시피 목록
 	ArrayList<RecipeDto> selectRecipeList();	
+	
 	// 등록될 레시피idx
 	int selectRecipeIdx();	
+	
+	// 레시피 insert
 	void insertRecipe(int insertRecipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng);
+	
+	// 레시피 이미지 
+	RecipeImgDto selectRecipeImg(int recipeIdx);
 	
 	// 수빈
 	
