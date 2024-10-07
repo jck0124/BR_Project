@@ -46,7 +46,7 @@ public class BoardController {
 //	수연 업로드 패스: 임시
 	@Resource(name = "recipeUploadPath")
 	private String recipeUploadPath;
-	
+
 	@Resource(name = "eventUploadPath")
 	private String eventUploadPath;
 	

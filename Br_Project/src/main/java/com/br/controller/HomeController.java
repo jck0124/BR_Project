@@ -28,6 +28,7 @@ public class HomeController {
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
+	
 	@Autowired
 	private MemberServiceImpl mSvc;
 	
@@ -46,22 +47,27 @@ public class HomeController {
     }
     
     
- // 로그인 첫 화면 요청 메소드
+    // 로그인 첫 화면 요청 메소드
     @RequestMapping(value = "/loginPage", method = { RequestMethod.GET, RequestMethod.POST })
     public String login(Model model, HttpSession session) {
-        /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO 클래스의 getAuthorizationUrl 메소드 호출 */
-        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-        
-        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&		
-        //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-        //System.out.println("네이버:" + naverAuthUrl);
-        //System.out.println("로그인 첫 화면 요청 메서드");
-        // 네이버 로그인 URL을 모델에 추가
-        model.addAttribute("url", naverAuthUrl);
-        
         return "etc/log_in";
     }
 
+    // 네이버 로그인
+    @RequestMapping(value="/naverLogin", method = { RequestMethod.GET })
+    public String naverLogin(Model model, HttpSession session) {
+    	  /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO 클래스의 getAuthorizationUrl 메소드 호출 */
+    	String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+        
+        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&		
+        //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+        model.addAttribute("url", naverAuthUrl);
+       
+//        return "redirect:";
+        return "redirect:" + naverAuthUrl;
+        
+    }
+    
     // 네이버 로그인 성공 시 callback 호출 메소드
     @RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
     public String callback(Model model, 

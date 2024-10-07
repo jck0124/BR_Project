@@ -143,7 +143,7 @@
 			</button>
 			<!-- 나이스 페이 -->
 			<button id="" class="btn_pay">
-				<img src="${pageContext.request.contextPath}/resources/img/payment_nicepay.png">
+				<img src="${pageContext.request.contextPath}/resources/img/payment_nicepay.jpeg">
 			</button>
 			<button id="btn_cancel">취소</button>
 			
@@ -169,8 +169,6 @@
 			// return 카카오톡 결제요청 페이지
 			
 			alert("Kakao alert");
-			console.log("kakao alert까지 왔음");
-			
 			// 아래 데이터 외에도 필요한 데이터 원하는 대로 담고, Controller에서 @RequestBody로 받으면 됨.
 			let data = {
 					name: "상품명",	// 카카오페이에 보낼 대표 상품명
@@ -179,7 +177,7 @@
 			
 			$.ajax({
 				type: "POST",
-				url: contextPath + "/pay/ready",
+				url: contextPath + "/api/payReady",
 			/* 	data: {
 					/* item_name : "menu",
 					quantity : "1",
@@ -188,7 +186,7 @@
 				data: JSON.stringify(data),
                 contentType: 'application/json', 
                 success: function(response) {
-	            	console.log("성공적으로 컨트롤러로 요청 완료되었습니다.");
+	            	console.log("컨트롤러로 요청 완료");
                 	location.href = response.next_redirect_pc_url;
                 },
 	            error:function(xhr, status, error) {
