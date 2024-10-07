@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.br.service.MemberService;
+import com.br.service.MemberServiceImpl;
 import com.br.service.NaverLoginBO;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
@@ -29,7 +29,7 @@ public class HomeController {
 		this.naverLoginBO = naverLoginBO;
 	}
 	@Autowired
-	private MemberService ms;
+	private MemberServiceImpl ms;
 	
 	/* NaverLoginBO */
     private NaverLoginBO naverLoginBO;

@@ -12,13 +12,13 @@ public class MemberDaoImpl implements MemberDao {
 	@Autowired
 	SqlSession sqlSession;
 
-	// 로그인
+	// 카카오 로그인
 	@Override
 	public String login(String email) {
 		HashMap<String, String> hmap = new HashMap<>();
 		hmap.put("loginId", email);
 		
-		String loginId = sqlSession.selectOne("MemberMapper.loginCheck", hmap);
+		String loginId = sqlSession.selectOne("MemberMapper.IdDuplicationCheck", hmap);
 		
 		return loginId;
 	}
@@ -40,7 +40,7 @@ public class MemberDaoImpl implements MemberDao {
 		hMap.put("loginId", id);
 		hMap.put("loginPw", pw);
 		
-		return sqlSession.selectOne("MemberMapper.loginCheck2", hMap);
+		return sqlSession.selectOne("MemberMapper.loginCheck", hMap);
 	}
 	
 	

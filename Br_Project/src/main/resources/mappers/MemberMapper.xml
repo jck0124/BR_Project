@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMapper">
 
-	<select id="loginCheck" resultType="String">
+	<select id="IdDuplicationCheck" resultType="String">
 		<![CDATA[
 			SELECT id
 			FROM member
@@ -19,7 +19,7 @@
 		]]>
 	</select>
 	
-	<select id="loginCheck2" resultType="Boolean">
+	<select id="loginCheck" resultType="Boolean">
 		<![CDATA[
 			SELECT  count(*)
 			FROM    member

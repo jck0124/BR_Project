@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.dao.MemberDaoImpl;
 import com.br.dto.PlazaBoardDto;
 import com.br.service.BoardServiceImpl;
-import com.br.service.MemberService;
+import com.br.service.MemberServiceImpl;
 
 @RestController
 public class AjaxController {
