@@ -180,7 +180,7 @@ $(function() {
 	// 로그인 체크
 	function loginCheck() {
 		return new Promise(function(resolve, reject) {
-			$.get(contextPath + "/api/loginCheck", function(response) {
+			$.get(contextPath + "/api/checkLoginStatus", function(response) {
 				// 응답받으면 resolve
 				resolve(response);
 			})

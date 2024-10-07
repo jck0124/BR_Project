@@ -33,6 +33,16 @@ public class HomeController {
         this.naverLoginBO = naverLoginBO;
     }
     
+    // loginSuccessTemp : 매핑경로 충돌방지, 임시로 Temp 붙임
+    @RequestMapping("/loginSuccessTemp")
+    public String loginSuccess(HttpSession session,
+    		@RequestParam("id") String loginId ) {
+    	
+    	session.setAttribute("loginId", loginId);
+    	return "redirect:/menu_icecream";
+    }
+    
+    
  // 로그인 첫 화면 요청 메소드
     @RequestMapping(value = "/loginPage", method = { RequestMethod.GET, RequestMethod.POST })
     public String login(Model model, HttpSession session) {

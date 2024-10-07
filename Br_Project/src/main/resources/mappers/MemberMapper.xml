@@ -18,4 +18,16 @@
 			VALUES (#{email}, null, #{nickname},'F')
 		]]>
 	</select>
+	
+	<select id="loginCheck2" resultType="Boolean">
+		<![CDATA[
+			SELECT  count(*)
+			FROM    member
+			WHERE   id = #{loginId}
+			        AND
+			        pw = #{loginPw}
+		]]>
+	</select> 
+	
+	
 </mapper>

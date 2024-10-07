@@ -1,6 +1,8 @@
 package com.br.dao;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,4 +32,16 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.insert("MemberMapper.insertMember", hmap);
 	}
 
+	// 로그인 체크
+	@Override
+	public boolean loginCheck(String id, String pw) {
+		
+		Map<String, String> hMap = new HashMap<String, String>();
+		hMap.put("loginId", id);
+		hMap.put("loginPw", pw);
+		
+		return sqlSession.selectOne("MemberMapper.loginCheck2", hMap);
+	}
+	
+	
 }

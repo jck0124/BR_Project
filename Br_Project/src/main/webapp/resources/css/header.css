@@ -334,7 +334,7 @@ input[name='search_keyword']::placeholder {
 	
 	position: absolute;
 	top: 840px;
-	right: -200px;
+	right: -180px;
 }
 
 .header_chat_small > button {
@@ -345,11 +345,10 @@ input[name='search_keyword']::placeholder {
 }
 
 .header_chat {
-	width: 190px;
-	height: 300px;
+	width: 192px;
+	height: 400px;
 	z-index: 200;
 	border: 3px solid #f986bd;
-	border-radius: 2px;
 	padding: 10px 10px;
 	overflow-y: scroll;
 	border-radius: 10px;
@@ -357,8 +356,8 @@ input[name='search_keyword']::placeholder {
 	background-color: #ffffff;
 	
 	position: absolute;
-	top: 550px;
-	right: -200px;
+	top: 490px;
+	right: -180px;
 }
 
 .header_chat_close_btn {
@@ -385,6 +384,7 @@ input[name='search_keyword']::placeholder {
 	padding-top: 10px;
 	padding-left: 5px;
 	border-top: 1px solid #f986bd;
+	margin-top: 10px;
 	
 }
 

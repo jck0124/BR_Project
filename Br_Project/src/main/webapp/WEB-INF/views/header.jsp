@@ -250,31 +250,61 @@
 						<div>상담원 채팅123</div>
 					</div>
 					
-					<div class="header_chat_customer">
-						<div>나</div>
-						<div>고객 채팅123</div>
-					</div>
-					
-					<div class="header_chat_customer">
-						<div>나</div>
-						<div>고객 채팅123</div>
-					</div>
-					
 					<div class="header_chat_admin">
 						<div>상담원</div>
 						<div>상담원 채팅123</div>
 					</div>
 					
-					
-					<div class="header_chat_insert">
-						<form action="">
-							<input type="text" name="header_chat" placeholder="내용입력"/>
-							<input type="submit" value="전송">										
-						</form>
+					<div class="header_chat_customer">
+						<div>나</div>
+						<div>고객 채팅123</div>
 					</div>
 					
+					<div class="header_chat_customer">
+						<div>나</div>
+						<div>고객 채팅123</div>
+					</div>
+				
+					 <div class="header_chat_admin">
+						<div>상담원</div>
+						<div>상담원 채팅123</div>
+					</div>
+					
+					<div class="header_chat_customer">
+						<div>나</div>
+						<div>고객 채팅123</div>
+					</div>
+					
+						<div class="header_chat_customer">
+						<div>나</div>
+						<div>고객 채팅123</div>
+					</div>
+					
+					<div class="header_chat_customer">
+						<div>나</div>
+						<div>고객 채팅123</div>
+					</div>
+				
+					 <div class="header_chat_admin">
+						<div>상담원</div>
+						<div>상담원 채팅123</div>
+					</div>
+					
+					<div class="header_chat_customer">
+						<div>나</div>
+						<div>고객 채팅123</div>
+					</div>
+					
+					 
 				</div>
 				<!-- header_chat_inner -->
+				
+				<div class="header_chat_insert">
+					<input type="text" name="header_chat" placeholder="내용입력"/>
+					<input type="button" value="전송"/>										
+					<input type="hidden" value="${sessionScope.loginId}"/>
+				</div>
+				<!-- header_chat_insert -->
 				
 			</div>
 			<!-- header_chat -->
@@ -285,8 +315,58 @@
         <!-- header_inner 종료 -->
     </header>
 
-
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath }/resources/js/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script>
+$(function() {
+
+	const pathname = "/" + window.location.pathname.split("/")[1] + "/";
+	const origin = window.location.origin;
+	const contextPath = origin + pathname;
+	
+	function onMessage(e) {
+		$(".header_chat_inner").append(
+			'<div class="header_chat_customer">' +
+				'<div>채팅</div>' +
+				'<div>' + e.data + '</div>' +
+			'</div>'
+		);
+	}
+	
+	function onOpen() {
+		$(".header_chat_inner").append(
+				'<div class="header_chat_customer">' +
+					'<div>실시간 채팅 시작</div>' +
+				'</div>'
+		);
+	}
+	
+	function onError() {
+		alert("error");
+	}
+	
+	
+	let webSocket = new WebSocket("ws://" + contextPath + "/chat");
+	webSocket.onmessage = onMessage;
+	webSokcet.onopen = onOpen;
+	webSocket.onerror = onError;
+	
+	$("input[type='button']").click(function() {
+		let loginId = $("input[type='hidden']").val();
+		let msg = $("input[name='header_chat']").val();
+		webSocket.send(loginId + " : " + msg);
+		
+		$(".header_chat_inner").append(
+			'<div class="header_chat_customer">' +
+				'<div>나</div>' +
+				'<div>' + e.data + '</div>' +
+			'</div>'
+		);
+		
+	})
+	
+	
+})
+</script>
 </html>

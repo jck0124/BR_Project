@@ -18,7 +18,7 @@
 		<div>아이디로 간편하게 로그인 하세요</div>
 	</div>
 	
-	<form id="write_login" action="">
+	<form id="write_login" action="${pageContext.request.contextPath}/loginSuccessTemp">
 		<input type="text" placeholder="아이디" name="id"/><br/>
 		<input type="text" placeholder="비밀번호" name="pw" /><br/>
 		<input type="submit" value="제출하기"/>
@@ -54,4 +54,40 @@
 	</c:choose>
 	<%@ include file="../footer.jsp" %>
 </body>
+<script>
+	const pathname = "/" + window.location.pathname.split("/")[1] + "/";
+	const origin = window.location.origin;
+	const contextPath = origin + pathname;
+
+	$("input[type='submit']").click(function(e) {
+		e.preventDefault();	
+		
+		let loginId = $("input[name='id']").val().trim();
+		let loginPw = $("input[name='pw']").val().trim();
+		
+		$.ajax({
+			type: "POST",
+			async: true,
+			url: contextPath + "/api/loginCheck",
+			data: {
+				loginId: loginId,
+				loginPw: loginPw
+			},
+			dataType: "json",
+			success: function(response) {
+				console.log("loginCheck success : " + response);
+				if(response) {
+					$("form").submit();				
+				}  else {
+					alert("회원정보가 일치하지 않습니다.");
+				}
+			}, error: function() {
+				console.log("loginCheck error");
+			}, complete: function() {
+				console.log("loginCheck complete");
+			}
+		})
+	})
+	
+</script>
 </html>
