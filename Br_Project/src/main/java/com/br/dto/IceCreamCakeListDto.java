@@ -4,14 +4,16 @@ public class IceCreamCakeListDto {
 	private String name;
 	private int price;
 	private String img;
+	private int idx;
 	
 	public IceCreamCakeListDto() {}
-	
-	public IceCreamCakeListDto(String name, int price, String img) {
+
+	public IceCreamCakeListDto(String name, int price, String img, int idx) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.img = img;
+		this.idx = idx;
 	}
 
 	public String getName() {
@@ -38,4 +40,12 @@ public class IceCreamCakeListDto {
 		this.img = img;
 	}
 
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
+	
 }

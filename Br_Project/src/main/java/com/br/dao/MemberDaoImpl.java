@@ -12,9 +12,9 @@ public class MemberDaoImpl implements MemberDao {
 	@Autowired
 	SqlSession sqlSession;
 
-	// 카카오 로그인
+	// 회원 있는지 확인
 	@Override
-	public String login(String email) {
+	public String IdDuplicationCheck(String email) {
 		HashMap<String, String> hmap = new HashMap<>();
 		hmap.put("loginId", email);
 		

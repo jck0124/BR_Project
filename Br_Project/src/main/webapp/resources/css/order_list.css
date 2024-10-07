@@ -94,3 +94,18 @@ a {text-decoration : none}
     border-radius: 10px;
     border : 1px solid #f986bd;
 }
+
+#total{
+	width : 770px;
+	margin : 0 auto;
+	margin-bottom : 20px;
+}
+#total > input {
+	border: 1px solid #ccc; 
+}
+#addedItems {
+	border: 1px solid #ccc; 
+	padding: 5px; 
+	max-height: 100px; 
+	overflow-y: auto;"
+}

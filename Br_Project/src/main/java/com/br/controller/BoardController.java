@@ -44,8 +44,11 @@ public class BoardController {
 	private ServletContext servletContext;
 	
 //	수연 업로드 패스: 임시
-	@Resource(name = "uploadPath")
-	private String uploadPath;
+	@Resource(name = "recipeUploadPath")
+	private String recipeUploadPath;
+	
+	@Resource(name = "eventUploadPath")
+	private String eventUploadPath;
 	
 	private static final Logger logger = Logger.getLogger(BoardController.class);
 	
@@ -137,7 +140,7 @@ public class BoardController {
 	@RequestMapping(value="file", method = RequestMethod.POST)
 	public String fileUpload(MultipartFile file) throws Exception {
 		logger.info("/request/file");
-		logger.info("uploadPath : "+ uploadPath);
+		logger.info("uploadPath : "+ recipeUploadPath);
 		
 		if (file.isEmpty()) {
 			return "FAIL";
@@ -151,7 +154,7 @@ public class BoardController {
 		byte[] fileData = file.getBytes();
 		
 		// 파일 업로드
-		String filePath = uploadPath;
+		String filePath = recipeUploadPath;
 		String fileName = file.getOriginalFilename();
 		File uploadFile = new File(filePath, fileName);
 		
@@ -225,35 +228,84 @@ public class BoardController {
 		return "manager/manager";
 	}
 	
-	// Post 방식으로 파일 업로드 처리 
-	@PostMapping("/uploadEvent")
-	public String handleFileUpload(
-		@RequestParam("topLetter") String topLetter,
-		@RequestParam("title") String title,
-		@RequestParam("period") String period,
-		@RequestParam("img") MultipartFile file,
-		RedirectAttributes redirectAttributes,
-		HttpServletRequest request) {
-		
-		if(file.isEmpty()) {
-			redirectAttributes.addFlashAttribute("message", "파일을 선택해주세요.");
-			return "redirect:/manager";
-		}
-		
-		try {
-            // 파일 저장 로직
-			// String uploadDir = "C:/uploads/";
-			String uploadDir = servletContext.getRealPath("/resources/uploads/");
-			File directory = new File(uploadDir);
-			if (!directory.exists()) {
-			    directory.mkdirs(); // 디렉토리 생성
-			}
-            Path path = Paths.get(uploadDir + file.getOriginalFilename());
-            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+//	// Post 방식으로 파일 업로드 처리 
+//	@PostMapping("/uploadEvent")
+//	public String handleFileUpload(
+//		@RequestParam("topLetter") String topLetter,
+//		@RequestParam("title") String title,
+//		@RequestParam("period") String period,
+//		@RequestParam("img") MultipartFile file,
+//		RedirectAttributes redirectAttributes,
+//		HttpServletRequest request) {
+//		
+//		if(file.isEmpty()) {
+//			redirectAttributes.addFlashAttribute("message", "파일을 선택해주세요.");
+//			return "redirect:/manager";
+//		}
+//		
+//		try {
+//            // 파일 저장 로직
+//			//String uploadDir = "C:/uploads/";
+//			String uploadDir = servletContext.getRealPath("/resources/uploads/");
+//			File directory = new File(uploadDir);
+//			if (!directory.exists()) {
+//			    directory.mkdirs(); // 디렉토리 생성
+//			}
+////            Path path = Paths.get(uploadDir + file.getOriginalFilename());
+////            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+//            
+//			String fileName = file.getOriginalFilename();
+//	        Path path = Paths.get(uploadDir + fileName);
+//	        Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+//
+//	        // 이미지 URL 저장 (예: http://localhost:9090/uploads/파일이름)
+//	        String imgUrl = "http://localhost:9090/uploads/" + fileName;
+//			
+//            // 데이터베이스에 이벤트 정보 삽입
+//            // String imgPath = uploadDir + file.getOriginalFilename(); // 저장한 이미지 경로
+//            bSvc.insertEvent(imgUrl, topLetter, title, period); // 서비스 호출
+//            
+//            // 성공 메시지 추가
+//            redirectAttributes.addFlashAttribute("message", "파일 업로드 성공: " + file.getOriginalFilename());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            redirectAttributes.addFlashAttribute("message", "파일 업로드 실패.");
+//        }
+//
+//        return "redirect:/manager";
+//	}
+	
+    @PostMapping("/uploadEvent")
+    public String handleFileUpload(
+        @RequestParam("topLetter") String topLetter,
+        @RequestParam("title") String title,
+        @RequestParam("period") String period,
+        @RequestParam("img") MultipartFile file,
+        RedirectAttributes redirectAttributes,
+        HttpServletRequest request) { // HttpServletRequest 추가
+        
+        if (file.isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "파일을 선택해주세요.");
+            return "redirect:/manager";
+        }
+        
+        try {
+            // ServletContext를 통해 업로드 경로 얻기
+            String uploadDir = servletContext.getRealPath("/resources/uploads/");
+            File directory = new File(uploadDir);
+            if (!directory.exists()) {
+                directory.mkdirs(); // 디렉토리 생성
+            }
             
+            String fileName = file.getOriginalFilename();
+            Path path = Path.of(uploadDir, fileName);
+            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+            // 이미지 URL 저장
+            String imgUrl = request.getContextPath() + "/resources/uploads/" + fileName; // HttpServletRequest 사용
+
             // 데이터베이스에 이벤트 정보 삽입
-            String imgPath = uploadDir + file.getOriginalFilename(); // 저장한 이미지 경로
-            bSvc.insertEvent(imgPath, topLetter, title, period); // 서비스 호출
+            bSvc.insertEvent(imgUrl, topLetter, title, period); // 서비스 호출
             
             // 성공 메시지 추가
             redirectAttributes.addFlashAttribute("message", "파일 업로드 성공: " + file.getOriginalFilename());
@@ -263,5 +315,7 @@ public class BoardController {
         }
 
         return "redirect:/manager";
-	}
+    }
+	
+	
 }

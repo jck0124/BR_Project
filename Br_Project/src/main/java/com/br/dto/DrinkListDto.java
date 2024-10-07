@@ -4,14 +4,16 @@ public class DrinkListDto {
 	private String name;
 	private int price;
 	private String img;
+	private int idx;
 	
 	public DrinkListDto() {}
-	
-	public DrinkListDto(String name, int price, String img) {
+
+	public DrinkListDto(String name, int price, String img, int idx) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.img = img;
+		this.idx = idx;
 	}
 
 	public String getName() {
@@ -36,6 +38,14 @@ public class DrinkListDto {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	
 }

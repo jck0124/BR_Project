@@ -42,7 +42,8 @@
 	<![CDATA[ 
 		SELECT  dd.name,
 		        dd.price,
-		        d.img
+		        d.img,
+		        dd.drinks_detail_idx AS idx
 		FROM drinks d
 		INNER JOIN drinks_detail dd ON d.drinks_idx = dd.drinks_idx
 		]]>
@@ -67,7 +68,8 @@
 	<![CDATA[ 
 		SELECT  c.name,
 		        cd.price,
-		        c.img
+		        c.img,
+		        c.cake_idx AS idx
 		FROM ice_cream_cake c
 		INNER JOIN ice_cream_cake_detail cd ON c.name = cd.kor_name
 	 ]]>

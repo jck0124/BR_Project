@@ -12,12 +12,12 @@
 		]]>
 	</select>
 	
-	<select id="insertMember"  parameterType="HashMap">
+	<insert id="insertMember"  parameterType="HashMap">
 		<![CDATA[
 			INSERT INTO member (id, pw, name, admin)
 			VALUES (#{email}, null, #{nickname},'F')
 		]]>
-	</select>
+	</insert>
 	
 	<select id="loginCheck" resultType="Boolean">
 		<![CDATA[

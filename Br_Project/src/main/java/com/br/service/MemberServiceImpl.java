@@ -121,9 +121,9 @@ public class MemberServiceImpl implements MemberService {
         return userInfo;
     }
     
-    // 로그인 체크 메서드 
-    public boolean loginCheck(String email) {
-    	String loginId = mDao.login(email);
+    // 회원 있는지 확인
+    public boolean IdDuplicationCheck(String email) {
+    	String loginId = mDao.IdDuplicationCheck(email);
     	return loginId != null; // 로그인 ID가 존재하면 true 반환
     }
     
