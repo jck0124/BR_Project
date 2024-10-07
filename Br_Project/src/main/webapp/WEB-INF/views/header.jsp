@@ -245,55 +245,18 @@
 				</div>
 				<div class="header_chat_inner">
 					
+					<!-- 
 					<div class="header_chat_admin">
 						<div>상담원</div>
 						<div>상담원 채팅123</div>
 					</div>
 					
-					<div class="header_chat_admin">
-						<div>상담원</div>
-						<div>상담원 채팅123</div>
-					</div>
-					
 					<div class="header_chat_customer">
 						<div>나</div>
 						<div>고객 채팅123</div>
 					</div>
+					 -->
 					
-					<div class="header_chat_customer">
-						<div>나</div>
-						<div>고객 채팅123</div>
-					</div>
-				
-					 <div class="header_chat_admin">
-						<div>상담원</div>
-						<div>상담원 채팅123</div>
-					</div>
-					
-					<div class="header_chat_customer">
-						<div>나</div>
-						<div>고객 채팅123</div>
-					</div>
-					
-						<div class="header_chat_customer">
-						<div>나</div>
-						<div>고객 채팅123</div>
-					</div>
-					
-					<div class="header_chat_customer">
-						<div>나</div>
-						<div>고객 채팅123</div>
-					</div>
-				
-					 <div class="header_chat_admin">
-						<div>상담원</div>
-						<div>상담원 채팅123</div>
-					</div>
-					
-					<div class="header_chat_customer">
-						<div>나</div>
-						<div>고객 채팅123</div>
-					</div>
 					
 					 
 				</div>
@@ -309,13 +272,89 @@
 			</div>
 			<!-- header_chat -->
 
-
-
+			
         </div>
         <!-- header_inner 종료 -->
+        
+        
+        <input type="hidden" name="admin_check" value="${sessionScope.adminCheck}"/>
     </header>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script>
+$(function() {
+
+	const pathname = "/" + window.location.pathname.split("/")[1] + "/";
+	const origin = window.location.origin;
+	const contextPath = origin + pathname;
+	
+	let adminCheckValue = $("input[name='admin_check']").val();
+	function adminCheckFunc() {
+		if(adminCheckValue == "true") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	function onMessage(e) {
+		
+		let msgContent = JSON.parse(e.data);
+		let userAppend = (msgContent.user === "상담사") ? "상담사" : "고객";
+		
+		$(".header_chat_inner").append(
+			'<div class="header_chat_customer">' +
+				'<div>' + userAppend + '</div>' +
+				'<div>' + msgContent.content + '</div>' +
+			'</div>'
+		);
+		
+	}
+	
+	function onOpen() {
+		$(".header_chat_inner").append(
+				'<div class="header_chat_customer">' +
+					'<div>실시간 채팅 시작</div>' +
+				'</div>'
+		);
+	}
+	
+	function onError() {
+		alert("error");
+	}
+	
+	// ws://localhost:9090/chat 
+	// ws://http//localhost:9090/www//chat' failed: 
+	let webSocket = new WebSocket("ws://localhost:9090/www/chat");
+	webSocket.onmessage = onMessage;
+	webSocket.onopen = onOpen;
+	webSocket.onerror = onError;
+	
+	$("input[type='button']").click(function() {
+		let loginId = $("input[type='hidden']").val();
+		let msg = $("input[name='header_chat']").val();
+		let user = adminCheckFunc() ? "상담사" : "고객";
+		
+		let sendContents = JSON.stringify({
+			content: msg,
+			user: user
+		});
+		
+		webSocket.send(sendContents);
+		
+		$(".header_chat_inner").append(
+			'<div class="header_chat_customer">' +
+				'<div>나</div>' +
+				'<div>' + msg + '</div>' +
+			'</div>'
+		);
+		
+		$("input[name='header_chat']").val('');
+	})
+	
+	
+})
+</script>
 </html>

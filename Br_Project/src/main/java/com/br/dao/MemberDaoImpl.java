@@ -43,5 +43,16 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("MemberMapper.loginCheck", hMap);
 	}
 	
+	// 관리자 여부 체크
+	@Override
+	public boolean adminCheck(String id) {
+		String checkResult = sqlSession.selectOne("MemberMapper.adminCheck", id);
+		if( checkResult != null && checkResult.equals("T") ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	
 }
