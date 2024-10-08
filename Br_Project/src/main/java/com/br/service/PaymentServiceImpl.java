@@ -1,6 +1,8 @@
 package com.br.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.br.dto.KakaoPayApproveDto;
 import com.br.dto.KakaoPayReadyDto;
+import com.nimbusds.jose.shaded.json.JSONObject;
 
 @Service 
 public class PaymentServiceImpl implements PaymentService {
@@ -75,4 +78,42 @@ public class PaymentServiceImpl implements PaymentService {
 
         return headers;
     }
+    
+    
+//    // 네이버 페이
+//    private final String partnerId = "np_dhjmo727289";
+//    private final String clientId = "HN3GGCMDdTgGUfl0kFCo";
+//	private final String secret = "ftZjkkRNMR";
+//	
+//	
+//    @Override
+//    public Map<String, Object> naverPay(Map<String, Object> params) {
+//    	
+//    	
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.set("X-Naver-Client-Id", clientId);
+//        headers.set("X-Naver-Client-Secret", secret);
+//        headers.set("Content-Type", "application/json");
+//
+//        Map<String, Object> payParams = new HashMap<>();
+//        payParams.put("merchanPayKey", params.get("merchanPayKey"));  // 실 데이터를 사용
+//        payParams.put("merchanUserKey", params.get("merchanUserKey"));  // 실 데이터를 사용
+//        payParams.put("productName", params.get("productName"));
+//        payParams.put("totalPayAmount", params.get("totalPayAmount"));
+//        payParams.put("returnUrl", "https://your-return-url.com");  // 리턴 url 추가
+//
+//        // JSON 객체로 변환
+//        JSONObject jObj = new JSONObject(payParams); 
+//
+//        // 네이버페이 결제 준비 api 요청 
+//        HttpEntity<?> request = new HttpEntity<>(jObj.toString(), headers);
+//
+//        RestTemplate template = new RestTemplate();
+//        String url = "https://dev.apis.naver.com/"+partnerId+"/naverpay/payments/v2/reserve";
+//
+//        // 요청 결과
+//        Map<String, Object> res = template.postForObject(url, request, Map.class);
+//        return res;
+//    }
+
 }

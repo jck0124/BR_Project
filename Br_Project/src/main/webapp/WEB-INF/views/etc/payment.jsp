@@ -8,6 +8,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/payment.css"/>
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+<script>
+	$(function() {
+		// 아임포트 관리자의 가맹점 식별코드 설정
+	    IMP.init('imp31361047'); 
+
+	    // jQuery로 버튼 클릭 이벤트 등록
+	    $('#naver').on('click', function() {
+	    	alert("하이");
+	        // IMP.request_pay 결제 모듈 호출
+	        IMP.request_pay({
+	            pg : 'naverco', // PG사
+	            pay_method : 'card', // 결제수단
+	            merchant_uid: "order_no_" + new Date().getTime(), // 상점에서 관리하는 주문 번호
+	            name : '상품', // 상품명
+	            amount : 14000, // 결제 금액
+	        }, function(rsp) {
+	            if ( rsp.success ) {
+	                // 결제 성공 시 서버로 결제 정보 전달
+	                $.ajax({
+	                    url: "/payments/complete", // 서버 측 결제 처리 URL
+	                    type: 'POST',
+	                    dataType: 'json',
+	                    data: {
+	                        imp_uid: rsp.imp_uid // 아임포트 고유 결제 ID
+	                    }
+	                }).done(function(data) {
+	                    // 서버 측에서 결제 정보 검증 후 처리
+	                    if (data.everythings_fine) {
+	                        alert('결제가 완료되었습니다.');
+	                    } else {
+	                        alert('결제 검증에 실패했습니다.');
+	                    }
+	                });
+	            } else {
+	                // 결제 실패 시
+	                alert('결제에 실패하였습니다. 에러내용: ' + rsp.error_msg);
+	            }
+	        });
+	    });
+	});
+    
+</script>
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
@@ -134,7 +178,7 @@
 		<div id="payment_container">
 		
 			<!-- 네이버 페이 -->
-			<button id="" class="btn_pay">
+			<button id="naver" class="btn_pay">
 				<img src="${pageContext.request.contextPath}/resources/img/payment_naver.svg">
 			</button>
 			<!-- 카카오 페이 -->
@@ -152,9 +196,9 @@
 	<%@ include file="../footer.jsp" %>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <!-- 처음 script 위치 설정 <script src="js/header.js"></script> -->
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+
 <script>
 	$(function(){
 		// 카카오페이 결제 팝업창 연결
@@ -195,6 +239,37 @@
 			});
 			 console.log("ajax 완료!");
 		});
+		
+		// 네이버페이 결제
+		/*ㄴ
+		$("#naver").click(function() {
+			var contextPath = "${pageContext.request.contextPath}";
+		    alert("Naver alert");
+		    $.ajax({
+		        type: 'GET',
+		        url: contextPath + '/pay/naver',
+		        data: {
+		            productName: "상품명",
+		            totalPayAmount: "140000"
+		        },
+		        success: function(res) {
+		            console.log("응답 성공:", res); // 응답 확인
+		            console.log("response body:", res.body);
+		            if (res.body && res.body.reserveld) { // 응답 데이터 체크
+		                location.href = "https://test-pay.naver.com/payments/" + res.body.reserveld;
+		            } else {
+		                console.error("예약 ID가 없습니다.");
+		            }
+		        },
+		        error: function(xhr, status, error) {
+		            console.error("AJAX 요청 실패:", status, error);
+		        }
+		    });
+		});
+		*/
+		
+
 	});
+	
 </script>
 </html>
