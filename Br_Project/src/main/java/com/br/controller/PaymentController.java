@@ -1,13 +1,11 @@
 package com.br.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.br.dto.KakaoPayApproveDto;
 import com.br.service.PaymentServiceImpl;
@@ -21,8 +19,8 @@ public class PaymentController {
     
     // 결제 페이지
     @RequestMapping("/payment")
-    public String payment() {
-    	
+    public String payment(@RequestParam("totalPrice") Integer totalPrice, Model model) {
+    	model.addAttribute("totalPrice", totalPrice);
     	return "etc/payment";
     }
     

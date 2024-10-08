@@ -64,11 +64,6 @@ public class HomeController {
     	  /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO 클래스의 getAuthorizationUrl 메소드 호출 */
     	String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
         
-        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&		
-        //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-    	
-//        model.addAttribute("url", naverAuthUrl);
-       
         return "redirect:" + naverAuthUrl;
         
     }
@@ -81,7 +76,7 @@ public class HomeController {
                            HttpSession session) 
             throws IOException, ParseException {
     	
-        System.out.println("여기는 callback");
+        System.out.println("callback");
         OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
 
         // 1. 로그인 사용자 정보를 읽어온다.
@@ -99,17 +94,29 @@ public class HomeController {
         JSONObject jsonObj = (JSONObject) obj;
 
         // 3. 데이터 파싱
-        //Top레벨 단계 _response 파싱
+        //최상위레벨 단계 _response 파싱
         JSONObject response_obj = (JSONObject) jsonObj.get("response");
-        //response의 nickname값 파싱
-        String nickname = (String) response_obj.get("nickname");
-        System.out.println("nickname : " + nickname);
+        //response의 값 파싱
+        String email = (String) response_obj.get("email");
+        System.out.println("email : "+ email);
+        String nickname = (String) response_obj.get("name");
+        System.out.println("name : "+ nickname);
 
-        // 4. 파싱한 닉네임을 세션으로 저장
-        session.setAttribute("sessionId", nickname); // 세션 생성
+        // 
+        session.setAttribute("loginId", email); // 세션 생성
         model.addAttribute("result", apiResult);
-
-        return "etc/log_in";
+        
+     // 4. 파싱한 닉네임을 세션으로 저장, 로그인 체크 
+    	if(mSvc.IdDuplicationCheck(email)) {
+    		// 이미 가입된 사용자 
+    		session.setAttribute("loginId", email);
+    		return "etc/log_in";
+    	} else {
+    		// 신규 회원, 회원가입 진행
+    		mSvc.signUp(email, nickname);
+    		session.setAttribute("loginId", email);
+    		return "etc/log_in";
+    	}
     }
     // 로그아웃
     @RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })

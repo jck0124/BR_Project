@@ -73,7 +73,7 @@
 				<ul class="menu_box">
 					<li>
 						<div class="selected_menu fl">
-							<div>[배달]파인트</div>
+							<div>${product}</div>
 							<div class="taste">맛:
 								<span>두바이스타일 초코통통,</span>
 								<span>피치 Pang 망고 Pang,</span>
@@ -138,6 +138,7 @@
 				</ul>
 			</div>
 			<div class="title_txt">결제금액</div>
+				<div>${totalPrice}</div>
 			<div class="title_txt">주소</div>
 			<div>
 				<form name="form" id="form" method="post">
