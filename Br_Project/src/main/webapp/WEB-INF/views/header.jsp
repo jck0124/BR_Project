@@ -244,20 +244,18 @@
 					<img src="${pageContext.request.contextPath}/resources/img/icon_close_big.png"/>
 				</div>
 				<div class="header_chat_inner">
-					
-					<!-- 
+				
+					<!--  
 					<div class="header_chat_admin">
 						<div>상담원</div>
-						<div>상담원 채팅123</div>
+						<div>상담사 채팅 예시</div>
 					</div>
 					
 					<div class="header_chat_customer">
-						<div>나</div>
-						<div>고객 채팅123</div>
+						<div>고객</div>
+						<div>고객 채팅 예시</div>
 					</div>
-					 -->
-					
-					
+					-->
 					 
 				</div>
 				<!-- header_chat_inner -->
@@ -302,7 +300,7 @@ $(function() {
 	function onMessage(e) {
 		
 		let msgContent = JSON.parse(e.data);
-		let userAppend = (msgContent.user === "상담사") ? "상담사" : "고객";
+		let userAppend = (msgContent.user === "상담원") ? "상담원" : "고객";
 		
 		$(".header_chat_inner").append(
 			'<div class="header_chat_customer">' +
@@ -315,8 +313,8 @@ $(function() {
 	
 	function onOpen() {
 		$(".header_chat_inner").append(
-				'<div class="header_chat_customer">' +
-					'<div>실시간 채팅 시작</div>' +
+				'<div class="header_chat_customer" style="color: #f986bd">' +
+					'<div>실시간 채팅 상담 시작</div>' +
 				'</div>'
 		);
 	}
@@ -335,7 +333,7 @@ $(function() {
 	$("input[type='button']").click(function() {
 		let loginId = $("input[type='hidden']").val();
 		let msg = $("input[name='header_chat']").val();
-		let user = adminCheckFunc() ? "상담사" : "고객";
+		let user = adminCheckFunc() ? "상담원" : "고객";
 		
 		let sendContents = JSON.stringify({
 			content: msg,
@@ -345,7 +343,7 @@ $(function() {
 		webSocket.send(sendContents);
 		
 		$(".header_chat_inner").append(
-			'<div class="header_chat_customer">' +
+			'<div class="header_chat_admin">' +
 				'<div>나</div>' +
 				'<div>' + msg + '</div>' +
 			'</div>'
