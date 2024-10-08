@@ -4,6 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BoardMapper">
 
+	<!-- 배라광장 게시판 -->
 	<select id="selectPlazaBoardList" resultType="com.br.dto.PlazaBoardDto">
 		<![CDATA[
 			SELECT  board_idx AS boardIdx,
@@ -25,6 +26,7 @@
 		]]>
 	</select>
 	
+	<!-- 배라광장 게시판 추천순 -->
 	<select id="selectPlazaBoardListOrderByLikes" resultType="com.br.dto.PlazaBoardDto">
 		<![CDATA[
 			SELECT  board_idx AS boardIdx,
@@ -46,6 +48,7 @@
 		]]>
 	</select>
 	
+	<!--  배라광장 게시판 글쓰기 -->
 	<insert id="insertPlaza">
 		<![CDATA[
 			INSERT INTO plaza(
@@ -72,6 +75,7 @@
 		]]>
 	</insert>
 	
+	<!-- 배라 광장 추천 -->
 	<update id="updatePlazaLikes">
 		<![CDATA[
 			UPDATE  plaza
@@ -82,7 +86,18 @@
 		]]>
 	</update>
 	
-
+	<!--  배라광장 게시판 자세히 보기 -->
+	<select id="selectPlazaDetailDtoByBoardIdx" resultType="com.br.dto.PlazaDetailDto">
+		<![CDATA[
+			SELECT  board_idx AS boardIdx,
+			        title AS title,
+			        content AS content,
+			        writer_name AS writerName,
+			        show_name AS showName
+			FROM    plaza
+			WHERE   board_idx = #{boardIdx}
+		]]>
+	</select>
 
 	<!-- 레시피 리스트 -->
  	<select id="getAllRecipe" resultType="com.br.dto.RecipeDto">

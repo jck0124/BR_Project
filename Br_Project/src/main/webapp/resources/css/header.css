@@ -350,7 +350,6 @@ input[name='search_keyword']::placeholder {
 	z-index: 200;
 	border: 3px solid #f986bd;
 	padding: 10px 10px;
-	overflow-y: scroll;
 	border-radius: 10px;
 		
 	background-color: #ffffff;
@@ -363,9 +362,13 @@ input[name='search_keyword']::placeholder {
 .header_chat_close_btn {
 	cursor: pointer;
 	display: flex;
-	justify-content: flex-end;		
+	justify-content: space-between;		
 }
 
+.header_chat_inner {
+	height: 320px;
+	overflow-y: auto;
+}
 
 .header_chat_inner > div {
 	margin-top: 10px;

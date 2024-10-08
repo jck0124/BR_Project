@@ -91,8 +91,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/br_plaza_detail")
-	public String brPlazaDetail(Model model) {
+	public String brPlazaDetail(
+				@RequestParam(value = "board_idx") Integer boardIdx,
+				Model model
+				) {
 		
+		model.addAttribute("pDto", bSvc.showPlazaDetailByBoardIdx(boardIdx));
 		return "br_play/br_plaza_detail";
 	}
 	

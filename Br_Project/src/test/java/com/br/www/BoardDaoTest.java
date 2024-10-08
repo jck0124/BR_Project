@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.br.dao.BoardDao;
 import com.br.dto.PlazaBoardDto;
+import com.br.dto.PlazaDetailDto;
 import com.br.dto.RecipeImgDto;
 import com.br.dto.SelectEventDto;
 
@@ -33,14 +34,19 @@ public class BoardDaoTest {
 	public void testPlaza() {
 		ArrayList<PlazaBoardDto> boardList = dao.selectPlazaBoardListOrderByLatest();
 		System.out.println(boardList.size());
-		
-		
 	}
 	
 	@Test
 	public void testInsertPlaza() {
 		dao.insertPlaza("테스트제목", "테스트내용", "아이디", "이름", 'T');
 	}
+	
+	@Test
+	public void testPlazaDetail() {
+		PlazaDetailDto pDto = dao.selectPlazaDtoByBoardIdx(16);
+		System.out.println( pDto.getShowName() );
+	}
+	
 	
 // 	// 저장된 이미지 경로
 //	@Test

@@ -57,9 +57,11 @@
 				<div class="plaza_item_footer">
 					<div class="plaza_item_footer_img"></div>
 					<div class="plaza_item_footer_detail">
-						<a href="${pageContext.request.contextPath}/br_plaza_detail">자세히 보기</a>
+						<a href="">자세히 보기</a>
+						<form action="${pageContext.request.contextPath}/br_plaza_detail">
+							<input type="hidden" name="board_idx" value="${board.boardIdx}"/>
+						</form>
 					</div>
-					<input type="hidden" name="board_idx" value="${board.boardIdx}"/>
 				</div>
 			</div>
 		</c:forEach>		
@@ -97,7 +99,7 @@ $(function() {
 					$.ajax({
 						type: "GET",
 						async: true,
-						url: contextPath + "/api/plaza",
+						url: contextPath + "api/plaza",
 						data: {
 							orderType : orderType,
 							pageNum: pageNum + 1
@@ -124,8 +126,8 @@ $(function() {
 										'<div class="plaza_item_footer">' +
 											'<div class="plaza_item_footer_img"></div>' +
 											'<div class="plaza_item_footer_detail">' +
-												'<a href="' + contextPath + '/br_plaza_detail">자세히 보기</a>' +
-												'<form action="">' +
+												'<a href="">자세히 보기</a>' +
+												'<form action="' + contextPath + '/br_plaza_detail">' +
 													'<input type="hidden" name="board_idx" value="' + board.boardIdx + '"/>' +
 												'</form>' +
 											'</div>'+
@@ -177,10 +179,10 @@ $(function() {
 	
 	
 	
-	// 로그인 체크
+	// 로그인 여부 체크
 	function loginCheck() {
 		return new Promise(function(resolve, reject) {
-			$.get(contextPath + "/api/checkLoginStatus", function(response) {
+			$.get(contextPath + "api/checkLoginStatus", function(response) {
 				// 응답받으면 resolve
 				resolve(response);
 			})
@@ -195,11 +197,12 @@ $(function() {
 	function increaseLikes(boardIdx) {
 		return new Promise(function(resolve, reject) {
 			$.get(
-					contextPath + "/api/increaseLikes", 
-					{boardIdx: boardIdx}, 
-					function(response) {
-						resolve(response);
-			}) 
+				contextPath + "api/increaseLikes", 
+				{boardIdx: boardIdx}, 
+				function(response) {
+					resolve(response);
+				}
+			) 
 			.fail(function() {
 				reject("추천수 올리기 실패");
 			})
@@ -215,10 +218,10 @@ $(function() {
 	    try {
 	        let loginCheckResponse = await loginCheck();
 	        if (loginCheckResponse) {
-	            window.location.href = contextPath + "/br_plaza_write";
+	            window.location.href = contextPath + "br_plaza_write";
 	        } else {
 	            alert("로그인 후 이용가능합니다.");
-	            window.location.href = contextPath + "/loginPage";
+	            window.location.href = contextPath + "loginPage";
 	        }
 	        
 	    } catch(error) {
@@ -244,7 +247,7 @@ $(function() {
 	            alert("게시물을 추천했습니다!");
 	        } else {
 	            alert("로그인 후 이용가능합니다.");
-	            window.location.href = contextPath + "/loginPage";
+	            window.location.href = contextPath + "loginPage";
 	        }
 	        
 	    } catch (error) {
@@ -252,6 +255,11 @@ $(function() {
 	    }
 	});
 	
+	// 자세히 보기
+	$(document).on("click", ".plaza_item_footer_detail > a", function(e) {
+		e.preventDefault();
+		$(this).siblings("form").submit();
+	})
 	
 })
 </script>

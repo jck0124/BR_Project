@@ -38,17 +38,5 @@ $(function() {
 	
 	
 	
-	$(".header_chat_small > button").click(function() {
-		$(".header_chat_small").addClass("header_chat_hidden");
-		$(".header_chat").removeClass("header_chat_hidden");
-	}) 
-	
-	$(".header_chat_close_btn > img").click(function() {
-		$(".header_chat").addClass("header_chat_hidden");
-		$(".header_chat_small").removeClass("header_chat_hidden");
-	}) 
-
-
-
 
 }) 

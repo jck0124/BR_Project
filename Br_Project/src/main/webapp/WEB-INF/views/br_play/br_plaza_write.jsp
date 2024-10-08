@@ -106,7 +106,6 @@ $(function() {
 	
 	
 	$("input[type='submit']").click(function(e) {
-		
 		if( formCheck() ) {
 			alert("게시글 작성이 완료되었습니다.");
 		} else {
