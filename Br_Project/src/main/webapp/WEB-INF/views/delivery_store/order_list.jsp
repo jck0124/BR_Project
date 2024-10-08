@@ -57,7 +57,7 @@
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-	<form action="">
+	<form action="${pageContext.request.contextPath}/payment">
 	<div id="store_info">
 		<div>주문 페이지</div>
 		<div>${storeName} 베스킨라빈스</div>
