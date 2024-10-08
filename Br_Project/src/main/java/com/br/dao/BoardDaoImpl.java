@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.br.dto.PlazaBoardDto;
+import com.br.dto.PlazaDetailDto;
 import com.br.dto.RecipeDto;
 import com.br.dto.RecipeImgDto;
 import com.br.dto.SelectEventDto;
@@ -57,6 +58,13 @@ public class BoardDaoImpl implements BoardDao {
 		
 		sqlSession.update("BoardMapper.updatePlazaLikes", boardIdx);
 	}
+	
+	@Override
+	public PlazaDetailDto selectPlazaDtoByBoardIdx(int boardIdx) {
+		
+		return sqlSession.selectOne("BoardMapper.selectPlazaDetailDtoByBoardIdx", boardIdx);
+	}
+	
 	
 	// 수연
 	@Override

@@ -54,8 +54,6 @@ public class AjaxController {
 	@RequestMapping("/api/checkLoginStatus")
 	public boolean checkLoginStatus(HttpSession session) {
 		
-		// 임시 로그인 
-		session.setAttribute("loginId", "test123");
 		return session.getAttribute("loginId") != null;
 	}
 	
@@ -67,6 +65,21 @@ public class AjaxController {
 		
 		return mDao.loginCheck(loginId, loginPw);
 	}
+	
+	// 채팅창 크게, 작게 저장
+	@RequestMapping("/api/chatSize")
+	public void chatResize(
+			@RequestParam(value="chatSize") String chatSize,
+			HttpSession session) {
+		
+		if( chatSize.equals("big") ) {
+			session.setAttribute("chatSize", "header_chat_hidden");
+		} else {
+			session.setAttribute("chatSize", null);
+		}
+		
+	}
+	
 	
 	// ajax 카카오 페이
 	@RequestMapping("/api/payReady")

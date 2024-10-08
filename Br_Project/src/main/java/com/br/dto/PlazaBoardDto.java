@@ -58,12 +58,18 @@ public class PlazaBoardDto {
 
 	public void setWriterId(String writerId) {
 		// 아이디 앞자리 3글자 제외 *로 표시
-		StringBuffer sb = new StringBuffer( writerId.substring(0, 3) );
-		if(writerId.length() > 3) {
-			for(int i = 0; i < writerId.length() - 3; i++) {
+		String id = writerId.split("@")[0];
+		StringBuffer sb;
+		
+		if(id.length() > 3) {
+			sb = new StringBuffer( id.substring(0, 3) );
+			for(int i = 0; i < id.length() - 3; i++) {
 				sb.append("*");
 			}
+		} else {
+			sb = new StringBuffer( id );
 		}
+		
 		this.writerId = sb.toString();
 	}
 

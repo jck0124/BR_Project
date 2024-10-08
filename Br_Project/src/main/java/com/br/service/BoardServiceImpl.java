@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.br.dao.BoardDao;
 import com.br.dto.PlazaBoardDto;
+import com.br.dto.PlazaDetailDto;
 import com.br.dto.PlazaPaginationDto;
 import com.br.dto.RecipeDto;
 import com.br.dto.RecipeImgDto;
@@ -71,7 +72,22 @@ public class BoardServiceImpl implements BoardService {
 	public void increaseLikes(int boardIdx) {
 		
 		bDao.updatePlazaLikes(boardIdx);
+	
 	}	
+	
+	// 배라광장 자세히 보기
+	@Override
+	public PlazaDetailDto showPlazaDetailByBoardIdx(int boardIdx) {
+		
+		PlazaDetailDto pDto = bDao.selectPlazaDtoByBoardIdx(boardIdx);
+		if(pDto.getShowName() == 'F') {
+			pDto.setWriterName("비공개");
+		}
+		
+		return pDto;
+	}
+	
+	
 	
 	// 레시피 출력
 	@Override

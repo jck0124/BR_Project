@@ -46,7 +46,7 @@ public class HomeController {
     	session.setAttribute("loginId", loginId);
     	
     	if(mSvc.adminCheck(loginId)) {
-    		BroadSocket.adminCheck = true;
+    		// BroadSocket.adminCheck = true;
     		session.setAttribute("adminCheck", true);
     	} 
     	return "redirect:/menu_icecream";

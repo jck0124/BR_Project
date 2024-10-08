@@ -234,13 +234,20 @@
 			
 			<!-- 채팅 -->
 			<!-- header_chat_hidden -->
-			<div class="header_chat_small ">
+			<div class="
+				header_chat_small
+				${sessionScope.chatSize == null ? '' : 'header_chat_hidden'}
+			">
 				<button type="button">실시간 채팅 상담</button>
 			</div>
 
 			<!-- header_chat_hidden -->
-			<div class="header_chat header_chat_hidden">
+			<div class="
+				header_chat
+				${sessionScope.chatSize == null ? 'header_chat_hidden' : ''}
+			">
 				<div class="header_chat_close_btn ">
+					<button type="button">채팅기록 삭제</button>
 					<img src="${pageContext.request.contextPath}/resources/img/icon_close_big.png"/>
 				</div>
 				<div class="header_chat_inner">
@@ -288,7 +295,78 @@ $(function() {
 	const origin = window.location.origin;
 	const contextPath = origin + pathname;
 	
+
+	// localStorage가 채팅기록이 있으면 표시
+	if(localStorage.getItem("chatHistory")) {
+		$(".header_chat_inner").html(localStorage.getItem("chatHistory"));
+	}	
+	
+	// 채팅 스크롤 맨 아래로
+	function chatScroll() {
+		$('.header_chat_inner ').scrollTop($('.header_chat_inner')[0].scrollHeight);
+	}
+	chatScroll();
+	
+	// 채팅기록 삭제
+	$(".header_chat_close_btn > button").click(function() {
+		$(".header_chat_inner").html("");
+		localStorage.clear();
+	})
+	
+	// 채팅창 열기
+	$(".header_chat_small > button").click(function() {
+		$(".header_chat_small").addClass("header_chat_hidden");
+		$(".header_chat").removeClass("header_chat_hidden");
+		
+		$.ajax({
+			type: "GET",
+			async: true,
+			url: contextPath + "api/chatSize",
+			data: {
+				chatSize: "big"
+			},
+			dataType: "json",
+			success: function(response) {
+				console.log("chat big success");
+			}, error: function() {
+				console.log("chat big error");
+			}, complete: function() {
+				console.log("chat big complete");
+			}
+		})
+		
+	}) 
+	
+	// 채팅창 닫기
+	$(".header_chat_close_btn > img").click(function() {
+		$(".header_chat").addClass("header_chat_hidden");
+		$(".header_chat_small").removeClass("header_chat_hidden");
+		
+		$.ajax({
+			type: "GET",
+			async: true,
+			url: contextPath + "api/chatSize",
+			data: {
+				chatSize: "small"
+			},
+			dataType: "json",
+			success: function(response) {
+				console.log("chat small success");
+			}, error: function() {
+				console.log("chat small error");
+			}, complete: function() {
+				console.log("chat small complete");
+			}
+		})
+		
+	}) 
+
+	
+	
+	// 로그인한 사용자 관리자 여부 true, false
 	let adminCheckValue = $("input[name='admin_check']").val();
+
+	// 로그인한 사용자 관리자 여부 체크
 	function adminCheckFunc() {
 		if(adminCheckValue == "true") {
 			return true;
@@ -297,6 +375,14 @@ $(function() {
 		}
 	}
 	
+	
+	// 채팅 웹소켓
+	let webSocket = new WebSocket("ws://localhost:9090/www/chat");
+	webSocket.onmessage = onMessage;
+	webSocket.onopen = onOpen;
+	webSocket.onerror = onError;
+	
+	// 채팅 도착
 	function onMessage(e) {
 		
 		let msgContent = JSON.parse(e.data);
@@ -309,27 +395,29 @@ $(function() {
 			'</div>'
 		);
 		
+		let chatHistory = $(".header_chat_inner").html();
+		
+		// localStorage에 채팅기록 저장
+		localStorage.setItem("chatHistory", chatHistory);
 	}
 	
+	// 채팅 시작
 	function onOpen() {
+		/*
 		$(".header_chat_inner").append(
 				'<div class="header_chat_customer" style="color: #f986bd">' +
 					'<div>실시간 채팅 상담 시작</div>' +
 				'</div>'
 		);
+		*/
 	}
 	
+	// 채팅 에러
 	function onError() {
 		alert("error");
 	}
 	
-	// ws://localhost:9090/chat 
-	// ws://http//localhost:9090/www//chat' failed: 
-	let webSocket = new WebSocket("ws://localhost:9090/www/chat");
-	webSocket.onmessage = onMessage;
-	webSocket.onopen = onOpen;
-	webSocket.onerror = onError;
-	
+	// 채팅 전송 클릭
 	$("input[type='button']").click(function() {
 		let loginId = $("input[type='hidden']").val();
 		let msg = $("input[name='header_chat']").val();
@@ -349,8 +437,15 @@ $(function() {
 			'</div>'
 		);
 		
+		let chatHistory = $(".header_chat_inner").html();
+		
+		// localStorage에 채팅기록 저장
+		localStorage.setItem("chatHistory", chatHistory);
+		
 		$("input[name='header_chat']").val('');
+		chatScroll();
 	})
+	
 	
 	
 })

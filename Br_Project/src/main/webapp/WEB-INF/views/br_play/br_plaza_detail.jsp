@@ -28,20 +28,19 @@
 	
 		<div class="plaza_detail_title">
 			<div class="plaza_detail_menu">제품 이름</div>
-			<div class="plaza_detail_menu_name">쿠키앤크림치즈</div>
+			<div class="plaza_detail_menu_name">${pDto.title}</div>
 			<div class="plaza_detail_witer">이름</div>
-			<div class="plaza_detail_witer_name">비공개</div>
+			<div class="plaza_detail_witer_name">${pDto.writerName}</div>
 		</div>
 		
 		<div class="plaza_detail_content">
-           	쿠키앤크림치즈 2019년인가 20년에 첨 출시되었을 때 먿고 반해서 그 뒤로 그것만 엄청 먹다가 몇개월뒤에 사라져서 진짜 슬펐는데 언제부터 청다브라운이랑 삼성 파르나스몰 매장에 있길래 정말 행복했거든요ㅠㅠ♥
-           	<br>
-			근데 또 사라졌더라구요ㅠㅠㅠㅠ하프갤런에 그것만 다 담아서 사먹는 앤데 이제 안만드시나요?ㅜㅜㅜㅜ파르나스몰에라도 제발 그대로 해주세요ㅠ^ㅠ          
+			${pDto.content}          
 		</div>
 	
 		<div class="plaza_detail_btn">
 			<div class="btn_left">
 				<span>좋아요</span>
+				<input type="hidden" name="board_idx" value="${pDto.boardIdx}"/>
 			</div>
 			<a href="${pageContext.request.contextPath}/br_plaza">
 				<div class="btn_right">
@@ -59,9 +58,66 @@
 <script>
 $(function() {
 	
-	$(".btn_left").click(function() {
-		alert("좋아요 클릭");
+	const pathname = "/" + window.location.pathname.split("/")[1] + "/";
+	const origin = window.location.origin;
+	const contextPath = origin + pathname;
+	
+	// 추천 버튼 누르기	
+	$(".btn_left").click(async function() {
+		let boardIdx = $("input[name='board_idx']").val();
+		
+		try{
+			let loginCheckResponse = await loginCheck();
+			if(loginCheckResponse) {
+				let increaseLikesResponse = await increaseLikes(boardIdx);
+				alert("게시물을 추천했습니다!");
+			} else {
+				alert("로그인 후 이용가능합니다.");
+				window.location.href = contextPath + "loginPage";
+			}
+		} catch(error) {
+			console.log(error);
+		}
+		
 	})
+	
+	
+	// 로그인 여부 체크
+	function loginCheck() {
+		return new Promise(function(resolve, reject) {
+			$.get(contextPath + "api/checkLoginStatus", function(response) {
+				resolve(response);
+			})
+			.fail(function() {
+				reject("로그인 체크 실패");
+			})
+		})
+	}
+	
+	// 추천수 올리기
+	function increaseLikes(boardIdx){
+		return new Promise(function(resolve, reject) {
+			$.get(
+				contextPath + "api/increaseLikes",
+				{boardIdx: boardIdx},
+				function(response){
+					resolve(response);
+				}
+			)
+			.fail(function() {
+				reject("추천수 올리기 실패");
+			})
+		})
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 })
 </script>
 </html>

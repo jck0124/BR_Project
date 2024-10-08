@@ -3,6 +3,7 @@ package com.br.dao;
 import java.util.ArrayList;
 
 import com.br.dto.PlazaBoardDto;
+import com.br.dto.PlazaDetailDto;
 import com.br.dto.RecipeDto;
 import com.br.dto.RecipeImgDto;
 import com.br.dto.SelectEventDto;
@@ -22,6 +23,8 @@ public interface BoardDao {
 	
 	// 배라광장 게시글 추천
 	void updatePlazaLikes(int boardIdx);
+	
+	PlazaDetailDto selectPlazaDtoByBoardIdx(int boardIdx);
 	
 	// 수연
 	
