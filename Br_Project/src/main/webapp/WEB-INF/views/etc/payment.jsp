@@ -9,48 +9,45 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/payment.css"/>
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script>
-	$(function() {
-		// 아임포트 관리자의 가맹점 식별코드 설정
-	    IMP.init('imp31361047'); 
+    $(function() {
+        // 아임포트 관리자의 가맹점 식별코드 설정
+        IMP.init('imp31361047'); 
 
-	    // jQuery로 버튼 클릭 이벤트 등록
-	    $('#naver').on('click', function() {
-	    	alert("하이");
-	        // IMP.request_pay 결제 모듈 호출
-	        IMP.request_pay({
-	            pg : 'naverco', // PG사
-	            pay_method : 'card', // 결제수단
-	            merchant_uid: "order_no_" + new Date().getTime(), // 상점에서 관리하는 주문 번호
-	            name : '상품', // 상품명
-	            amount : 14000, // 결제 금액
-	        }, function(rsp) {
-	            if ( rsp.success ) {
-	                // 결제 성공 시 서버로 결제 정보 전달
-	                $.ajax({
-	                    url: "/payments/complete", // 서버 측 결제 처리 URL
-	                    type: 'POST',
-	                    dataType: 'json',
-	                    data: {
-	                        imp_uid: rsp.imp_uid // 아임포트 고유 결제 ID
-	                    }
-	                }).done(function(data) {
-	                    // 서버 측에서 결제 정보 검증 후 처리
-	                    if (data.everythings_fine) {
-	                        alert('결제가 완료되었습니다.');
-	                    } else {
-	                        alert('결제 검증에 실패했습니다.');
-	                    }
-	                });
-	            } else {
-	                // 결제 실패 시
-	                alert('결제에 실패하였습니다. 에러내용: ' + rsp.error_msg);
-	            }
-	        });
-	    });
-	});
-    
+        // jQuery로 버튼 클릭 이벤트 등록
+        $('#toss').on('click', function() {
+            alert("하이");
+            // IMP.request_pay 결제 모듈 호출
+            IMP.request_pay({
+                pg: 'tosspay', // PG사
+                pay_method: 'card', // 결제수단
+                name: '상품', // 상품명
+                amount: 1, // 결제 금액
+                buyer_name: '하이'
+            }, function(rsp) {
+                if (rsp.success) {
+                    // 결제 성공 시 서버로 결제 정보 전달
+                	$.ajax({
+                	    url: "https://jsonplaceholder.typicode.com/todos/1", // 간단한 JSON 응답
+                	    type: 'GET',
+                	    dataType: 'json',
+                	    data : {
+							
+                	    }
+                	}).done(function(data) {
+                	    console.log("AJAX 요청 성공:", data);
+                	    window.location.href = "menu_icecream";
+                	}).fail(function(jqXHR, textStatus, errorThrown) {
+                	    console.log("AJAX 요청 실패:", textStatus, errorThrown);
+                	});
+                } else {
+                    // 결제 실패 시
+                    alert('결제에 실패하였습니다. 에러내용: ' + rsp.error_msg);
+                }
+            });
+        });
+    });
 </script>
 </head>
 <body>
@@ -177,9 +174,9 @@
 		<!-- 결제 정보 -->
 		<div id="payment_container">
 		
-			<!-- 네이버 페이 -->
-			<button id="naver" class="btn_pay">
-				<img src="${pageContext.request.contextPath}/resources/img/payment_naver.svg">
+			<!-- 토스 페이 -->
+			<button id="toss" class="btn_pay">
+				<img src="${pageContext.request.contextPath}/resources/img/Toss_Logo_Primary.png">
 			</button>
 			<!-- 카카오 페이 -->
 			<button id="kakao" class="btn_pay">
