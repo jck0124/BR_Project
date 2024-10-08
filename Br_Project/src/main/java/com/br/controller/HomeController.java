@@ -52,7 +52,6 @@ public class HomeController {
     	return "redirect:/menu_icecream";
     }
     
-    
     // 로그인 첫 화면 요청 메소드
     @RequestMapping(value = "/loginPage", method = { RequestMethod.GET, RequestMethod.POST })
     public String login(Model model, HttpSession session) {
@@ -67,9 +66,9 @@ public class HomeController {
         
         //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&		
         //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-        model.addAttribute("url", naverAuthUrl);
+    	
+//        model.addAttribute("url", naverAuthUrl);
        
-//        return "redirect:";
         return "redirect:" + naverAuthUrl;
         
     }
@@ -104,13 +103,13 @@ public class HomeController {
         JSONObject response_obj = (JSONObject) jsonObj.get("response");
         //response의 nickname값 파싱
         String nickname = (String) response_obj.get("nickname");
-        System.out.println(nickname);
+        System.out.println("nickname : " + nickname);
 
         // 4. 파싱한 닉네임을 세션으로 저장
         session.setAttribute("sessionId", nickname); // 세션 생성
         model.addAttribute("result", apiResult);
 
-        return "c";
+        return "etc/log_in";
     }
     // 로그아웃
     @RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
