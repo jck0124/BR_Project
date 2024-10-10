@@ -134,13 +134,9 @@ public class HomeController {
     @RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
     public String kakaoLogin(@RequestParam(value = "code", required = false)String code, HttpServletRequest request) {
     	String access_Token = mSvc.getAccessToken(code);
-    	System.out.println("#########" + code);
     	
     	// access_Token을 보내 사용자 정보 얻기 
     	HashMap<String, Object> userInfo = mSvc.getUserInfo(access_Token);
-    	System.out.println("###access_Token#### : " + access_Token);
-    	System.out.println("###nickname#### : " + userInfo.get("nickname"));
-    	System.out.println("###email#### : " + userInfo.get("email"));
     	
     	// HttpSession을 이용해서 사용자 정보 저장 
     	HttpSession session = request.getSession();
@@ -150,14 +146,16 @@ public class HomeController {
     	// 로그인 체크 
     	if(mSvc.IdDuplicationCheck(email)) {
     		// 이미 가입된 사용자 
-    		session.setAttribute("loginId", userInfo.get("nickname"));
-    		return "etc/log_in";
+    		session.setAttribute("loginId", userInfo.get("email"));
+    		return "menu/menu_icecream";
     	} else {
     		// 신규 회원, 회원가입 진행
     		mSvc.signUp(email, nickname);
-    		session.setAttribute("loginId", userInfo.get("nickname"));
-    		return "etc/log_in";
+    		session.setAttribute("loginId", userInfo.get("email"));
+    		return "menu/menu_icecream";
     	}
+    	
+    	
     }
 
 }

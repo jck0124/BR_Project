@@ -52,8 +52,9 @@ public class AjaxController {
 	
 	// ajax 로그인 상태 체크
 	@RequestMapping("/api/checkLoginStatus")
+	@ResponseBody
 	public boolean checkLoginStatus(HttpSession session) {
-		
+		System.out.println("LoginId: " + session.getAttribute("loginId"));
 		return session.getAttribute("loginId") != null;
 	}
 	

@@ -230,18 +230,36 @@ document.addEventListener("DOMContentLoaded", function() {
 	        closeButton.addEventListener('click', function() {
 	            infowindow.close();
 	        });
-	        
-	        
     });
     
 	//marker.setMap(map); // 마커가 지도 위에 표시되도록 설정
     });
-
 });
 
+//로그인 체크
+$(document).ready(function() {
+	// 동적으로 생성되는 .submit_button 요소에 대해 이벤트 위임 사용
+	$(document).on('click', '.submit_button', function() {
+		$.ajax({
+			url: "http://localhost:9090/www/api/checkLoginStatus",
+			dataType: "json",
+			type: "GET",
+			success: function(isLoggedIn) {
+				console.log(isLoggedIn); // 값 확인
+				if (isLoggedIn) {
+					alert("로그인 상태입니다.");
+				} else {
+					alert("로그인이 필요합니다.");
+					window.location.href = "loginPage";
+				}
+			},
+			error: function() {
+				alert("로그인 상태 확인 중 오류 발생.");
+			}
+		});
+	});
+});
 
-
- 
 
 $(function(){
 
