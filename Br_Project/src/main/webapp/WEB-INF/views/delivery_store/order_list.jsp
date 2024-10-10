@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,12 +16,13 @@
 	
 	        $(".list").each(function() {
 	            let num = Number($(this).find(".amount").val());
-	            let price = Number($(this).find(".price").text());
+	            let price = Number($(this).find(".price").text().replace(/,/g,''));
 	            let itemName = $(this).find(".fl").eq(1).text(); // 두 번째 플렉스 아이템이 이름
 	
 	            if (num > 0) { // 수량이 0보다 큰 경우
 	                totalPrice += num * price; // 총액에 추가
-	                addedItems.push(itemName + " (수량: " + num + ")"); // 추가된 상품에 이름과 수량 추가
+	                addedItems.push(itemName + "/" + num + "/" + price); // 추가된 상품에 이름/수량/가격 추가
+/* 	                addedItems.push(itemName + " (수량: " + num + ")" + " (가격: " + price + ")"); // 추가된 상품에 이름과 수량 추가 */
 	            }
 	        });
 	
@@ -67,7 +69,7 @@
 		<div class="list">
 			<img class="fl" src="https://www.baskinrobbins.co.kr/assets/images/menu/icon_size_hp_1.jpg"/>
 			<div class="fl">파인트</div>
-			<div class="fl price">9800</div>
+			<div class="fl price"><fmt:formatNumber value="9800" type="number" pattern="#,###"/></div>
 			<button class="fl minus" type="button">-</button>
 			<input class="fl amount" type="text" value="0"/>
 			<button class="fl plus" type="button">+</button>
@@ -76,7 +78,7 @@
 		<div class="list">
 			<img class="fl" src="https://www.baskinrobbins.co.kr/assets/images/menu/icon_size_hp_1.jpg"/>
 			<div class="fl">쿼터</div>
-			<div class="fl price">18500</div>
+			<div class="fl price"><fmt:formatNumber value="18500" type="number" pattern="#,###"/></div>
 			<button class="fl minus" type="button">-</button>
 			<input class="fl amount" type="text" value="0"/>
 			<button class="fl plus" type="button">+</button>
@@ -85,7 +87,7 @@
 		<div class="list">
 			<img class="fl" src="https://www.baskinrobbins.co.kr/assets/images/menu/icon_size_hp_1.jpg"/>
 			<div class="fl">패밀리</div>
-			<div class="fl price">26000</div>
+			<div class="fl price"><fmt:formatNumber value="26000" type="number" pattern="#,###"/></div>
 			<button class="fl minus" type="button">-</button>
 			<input class="fl amount" type="text" value="0"/>
 			<button class="fl plus" type="button">+</button>
@@ -94,7 +96,7 @@
 		<div class="list">
 			<img class="fl" src="https://www.baskinrobbins.co.kr/assets/images/menu/icon_size_hp_1.jpg"/>
 			<div class="fl">하프갤론</div>
-			<div class="fl price">31500</div>
+			<div class="fl price"><fmt:formatNumber value="31500" type="number" pattern="#,###"/></div>
 			<button class="fl minus" type="button">-</button>
 			<input class="fl amount" type="text" value="0"/>
 			<button class="fl plus" type="button">+</button>
@@ -104,7 +106,7 @@
 		<div class="list">
 			<img class="fl" src="${cakes.img}"/>
 			<div class="fl">${cakes.name}</div>
-			<div class="fl price">${cakes.price}</div>
+			<div class="fl price"><fmt:formatNumber value="${cakes.price}" type="number" pattern="#,###"/></div>
 			<div class="fl">${cakes.idx}</div>
 			<button class="fl minus" type="button">-</button>
 			<input class="fl amount" type="text" value="0"/>
@@ -116,7 +118,7 @@
 		<div class="list">
 			<img class="fl" src="${drinks.img}"/>
 			<div class="fl">${drinks.name}</div>
-			<div class="fl price">${drinks.price}</div>
+			<div class="fl price"><fmt:formatNumber value="${drinks.price}" type="number" pattern="#,###"/></div>
 			<div class="fl">${drinks.idx}</div>
 			<button class="fl minus" type="button">-</button>
 			<input class="fl amount" type="text" value="0"/>
