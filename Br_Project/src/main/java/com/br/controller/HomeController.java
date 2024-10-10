@@ -159,7 +159,18 @@ public class HomeController {
     		return "etc/log_in";
     	}
     }
-
+    
+    // 구글 로그인
+    @RequestMapping(value="googleLogin")
+    public String googleLogin() {
+    	
+    	// String clientId= "604086868209-1fjupjltvc4s2rvl7ob3ehii9gotmsrl.apps.googleusercontent.com";
+		String reqUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=604086868209-1fjupjltvc4s2rvl7ob3ehii9gotmsrl.apps.googleusercontent.com&redirect_uri=http://localhost:9090/login/oauth2/code/google&response_type=code&scope=email";
+    			
+		return "redirect:" + reqUrl;
+    }
+    
+    
 }
 	
 
