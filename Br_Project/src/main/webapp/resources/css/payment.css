@@ -95,6 +95,13 @@ body {
     border-bottom: 2px solid #f986bd;
     text-align: left;
 }
+#total_price {
+	text-align:left;
+	font-size: 20px;
+    margin-top: 15px;
+    width:1000px;
+    padding-left: 30px;
+}
 .main_container_body {
 	width: 1557.5px;
 	height: auto;

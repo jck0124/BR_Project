@@ -1,5 +1,10 @@
 package com.br.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +24,43 @@ public class PaymentController {
     
     // 결제 페이지
     @RequestMapping("/payment")
-    public String payment(@RequestParam("totalPrice") Integer totalPrice, Model model) {
+    public String payment(@RequestParam("totalPrice") Integer totalPrice
+    		, @RequestParam("products") String products, Model model) {
     	model.addAttribute("totalPrice", totalPrice);
+    	if(products != null) {
+    		String[] product = products.split("/");
+    		List<Map<String, String>> menuInfoList = new ArrayList<>();
+    		
+    		for(String menu : product) {
+    			String[] menuInfo = menu.split("/");
+    			if(product.length == 3) {
+    				Map<String, String> menuDetails = new HashMap<String, String>();
+    				menuDetails.put("name", menuInfo[0].trim());
+    				menuDetails.put("count", menuInfo[1].trim());
+    				menuDetails.put("price", menuInfo[2].trim());
+    				menuInfoList.add(menuDetails);
+    			}
+    		}
+    		model.addAttribute("menuInfoList", menuInfoList);
+    	}
+//    	if(products != null) {
+//    		String[] product = products.split(",");
+//    		String[] menuArray = new String[product.length];
+//    		String[] menuInfoArray = new String[3];
+//    		for(int i=0; i<product.length; i++) {
+//    			System.out.println(product[i]);
+//    			menuArray[i] = product[i];
+//    			for(int j=0; j<3; j++) {
+//    				String[] menuInfo = menuArray[i].split("/");
+//    				menuInfoArray[j] = menuInfo[j];
+//    			}
+//    			model.addAttribute("menuInfoArray", menuInfoArray);
+//    			System.out.println("menuInfoArray :" + Arrays.toString(menuInfoArray));
+//    		}
+//    		System.out.println("menuArray배열 : "+ Arrays.toString(menuArray));
+//    		model.addAttribute("menuArray", menuArray);
+//    		System.out.println("menuInfoArray가 최종적으로 보내는 값: "+ Arrays.toString(menuInfoArray));
+//    	}
     	return "etc/payment";
     }
     
