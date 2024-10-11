@@ -125,7 +125,6 @@
 		</div>
 		</c:forEach>
 	</div>
-	
 	<div id="total">
 	    <div>총 액수</div>
 	    <input type="text" name="totalPrice" id="totalPrice" value="0"/>
@@ -135,7 +134,11 @@
 	</div>
 	<button id=order type="submit">주문</button>
 	</form>
-		
+	<div id="shopping_bag">
+		<div class="bag_title">총 금액</div>
+		<div class="bag_title">상품</div>
+		<div class="bag_title">주문</div>
+	</div>
 <%@ include file="../footer.jsp" %>		
 </body>
 </html>

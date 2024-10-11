@@ -107,5 +107,17 @@ a {text-decoration : none}
 	border: 1px solid #ccc; 
 	padding: 5px; 
 	max-height: 100px; 
-	overflow-y: auto;"
+	overflow-y: auto;
+}
+/* 장바구니 */
+#shopping_bag {
+    width: 212px;
+    height: 75px;
+    background-color: aliceblue;
+    border: 3px solid #f986bd;
+    border-radius: 10px;
+    position: fixed;
+    top: 400px;
+    z-index: 500;
+    right: 6px;
 }
