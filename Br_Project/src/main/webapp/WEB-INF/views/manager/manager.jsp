@@ -7,7 +7,6 @@
 	<title>Insert title here</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/manager.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
@@ -20,7 +19,7 @@
 	</div>
 	
 	<!-- 정보 넣기 -->
-	<div id="insert">
+	<div id="insert" class="flex">
 		<!-- 이벤트 정보 넣기 -->
 		<form class="insert_info" action="uploadEvent" method="POST" enctype="multipart/form-data">
 			이벤트 업로드
@@ -33,7 +32,7 @@
 			<br/>
 			이미지 : <input type="file" name="img"/>
 			<br/>
-			<button type="submit">이벤트 작성하기</button>
+			<button class="button" type="submit">이벤트 작성하기</button>
 		</form>
 		
 		<!-- br레시피 정보 넣기 -->
@@ -55,11 +54,41 @@
 			이미지 : <input type="file" name="imgUrl"/> 
 			<br/>
 			<input type="hidden" name="recipeIdx" value=""/>
-			<button type="submit">BR 레시피 작성하기</button>
+			<button class="button" type="submit">BR 레시피 작성하기</button>
 		</form>
+		
+		<!-- 알림 보여주기 -->
+		<div id="alarm">
+			<div>알림창</div>
+			<div id="info"></div>
+			<input type="text" id="input_message"/>
+			<button id="btn_send" class="button" type="button">알림 전송</button>
+		</div>
 	</div>
+	
+	
+	<div style="clear:both;"></div>
 	<%@ include file = "../footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script>
+	function func_on_message(e) {
+		$("#info").append("<p class='chat'>"+e.data+"</p>");
+	}
+	function func_on_open(e) {
+	}
+	function func_on_error(e) {
+		alert("Error!!");
+	}
+	let webSocket = new WebSocket("ws://localhost:9090/www/alarm");
+	webSocket.onmessage = func_on_message;
+	webSocket.onopen = func_on_open;
+	webSocket.onerror = func_on_error;
+	
+	$("#btn_send").click(function() {
+		let msg = $("#input_message").val();
+		webSocket.send(msg);
+		$("#info").prepend("<p class='chat'>관리자 "+msg+"</p>");
+	});
+</script>
 </html>

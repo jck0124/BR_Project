@@ -9,7 +9,7 @@ import javax.websocket.*;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("/alermcasting")
+@ServerEndpoint("/alarm")
 public class AlarmSocket {
 	// session = 연결 상태, synchronizedSet = 동기화된 set, set = 중복x, 순서x
 	// client 가 올 때 마다 setClients 가 증가한다. 

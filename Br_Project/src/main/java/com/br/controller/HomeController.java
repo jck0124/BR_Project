@@ -147,12 +147,12 @@ public class HomeController {
     	if(mSvc.IdDuplicationCheck(email)) {
     		// 이미 가입된 사용자 
     		session.setAttribute("loginId", userInfo.get("email"));
-    		return "menu/menu_icecream";
+    		return "etc/log_in";
     	} else {
     		// 신규 회원, 회원가입 진행
     		mSvc.signUp(email, nickname);
     		session.setAttribute("loginId", userInfo.get("email"));
-    		return "menu/menu_icecream";
+    		return "etc/log_in";
     	}
     	
     	

@@ -188,6 +188,9 @@
 		                        <a href="">
 		                            <div class="header_login_list">CS CENTER</div>
 		                        </a>
+		                        <a href="${pageContext.request.contextPath}/manager" id="managerPage">
+		                            <div class="header_login_list">Manager</div>
+		                        </a>
 		                    </div>
 						</c:when>
 						<c:otherwise>
@@ -446,6 +449,16 @@ $(function() {
 		chatScroll();
 	})
 	
+	/////////////////////////////////////////////
+	// 수빈 manager 작업
+	let loginId = "${sessionScope.loginId}"; // JSP에서 세션 값을 JavaScript로 전달
+	
+	$("#managerPage").click(function(e) {
+		if(loginId!="admin") {
+			alert("관리자만 접근 가능한 페이지 입니다!");
+			e.preventDefault();
+		}
+	});
 	
 	
 })
