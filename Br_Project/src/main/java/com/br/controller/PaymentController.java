@@ -1,6 +1,7 @@
 package com.br.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,39 +29,22 @@ public class PaymentController {
     		, @RequestParam("products") String products, Model model) {
     	model.addAttribute("totalPrice", totalPrice);
     	if(products != null) {
-    		String[] product = products.split("/");
+    		String[] product = products.split(",");
+//    		System.out.println("product의 개수: " + product.length);
     		List<Map<String, String>> menuInfoList = new ArrayList<>();
     		
     		for(String menu : product) {
     			String[] menuInfo = menu.split("/");
-    			if(product.length == 3) {
+//    			System.out.println("menuInfo: " + Arrays.toString(menuInfo));
     				Map<String, String> menuDetails = new HashMap<String, String>();
     				menuDetails.put("name", menuInfo[0].trim());
     				menuDetails.put("count", menuInfo[1].trim());
     				menuDetails.put("price", menuInfo[2].trim());
     				menuInfoList.add(menuDetails);
-    			}
     		}
     		model.addAttribute("menuInfoList", menuInfoList);
+//    		System.out.println("menuInfoList: "+ menuInfoList.toString());
     	}
-//    	if(products != null) {
-//    		String[] product = products.split(",");
-//    		String[] menuArray = new String[product.length];
-//    		String[] menuInfoArray = new String[3];
-//    		for(int i=0; i<product.length; i++) {
-//    			System.out.println(product[i]);
-//    			menuArray[i] = product[i];
-//    			for(int j=0; j<3; j++) {
-//    				String[] menuInfo = menuArray[i].split("/");
-//    				menuInfoArray[j] = menuInfo[j];
-//    			}
-//    			model.addAttribute("menuInfoArray", menuInfoArray);
-//    			System.out.println("menuInfoArray :" + Arrays.toString(menuInfoArray));
-//    		}
-//    		System.out.println("menuArray배열 : "+ Arrays.toString(menuArray));
-//    		model.addAttribute("menuArray", menuArray);
-//    		System.out.println("menuInfoArray가 최종적으로 보내는 값: "+ Arrays.toString(menuInfoArray));
-//    	}
     	return "etc/payment";
     }
     
