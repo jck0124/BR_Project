@@ -66,14 +66,15 @@
 		</div>
 	</div>
 	
-	
 	<div style="clear:both;"></div>
 	<%@ include file = "../footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script>
+	console.log("WebSocket 연결 성공<- manager에서");
 	function func_on_message(e) {
 		$("#info").append("<p class='chat'>"+e.data+"</p>");
+		alert("고객으로부터 요청 사항 도착!");
 	}
 	function func_on_open(e) {
 	}

@@ -109,11 +109,6 @@ body {
 	background-color: #fff;
 	border-radius: 12px;
 }
-#requirement {
-	width: 575px;
-    height: 95px;
-    border: none;
-}
 .main_container_body {
 	width: 1557.5px;
 	height: auto;
@@ -317,4 +312,35 @@ body {
 	font-weight: 600;
 	border: none;
 	border-radius: 10px;
+	text-decoration: none;
+    text-align: center;
+    line-height: 47px;
+}
+#address {
+    margin-left: 12px;
+}
+#address colgroup {
+    width: 110px;
+}
+#address th {
+	width: 80px;
+}
+#address td {
+    height: 35px;
+}
+#address input {
+	height:30px;
+}
+#address_container {
+	width:1000px;
+	height:150px;
+}
+#postcode {
+	width:250px;
+}
+#address_txt {
+	width:343px;
+}
+#detail_address {
+	width:343px;
 }

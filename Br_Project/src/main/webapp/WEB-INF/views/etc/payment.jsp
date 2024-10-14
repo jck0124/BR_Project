@@ -125,7 +125,7 @@
 			<div class="title_txt">결제금액</div>
 				<div id="total_price"><fmt:formatNumber value="${totalPrice}" type="number" pattern="#,###"/></div>
 			<div class="title_txt">주소</div>
-			<div>
+			<div id="address_container">
 				<form name="form" id="form" method="post">
 					<table id="address">
 						<colgroup>
@@ -155,10 +155,12 @@
 					</table>
 				</form>
 			</div>
+			
+			<!-- 여기 -->
 			<div class="title_txt">요청사항</div>
-			<div id="requirement_container">
-				<textarea id="requirement"></textarea>
-			</div>
+			<div id="requirement_container"></div>
+			<input type="text" id="input_message">
+			<input type="submit" id="btn_submit_message" value="전송">
 		</div>
 		
 		<!-- 결제 정보 -->
@@ -176,8 +178,7 @@
 			<button id="" class="btn_pay">
 				<img src="${pageContext.request.contextPath}/resources/img/payment_nicepay.jpeg">
 			</button>
-			<button id="btn_cancel">취소</button>
-			
+			<a id="btn_cancel" href="${pageContext.request.contextPath}/menu_icecream">취소</a>
 		</div>
 	</div>
 	<%@ include file="../footer.jsp" %>
@@ -206,7 +207,31 @@
             }
         }).open();
     }
+	
+	$(function(){
+		// 웹소켓 연결- 서버
+		function func_on_message(e) {
+			$("#requirement_container").append("<p class='chat'>" + e.data + "</p>");
+		}
+		function func_on_open(e) {
+			$("#requirement_container").append("<p class='chat'>" + e.data + "</p>");
+		}
+		function func_on_error(e) {
+			alert("!");
+		}
+		let webSocket = new WebSocket("ws://localhost:9090/www/alarm");
+		webSocket.onmessage = func_on_message;
+		webSocket.opopen = func_on_open;
+		webSocket.operror = func_on_error;
 		
+		$("#btn_submit_message").click(function() {
+			let msg = $("#input_message").val();
+			alert("payment 페이지에서 보내는 msg : "+ msg);
+			webSocket.send(msg);
+			$("#requirement_container").prepend("<p class='chat'> + 고객 " + msg + "</p>");
+			console.log("WebSocket 연결 성공<- payment에서");
+		});
+	});
 	$(function(){
 
 		// 카카오페이 결제 팝업창 연결
