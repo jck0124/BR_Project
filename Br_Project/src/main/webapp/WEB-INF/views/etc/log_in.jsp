@@ -39,10 +39,10 @@
 			<a id="btn_kakao_login" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=179c8429a668f25b23f83e8fd29c90c5&redirect_uri=http://localhost:9090/www/kakaoLogin">
 				<img class="login_logo" src="${pageContext.request.contextPath}/resources/img/kakao_logo_login.png">
 			</a>
-			<a id="btn_google_login" href="">
+			<a id="btn_google_login" href="${pageContext.request.contextPath}/googleLogin">
 				<img class="login_logo" src="${pageContext.request.contextPath}/resources/img/google_logo_login.png">
 			</a>
-		</div>
+		</div> 
 	<%@ include file="../footer.jsp" %>
 </body>
 <script>

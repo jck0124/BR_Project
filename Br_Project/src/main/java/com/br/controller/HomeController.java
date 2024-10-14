@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.br.service.MemberServiceImpl;
 import com.br.service.NaverLoginBO;
-import com.br.websocket.BroadSocket;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 @Controller
@@ -162,10 +161,19 @@ public class HomeController {
     @RequestMapping(value="googleLogin")
     public String googleLogin() {
     	
-    	// String clientId= "604086868209-1fjupjltvc4s2rvl7ob3ehii9gotmsrl.apps.googleusercontent.com";
-		String reqUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=604086868209-1fjupjltvc4s2rvl7ob3ehii9gotmsrl.apps.googleusercontent.com&redirect_uri=http://localhost:9090/login/oauth2/code/google&response_type=code&scope=email";
-    			
-		return "redirect:" + reqUrl;
+    	return "";
+    }
+    
+    
+    @RequestMapping(value="/login/oauth2/code/google")
+    public String googleLoginCallback(
+    			@RequestParam(value="code") String code,
+    			@RequestParam(value="scope") String scope,
+    			@RequestParam(value="authuser") int authuser,
+    			@RequestParam(value="prompt") String prompt
+    		) {
+    	
+    	return "";
     }
     
     
