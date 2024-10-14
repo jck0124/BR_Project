@@ -111,6 +111,9 @@ public class AjaxController {
         return readyResponse;
     }
 	
-	
+//	// ajax alarm 채팅 기록
+//	@PostMapping("/saveAlarmHistory"){
+//		
+//	}
 	
 }

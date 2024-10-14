@@ -153,6 +153,13 @@ body {
     top: 0; 
     transition: top 0.3s ease;
 }
+.menu_img::before {
+	top: 30px;
+    left: 30px;
+    width: 67px;
+    height: 81px;
+    background: url(https://www.baskinrobbins.co.kr/assets/images/common/icon_fom.png) no-repeat;
+}
 .textColor {
 	display: none;
 }

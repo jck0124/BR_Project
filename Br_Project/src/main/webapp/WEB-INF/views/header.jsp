@@ -460,6 +460,48 @@ $(function() {
 		}
 	});
 	
+	// 수연 loginId="admin"일 때 알람 기능!
+	console.log("WebSocket 연결 성공<- manager에서");
+	function func_on_message(e) {
+		if(loginId == "admin") {
+			alert("고객으로부터 요청 사항 도착!");
+		/* 	saveAlalrmHistory(e.data); */
+			location.href = contextPath + "/manager";
+			$("#info").append("<p class='chat'>"+e.data+"</p>");
+		}
+	}
+	function func_on_open(e) {
+	}
+	function func_on_error(e) {
+		alert("Error!!");
+	}
+/* 	function saveAlarmHistory(message) {
+		// 서버에 데이터 전송
+		$.ajax({
+			type: "POST",
+			url: "",
+			data: { content : message },
+			success: function() {
+				console.log("채팅 기록 저장 완료!");	
+			}, 
+			error: function() {
+				console.log("채팅 기록 저장 실패");	
+			}
+		});
+	} */
+	let webSocketAlarm = new WebSocket("ws://localhost:9090/www/alarm");
+	// 서버와 핸드 셰이킹이 이루어진 직후 수행
+	webSocketAlarm.onmessage = func_on_message;
+	// 서버로부터 데이터를 수신할 경우 수행
+	webSocketAlarm.onopen = func_on_open;
+	webSocketAlarm.onerror = func_on_error;
+	
+	$("#btn_send").click(function() {
+		let msg = $("#input_message").val();
+		webSocket.send(msg);
+		$("#info").prepend("<p class='chat'>관리자 "+msg+"</p>");
+	});
+	
 })
 </script>
 </html>

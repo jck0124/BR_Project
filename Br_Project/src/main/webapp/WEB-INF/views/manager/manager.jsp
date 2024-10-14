@@ -71,25 +71,6 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script>
-	console.log("WebSocket 연결 성공<- manager에서");
-	function func_on_message(e) {
-		$("#info").append("<p class='chat'>"+e.data+"</p>");
-		alert("고객으로부터 요청 사항 도착!");
-	}
-	function func_on_open(e) {
-	}
-	function func_on_error(e) {
-		alert("Error!!");
-	}
-	let webSocket = new WebSocket("ws://localhost:9090/www/alarm");
-	webSocket.onmessage = func_on_message;
-	webSocket.onopen = func_on_open;
-	webSocket.onerror = func_on_error;
-	
-	$("#btn_send").click(function() {
-		let msg = $("#input_message").val();
-		webSocket.send(msg);
-		$("#info").prepend("<p class='chat'>관리자 "+msg+"</p>");
-	});
+
 </script>
 </html>
