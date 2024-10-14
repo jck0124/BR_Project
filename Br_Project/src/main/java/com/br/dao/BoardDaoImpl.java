@@ -110,8 +110,8 @@ public class BoardDaoImpl implements BoardDao {
 	// event 게시판 보여주기
 	@Override
 	public ArrayList<SelectEventDto> selectEvent(int pageNum) {
-		int endNum = pageNum * 4;
-		int startNum = endNum -3;
+		int endNum = pageNum * 5;
+		int startNum = endNum -4;
 		
 		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
 		hmap.put("endNum", endNum);
