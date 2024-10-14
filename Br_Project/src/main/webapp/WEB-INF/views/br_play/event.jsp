@@ -12,7 +12,6 @@
     <script>
     	$(function(){
     		let pageNum = ${pageNum};
-    		alert(pageNum);
         	function draw_board_list(page) {
         		$.ajax({
         			type:'get',
@@ -40,7 +39,11 @@
         			}
         		});
         	}
-        	
+        	$(window).scroll(function() {
+       		   if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+       		    	draw_board_list(pageNum++);
+       		   }
+       		});
         	draw_board_list(pageNum);
     	});
     </script>
@@ -62,48 +65,9 @@
 		<div>다양한 이벤트를 확인해보세요</div>
 	</div>
 	
-	
-	<div id="promotion_box">
-	<!-- 탭 
-		<c:forEach var="event" items="${selectEvent}">
-			<div class="fl promotion">
-				<div class="fl">
-					<img class="promotion_img" src="${event.img}"/>
-				</div>
-				<div class="fl promotion_letter">
-					<div class="top_blue">${event.topLetter}</div>
-					<div class="middle_black">${event.title}</div>
-					<div class="bottom_tag">${event.period}</div>
-				</div>
-				<div style="clear:both;"></div>
-			</div>
-		</c:forEach>
-		<div style="clear:both"></div>
-	-->	
-	</div>
-	
-	
-	<!-- 
-	<c:set var="startNum" value="${startNnum != null && startNum >= 0 ? startNum : 1}"/>
-	<c:set var="endNum" value="${endNum != null && endNum >= 0 ? endNum : 1}"/>
-	
-	<div id="pagination">
-		<c:forEach var="i" begin="${startNum}" end="${endNum}">
-			<c:choose>
-				<c:when test="${i!=pageNum}">
-					<a href="event?page=${i}">${i}</a> 
-				</c:when>
-				<c:otherwise>
-					<strong>${i}</strong>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${endNum < lastPageNum}">
-			<a id="next" href="event?page=${endNum+1}">&lt;</a>
-		</c:if>
-	</div>
-	 -->
+	<div id="promotion_box"></div>
 	<div style="clear:both;"></div>
+	
 	<%@ include file="../footer.jsp" %>
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
