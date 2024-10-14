@@ -1,6 +1,9 @@
 package com.br.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,9 +19,11 @@ import com.br.dao.MemberDaoImpl;
 import com.br.dto.KakaoPayOrderFormDto;
 import com.br.dto.KakaoPayReadyDto;
 import com.br.dto.PlazaBoardDto;
+import com.br.dto.SelectEventDto;
 import com.br.service.BoardServiceImpl;
 import com.br.service.PaymentServiceImpl;
 import com.br.util.KakaoPaySessionUtils;
+import com.nimbusds.jose.shaded.json.JSONArray;
 
 @RestController
 public class AjaxController {
@@ -40,6 +45,16 @@ public class AjaxController {
 			@RequestParam("pageNum") int pageNum ) {
 		
 		return bSvc.palzaPagination(orderType, pageNum).getBoardList(); 
+	}
+	
+	// 이벤트 무한스크롤 
+	@RequestMapping(value="/api/event" , produces = "application/json") 
+	@ResponseBody
+	public JSONArray event(int pageNum) {
+	    System.out.println("event 요청이 들어옴");
+	    System.out.println(pageNum);
+	    return bSvc.selectEvent(pageNum);
+	    
 	}
 	
 	// 배라광장 추천버튼

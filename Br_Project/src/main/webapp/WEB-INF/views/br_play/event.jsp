@@ -10,24 +10,38 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/event.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script>
-    	let pageNum = ${pageNum};
-    	function draw_board_list(page) {
-    		$.ajax({
-    			type:'get',
-    			data : {page_num : page_num},	// 보내주는 데이터
-    			dataType: "json", // 응답 받을 데이터 타입
-    			// url : "BoardServiceImpl" 인터넷에서는 왜 안하지
-    			success : function(res) {
-    				console.log(res);
-    			},
-    			error : function(r,s,e) {
-    				alert("[에러]code:" + r.status + ", message:" + r.responseText + ", error" + e);
-    			}
-    		});
-    	}
-    	
-    	$(function() {
-    		draw_board_list(page_num);
+    	$(function(){
+    		let pageNum = ${pageNum};
+    		alert(pageNum);
+        	function draw_board_list(page) {
+        		$.ajax({
+        			type:'get',
+        			data : {pageNum : pageNum},	// 보내주는 데이터
+        			dataType: "json", // 응답 받을 데이터 타입
+        			url : "${pageContext.request.contextPath}/api/event", 
+        			success : function(res) {
+        				for(let i=0; i<res.length-1; i++) {
+        					let str = "<div class='fl promotion'>"
+        					+ "<div class='fl'>"
+        					+ "<img class='promotion_img' src='"+ res[i].img +"'/>"
+        					+ "</div>"
+        					+ "<div class='fl promotion_letter'>"
+        					+ "<div class='top_blue'>"+ res[i].topLetter +"</div>"
+        					+ "<div class='middle_black'>"+ res[i].title +"</div>"
+        					+ "<div class='bottom_tag'>"+ res[i].period +"</div>"
+        					+ "</div>"
+        					+ "<div style='clear:both;'></div>"
+        					+ "</div>";
+        					$("#promotion_box").append(str);
+        				}
+        			},
+        			error : function(r,s,e) {
+        				alert("[에러]code:" + r.status + ", message:" + r.responseText + ", error" + e);
+        			}
+        		});
+        	}
+        	
+        	draw_board_list(pageNum);
     	});
     </script>
 </head>
@@ -48,8 +62,9 @@
 		<div>다양한 이벤트를 확인해보세요</div>
 	</div>
 	
-	<!-- 탭 -->
+	
 	<div id="promotion_box">
+	<!-- 탭 
 		<c:forEach var="event" items="${selectEvent}">
 			<div class="fl promotion">
 				<div class="fl">
@@ -64,8 +79,11 @@
 			</div>
 		</c:forEach>
 		<div style="clear:both"></div>
+	-->	
 	</div>
 	
+	
+	<!-- 
 	<c:set var="startNum" value="${startNnum != null && startNum >= 0 ? startNum : 1}"/>
 	<c:set var="endNum" value="${endNum != null && endNum >= 0 ? endNum : 1}"/>
 	
@@ -84,6 +102,7 @@
 			<a id="next" href="event?page=${endNum+1}">&lt;</a>
 		</c:if>
 	</div>
+	 -->
 	<div style="clear:both;"></div>
 	<%@ include file="../footer.jsp" %>
 </body>

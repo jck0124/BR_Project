@@ -7,6 +7,7 @@ import com.br.dto.PlazaDetailDto;
 import com.br.dto.PlazaPaginationDto;
 import com.br.dto.RecipeDto;
 import com.br.dto.RecipeImgDto;
+import com.nimbusds.jose.shaded.json.JSONArray;
 
 public interface BoardService {
 	
@@ -35,7 +36,7 @@ public interface BoardService {
 	void insertRecipe(int recipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng);
 	
 	// 이벤트 리스트 보여주기
-	Map<String,Object> selectEvent(int pageNum);
+	JSONArray selectEvent(int pageNum);
 	
 	// event insert
 	void insertEvent(String imgPath, String topLetter, String title, String period);

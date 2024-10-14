@@ -25,8 +25,8 @@
                 pg: 'tosspay', // PG사
                 pay_method: 'card', // 결제수단
                 name: '상품', // 상품명
-                amount: 1, // 결제 금액
-                buyer_name: '하이'
+                amount: ${totalPrice}, // 결제 금액
+                buyer_name: '사용자'
             }, function(rsp) {
                 if (rsp.success) {
                     // 결제 성공 시 서버로 결제 정보 전달
@@ -35,7 +35,7 @@
                 	    type: 'GET',
                 	    dataType: 'json',
                 	    data : {
-							
+                	     }
                 	    }
                 	}).done(function(data) {
                 	    console.log("AJAX 요청 성공:", data);
@@ -245,34 +245,6 @@
 			});
 			 console.log("ajax 완료!");
 		});
-		
-		// 네이버페이 결제
-		/*ㄴ
-		$("#naver").click(function() {
-			var contextPath = "${pageContext.request.contextPath}";
-		    alert("Naver alert");
-		    $.ajax({
-		        type: 'GET',
-		        url: contextPath + '/pay/naver',
-		        data: {
-		            productName: "상품명",
-		            totalPayAmount: "140000"
-		        },
-		        success: function(res) {
-		            console.log("응답 성공:", res); // 응답 확인
-		            console.log("response body:", res.body);
-		            if (res.body && res.body.reserveld) { // 응답 데이터 체크
-		                location.href = "https://test-pay.naver.com/payments/" + res.body.reserveld;
-		            } else {
-		                console.error("예약 ID가 없습니다.");
-		            }
-		        },
-		        error: function(xhr, status, error) {
-		            console.error("AJAX 요청 실패:", status, error);
-		        }
-		    });
-		});
-		*/
 	});
 	
 </script>

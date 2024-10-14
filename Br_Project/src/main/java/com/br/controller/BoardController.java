@@ -34,6 +34,7 @@ import com.br.dto.PlazaPaginationDto;
 import com.br.dto.RecipeDto;
 import com.br.dto.RecipeImgDto;
 import com.br.service.BoardServiceImpl;
+import com.nimbusds.jose.shaded.json.JSONArray;
 
 @Controller
 public class BoardController {
@@ -211,15 +212,13 @@ public class BoardController {
 			pageNum = Integer.parseInt(request.getParameter("page"));
 		}catch(Exception e) { }
 		
-		Map<String, Object> result = bSvc.selectEvent(pageNum);
+		
+		JSONArray result = bSvc.selectEvent(pageNum);
 		
 		if(result != null) {
-			model.addAttribute("selectEvent", result.get("selectEvent"));
-			model.addAttribute("startNum", result.get("startNum"));
-			model.addAttribute("endNum", result.get("endNum"));
-			model.addAttribute("lastPageNum", result.get("lastPageNum"));
+			model.addAttribute("selectEvent", result);
+			
 		}
-		
 		model.addAttribute("pageNum", pageNum);
 		
 		return "br_play/event";

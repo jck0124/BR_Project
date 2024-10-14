@@ -14,6 +14,9 @@ import com.br.dto.PlazaPaginationDto;
 import com.br.dto.RecipeDto;
 import com.br.dto.RecipeImgDto;
 import com.br.dto.SelectEventDto;
+import com.nimbusds.jose.shaded.json.JSONArray;
+
+import net.minidev.json.JSONObject;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -121,26 +124,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	// event 게시판 보여주기
 	@Override
-	public Map<String, Object> selectEvent(int pageNum) {
-		// 무한스크롤
-//	System.out.println(pageNum);
-//			
+	public JSONArray selectEvent(int pageNum) {
 		ArrayList<SelectEventDto> selectEvent = new ArrayList<SelectEventDto>();
 		selectEvent = bDao.selectEvent(pageNum);
-//			
-//			JSONArray array = new JSONArray();
-//			for(SelectEventDto dto : selectEvent) {
-//				JSONObject obj = new JSONObject();
-//				obj.put("img", dto.getImg());
-//				obj.put("topLetter", dto.getTopLetter());
-//				obj.put("title", dto.getTitle());
-//				obj.put("period", dto.getPeriod());
-//				array.add(obj);
-//			}
-//			response.setContentType("application/json; charset=utf-8");
-//			
-
-		// 페이지네이션
+//		// 페이지네이션
 		int startNum, endNum;
 		int lastPageNum = bDao.getLastPageNumber();
 		endNum = (pageNum / 5 + 1) * 5 - (pageNum % 5 == 0 ? 5 : 0);
@@ -148,14 +135,25 @@ public class BoardServiceImpl implements BoardService {
 			endNum = lastPageNum;
 		}
 		startNum = endNum - 4;
-
-		Map<String, Object> result = new HashMap<>();
-		result.put("selectEvent", selectEvent);
-		result.put("startNum", startNum);
-		result.put("endNum", endNum);
-		result.put("lastPageNum", lastPageNum);
-
-		return result;
+//
+//		Map<String, Object> result = new HashMap<>();
+//		result.put("selectEvent", selectEvent);
+//		result.put("startNum", startNum);
+//		result.put("endNum", endNum);
+//		result.put("lastPageNum", lastPageNum);
+		
+		JSONArray array = new JSONArray();
+		for(SelectEventDto dto : selectEvent) {
+			JSONObject obj = new JSONObject();
+			obj.put("img", dto.getImg());
+			obj.put("topLetter", dto.getTopLetter());
+			obj.put("title", dto.getTitle());
+			obj.put("period", dto.getPeriod());
+			array.add(obj);
+		}
+		
+		// 이벤트 리스트와 페이지네이션 정보 담기
+		return array;
 	}
 
 	@Override
