@@ -14,6 +14,6 @@
 	const origin = window.location.origin;
 	const contextPath = origin + pathname;
 	alert("에러 발생. 홈 화면으로 돌아갑니다.");
-	window.location.href = contextPath + "/menu_icecream";
+	window.location.href = contextPath + "menu_icecream";
 </script>
 </html>

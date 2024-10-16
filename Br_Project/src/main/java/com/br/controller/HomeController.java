@@ -5,21 +5,25 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.br.dto.GoogleOAuthTokenDto;
+import com.br.dto.GoogleUserInfoDto;
+import com.br.service.GoogleLoginServiceImpl;
 import com.br.service.MemberServiceImpl;
 import com.br.service.NaverLoginBO;
-import com.br.websocket.BroadSocket;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 @Controller
@@ -36,7 +40,12 @@ public class HomeController {
 	/* NaverLoginBO */
     private NaverLoginBO naverLoginBO;
     private String apiResult = null;
-
+    
+    // 구글 로그인
+    @Autowired
+    private GoogleLoginServiceImpl gSvc;
+    
+    
     
     // loginSuccessTemp : 매핑경로 충돌방지, 임시로 Temp 붙임
     @RequestMapping("/loginSuccessTemp")
@@ -160,13 +169,37 @@ public class HomeController {
     
     // 구글 로그인
     @RequestMapping(value="googleLogin")
-    public String googleLogin() {
-    	
-    	// String clientId= "604086868209-1fjupjltvc4s2rvl7ob3ehii9gotmsrl.apps.googleusercontent.com";
-		String reqUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=604086868209-1fjupjltvc4s2rvl7ob3ehii9gotmsrl.apps.googleusercontent.com&redirect_uri=http://localhost:9090/login/oauth2/code/google&response_type=code&scope=email";
-    			
-		return "redirect:" + reqUrl;
+    public void googleLoginStart(HttpServletResponse response) {
+    	try {
+    		response.sendRedirect(gSvc.getOauthRedirectUrl());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
+    
+    @RequestMapping(value="login/oauth2/code/google")
+    public String googleLoginCallBack(
+    		@RequestParam(value="code") String code,
+    		HttpSession session
+    		) {
+    	
+    	ResponseEntity<String> tokenResponse = gSvc.requestAccessToken(code);
+    	GoogleOAuthTokenDto tokenDto = gSvc.getAccessToken(tokenResponse);
+    	
+    	ResponseEntity<String> userInfoResponse = gSvc.requestUserInfo(tokenDto);
+    	GoogleUserInfoDto userInfoDto = gSvc.getUserInfo(userInfoResponse);
+    	
+    	String email = userInfoDto.getEmail();
+    	
+    	if(!mSvc.IdDuplicationCheck(email)) {
+    		mSvc.signUp(email, "none");
+    	}
+    	session.setAttribute("loginId", email);
+    	
+    	return "redirect:/menu_icecream";
+    }
+    
+  
     
     
 }
