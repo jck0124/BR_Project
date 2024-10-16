@@ -41,3 +41,6 @@ target/
 
 # Spring Tool Suite 설정 파일 무시
 .springBeans
+
+# 구글 로그인 client_secret
+application.properties
