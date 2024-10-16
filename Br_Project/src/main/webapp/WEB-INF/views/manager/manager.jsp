@@ -60,8 +60,8 @@
 		<!-- 알림 보여주기 -->
 		<div id="alarm">
 			<div>알림창</div>
-			<div id="info"></div>
-			<input type="text" id="input_message"/>
+			<div id="list"></div>
+			<input type="text" id="msg" placeholder="대화 내용을 입력하세요"/>
 			<button id="btn_send" class="button" type="button">알림 전송</button>
 		</div>
 	</div>
