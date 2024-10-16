@@ -157,10 +157,12 @@
 			</div>
 			
 			<!-- 여기 -->
-			<div class="title_txt">요청사항</div>
-			<div id="requirement_container"></div>
-			<input type="text" id="input_message">
-			<input type="submit" id="btn_submit_message" value="전송">
+			<div id="alarm">
+				<div class="title_txt">요청사항</div>
+				<div id="list"></div>
+				<input type="text" id="msg">
+				<input type="submit" id="btn_send" value="전송">
+			</div>
 		</div>
 		
 		<!-- 결제 정보 -->
@@ -207,7 +209,7 @@
             }
         }).open();
     }
-	
+	/*
 	$(function(){
 		// 웹소켓 연결- 서버
 		function func_on_message(e) {
@@ -232,6 +234,7 @@
 			console.log("WebSocket 연결 성공<- payment에서");
 		});
 	});
+	*/
 	$(function(){
 
 		// 카카오페이 결제 팝업창 연결

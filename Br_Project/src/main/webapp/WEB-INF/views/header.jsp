@@ -450,6 +450,8 @@ $(function() {
 	})
 	
 	/////////////////////////////////////////////
+	
+	
 	// 수빈 manager 작업
 	let loginId = "${sessionScope.loginId}"; // JSP에서 세션 값을 JavaScript로 전달
 	
@@ -460,47 +462,115 @@ $(function() {
 		}
 	});
 	
-	// 수연 loginId="admin"일 때 알람 기능!
-	console.log("WebSocket 연결 성공<- manager에서");
-	function func_on_message(e) {
-		if(loginId == "admin") {
-			alert("고객으로부터 요청 사항 도착!");
-		/* 	saveAlalrmHistory(e.data); */
-			location.href = contextPath + "/manager";
-			$("#info").append("<p class='chat'>"+e.data+"</p>");
+	<c:if test="${pageContext.request.requestURI.contains('manager.jsp') || pageContext.request.requestURI.contains('payment.jsp')}">
+	// 알림 채팅
+	let name = "${sessionScope.loginId}";
+	let ws;
+	const url = "ws://localhost:9090/www/alarm";
+	
+	function connect(name) {
+		
+		// 서버와 연결하기 > 소켓 생성
+		ws = new WebSocket(url);
+		
+		ws.onopen = function(evt){
+			
+			let message = {
+					code: '1',
+					sender : name,
+					receiver : '',
+					content : '',
+					regdate : new Date().toLocaleString()
+			};
+			
+			// json 문자열로 변환후 전송 
+			ws.send(JSON.stringify(message));
+			print('', '대화방에 참여했습니다', 'me', 'state', message.regdate);
+			
+			$('#msg').focus();
+		};
+		
+		// 서버에서 클라이언트에게 전달한 메시지 
+		ws.onmessage = function(evt) {
+			let message = JSON.parse(evt.data);
+			
+			if(message.code == '1') {
+				print('', '[' + message.sender + ']님이 들어왔습니다.', 'other', 'state', message.regdate);
+			} else if (message.code == '2') {
+				print('', '[' + message.sender + ']님이 나갔습니다.', 'other', 'state', message.regdate);
+			} else if (message.code == '3') {
+				print(message.sender, message.content, 'other', 'msg', message.regdate);
+			}
+		};
+		
+		// 대화창 출력 메소드 
+		function print(name, msg, side, state, time) {
+			let temp =  
+				"<div class='item " + state + " " + side + "'>"
+				  + "<div>"
+				  + "<div>" + name + "</div>"
+				  + "<div>" + msg + "</div>"
+				  + "</div>"
+				  + "<div>" + time + "</div>"
+				  + "<div>";
+
+				
+				$("#list").append(temp);
+				
+				// 새로운 내용이 추가되면 스크롤을 바닥으로 내린다 
+				scrollList();
 		}
-	}
-	function func_on_open(e) {
-	}
-	function func_on_error(e) {
-		alert("Error!!");
-	}
-/* 	function saveAlarmHistory(message) {
-		// 서버에 데이터 전송
-		$.ajax({
-			type: "POST",
-			url: "",
-			data: { content : message },
-			success: function() {
-				console.log("채팅 기록 저장 완료!");	
-			}, 
-			error: function() {
-				console.log("채팅 기록 저장 실패");	
+		
+		$(window).on('beforeunload', function() {
+			disconnect();
+		});
+		
+		function disconnect() {
+			let message = {
+					code : '2',
+					sender : name,
+					receiver : '',
+					content : '',
+					regdate : new Date().toLocaleString()
+			};
+			
+			ws.send(JSON.stringify(message));
+		}
+		
+		// 대화 스크롤 이벤트
+		function scrollList() {
+			$('#list').scrollTop($('#list').outerHeight() + 300);
+		}
+		
+		$("#msg").keydown(function(evt) {
+			// 엔터를 눌러서 대화 내용을 서버로 전달
+			if(evt.keyCode == 13) { // 엔터
+				let message = {
+						code : '3',
+						sender : name,
+						receiver : '',
+						content : $("#msg").val(),
+						regdate : new Date().toLocaleString()
+				};
+				
+				ws.send(JSON.stringify(message));
+				
+				$("#msg").val('').focus();
+				
+				print(name, message.content, 'me', 'msg', message.regdate);
 			}
 		});
-	} */
-	let webSocketAlarm = new WebSocket("ws://localhost:9090/www/alarm");
-	// 서버와 핸드 셰이킹이 이루어진 직후 수행
-	webSocketAlarm.onmessage = func_on_message;
-	// 서버로부터 데이터를 수신할 경우 수행
-	webSocketAlarm.onopen = func_on_open;
-	webSocketAlarm.onerror = func_on_error;
+		
+
+		
+	}
 	
-	$("#btn_send").click(function() {
-		let msg = $("#input_message").val();
-		webSocket.send(msg);
-		$("#info").prepend("<p class='chat'>관리자 "+msg+"</p>");
-	});
+	connect(name);
+	</c:if>
+	
+	
+	
+	
 	
 })
 </script>
