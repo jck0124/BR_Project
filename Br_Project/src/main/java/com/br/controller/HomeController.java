@@ -146,16 +146,12 @@ public class HomeController {
     	String nickname = (String) userInfo.get("nickname");
     	
     	// 로그인 체크 
-    	if(mSvc.IdDuplicationCheck(email)) {
-    		// 이미 가입된 사용자 
-    		session.setAttribute("loginId", userInfo.get("email"));
-    		return "etc/log_in";
-    	} else {
+    	if(!mSvc.IdDuplicationCheck(email)) {
     		// 신규 회원, 회원가입 진행
     		mSvc.signUp(email, nickname);
-    		session.setAttribute("loginId", userInfo.get("email"));
-    		return "etc/log_in";
-    	}
+    	}	
+    	session.setAttribute("loginId", userInfo.get("email"));
+    	return "redirect:/menu_icecream";
     	
     	
     }
