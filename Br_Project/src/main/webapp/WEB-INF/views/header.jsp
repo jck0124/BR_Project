@@ -468,6 +468,7 @@ $(function() {
 	let ws;
 	const url = "ws://localhost:9090/www/alarm";
 	
+	
 	function connect(name) {
 		
 		// 서버와 연결하기 > 소켓 생성

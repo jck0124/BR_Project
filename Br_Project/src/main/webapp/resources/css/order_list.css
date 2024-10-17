@@ -1,11 +1,7 @@
 @charset "UTF-8";
-body {
-    margin: 0 auto;
-    overflow-y: scroll;
-}
 .fl {float : left}
 .fr {float : right}
-.border {boarder : 1px solid red}
+.font {color: #f986bd; font-size: 40px; text-align: center;}
 a {text-decoration : none}
 
 #store_info {
@@ -24,56 +20,27 @@ a {text-decoration : none}
     margin-top: 50px;
 }
 
-.product_box {
-	width: 265px;
-    float: left;
-    margin-right: 45px;
-}
-
-#icecream_check {
-	border: 2px solid #f986bd;
-    margin: 20px 110px;
-    border-radius: 10px;
-    padding: 20px;
-}
-#icecream_check > select {
-	border: 2px solid #f986bd;
-    border-radius: 20px;
-    height: 40px;
-}
-#icecream_check > button {
-	background-color: white;
-    border: 2px solid #f986bd;
-    border-radius: 50px;
-    height: 35px;
-}
-
-.count {
-	margin-left: 115px;
-}
-.count > button {
-	border: 1px solid #f986bd;
-    background-color: white;
-    border-radius: 15px;
-}
- .count > input {
-     width: 30px;
-}
-
 /*여기서부터*/
-#product_list {
- 	width: 800px;
+.product_list {
+ 	width: 1600px;
     margin: 0 auto;
     margin-top : 100px;
 }
 .list {
-	
+	width: 200px;
+    height: 200px;
+    margin: 14px;
+    text-align: center;
 }
 .list > img {
-	width  : 50px;
+	width: 100px;
 }
 .list > div {
 	padding: 10px;
+}
+.list > div:nth-child(2) {
+	width: 200px;
+    overflow: hidden;
 }
 .list > button {
 	background-color : white;
@@ -99,6 +66,8 @@ a {text-decoration : none}
 	width : 770px;
 	margin : 0 auto;
 	margin-bottom : 20px;
+	margin-top : 100px;
+	clear: both;
 }
 #total > input {
 	border: 1px solid #ccc; 
@@ -120,4 +89,23 @@ a {text-decoration : none}
     top: 400px;
     z-index: 500;
     right: 6px;
+}
+
+/*tab*/
+#productTab {
+	cursor : pointer;
+	color: #f986bd;
+	margin: 50px 780px;
+    text-align: center;
+}
+#productTab > div {
+	text-decoration: none;
+	color: #f986bd;
+	margin-right :10px;
+	border-right : 1px solid #f986bd;
+	padding-right: 10px;
+}
+#productTab > div:last-child {
+	border : 0;
+	border-right : 0px;
 }

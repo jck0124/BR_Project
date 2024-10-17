@@ -17,7 +17,7 @@
 	        $(".list").each(function() {
 	            let num = Number($(this).find(".amount").val());
 	            let price = Number($(this).find(".price").text().replace(/,/g,''));
-	            let itemName = $(this).find(".fl").eq(1).text(); // 두 번째 플렉스 아이템이 이름
+	            let itemName = $(this).find(".name").text(); // 두 번째 플렉스 아이템이 이름
 	
 	            if (num > 0) { // 수량이 0보다 큰 경우
 	                totalPrice += num * price; // 총액에 추가
@@ -53,6 +53,29 @@
 	
 	        updateTotalPrice(); // 수량 변경 후 총액 업데이트
 	    });
+	    
+	    // 탭
+	    $("#iceCreamTabHide").hide();
+	 	$("#drinkTabHide").hide();
+	    
+	    $("#iceCreamTab").click(function() {
+	    	$("#iceCreamTabHide").show();
+	    	$("#cakeTabHide").hide();
+	 	    $("#drinkTabHide").hide();
+	    });
+	    
+	    $("#cakeTab").click(function() {
+	    	$("#iceCreamTabHide").hide();
+	    	$("#cakeTabHide").show();
+	 	    $("#drinkTabHide").hide();
+	    });
+	    
+	    $("#drinkTab").click(function() {
+	    	$("#iceCreamTabHide").hide();
+	    	$("#cakeTabHide").hide();
+	 	    $("#drinkTabHide").show();
+	    });
+	    
 	});
 </script>
 
@@ -65,66 +88,99 @@
 		<div>${storeName} 베스킨라빈스</div>
 	</div>
 	
-	<div id="product_list">
-		<div class="list">
-			<img class="fl" src="https://www.baskinrobbins.co.kr/assets/images/menu/icon_size_hp_1.jpg"/>
-			<div class="fl">파인트</div>
-			<div class="fl price"><fmt:formatNumber value="9800" type="number" pattern="#,###"/></div>
-			<button class="fl minus" type="button">-</button>
-			<input class="fl amount" type="text" value="0"/>
-			<button class="fl plus" type="button">+</button>
-			<div style="clear:both"></div>
+	<div id="tab">
+		<div id="productTab">
+			<div id="iceCreamTab" class="fl">아이스크림</div>
+			<div id="cakeTab" class="fl">아이스크림 케이크</div>
+			<div id="drinkTab" class="fl">음료</div>
+			<div style="clear:both;"></div>
 		</div>
-		<div class="list">
-			<img class="fl" src="https://www.baskinrobbins.co.kr/assets/images/menu/icon_size_hp_1.jpg"/>
-			<div class="fl">쿼터</div>
-			<div class="fl price"><fmt:formatNumber value="18500" type="number" pattern="#,###"/></div>
-			<button class="fl minus" type="button">-</button>
-			<input class="fl amount" type="text" value="0"/>
-			<button class="fl plus" type="button">+</button>
-			<div style="clear:both"></div>
+		
+		<div id="iceCreamTabHide">
+			<div class="font">아이스크림</div>
+			<div class="product_list">
+				<div class="list fl">
+					<img src="https://www.baskinrobbins.co.kr/assets/images/menu/icon_size_hp_1.jpg"/>
+					<div class="name">파인트</div>
+					<div class="price"><fmt:formatNumber value="9800" type="number" pattern="#,###"/></div>
+					<button class="fl minus" type="button">-</button>
+					<input class="fl amount" type="text" value="0"/>
+					<button class="fl plus" type="button">+</button>
+					<div style="clear:both"></div>
+				</div>
+				<div class="list fl">
+					<img src="https://www.baskinrobbins.co.kr/assets/images/menu/icon_size_hp_1.jpg"/>
+					<div class="name">쿼터</div>
+					<div class="price"><fmt:formatNumber value="18500" type="number" pattern="#,###"/></div>
+					<button class="fl minus" type="button">-</button>
+					<input class="fl amount" type="text" value="0"/>
+					<button class="fl plus" type="button">+</button>
+					<div style="clear:both"></div>
+				</div>
+				<div class="list fl">
+					<img src="https://www.baskinrobbins.co.kr/assets/images/menu/icon_size_hp_1.jpg"/>
+					<div class="name">패밀리</div>
+					<div class="price"><fmt:formatNumber value="26000" type="number" pattern="#,###"/></div>
+					<button class="fl minus" type="button">-</button>
+					<input class="fl amount" type="text" value="0"/>
+					<button class="fl plus" type="button">+</button>
+					<div style="clear:both"></div>
+				</div>
+				<div class="list fl">
+					<img src="https://www.baskinrobbins.co.kr/assets/images/menu/icon_size_hp_1.jpg"/>
+					<div class="name">하프갤론</div>
+					<div class="price"><fmt:formatNumber value="31500" type="number" pattern="#,###"/></div>
+					<button class="fl minus" type="button">-</button>
+					<input class="fl amount" type="text" value="0"/>
+					<button class="fl plus" type="button">+</button>
+					<div style="clear:both"></div>
+				</div>
+				<div style="claer:both;"></div>
+			</div>
 		</div>
-		<div class="list">
-			<img class="fl" src="https://www.baskinrobbins.co.kr/assets/images/menu/icon_size_hp_1.jpg"/>
-			<div class="fl">패밀리</div>
-			<div class="fl price"><fmt:formatNumber value="26000" type="number" pattern="#,###"/></div>
-			<button class="fl minus" type="button">-</button>
-			<input class="fl amount" type="text" value="0"/>
-			<button class="fl plus" type="button">+</button>
-			<div style="clear:both"></div>
+		
+		<div id="cakeTabHide">
+			<div class="font">아이스크림 케이크</div>
+			<div>
+				<div class="product_list">
+					<c:forEach var="cakes" items="${products.iceCreamCakes}">
+					<div class="list fl">
+						<img src="${cakes.img}"/>
+						<div class="name">${cakes.name}</div>
+						<div class="price"><fmt:formatNumber value="${cakes.price}" type="number" pattern="#,###"/></div>
+						<button class="fl minus" type="button">-</button>
+						<input class="fl amount" type="text" value="0"/>
+						<button class="fl plus" type="button">+</button>
+						<div style="clear:both"></div>
+					</div>
+					</c:forEach>
+					<div style="claer:both;"></div>
+				</div>
+			</div>
 		</div>
-		<div class="list">
-			<img class="fl" src="https://www.baskinrobbins.co.kr/assets/images/menu/icon_size_hp_1.jpg"/>
-			<div class="fl">하프갤론</div>
-			<div class="fl price"><fmt:formatNumber value="31500" type="number" pattern="#,###"/></div>
-			<button class="fl minus" type="button">-</button>
-			<input class="fl amount" type="text" value="0"/>
-			<button class="fl plus" type="button">+</button>
-			<div style="clear:both"></div>
+		
+		<div id="drinkTabHide">
+			<div class="font">음료</div>
+			<div>
+				<div class="product_list">
+				<c:forEach var="drinks" items="${products.drinks}">
+				<div class="list fl">
+					<img src="${drinks.img}"/>
+					<div class="name">${drinks.name}</div>
+					<div class="price"><fmt:formatNumber value="${drinks.price}" type="number" pattern="#,###"/></div>
+					<button class="fl minus" type="button">-</button>
+					<input class="fl amount" type="text" value="0"/>
+					<button class="fl plus" type="button">+</button>
+					<div style="clear:both"></div>
+				</div>
+				</c:forEach>
+				</div>
+				<div style="claer:both;"></div>
+			</div>
 		</div>
-		<c:forEach var="cakes" items="${products.iceCreamCakes}">
-		<div class="list">
-			<img class="fl" src="${cakes.img}"/>
-			<div class="fl">${cakes.name}</div>
-			<div class="fl price"><fmt:formatNumber value="${cakes.price}" type="number" pattern="#,###"/></div>
-			<button class="fl minus" type="button">-</button>
-			<input class="fl amount" type="text" value="0"/>
-			<button class="fl plus" type="button">+</button>
-			<div style="clear:both"></div>
-		</div>
-		</c:forEach>
-		<c:forEach var="drinks" items="${products.drinks}">
-		<div class="list">
-			<img class="fl" src="${drinks.img}"/>
-			<div class="fl">${drinks.name}</div>
-			<div class="fl price"><fmt:formatNumber value="${drinks.price}" type="number" pattern="#,###"/></div>
-			<button class="fl minus" type="button">-</button>
-			<input class="fl amount" type="text" value="0"/>
-			<button class="fl plus" type="button">+</button>
-			<div style="clear:both"></div>
-		</div>
-		</c:forEach>
+		<div style="claer:both;"></div>
 	</div>
+	<br/>
 	<div id="total">
 	    <div>총 액수</div>
 	    <input type="text" name="totalPrice" id="totalPrice" value="0"/>
@@ -134,11 +190,6 @@
 	</div>
 	<button id=order type="submit">주문</button>
 	</form>
-	<div id="shopping_bag">
-		<div class="bag_title">총 금액</div>
-		<div class="bag_title">상품</div>
-		<div class="bag_title">주문</div>
-	</div>
 <%@ include file="../footer.jsp" %>		
 </body>
 </html>

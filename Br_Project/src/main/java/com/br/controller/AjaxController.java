@@ -1,9 +1,6 @@
 package com.br.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +16,6 @@ import com.br.dao.MemberDaoImpl;
 import com.br.dto.KakaoPayOrderFormDto;
 import com.br.dto.KakaoPayReadyDto;
 import com.br.dto.PlazaBoardDto;
-import com.br.dto.SelectEventDto;
 import com.br.service.BoardServiceImpl;
 import com.br.service.PaymentServiceImpl;
 import com.br.util.KakaoPaySessionUtils;
@@ -110,10 +106,5 @@ public class AjaxController {
 
         return readyResponse;
     }
-	
-//	// ajax alarm 채팅 기록
-//	@PostMapping("/saveAlarmHistory"){
-//		
-//	}
 	
 }

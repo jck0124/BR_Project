@@ -403,7 +403,68 @@ input[name='header_chat']::placeholder {
 	line-height: 15px;
 }
 
-
+	#list .item {
+		font-size: 14px;
+		margin: 15px 0;
+	}
+	
+	#list .item > div:first-child {
+		display: flex;
+	}
+	
+	#list .item.me > div:first-child {
+		justify-content: flex-end;
+	}
+	
+	#list .item.other > div:first-child {
+		justify-content: flex-end;
+		flex-direction: row-reverse;
+	}
+	
+	#list .item > div:first-child > div:first-child {
+		font-size: 10px;
+		color: #777;
+		margin: 3px 5px;
+	}
+	
+	#list .item > div:first-child > div:nth-child(2) {
+		border: 1px solid var(--border-color);
+		display: inline-block;
+		min-width: 100px;
+		max-width: 250px;
+		text-align: left;
+		padding: 3px 7px;
+	}
+	
+	#list .state.item > div:first-child > div:nth-child(2) {
+		background-color: #EEE;
+	}
+	
+	#list .item > div:last-child {
+		font-size: 10px;
+		color: #777;
+		margin-top: 5px;
+	}
+	
+	#list .me {
+		text-align: right;
+	}
+	
+	#list .other {
+		text-align: left;
+	}
+	
+	#list .msg.me.item > div:first-child > div:nth-child(2) {
+		background-color: rgba(255, 99, 71, .2);
+	}
+	
+	#list .msg.other.item > div:first-child > div:nth-child(2) {
+		background-color: rgba(100, 149, 237, .2);
+	}
+	
+	#list .msg img {
+		width: 150px;
+	}
 
 
 
