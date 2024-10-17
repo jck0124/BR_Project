@@ -1,14 +1,12 @@
 package com.br.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,9 +17,10 @@ import com.br.dao.MemberDaoImpl;
 import com.br.dto.KakaoPayOrderFormDto;
 import com.br.dto.KakaoPayReadyDto;
 import com.br.dto.PlazaBoardDto;
-import com.br.dto.SelectEventDto;
+import com.br.dto.StoreDto;
 import com.br.service.BoardServiceImpl;
 import com.br.service.PaymentServiceImpl;
+import com.br.service.StoreServiceImpl;
 import com.br.util.KakaoPaySessionUtils;
 import com.nimbusds.jose.shaded.json.JSONArray;
 
@@ -38,6 +37,8 @@ public class AjaxController {
 	@Autowired
 	PaymentServiceImpl pSvc;
 	
+	@Autowired
+	StoreServiceImpl	sSvc;
 	// 배라광장 무한스크롤
 	@RequestMapping(value = "/api/plaza", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<PlazaBoardDto> getPlazaBoardList(
@@ -111,9 +112,36 @@ public class AjaxController {
         return readyResponse;
     }
 	
-//	// ajax alarm 채팅 기록
-//	@PostMapping("/saveAlarmHistory"){
-//		
-//	}
-	
+//	ajax store 필터링
+	@RequestMapping("/filter/store")
+	@ResponseBody
+	public List<StoreDto> filteredStore(@RequestParam("storeTypeBrChecked") String storeTypeBrChecked,
+			@RequestParam("storeTypeFlavor") String storeTypeFlavor,
+			@RequestParam("parkingChecked") String parkingChecked,
+			@RequestParam("deliveryChecked") String deliveryChecked,
+			@RequestParam("pickupChecked") String pickupChecked,
+			@RequestParam("hereChecked") String hereChecked,
+			@RequestParam("happyStationChecked") String happyStationChecked,
+			@RequestParam("blindBoxChecked") String blindBoxChecked,
+			@RequestParam("sel1Selected") String sel1Selected,
+			@RequestParam("sel2Selected") String sel2Selected,
+			@RequestParam("storeSearched") String storeSearched, Model model) {
+		
+		model.addAttribute("storeTypeBrChecked", storeTypeBrChecked);
+		model.addAttribute("storeTypeFlavor", storeTypeFlavor);
+		model.addAttribute("parkingChecked", parkingChecked);
+		model.addAttribute("deliveryChecked", deliveryChecked);
+		model.addAttribute("pickupChecked", pickupChecked);
+		model.addAttribute("hereChecked", hereChecked);
+		model.addAttribute("happyStationChecked", happyStationChecked);
+		model.addAttribute("blindBoxChecked", blindBoxChecked);
+		model.addAttribute("sel1Selected", sel1Selected);
+		model.addAttribute("sel2Selected", sel2Selected);
+		model.addAttribute("storeSearched", storeSearched);
+		
+		List<StoreDto> filteredStoreList = sSvc.getFilteredStoreList(storeTypeBrChecked, storeTypeFlavor, parkingChecked, deliveryChecked, pickupChecked, hereChecked, happyStationChecked, blindBoxChecked, sel1Selected, sel2Selected, storeSearched);
+		model.addAttribute("filteredStoreList", filteredStoreList);
+		
+		return filteredStoreList;
+	}
 }

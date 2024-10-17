@@ -3,7 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="StoreMapper">
- 	<select id="getAllStore" resultType="com.br.dto.StoreDto">
+	<select id="getAllStore" resultType="com.br.dto.StoreDto">
 		<![CDATA[
 			SELECT store_idx AS storeIdx
 			, store_name AS storeName
@@ -13,6 +13,52 @@
 			, service
 			FROM store
 		]]>
+
+	</select> 
+
+ 	<select id="getFilteredStore" resultType="com.br.dto.StoreDto">
+		<![CDATA[
+			SELECT store_idx AS storeIdx
+			, store_name AS storeName
+			, address
+			, phone
+			, business_hours AS businessHours
+			FROM store
+			WHERE 1=1			
+		]]>
+		<if test="storeTypeBrChecked and !storeTypeFlavorChecked">
+			AND type_br = 'T'
+		</if>
+		<if test="!storeTypeBrChecked and storeTypeFlavorChecked">
+			AND type_br = 'F'
+		</if>
+		<if test="parkingChecked">
+			AND parking = 'T'
+		</if>
+		<if test="deliveryChecked">
+			AND delivery = 'T'
+		</if>
+		<if test="pickupChecked">
+			AND pickup = 'T'
+		</if>
+		<if test="hereChecked">
+			AND here = 'T'
+		</if>
+		<if test="happyStationChecked">
+			AND happy_station = 'T'
+		</if>
+		<if test="blindBoxChecked">
+			AND blind_box = 'T'
+		</if>
+		<if test="sel1Selected != null and sel1Selected != ''">
+			 AND address LIKE #{sel1Selected} || '%'
+		</if>
+		<if test="sel2Selected != null and sel2Selected !=''">
+			AND address LIKE '%' || #{sel2Selected} || '%'
+		</if>
+		<if test="storeSearched != null and storeSearched !=''">
+			AND store_name LIKE '%' || #{storeSearched} || '%'
+		</if>
 	</select> 
 	
 	<select id="selectStores" resultType="com.br.dto.SelectStoreDto">

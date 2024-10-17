@@ -75,7 +75,6 @@ public class HomeController {
                            HttpSession session) 
             throws IOException, ParseException {
     	
-        System.out.println("callback");
         OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
 
         // 1. 로그인 사용자 정보를 읽어온다.
@@ -101,21 +100,15 @@ public class HomeController {
         String nickname = (String) response_obj.get("name");
         System.out.println("name : "+ nickname);
 
-        // 
-        session.setAttribute("loginId", email); // 세션 생성
         model.addAttribute("result", apiResult);
         
-     // 4. 파싱한 닉네임을 세션으로 저장, 로그인 체크 
-    	if(mSvc.IdDuplicationCheck(email)) {
-    		// 이미 가입된 사용자 
-    		session.setAttribute("loginId", email);
-    		return "etc/log_in";
-    	} else {
-    		// 신규 회원, 회원가입 진행
+	    // 4. 파싱한 닉네임을 세션으로 저장, 로그인 체크 
+	    // 이미 가입된 사용자가 아니면, 회원가입 진행
+    	if(!mSvc.IdDuplicationCheck(email)) {
     		mSvc.signUp(email, nickname);
-    		session.setAttribute("loginId", email);
-    		return "etc/log_in";
     	}
+    	session.setAttribute("loginId", email); // 세션 생성
+    	return "etc/log_in";
     }
     // 로그아웃
     @RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })

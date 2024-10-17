@@ -25,6 +25,7 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public ArrayList<DrinkDto> selectDrinksList() {
 		List<DrinkDto> drinksList = sqlSession.selectList("MenuMapper.selectAllDrinks");
+		
 		return new ArrayList<DrinkDto>(drinksList);
 	}
 	
