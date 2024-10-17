@@ -188,9 +188,11 @@
 		                        <a href="">
 		                            <div class="header_login_list">CS CENTER</div>
 		                        </a>
-		                        <a href="${pageContext.request.contextPath}/manager" id="managerPage">
-		                            <div class="header_login_list">Manager</div>
-		                        </a>
+		                        <c:if test="${sessionScope.adminCheck}">
+			                        <a href="${pageContext.request.contextPath}/manager" id="managerPage">
+			                            <div class="header_login_list">Manager</div>
+			                        </a>
+		                        </c:if>
 		                    </div>
 						</c:when>
 						<c:otherwise>
@@ -218,7 +220,6 @@
                 <div class="header_search_close">
                     close
                 </div>
-                <!-- <div style="clear: both;"></div> -->
 
                 <div class="header_search_box">
                     <form action="">
@@ -236,7 +237,7 @@
 			
 			
 			<!-- 채팅 -->
-			<!-- header_chat_hidden -->
+			<!-- header_chat_hidden header_new_chat -->
 			<div class="
 				header_chat_small
 				${sessionScope.chatSize == null ? '' : 'header_chat_hidden'}
@@ -244,41 +245,53 @@
 				<button type="button">실시간 채팅 상담</button>
 			</div>
 
-			<!-- header_chat_hidden -->
+			<!-- header_chat_hidden header_new_chat -->
 			<div class="
 				header_chat
 				${sessionScope.chatSize == null ? 'header_chat_hidden' : ''}
-			">
+			">	
+				
 				<div class="header_chat_close_btn ">
-					<button type="button">채팅기록 삭제</button>
+					<button type="button" class="delete_chat_histroy">채팅삭제</button>
+					<c:if test="${sessionScope.adminCheck}">
+						<button type="button" class="return_to_chat_list">채팅목록</button>
+					</c:if>
 					<img src="${pageContext.request.contextPath}/resources/img/icon_close_big.png"/>
 				</div>
-				<div class="header_chat_inner">
+					
 				
-					<!--  
-					<div class="header_chat_admin">
-						<div>상담원</div>
-						<div>상담사 채팅 예시</div>
+				<c:if test="${sessionScope.adminCheck}">
+					<!-- 채팅목록 -->
+					<div>새로운 채팅</div>
+					<div class="header_chat_list_container">
+					
+						
+					</div>
+				</c:if>
+				
+				
+				<div class="
+					header_chat_selected
+					<c:if test="${sessionScope.adminCheck}">
+						header_chat_selected_hidden
+					</c:if>
+				">
+					<!-- 채팅내용 -->	
+					<div class="header_chat_inner">
+						
 					</div>
 					
-					<div class="header_chat_customer">
-						<div>고객</div>
-						<div>고객 채팅 예시</div>
+					<div class="header_chat_insert">
+						<input type="text" name="header_chat" placeholder="내용입력"/>
+						<input type="hidden" name="login_id" value="${sessionScope.loginId}"/>
+						<input type="button" value="전송"/>										
 					</div>
-					-->
-					 
 				</div>
-				<!-- header_chat_inner -->
 				
-				<div class="header_chat_insert">
-					<input type="text" name="header_chat" placeholder="내용입력"/>
-					<input type="button" value="전송"/>										
-					<input type="hidden" value="${sessionScope.loginId}"/>
-				</div>
-				<!-- header_chat_insert -->
 				
 			</div>
 			<!-- header_chat -->
+
 
 			
         </div>
@@ -298,11 +311,18 @@ $(function() {
 	const origin = window.location.origin;
 	const contextPath = origin + pathname;
 	
+	let loginId = $("input[name='login_id']").val();
 
 	// localStorage가 채팅기록이 있으면 표시
 	if(localStorage.getItem("chatHistory")) {
 		$(".header_chat_inner").html(localStorage.getItem("chatHistory"));
 	}	
+	
+	
+	// 관리자 - 채팅목록 있으면 표시
+	if(localStorage.getItem("chatListContainer")) {
+		$(".header_chat_list_container").html(localStorage.getItem("chatListContainer"));
+	}
 	
 	// 채팅 스크롤 맨 아래로
 	function chatScroll() {
@@ -311,16 +331,35 @@ $(function() {
 	chatScroll();
 	
 	// 채팅기록 삭제
-	$(".header_chat_close_btn > button").click(function() {
+	$(".header_chat_close_btn > .delete_chat_histroy").click(function() {
 		$(".header_chat_inner").html("");
 		localStorage.clear();
 	})
+	
+	// 관리자 - 1:1채팅에서 채팅목록으로 돌아가기
+	$(".header_chat_close_btn > .return_to_chat_list").click(function() {
+		$(".header_chat_list_container").removeClass("header_chat_list_hidden");
+		$(".header_chat_selected").addClass("header_chat_selected_hidden");
+	})
+	
+	// 관리자 - 1:1 채팅 선택
+	$(".header_chat_list").on("click", function() {
+		$(".header_chat_list_container").addClass("header_chat_list_hidden");
+		$(".header_chat_selected").removeClass("header_chat_selected_hidden");
+		$(this).removeClass("header_chat_list_new_chat");
+		
+		let chatListContainer = $(".header_chat_list_container").html();
+		localStorage.setItem("chatListContainer", chatListContainer);
+	})
+	
 	
 	// 채팅창 열기
 	$(".header_chat_small > button").click(function() {
 		$(".header_chat_small").addClass("header_chat_hidden");
 		$(".header_chat").removeClass("header_chat_hidden");
 		
+		$(".header_chat").removeClass("header_new_chat");
+		$(".header_chat_small").removeClass("header_new_chat");
 		$.ajax({
 			type: "GET",
 			async: true,
@@ -361,9 +400,13 @@ $(function() {
 				console.log("chat small complete");
 			}
 		})
-		
 	}) 
 
+	// 채팅창에 마우스가 들어올시 new 알림 사라짐
+	$(".header_chat").mouseenter(function() {
+		$(".header_chat").removeClass("header_new_chat");
+		$(".header_chat_small").removeClass("header_new_chat");
+	})
 	
 	
 	// 로그인한 사용자 관리자 여부 true, false
@@ -378,37 +421,98 @@ $(function() {
 		}
 	}
 	
-	
 	// 채팅 웹소켓
 	let webSocket = new WebSocket("ws://localhost:9090/www/chat");
 	webSocket.onmessage = onMessage;
 	webSocket.onopen = onOpen;
 	webSocket.onerror = onError;
 	
+	// 채팅 전송
+	$("input[type='button']").click(function() {
+		
+		if(loginId === null || loginId === "") {
+			alert("로그인 후 이용가능합니다.");
+		} else {
+		
+			let msg = $("input[name='header_chat']").val();
+			
+			let sender = loginId;
+			let receiver = (sender != 'admin') ? 'admin' : '보낼고객아이디';
+			
+			$(".header_chat_inner").append(
+				'<div class="header_chat_self">' +
+					'<div>나</div>' +
+					'<div>' + msg + '</div>' +
+				'</div>'  
+			);
+			
+			let chatHistory = $(".header_chat_inner").html().trim();
+				
+			
+			
+			let sendContents = JSON.stringify({
+				sender: sender,
+				receiver: receiver,
+				msg: msg,
+				chatHistory: chatHistory
+			});
+			
+			webSocket.send(sendContents);
+			
+			// localStorage에 채팅기록 저장
+			localStorage.setItem("chatHistory", chatHistory);
+			
+			$("input[name='header_chat']").val('');
+			chatScroll();
+		}
+	})
+	
+	
 	// 채팅 도착
 	function onMessage(e) {
 		
 		let msgContent = JSON.parse(e.data);
-		let userAppend = (msgContent.user === "상담원") ? "상담원" : "고객";
+		let sender = msgContent.sender;
+		let receiver = msgContent.receiver;
 		
-		$(".header_chat_inner").append(
-			'<div class="header_chat_customer">' +
-				'<div>' + userAppend + '</div>' +
-				'<div>' + msgContent.content + '</div>' +
-			'</div>'
-		);
+		// 관리자 - 새로운 채팅표시
+		if(adminCheckFunc) {
+			let str = 
+				"<div class='header_chat_list header_chat_list_new_chat'>" +
+					"<div>" + sender + "</div>" +
+				"</div>";
+			$(".header_chat_list_container").append(str);
+			
+			let chatListContainer = $(".header_chat_list_container").html();
+			localStorage.setItem("chatListContainer", chatListContainer);
+		}
 		
-		let chatHistory = $(".header_chat_inner").html();
-		
-		// localStorage에 채팅기록 저장
-		localStorage.setItem("chatHistory", chatHistory);
+		if(receiver === loginId) {
+			$(".header_chat_inner").append(
+					'<div class="header_chat_other">' +
+						'<div>' + msgContent.sender + '</div>' +
+						'<div>' + msgContent.msg + '</div>' +
+					'</div>'
+			);
+			
+			let chatHistory = $(".header_chat_inner").html();
+			
+			// localStorage에 채팅기록 저장
+			localStorage.setItem("chatHistory", chatHistory);
+			
+			$(".header_chat").addClass("header_new_chat");
+			$(".header_chat_small").addClass("header_new_chat");		
+		}
 	}
+	
+	
+	
 	
 	// 채팅 시작
 	function onOpen() {
 		/*
 		$(".header_chat_inner").append(
-				'<div class="header_chat_customer" style="color: #f986bd">' +
+				'<div class="header_chat_other" style="color: #f986bd">' +
 					'<div>실시간 채팅 상담 시작</div>' +
 				'</div>'
 		);
@@ -420,41 +524,19 @@ $(function() {
 		alert("error");
 	}
 	
-	// 채팅 전송 클릭
-	$("input[type='button']").click(function() {
-		let loginId = $("input[type='hidden']").val();
-		let msg = $("input[name='header_chat']").val();
-		let user = adminCheckFunc() ? "상담원" : "고객";
-		
-		let sendContents = JSON.stringify({
-			content: msg,
-			user: user
-		});
-		
-		webSocket.send(sendContents);
-		
-		$(".header_chat_inner").append(
-			'<div class="header_chat_admin">' +
-				'<div>나</div>' +
-				'<div>' + msg + '</div>' +
-			'</div>'
-		);
-		
-		let chatHistory = $(".header_chat_inner").html();
-		
-		// localStorage에 채팅기록 저장
-		localStorage.setItem("chatHistory", chatHistory);
-		
-		$("input[name='header_chat']").val('');
-		chatScroll();
-	})
+	
+	
+	
+	
+	
+	
 	
 	/////////////////////////////////////////////
 	
 	
-	// 수빈 manager 작업
-	let loginId = "${sessionScope.loginId}"; // JSP에서 세션 값을 JavaScript로 전달
 	
+	
+	// 수빈 manager 작업
 	$("#managerPage").click(function(e) {
 		if(loginId!="admin") {
 			alert("관리자만 접근 가능한 페이지 입니다!");

@@ -69,7 +69,6 @@ public class AjaxController {
 	@RequestMapping("/api/checkLoginStatus")
 	@ResponseBody
 	public boolean checkLoginStatus(HttpSession session) {
-		System.out.println("LoginId: " + session.getAttribute("loginId"));
 		return session.getAttribute("loginId") != null;
 	}
 	
@@ -84,7 +83,7 @@ public class AjaxController {
 	
 	// 채팅창 크게, 작게 저장
 	@RequestMapping("/api/chatSize")
-	public void chatResize(
+	public boolean chatResize(
 			@RequestParam(value="chatSize") String chatSize,
 			HttpSession session) {
 		
@@ -93,7 +92,7 @@ public class AjaxController {
 		} else {
 			session.setAttribute("chatSize", null);
 		}
-		
+		return true;
 	}
 	
 	

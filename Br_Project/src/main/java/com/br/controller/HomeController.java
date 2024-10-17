@@ -164,7 +164,6 @@ public class HomeController {
     		return "etc/log_in";
     	}
     	
-    	
     }
     
     // 구글 로그인
