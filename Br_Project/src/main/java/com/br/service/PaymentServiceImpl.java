@@ -1,8 +1,6 @@
 package com.br.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpEntity;
@@ -13,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.br.dto.KakaoPayApproveDto;
 import com.br.dto.KakaoPayReadyDto;
-import com.nimbusds.jose.shaded.json.JSONObject;
 
 @Service 
 public class PaymentServiceImpl implements PaymentService {

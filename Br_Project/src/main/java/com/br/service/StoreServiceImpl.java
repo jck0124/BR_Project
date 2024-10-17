@@ -20,15 +20,34 @@ public class StoreServiceImpl implements StoreService {
 	@Autowired
 	private StoreDao sDao;
 	
+	// 필터링 전 store
 	@Override
 	public ArrayList<StoreDto> getStoreList() {
 		ArrayList<StoreDto> storeList = new ArrayList<StoreDto>();
-	
 		storeList = sDao.selectStoreList();
 		
 		return storeList;
 	}
-
+	// 필터링 후 store
+	@Override
+	public ArrayList<StoreDto> getFilteredStoreList(
+			String storeTypeBrChecked,
+			String storeTypeFlavor,
+			String parkingChecked,
+			String deliveryChecked,
+			String pickupChecked,
+			String hereChecked,
+			String happyStationChecked,
+			String blindBoxChecked,
+			String sel1Selected,
+			String sel2Selected,
+			String storeSearched
+			) {
+		ArrayList<StoreDto> filteredStoreList = new ArrayList<StoreDto>();
+		filteredStoreList = sDao.filteredStoreList(storeTypeBrChecked, storeTypeFlavor, parkingChecked, deliveryChecked, pickupChecked, hereChecked, happyStationChecked, blindBoxChecked, sel1Selected, sel2Selected, storeSearched);
+		
+		return filteredStoreList;
+	}
 	@Override
 	public ArrayList<SelectStoreDto> getStore() {
 		ArrayList<SelectStoreDto> selectStore = new ArrayList<SelectStoreDto>();

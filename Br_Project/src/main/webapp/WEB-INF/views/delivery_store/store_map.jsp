@@ -46,40 +46,41 @@
     						<div class="option_title">매장타입</div>
     						<div class="option_content">
     							<label>
-    								<input type="checkbox" style="margin-top: 0;">
+    								<input type="checkbox" id="store_type_br" style="margin-top: 0;">
     								<span>BR31</span>
     							</label>
     							<label>
-	    							<input type="checkbox">
+	    							<input type="checkbox" id="store_type_flavor">
 	    							<span>100flavor</span>
     							</label>
     						</div>
     					</div>
+    					<!-- 여기 -->
     					<div id="option_type2" class="option_type">
     						<div class="option_title">제공 서비스</div>
     						<div class="option_content">
     							<label>
-	    							<input type="checkbox" style="margin-top: 0;">
+	    							<input type="checkbox" id="parking" style="margin-top: 0;">
 	    							<span>주차</span> 
     							</label>
     							<label>
-	    							<input type="checkbox"> 
+	    							<input type="checkbox" id="delivery"> 
 	    							<span>배달</span> 
     							</label>
     							<label>
-	    							<input type="checkbox"> 
+	    							<input type="checkbox" id="pickup"> 
 	    							<span>픽업</span> 
     							</label>
     							<label>
-	    							<input type="checkbox"> 
+	    							<input type="checkbox" id="here"> 
 	    							<span>취식여부</span> 
     							</label>
     							<label>
-	    							<input type="checkbox">
+	    							<input type="checkbox" id="happy_station">
 	    							<span>해피스테이션</span> 
     							</label>
     							<label>
-	    							<input type="checkbox">
+	    							<input type="checkbox" id="blind_box">
 	    							<span>가챠머신</span> 
     							</label>
     						</div>
@@ -95,19 +96,33 @@
    					</select>
    				</div>
    				<div id="search_store">
-   					<input type="text" name="store_name" placeholder="매장명">
+   					<input type="text" id="store_search" name="store_name" placeholder="매장명">
    				</div>
-   				<button type="submit" class="btn_search">검색</button>
+   				<button type="submit" id="btn_search" class="btn_search">검색</button>
     		</div>
     		</form>
     		
     		<!-- 검색버튼 아래 사이드바 -->
     		<div id="side_bar_list">
     			<div class="search_result">
-    				검색결과 <span class="pink_text">100</span>개
+    				검색결과 <span class="pink_text">100</span>
     			</div>
     			<div id="map_list_container">
-    				<ul>
+    				<ul id="ul_map_container">
+    				<!--  필터링 전 forEach문 -->
+    				<c:forEach var="filteredStore" items="${filteredStoreList}">
+    					<li>
+    						<a href="" class="map_list">
+	    						<div class="map_list_left">
+	    							<h3>${filteredStore.storeName}</h3>
+		    						<p>${filteredStore.address}</p>
+		    						<p>${filteredStore.phone}</p>
+		    						<p>${filteredStore.businessHours}</p>
+	    						</div>
+   							</a>
+    					</li>
+   					</c:forEach>
+   					<!-- 필터링 후 forEach문 -->
     				<c:forEach var="store" items="${storeList}">
     					<li>
     						<a href="" class="map_list">
@@ -144,6 +159,106 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <!-- <script src="${pageContext.request.contextPath }/resources/js/store_map.js"></script> --> 
 <script>
+const pathname = "/" + window.location.pathname.split("/")[1] + "/";
+const origin = window.location.origin;
+const contextPath = origin + pathname;
+$(function(){
+	$("#btn_search").click(function(event){
+		event.preventDefault(event);
+		
+	   let storeTypeBrChecked = $("#store_type_br").is(":checked");
+	   let storeTypeFlavor = $("#store_type_flavor").is(":checked");
+	   let parkingChecked = $("#parking").is(":checked");
+	   let deliveryChecked = $("#delivery").is(":checked"); 
+	   let pickupChecked = $("#pickup").is(":checked");
+	   let hereChecked = $("#here").is(":checked");
+	   let happyStationChecked = $("#happy_station").is(":checked");
+	   let blindBoxChecked = $("#blind_box").is(":checked");
+	   let sel1Selected = $("#sel1").val();
+	   let sel2Selected = $("#sel2").val();
+	   let storeSearched = $("#store_search").val();
+	   
+	   alert("BR31: " +storeTypeBrChecked
+			   + " 100flavor: " +storeTypeFlavor
+			   + " parking: " +parkingChecked
+			   + " delivery: " +deliveryChecked
+			   + " pickup: " +pickupChecked
+			   + " here: " +hereChecked
+			   + " happySation: " +happyStationChecked
+			   + " blindBoxChecked: " +blindBoxChecked
+			   + " sel1: " +sel1Selected
+			   + " sel2: " +sel2Selected
+			   + " storeName: " + storeSearched
+	   );
+	   
+ 	   $.ajax({
+		   type: "POST",
+		   url: contextPath + "/filter/store",
+		   data: JSON.stringify({
+		        storeTypeBrChecked: storeTypeBrChecked,
+		        storeTypeFlavor: storeTypeFlavor,
+		        parkingChecked: parkingChecked,
+		        deliveryChecked: deliveryChecked,
+		        pickupChecked: pickupChecked,
+		        hereChecked: hereChecked,
+		        happyStationChecked: happyStationChecked,
+		        blindBoxChecked: blindBoxChecked,
+		        sel1Selected: sel1Selected,
+		        sel2Selected: sel2Selected,
+		        storeSearched: storeSearched
+		    }),
+		  	contentType:'application/json',
+		  	success: function(response) {
+		  		console.log("ajax 필터링 요청 성공!");
+		  		console.log("data" ,  data);
+		  		let storeContainer = $("#ul_map_container");
+		  		storeContainer.empty();	// 기존 리스트 비우기
+		  		
+		  		response.forEach(filteredStore => {
+		  			storeContainer.append(`
+		  				<li>
+	   						<a href="" class="map_list">
+	    						<div class="map_list_left">
+	    							<h3>${filteredStore.storeName}</h3>
+		    						<p>${filteredStore.address}</p>
+		    						<p>${filteredStore.phone}</p>
+		    						<p>${filteredStore.businessHours}</p>
+	    						</div>
+  							</a>
+	   					</li>
+		  					`);
+		  		});
+		  	},
+		  	error: function(xhr, status, error) {
+		  		console.error("ajax 필터링 요청 실패", status, error);
+		  	}
+	   }); 
+/*  	   $.ajax({
+		   type: "POST",
+		   url: contextPath + "/filter/store",
+		  	data: {
+				storeTypeBrChecked: storeTypeBrChecked,
+				storeTypeFlavor: storeTypeFlavor,
+				parkingChecked: parkingChecked,
+				deliveryChecked: deliveryChecked,
+				pickupChecked: pickupChecked,
+				hereChecked: hereChecked,
+				happyStationChecked: happyStationChecked,
+				blindBoxChecked: blindBoxChecked,
+				sel1Selected: sel1Selected,
+				sel2Selected: sel2Selected,
+				storeSearched: storeSearched
+		  	},
+		  	success: function(response) {
+		  		console.log("ajax 필터링 요청 성공!");
+		  	},
+		  	error: function(xhr, status, error) {
+		  		console.error("ajax 필터링 요청 실패", status, error);
+		  	}
+	   });  */
+	   console.log("ajax 완료!");
+	});
+});
 //카카오맵 API
 document.addEventListener("DOMContentLoaded", function() {
 	var imgSrc = 'https://www.baskinrobbins.co.kr/assets/images/store/map/icon_map_marker_default.png';
@@ -656,6 +771,12 @@ $( document ).ready(function(){
         retOption(eval(subSelName), "sel2");
     })
    retOption(sel1, "sel1");
+	
+   $(function(){
+	  $("#btn_search").click(function(){
+		  
+	  }); 
+   });
 });
 </script>
 </html>
