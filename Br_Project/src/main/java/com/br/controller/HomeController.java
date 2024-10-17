@@ -153,7 +153,6 @@ public class HomeController {
     	session.setAttribute("loginId", userInfo.get("email"));
     	return "redirect:/menu_icecream";
     	
-    	
     }
     
     // 구글 로그인

@@ -320,6 +320,8 @@ input[name='search_keyword']::placeholder {
 	display: none;
 }
 
+
+
 .header_chat_small {
 	width: 190px;
 	height: 50px;
@@ -335,6 +337,17 @@ input[name='search_keyword']::placeholder {
 	position: absolute;
 	top: 840px;
 	right: -180px;
+}
+
+.header_chat_small.header_new_chat::before {
+	display: inline-block;
+	content: "New!";
+	font-size: 15px;
+	color: #f986bd;
+	
+	position: absolute;
+	top: -40px;
+	right: 0px;
 }
 
 .header_chat_small > button {
@@ -359,11 +372,72 @@ input[name='search_keyword']::placeholder {
 	right: -180px;
 }
 
+.header_chat.header_new_chat::before {
+	display: inline-block;
+	content: "New!";
+	font-size: 15px;
+	color: #f986bd;
+	
+	position: absolute;
+	top: -25px;
+	right: 0px;
+}
+
 .header_chat_close_btn {
 	cursor: pointer;
 	display: flex;
 	justify-content: space-between;		
 }
+
+
+.header_chat_list_container {
+	height: 350px;
+	overflow-y: scroll;
+	margin-top: 10px;
+}
+
+.header_chat_list_container.header_chat_list_hidden{
+	display: none;
+}
+
+.header_chat_list {
+	cursor: pointer;
+	border: 2px solid #f986bd;
+	border-radius: 15px;
+	text-align: center;
+	line-height: 30px;	
+	height: 30px;
+	margin-top: 30px;
+	
+	position: relative;
+}
+
+.header_chat_list.header_chat_list_new_chat::before {
+	display: inline-block;
+	content: "New!";
+	font-size: 15px;
+	color: #f986bd;
+	
+	position: absolute;
+	top: -25px;
+	left: 0px;
+}
+
+
+.header_chat_list > div {
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+	white-space:nowrap;
+}
+
+
+
+
+.header_chat_selected.header_chat_selected_hidden {
+	display: none;
+}
+
+
 
 .header_chat_inner {
 	height: 320px;
@@ -374,11 +448,11 @@ input[name='search_keyword']::placeholder {
 	margin-top: 10px;
 }
 
-.header_chat_admin {
+.header_chat_self > div{
 	color: #2C3E50;
 }
 
-.header_chat_customer {
+.header_chat_other > div {
 	color: #3498DB;
 }
 
