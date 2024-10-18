@@ -75,6 +75,7 @@ public class MenuController {
 		return "menu/icecream_detail";
 				
 	}
+	
 	//수빈
 	@RequestMapping("/menu_ice_cream_cake")
 	public String menu_ice_cream_cake(HttpServletRequest request, Model model) {
