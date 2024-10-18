@@ -24,20 +24,23 @@ public class MenuServiceImpl implements MenuService {
 	private MenuDao mDao;
 	
 	// 찬균
+	// 특정 페이지 번호의 음료 페이지(페이지네이션)
+	// 파라미터: 현재 페이지(pageNum)
 	@Override
 	public DrinkPaginationDto getPaginationDrinksList(int pageNum) {
 		
+		// 전체 페이지 수
 		int totalPageNum = 1;
+		// 음료 리스트 
 		ArrayList<DrinkDto> drinkList = mDao.selectDrinksList();
+		// 특정 페이지의 음료 리스트
+		ArrayList<DrinkDto> paginationDrinkList = new ArrayList<DrinkDto>();
 		
 		if( drinkList.size()%10 != 0) {
 			totalPageNum = drinkList.size()/10 + 1;
 		} else {
 			totalPageNum = drinkList.size()/10;
 		}
-		
-		ArrayList<DrinkDto> paginationDrinkList = new ArrayList<DrinkDto>();
-		
 		
 		if(pageNum != totalPageNum) {
 			for(int i = (pageNum - 1)*10; i <= (pageNum*10 - 1); i++) {
@@ -56,23 +59,25 @@ public class MenuServiceImpl implements MenuService {
 		return dDto;
 	}
 	
+	// 특정 idx의 음료 상세 페이지
+	// 파라미터: 음료idx(drinksIdx)
 	@Override
-	public DrinkDetailDto getDrinkDetail(int drinksIDx) {
+	public DrinkDetailDto getDrinkDetail(int drinksIdx) {
 		
-		DrinkDto dDto = mDao.selectDrinkByIdx(drinksIDx);
-		ArrayList<DrinkDetailMenuDto> drinkDetailMenuList = mDao.selectDrinkDetailMenuList(drinksIDx);
+		DrinkDto dDto = mDao.selectDrinkByIdx(drinksIdx);
+		ArrayList<DrinkDetailMenuDto> drinkDetailMenuList = mDao.selectDrinkDetailMenuList(drinksIdx);
 
 		return new DrinkDetailDto(dDto, drinkDetailMenuList);
 	}
 	
 	// 수연
-	// 아이스크림 리스트
+	// 특정 페이지 번호의 아이스크림 페이지(페이지네이션)
+	// 파라미터: 현재 페이지(pageNum)
 	@Override
 	public Map<String, Object> getIcecreamList(int pageNum) {
 		
 		ArrayList<IcecreamDto> icecreamList = new ArrayList<IcecreamDto>();
 		icecreamList = mDao.selectIcecreamList(pageNum);
-		
 		
 		int startNum,  endNum;
 		int lastPageNum;
@@ -93,29 +98,34 @@ public class MenuServiceImpl implements MenuService {
 		return list;
 	}
 	
-	// 아이스크림 라스트 페이지 넘버
-	
-	// 아이스크림 상세페이지
-		@Override
-		public IcecreamDto getIcecreamDetail(int icecreamIdx) {
-			IcecreamDto icecreamDetail = new IcecreamDto();
-			icecreamDetail = mDao.selectIcecreamDetail(icecreamIdx);
-			
-			return icecreamDetail;
-		}
+	// 특정 idx의 아이스크림 상세 페이지
+	// 파라미터: 아이스크림idx(icecreamIdx)
+	@Override
+	public IcecreamDto getIcecreamDetail(int icecreamIdx) {
 		
-	// 아이스크림 재료
-		@Override
-		public ArrayList<IcecreamIngredientDto> getIngredient(int icecreamIdx) {
-			ArrayList<IcecreamIngredientDto> ingredientList = new ArrayList<IcecreamIngredientDto>();
-			ingredientList = mDao.selectIngredientList(icecreamIdx);
-			
-			return ingredientList;
-		}
+		IcecreamDto icecreamDetail = new IcecreamDto();
+		icecreamDetail = mDao.selectIcecreamDetail(icecreamIdx);
+		
+		return icecreamDetail;
+	}
+		
+	// 특정 idx의 아이스크림 재료
+	// 파라미터: 아이스크림idx(icecreamIdx)
+	@Override
+	public ArrayList<IcecreamIngredientDto> getIngredient(int icecreamIdx) {
+		
+		ArrayList<IcecreamIngredientDto> ingredientList = new ArrayList<IcecreamIngredientDto>();
+		ingredientList = mDao.selectIngredientList(icecreamIdx);
+		
+		return ingredientList;
+	}
 	
 	// 수빈
+	// 특정 페이지 번호의 아이스크림케이크 페이지(페이지네이션)
+	// 파라미터: 현재 페이지(pageNum)
 	@Override
 	public Map<String, Object> showIceCreamCake(int pageNum) {
+		
 		ArrayList<ShowIceCreamCakeDto> cakesList = mDao.showIceCreamCake(pageNum);
 		
 		int startNum,endNum;
@@ -132,14 +142,19 @@ public class MenuServiceImpl implements MenuService {
 		result.put("startNum", startNum);
 		result.put("endNum", endNum);
 		result.put("lastPageNum", lastPageNum);
+		
 		return result;
 	}
 	
-	// 아이스크림 케이크 상세정보
+	// 특정 idx의 아이스크림케이크 상세 페이지
+	// 변경 필요
+	// 파라미터: 
 	@Override
 	public ShowIceCreamCakeDetailDto showIceCreamCakeDetail(String korName) {
+		
 		ShowIceCreamCakeDetailDto cakeDetail = new ShowIceCreamCakeDetailDto();
 		cakeDetail = mDao.showIceCreamCakeDetail(korName);
+		
 		return cakeDetail;
 	}
 

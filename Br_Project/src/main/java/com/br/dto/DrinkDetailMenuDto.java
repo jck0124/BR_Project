@@ -1,17 +1,18 @@
 package com.br.dto;
 
+// 음료 상세 정보
 public class DrinkDetailMenuDto {
 	
-	private String name;
-	private String servingSize;
-	private String calories;
-	private String sugars;
-	private String protein;
-	private String saturatedFat;
-	private String sodium;
-	private String caffeine;
-	private String allergens;
-	private int price;
+	private String name;	// 메뉴명
+	private String servingSize;	// 1회 제공량
+	private String calories;	// 열량
+	private String sugars;	// 당류
+	private String protein;	// 단백질
+	private String saturatedFat;	// 포화지방
+	private String sodium;	// 나트륨
+	private String caffeine;	// 카페인
+	private String allergens;	// 알레르기
+	private int price;	// 가격
 	
 	
 	public DrinkDetailMenuDto() {
@@ -112,8 +113,5 @@ public class DrinkDetailMenuDto {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
-	
-	
 	
 }

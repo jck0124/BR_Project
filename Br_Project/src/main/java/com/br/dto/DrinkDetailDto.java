@@ -2,10 +2,10 @@ package com.br.dto;
 
 import java.util.ArrayList;
 
+// 음료 상세 페이지
 public class DrinkDetailDto {
-	
-	private DrinkDto dto;
-	private ArrayList<DrinkDetailMenuDto> detailMenuList;
+	private DrinkDto dto;	// 음료	
+	private ArrayList<DrinkDetailMenuDto> detailMenuList;	// 음료의 옵션
 	
 	public DrinkDetailDto() {
 		
@@ -33,5 +33,4 @@ public class DrinkDetailDto {
 		this.detailMenuList = detailMenuList;
 	}
 	
-
 }

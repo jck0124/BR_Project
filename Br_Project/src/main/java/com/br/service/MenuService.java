@@ -12,22 +12,34 @@ import com.br.dto.ShowIceCreamCakeDetailDto;
 public interface MenuService {
 	
 	// 찬균
+	// 특정 페이지 번호의 음료 페이지(페이지네이션)
+	// 파라미터: 현재 페이지(pageNum)
 	DrinkPaginationDto getPaginationDrinksList(int pageNum);
-	DrinkDetailDto getDrinkDetail(int drinksIDx);
+	
+	// 특정 idx의 음료 상세 페이지
+	// 파라미터: 음료idx(drinksIdx)
+	DrinkDetailDto getDrinkDetail(int drinksIdx);
 	
 	// 수연
-	
-	// 아이스크림 리스트
+	// 특정 페이지 번호의 아이스크림 페이지(페이지네이션)
+	// 파라미터: 현재 페이지(pageNum)
 	Map<String, Object> getIcecreamList(int pageNum);
-	// 아이스크림 상세 페이지
+	
+	// 특정 idx의 아이스크림 상세 페이지
+	// 파라미터: 아이스크림idx(icecreamIdx)
 	IcecreamDto getIcecreamDetail(int icecreamIdx);
-	// 아이스크림 재료
+	
+	// 특정 idx의 아이스크림 재료
+	// 파라미터: 아이스크림idx(icecreamIdx)
 	ArrayList<IcecreamIngredientDto> getIngredient(int icecreamIdx);
 	
 	// 수빈
-	
-	// 아이스크림 케이크 목록
+	// 특정 페이지 번호의 아이스크림케이크 페이지(페이지네이션)
+	// 파라미터: 현재 페이지(pageNum)
 	Map<String, Object> showIceCreamCake(int pageNum);
-	// 아이스크림 케이크 상세정보
+	
+	// 특정 idx의 아이스크림케이크 상세 페이지
+	// 변경 필요
+	// 파라미터: 
 	ShowIceCreamCakeDetailDto showIceCreamCakeDetail(String korName);
 }

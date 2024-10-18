@@ -2,10 +2,11 @@ package com.br.dto;
 
 import java.util.ArrayList;
 
+// 메뉴(음료) 페이지(페이지네이션)
 public class DrinkPaginationDto {
 	
-	private int totalPageNum;
-	private ArrayList<DrinkDto> drinkList;
+	private int totalPageNum;	// 전체 페이지 수
+	private ArrayList<DrinkDto> drinkList;	// 음료 리스트
 	
 	public DrinkPaginationDto() {
 		
@@ -32,6 +33,5 @@ public class DrinkPaginationDto {
 	public void setDrinkList(ArrayList<DrinkDto> drinkList) {
 		this.drinkList = drinkList;
 	}
-	
 	
 }
