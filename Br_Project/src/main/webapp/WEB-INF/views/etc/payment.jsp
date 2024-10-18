@@ -36,7 +36,6 @@
                 	    dataType: 'json',
                 	    data : {
                 	     }
-                	    }
                 	}).done(function(data) {
                 	    console.log("AJAX 요청 성공:", data);
                 	    window.location.href = "menu_icecream";
