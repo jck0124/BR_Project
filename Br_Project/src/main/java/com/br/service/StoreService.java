@@ -12,14 +12,14 @@ public interface StoreService {
 	
 	// 필터링 후 store
 	ArrayList<StoreDto> getFilteredStoreList(
-			String storeTypeBrChecked,
-			String storeTypeFlavor,
-			String parkingChecked,
-			String deliveryChecked,
-			String pickupChecked,
-			String hereChecked,
-			String happyStationChecked,
-			String blindBoxChecked,
+			Boolean storeTypeBrChecked,
+			Boolean storeTypeFlavor,
+			Boolean parkingChecked,
+			Boolean deliveryChecked,
+			Boolean pickupChecked,
+			Boolean hereChecked,
+			Boolean happyStationChecked,
+			Boolean blindBoxChecked,
 			String sel1Selected,
 			String sel2Selected,
 			String storeSearched

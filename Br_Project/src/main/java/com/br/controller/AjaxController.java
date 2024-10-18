@@ -1,14 +1,16 @@
 package com.br.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -96,7 +98,6 @@ public class AjaxController {
 		return true;
 	}
 	
-	
 	// ajax 카카오 페이
 	@RequestMapping("/api/payReady")
     public @ResponseBody KakaoPayReadyDto payReady(@RequestBody KakaoPayOrderFormDto kakaoPayOrder) {
@@ -112,35 +113,39 @@ public class AjaxController {
     }
 	
 //	ajax store 필터링
-	@RequestMapping("/filter/store")
 	@ResponseBody
-	public List<StoreDto> filteredStore(@RequestParam("storeTypeBrChecked") String storeTypeBrChecked,
-			@RequestParam("storeTypeFlavor") String storeTypeFlavor,
-			@RequestParam("parkingChecked") String parkingChecked,
-			@RequestParam("deliveryChecked") String deliveryChecked,
-			@RequestParam("pickupChecked") String pickupChecked,
-			@RequestParam("hereChecked") String hereChecked,
-			@RequestParam("happyStationChecked") String happyStationChecked,
-			@RequestParam("blindBoxChecked") String blindBoxChecked,
-			@RequestParam("sel1Selected") String sel1Selected,
-			@RequestParam("sel2Selected") String sel2Selected,
-			@RequestParam("storeSearched") String storeSearched, Model model) {
+	@RequestMapping(value="/filter/store", method = RequestMethod.POST)
+	public HashMap<String, Object> filteredStore(@RequestBody HashMap<String, Object> hmap) {
+		System.out.println(hmap);
+		Boolean storeTypeBrChecked = (Boolean) hmap.get("storeTypeBrChecked");
+		System.out.println("여기?1");
+		Boolean storeTypeFlavor = (Boolean) hmap.get("storeTypeFlavor");
+		Boolean parkingChecked = (Boolean) hmap.get("parkingChecked");
+		Boolean deliveryChecked = (Boolean) hmap.get("deliveryChecked");
+		Boolean pickupChecked = (Boolean) hmap.get("pickupChecked");
+		Boolean hereChecked = (Boolean) hmap.get("hereChecked");
+		Boolean happyStationChecked = (Boolean) hmap.get("happyStationChecked");
+		Boolean blindBoxChecked = (Boolean) hmap.get("blindBoxChecked");
+		System.out.println("여기?8");
+		System.out.println("storeTypeBrChecked: "+storeTypeBrChecked+"/storeTypeFlavor: "+storeTypeFlavor+"/parkingChecked: "+parkingChecked
+				+"/deliveryChecked: "+deliveryChecked+"/pickupChecked: "+pickupChecked
+				+"/hereChecked: "+hereChecked+"/happyStationChecked: "+happyStationChecked
+				+"/blindBoxChecked: "+blindBoxChecked);
+		String sel1Selected = hmap.get("sel1Selected") != null ? hmap.get("sel1Selected").toString() : null;
+		String sel2Selected = hmap.get("sel2Selected") != null ? hmap.get("sel2Selected").toString() : null;
+		String storeSearched = hmap.get("storeSearched") != null ? hmap.get("storeSearched").toString() : null;
 		
-		model.addAttribute("storeTypeBrChecked", storeTypeBrChecked);
-		model.addAttribute("storeTypeFlavor", storeTypeFlavor);
-		model.addAttribute("parkingChecked", parkingChecked);
-		model.addAttribute("deliveryChecked", deliveryChecked);
-		model.addAttribute("pickupChecked", pickupChecked);
-		model.addAttribute("hereChecked", hereChecked);
-		model.addAttribute("happyStationChecked", happyStationChecked);
-		model.addAttribute("blindBoxChecked", blindBoxChecked);
-		model.addAttribute("sel1Selected", sel1Selected);
-		model.addAttribute("sel2Selected", sel2Selected);
-		model.addAttribute("storeSearched", storeSearched);
+		System.out.println("sel1Selected: "+ sel1Selected + " /sel2Selected: "+ sel2Selected + " /storeSearched: "+storeSearched);
 		
-		List<StoreDto> filteredStoreList = sSvc.getFilteredStoreList(storeTypeBrChecked, storeTypeFlavor, parkingChecked, deliveryChecked, pickupChecked, hereChecked, happyStationChecked, blindBoxChecked, sel1Selected, sel2Selected, storeSearched);
-		model.addAttribute("filteredStoreList", filteredStoreList);
+		HashMap<String, Object> response = new HashMap<>();
+		ArrayList<StoreDto> filteredStoreList = sSvc.getFilteredStoreList(storeTypeBrChecked, storeTypeFlavor, parkingChecked, deliveryChecked, pickupChecked, hereChecked, happyStationChecked, blindBoxChecked, sel1Selected, sel2Selected, storeSearched);
+		response.put("filteredStoreList", filteredStoreList);
 		
-		return filteredStoreList;
+//		String sel1Selected = hmap.get("sel1Selected").toString();
+//		String sel2Selected = hmap.get("sel2Selected").toString();
+//		String storeSearched = hmap.get("storeSearched").toString();
+		
+	    
+		return response;
 	}
 }

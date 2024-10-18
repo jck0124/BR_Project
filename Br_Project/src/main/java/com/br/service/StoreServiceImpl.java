@@ -31,22 +31,33 @@ public class StoreServiceImpl implements StoreService {
 	// 필터링 후 store
 	@Override
 	public ArrayList<StoreDto> getFilteredStoreList(
-			String storeTypeBrChecked,
-			String storeTypeFlavor,
-			String parkingChecked,
-			String deliveryChecked,
-			String pickupChecked,
-			String hereChecked,
-			String happyStationChecked,
-			String blindBoxChecked,
+			Boolean storeTypeBrChecked,
+			Boolean storeTypeFlavor,
+			Boolean parkingChecked,
+			Boolean deliveryChecked,
+			Boolean pickupChecked,
+			Boolean hereChecked,
+			Boolean happyStationChecked,
+			Boolean blindBoxChecked,
 			String sel1Selected,
 			String sel2Selected,
 			String storeSearched
 			) {
-		ArrayList<StoreDto> filteredStoreList = new ArrayList<StoreDto>();
-		filteredStoreList = sDao.filteredStoreList(storeTypeBrChecked, storeTypeFlavor, parkingChecked, deliveryChecked, pickupChecked, hereChecked, happyStationChecked, blindBoxChecked, sel1Selected, sel2Selected, storeSearched);
+		HashMap<String, Object> hmap = new HashMap<>();
+		hmap.put("storeTypeBrChecked", storeTypeBrChecked);
+		hmap.put("storeTypeFlavor", storeTypeFlavor);
+		hmap.put("parkingChecked", parkingChecked);
+		hmap.put("deliveryChecked", deliveryChecked);
+		hmap.put("pickupChecked", pickupChecked);
+		hmap.put("hereChecked", hereChecked);
+		hmap.put("happyStationChecked", happyStationChecked);
+		hmap.put("blindBoxChecked", blindBoxChecked);
+		hmap.put("sel1Selected", sel1Selected);
+		hmap.put("sel2Selected", sel2Selected);
+		hmap.put("storeSearched", storeSearched);
 		
-		return filteredStoreList;
+//		filteredStoreList
+		return sDao.filteredStoreList(hmap);
 	}
 	@Override
 	public ArrayList<SelectStoreDto> getStore() {

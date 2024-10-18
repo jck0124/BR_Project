@@ -109,20 +109,7 @@
     			</div>
     			<div id="map_list_container">
     				<ul id="ul_map_container">
-    				<!--  필터링 전 forEach문 -->
-    				<c:forEach var="filteredStore" items="${filteredStoreList}">
-    					<li>
-    						<a href="" class="map_list">
-	    						<div class="map_list_left">
-	    							<h3>${filteredStore.storeName}</h3>
-		    						<p>${filteredStore.address}</p>
-		    						<p>${filteredStore.phone}</p>
-		    						<p>${filteredStore.businessHours}</p>
-	    						</div>
-   							</a>
-    					</li>
-   					</c:forEach>
-   					<!-- 필터링 후 forEach문 -->
+   					<!-- 필터링 전 forEach문 -->
     				<c:forEach var="store" items="${storeList}">
     					<li>
     						<a href="" class="map_list">
@@ -162,7 +149,7 @@
 const pathname = "/" + window.location.pathname.split("/")[1] + "/";
 const origin = window.location.origin;
 const contextPath = origin + pathname;
-$(function(){
+$(document).ready(function(){
 	$("#btn_search").click(function(event){
 		event.preventDefault(event);
 		
@@ -190,12 +177,8 @@ $(function(){
 			   + " sel2: " +sel2Selected
 			   + " storeName: " + storeSearched
 	   );
-	   
- 	   $.ajax({
-		   type: "POST",
-		   url: contextPath + "/filter/store",
-		   data: JSON.stringify({
-		        storeTypeBrChecked: storeTypeBrChecked,
+	   let param = {
+			   storeTypeBrChecked: storeTypeBrChecked,
 		        storeTypeFlavor: storeTypeFlavor,
 		        parkingChecked: parkingChecked,
 		        deliveryChecked: deliveryChecked,
@@ -206,57 +189,53 @@ $(function(){
 		        sel1Selected: sel1Selected,
 		        sel2Selected: sel2Selected,
 		        storeSearched: storeSearched
-		    }),
+	   }
+	   let paramData = JSON.stringify(param);
+ 	   $.ajax({
+		   type: "POST",
+		   url: contextPath + "/filter/store",
+		   data: paramData,
 		  	contentType:'application/json',
 		  	success: function(response) {
+		  		// 확인용
+			   console.log("paramData: "+ paramData),
 		  		console.log("ajax 필터링 요청 성공!");
-		  		console.log("data" ,  data);
+		  		console.log("ajax응답: "+ JSON.stringify(response));
 		  		let storeContainer = $("#ul_map_container");
 		  		storeContainer.empty();	// 기존 리스트 비우기
-		  		
-		  		response.forEach(filteredStore => {
-		  			storeContainer.append(`
-		  				<li>
-	   						<a href="" class="map_list">
-	    						<div class="map_list_left">
-	    							<h3>${filteredStore.storeName}</h3>
-		    						<p>${filteredStore.address}</p>
-		    						<p>${filteredStore.phone}</p>
-		    						<p>${filteredStore.businessHours}</p>
-	    						</div>
-  							</a>
-	   					</li>
-		  					`);
+		  		console.log("필터링된 스토어 리스트:", response.filteredStoreList);
+		  		response.filteredStoreList.forEach(filteredStore => {
+		  		 /*    storeContainer.append(`
+		  		        <li>
+		  		            <a href="" class="map_list">
+		  		                <div class="map_list_left">
+		  		                    <h3>${filteredStore.storeName}</h3>
+		  		                    <p>${filteredStore.address}</p>
+		  		                    <p>${filteredStore.phone}</p>
+		  		                    <p>${filteredStore.businessHours}</p>
+		  		                </div>
+		  		            </a>
+		  		        </li>
+		  		    `); */
+		  		    let filter = 
+		  		    	'<li>' +
+		  		    		'<a href="" class="map_list">' +
+		  		    			'<div class="map_list_left">' +
+		  		    				'<h3>'+ filteredStore.storeName +'</h3>' +
+		  		    				'<p>'+ filteredStore.address +'</p>' +
+		  		   			 		'<p>'+ filteredStore.phone +'</p>' +
+		  		    				'<p>'+ filteredStore.businessHours +'</p>' +
+		  		    			'</div>' +
+		  		    		'</a>' +
+		  		    	'</li>'
+		  		    	;
+		  		    	storeContainer.append(filter);
 		  		});
 		  	},
 		  	error: function(xhr, status, error) {
 		  		console.error("ajax 필터링 요청 실패", status, error);
 		  	}
 	   }); 
-/*  	   $.ajax({
-		   type: "POST",
-		   url: contextPath + "/filter/store",
-		  	data: {
-				storeTypeBrChecked: storeTypeBrChecked,
-				storeTypeFlavor: storeTypeFlavor,
-				parkingChecked: parkingChecked,
-				deliveryChecked: deliveryChecked,
-				pickupChecked: pickupChecked,
-				hereChecked: hereChecked,
-				happyStationChecked: happyStationChecked,
-				blindBoxChecked: blindBoxChecked,
-				sel1Selected: sel1Selected,
-				sel2Selected: sel2Selected,
-				storeSearched: storeSearched
-		  	},
-		  	success: function(response) {
-		  		console.log("ajax 필터링 요청 성공!");
-		  	},
-		  	error: function(xhr, status, error) {
-		  		console.error("ajax 필터링 요청 실패", status, error);
-		  	}
-	   });  */
-	   console.log("ajax 완료!");
 	});
 });
 //카카오맵 API

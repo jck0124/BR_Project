@@ -33,37 +33,13 @@ public class StoreDaoImpl implements StoreDao {
 	
 	// 필터링 후 store
 	@Override
-	public ArrayList<StoreDto> filteredStoreList(
-			String storeTypeBrChecked,
-			String storeTypeFlavor,
-			String parkingChecked,
-			String deliveryChecked,
-			String pickupChecked,
-			String hereChecked,
-			String happyStationChecked,
-			String blindBoxChecked,
-			String sel1Selected,
-			String sel2Selected,
-			String storeSearched
-			) {
-		HashMap<String, String> hmap = new HashMap<String, String>();
-		hmap.put("storeTypeBrChecked", storeTypeBrChecked);
-		hmap.put("storeTypeFlavor", storeTypeFlavor);
-		hmap.put("parkingChecked", parkingChecked);
-		hmap.put("deliveryChecked", deliveryChecked);
-		hmap.put("pickupChecked", pickupChecked);
-		hmap.put("hereChecked", hereChecked);
-		hmap.put("happyStationChecked", happyStationChecked);
-		hmap.put("blindBoxChecked", blindBoxChecked);
-		hmap.put("sel1Selected", sel1Selected);
-		hmap.put("sel2Selected", sel2Selected);
-		hmap.put("storeSearched", storeSearched);
+	public ArrayList<StoreDto> filteredStoreList(HashMap<String, Object> hmap) {
 		
 		List<StoreDto> filteredStoreListTemp = sqlSession.selectList("StoreMapper.getFilteredStore", hmap);
-		ArrayList<StoreDto> filteredStoreList = new ArrayList<StoreDto>();
-		filteredStoreList.addAll(filteredStoreListTemp);
+//		ArrayList<StoreDto> filteredStoreList = new ArrayList<StoreDto>();
+//		filteredStoreList.addAll(filteredStoreListTemp);
 		
-		return filteredStoreList;
+		return new ArrayList<>(filteredStoreListTemp);
 	}
 	// 수빈
 	@Override
