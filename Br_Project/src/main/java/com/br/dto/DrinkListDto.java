@@ -1,19 +1,30 @@
 package com.br.dto;
 
+// 메뉴(음료) 리스트
 public class DrinkListDto {
-	private String name;
-	private int price;
-	private String img;
-	private int idx;
+	private int drinksIdx;	// 음료 idx
+	private String name;	// 메뉴명
+	private int price;	// 가격
+	private String img;	// 이미지 URL
 	
-	public DrinkListDto() {}
+	public DrinkListDto() {
+		
+	}
 
-	public DrinkListDto(String name, int price, String img, int idx) {
+	public DrinkListDto(int drinksIdx, String name, int price, String img) {
 		super();
+		this.drinksIdx = drinksIdx;
 		this.name = name;
 		this.price = price;
 		this.img = img;
-		this.idx = idx;
+	}
+
+	public int getDrinksIdx() {
+		return drinksIdx;
+	}
+
+	public void setDrinksIdx(int drinksIdx) {
+		this.drinksIdx = drinksIdx;
 	}
 
 	public String getName() {
@@ -40,12 +51,4 @@ public class DrinkListDto {
 		this.img = img;
 	}
 
-	public int getIdx() {
-		return idx;
-	}
-
-	public void setIdx(int idx) {
-		this.idx = idx;
-	}
-	
 }

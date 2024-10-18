@@ -11,34 +11,44 @@ import com.br.dto.ShowIceCreamCakeDto;
 
 public interface MenuDao {
 	
-	// 음료 리스트 SELECT
+	// 음료 리스트
 	ArrayList<DrinkDto> selectDrinksList();
 	
-	// 특정 idx의 음료 SELECT
+	// 특정 idx의 음료 정보 
+	// 파라미터: 음료idx(drinksIdx)
 	DrinkDto selectDrinkByIdx(int drinksIdx);
 	
-	// 특정 idx의 음료 세부 메뉴 리스트 SELECT
+	// 특정 idx 음료의 옵션 리스트
+	// 파라미터: 음료idx(drinksIdx)
 	ArrayList<DrinkDetailMenuDto> selectDrinkDetailMenuList(int drinksIdx);
 	
-	// 아이스크림 리스트
+	// 수연
+	// 아이스크림 리스트 페이지네이션
+	// 파라미터: 현재 페이지(pageNum)
 	ArrayList<IcecreamDto> selectIcecreamList(int pageNum);
 	
-	// 아이스크림 라스트 페이지 넘버
+	// 아이스크림 마지막 페이지 번호
 	int getIcecreamLastPageNumber();
 	
-	// 아이스크림 상세페이지
+	// 특정 idx의 아이스크림
+	// 파라미터: 아이스크림idx(icecreamIdx)
 	IcecreamDto selectIcecreamDetail(int icecreamIdx); 
 	
-	// 아이스크림 재료
+	// 특정 idx의 아이스크림 재료
+	// 파라미터: 아이스크림idx(icecreamIdx)
 	ArrayList<IcecreamIngredientDto> selectIngredientList(int icecreamIdx);
 	
-	// 아이스크림 케이크 리스트
+	// 수빈
+	// 아이스크림케이크 리스트 페이지네이션
+	// 파라미터: 현재 페이지(pageNum)
 	ArrayList<ShowIceCreamCakeDto> showIceCreamCake(int pageNum);
 	
-	// 아이스크림 케이크 리스트 페이지네이션 
+	// 아이스크림케이크 마지막 페이지 번호
 	int getLastPageNumber();
 	
-	// 아이스크림 케이크 디테일
+	// 특정 idx의 아이스크림케이크
+	// 변경 필요
+	// 파라미터: 
 	ShowIceCreamCakeDetailDto showIceCreamCakeDetail(String korName);
 	
 }

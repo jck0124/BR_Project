@@ -1,15 +1,16 @@
 package com.br.dto;
 
+// 메뉴(음료)
 public class DrinkDto {
 	
-	private int drinksIdx;
-	private String name;
-	private String img;
-	private String tag;
-	private String backgroundColor;
-	private String fontColor;
-	private String nameEng;
-	private String description;
+	private int drinksIdx;	// 음료 idx
+	private String name;	// 메뉴명
+	private String img;	// 이미지 URL
+	private String tag;	// 태그
+	private String backgroundColor;	// 배경색
+	private String fontColor;	// 글자색
+	private String nameEng;	// 영어명
+	private String description;	// 설명
 	
 	
 	public DrinkDto() {
