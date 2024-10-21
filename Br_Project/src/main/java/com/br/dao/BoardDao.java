@@ -28,16 +28,18 @@ public interface BoardDao {
 	
 	// 수연
 	
-	//모든 레시피 목록
+	// 게시판(레시피) 리스트
 	ArrayList<RecipeDto> selectRecipeList();	
 	
-	// 등록될 레시피idx
+	// 게시판(레시피) 신규 레시피 idx
 	int selectRecipeIdx();	
 	
-	// 레시피 insert
+	// 게시판(레시피) 등록
+	// 파라미터: 레시피 idx(recipeIdx) / 카테고리 idx(categoryIdx) / 이미지 URL(imgUrl) / 타이틀(한글)(titleKor) / 타이틀(영어)(titleEng)
 	void insertRecipe(int insertRecipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng);
 	
-	// 레시피 이미지 
+	// 게시판(레시피) 이미지 
+	// 파라미터: 레시피 idx(recipeIdx)
 	RecipeImgDto selectRecipeImg(int recipeIdx);
 	
 	// 수빈

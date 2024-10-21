@@ -12,7 +12,6 @@ public class DrinkDto {
 	private String nameEng;	// 영어명
 	private String description;	// 설명
 	
-	
 	public DrinkDto() {
 		
 	}

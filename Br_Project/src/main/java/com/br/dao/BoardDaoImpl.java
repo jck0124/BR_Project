@@ -67,25 +67,30 @@ public class BoardDaoImpl implements BoardDao {
 	
 	
 	// 수연
+	// 게시판(레시피) 리스트
 	@Override
 	public ArrayList<RecipeDto> selectRecipeList() {
 		List<RecipeDto> recipeListTemp = sqlSession.selectList("BoardMapper.getAllRecipe");
 		ArrayList<RecipeDto> recipeList = new ArrayList<RecipeDto>();
 		
 		recipeList.addAll(recipeListTemp);
+		
 		return recipeList;
 	}
 	
-	// 저장될 레시피idx select
+	// 게시판(신규) 레시피 idx
 	@Override
 	public int selectRecipeIdx() {
 		int recipeIdx = sqlSession.selectOne("BoardMapper.selectRecipeIdx");
+		
 		return recipeIdx;
 	}
 
-	// 레시피 insert
+	// 게시판(레시피) 등록
+	// 파라미터: 레시피 idx(recipeIdx) / 카테고리 idx(categoryIdx) / 이미지 URL(imgUrl) / 타이틀(한글)(titleKor) / 타이틀(영어)(titleEng)
 	@Override
 	public void insertRecipe(int recipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng) {
+		
 		int InsertRecipeIdx = selectRecipeIdx();
 		
 		System.out.println("recipeIdx"+ InsertRecipeIdx);
@@ -99,7 +104,8 @@ public class BoardDaoImpl implements BoardDao {
 		sqlSession.insert("BoardMapper.insertRecipeInfo", hmap);
 	}
 	
-	// 레시피 이미지
+	// 게시판(레시피) 이미지
+	// 파라미터: 레시피 idx(recipeIdx)
 	@Override
 	public RecipeImgDto selectRecipeImg(int recipeIdx) {
 		return sqlSession.selectOne("BoardMapper.imgFile", recipeIdx);

@@ -1,21 +1,23 @@
 package com.br.dto;
 
+// 매장 지도 상세 정보
 public class SelectStoreDto {
-	private int storeIdx;
-    private String storeName;
-    private String address;
-    private String phone;
-    private String businessHours;
-    private String service;
-    private String latitude;
-    private String longitude;
-    private String typeBr;
-    private String parking;
-    private String delivery;
-    private String pickup;
-    private String here;
-    private String happyStation;
-    private String blindBox;
+	
+	private int storeIdx;	// 매장 idx
+    private String storeName;	// 매장명
+    private String address;	// 주소
+    private String phone;	// 번호
+    private String businessHours;	// 영업시간
+    private String service;	// 서비스
+    private String latitude;	// 위도
+    private String longitude;	// 경도
+    private String typeBr;	// 매장 타입
+    private String parking;	// 주차
+    private String delivery;	// 배달
+    private String pickup;	// 픽업
+    private String here;	// 취식
+    private String happyStation;	// 해피스테이션
+    private String blindBox;	// 가챠 머신
     
     public SelectStoreDto() {}
     

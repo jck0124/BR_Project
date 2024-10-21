@@ -40,7 +40,6 @@
 		<div id="div_menu" class="center">
 			<div class="menu_list center">
 				<ul class="menu_list_inner">
-				<!-- 여기 -->
 				<c:forEach var="icecream" items="${icecreamList}">
 					<li class = "icecream">
 						<div class="menu_list_inner_border" style="background-color: ${icecream.backgroundColor};"
@@ -53,7 +52,6 @@
 						<strong class="menu_name">${icecream.nameKor}</strong>
 					</li>
 				</c:forEach>
-				
 				</ul>
 			</div>
 		</div>

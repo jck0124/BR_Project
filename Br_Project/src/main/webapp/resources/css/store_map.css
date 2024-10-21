@@ -384,7 +384,7 @@ footer {
 }
 #map_list_container ul {
 	width: 352px;
-	height: 18400px;
+	height: auto;
 	list-style: none;
 	padding: 0;
 	margin: 0;

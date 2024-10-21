@@ -13,7 +13,6 @@
 	<%@ include file="../header.jsp" %>
     
     <!-- main_container -->
-    <%-- <c:forEach var="icecream" items="${icecreamDetail}"> --%>
    	<div id="main_container" class="center">
    		<div class="main_container_inner">
    			<div class="view_top">
@@ -47,12 +46,6 @@
    			
    			<!-- 영양정보부터 -->
    			<div id="menu_view_container" class="center">
-   			<%-- servingSize 체크
-   			<div>
-			    <p>icecreamDetail: <c:out value="${icecreamDetail}" /></p>
-			    <p>servingSize: <c:out value="${icecreamDetail.servingSize}" /></p>
-			</div> 
-			--%>
    				<div id="menu_view_inner">
    				<c:if test="${not empty icecreamDetail.servingSize and icecreamDetail.servingSize != 0}">
    					<div id="nutrition_box">
@@ -211,7 +204,6 @@
    							<div class="menu_inner">
    								<a href="" class="">
    									<img src="">
-   									
    								</a>
    							</div>
    						</div>

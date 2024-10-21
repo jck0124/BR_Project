@@ -6,11 +6,13 @@
 	<select id="getAllStore" resultType="com.br.dto.StoreDto">
 		<![CDATA[
 			SELECT store_idx AS storeIdx
-			, store_name AS storeName
-			, address
-			, phone
-			, business_hours AS businessHours
-			, service
+				, store_name AS storeName
+	            , latitude
+	            , longitude
+				, address
+				, phone
+				, business_hours AS businessHours
+				, service
 			FROM store
 		]]>
 
@@ -19,10 +21,10 @@
  	<select id="getFilteredStore" resultType="com.br.dto.StoreDto">
 		<![CDATA[
 			SELECT store_idx AS storeIdx
-			, store_name AS storeName
-			, address
-			, phone
-			, business_hours AS businessHours
+				, store_name AS storeName
+				, address
+				, phone
+				, business_hours AS businessHours
 			FROM store
 			WHERE 1=1			
 		]]>
@@ -57,6 +59,9 @@
 			AND address LIKE '%' || #{sel2Selected} || '%'
 		</if>
 		<if test="storeSearched != null and storeSearched !=''">
+			AND store_name LIKE '%' || #{storeSearched} || '%'
+		</if>
+		<if test="(sel1Selected == null and sel1Selected == '' )and (sel2Selected == null and sel2Selected == '') and (storeSearched != null and storeSearched !='')">
 			AND store_name LIKE '%' || #{storeSearched} || '%'
 		</if>
 	</select> 

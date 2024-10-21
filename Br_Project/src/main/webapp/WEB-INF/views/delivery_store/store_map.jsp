@@ -88,12 +88,8 @@
     				</div>
     			</div>
    				<div class="select_city_box">
-   					<select id="sel1" name="sel1">
-   					
-   					</select>
-   					<select id="sel2" name="sel2">
-   					
-   					</select>
+   					<select id="sel1" name="sel1"></select>
+   					<select id="sel2" name="sel2"></select>
    				</div>
    				<div id="search_store">
    					<input type="text" id="store_search" name="store_name" placeholder="매장명">
@@ -105,14 +101,14 @@
     		<!-- 검색버튼 아래 사이드바 -->
     		<div id="side_bar_list">
     			<div class="search_result">
-    				검색결과 <span class="pink_text">100</span>
+    				검색결과 <span class="pink_text" id="storeCount">${storeList.size()}</span>
     			</div>
     			<div id="map_list_container">
     				<ul id="ul_map_container">
    					<!-- 필터링 전 forEach문 -->
-    				<c:forEach var="store" items="${storeList}">
+    				<c:forEach var="store" items="${storeList}" varStatus="status">
     					<li>
-    						<a href="" class="map_list">
+    						<a href="#" class="map_list" data-lat="${store.latitude}" data-lng="${store.longitude}">
 	    						<div class="map_list_left">
 	    							<h3>${store.storeName}</h3>
 		    						<p>${store.address}</p>
@@ -129,14 +125,6 @@
    		
    		<div id="store_map_field"></div>
     </div>
-    <!-- <div class="store_info_box">
-    	<div><div>BR 100flavor</div></div>
-    	<div>SPC 스퀘어</div>
-    	<div><span>매장주소</span> 서울 특별시 강남구 역삼동 831-23 2층</div>
-    	<div><span>전화번호</span> 02-565-1012</div>
-    	<div><span>운영시간</span> AM 10~PM 11</div>
-    	<div><span>매장 서비스</span> 주차, 배달, 픽업, 취식여부, 해피스테이션, 가챠머신</div>
-    </div> -->
     
 	<%@ include file="../footer.jsp" %>
     
@@ -199,27 +187,16 @@ $(document).ready(function(){
 		  	success: function(response) {
 		  		// 확인용
 			   console.log("paramData: "+ paramData),
-		  		console.log("ajax 필터링 요청 성공!");
 		  		console.log("ajax응답: "+ JSON.stringify(response));
 		  		let storeContainer = $("#ul_map_container");
 		  		storeContainer.empty();	// 기존 리스트 비우기
+		  		let storeCountContainer = $("#storeCount");
+		  		storeCountContainer.empty();
 		  		console.log("필터링된 스토어 리스트:", response.filteredStoreList);
 		  		response.filteredStoreList.forEach(filteredStore => {
-		  		 /*    storeContainer.append(`
-		  		        <li>
-		  		            <a href="" class="map_list">
-		  		                <div class="map_list_left">
-		  		                    <h3>${filteredStore.storeName}</h3>
-		  		                    <p>${filteredStore.address}</p>
-		  		                    <p>${filteredStore.phone}</p>
-		  		                    <p>${filteredStore.businessHours}</p>
-		  		                </div>
-		  		            </a>
-		  		        </li>
-		  		    `); */
 		  		    let filter = 
 		  		    	'<li>' +
-		  		    		'<a href="" class="map_list">' +
+		  		    		'<a href="#" class="map_list" data-lat="' + filteredStore.latitude +'" data-lng="' + filteredStore.longitude +'">' +
 		  		    			'<div class="map_list_left">' +
 		  		    				'<h3>'+ filteredStore.storeName +'</h3>' +
 		  		    				'<p>'+ filteredStore.address +'</p>' +
@@ -231,6 +208,8 @@ $(document).ready(function(){
 		  		    	;
 		  		    	storeContainer.append(filter);
 		  		});
+		  		let filterCountStore = response.filteredStoreList.length; // 크기 가져오기
+                $("#storeCount").html(filterCountStore); // 검색 결과 수 업데이트
 		  	},
 		  	error: function(xhr, status, error) {
 		  		console.error("ajax 필터링 요청 실패", status, error);
@@ -238,6 +217,7 @@ $(document).ready(function(){
 	   }); 
 	});
 });
+
 //카카오맵 API
 document.addEventListener("DOMContentLoaded", function() {
 	var imgSrc = 'https://www.baskinrobbins.co.kr/assets/images/store/map/icon_map_marker_default.png';
@@ -328,7 +308,22 @@ document.addEventListener("DOMContentLoaded", function() {
     
 	//marker.setMap(map); // 마커가 지도 위에 표시되도록 설정
     });
+	
+	$(".map_list").click(function(event){
+		event.preventDefault();
+		
+		let lat = $(this).data("lat");
+		let lng = $(this).data("lng");
+		
+		let options = {
+				center: new kakao.maps.LatLng(lat, lng),
+				level: 3
+		}
+		// 지도 인스턴스 업데이트 
+		map.setCenter(options.center);
+	}); 
 });
+
 
 //로그인 체크
 $(document).ready(function() {

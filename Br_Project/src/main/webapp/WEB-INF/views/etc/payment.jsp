@@ -77,12 +77,6 @@
 						<li>
 							<div class="selected_menu fl">
 								<div>${menu.name}</div>
-							<!-- 	<div class="taste">맛
-									<span>두바이스타일 초코통통,</span>
-									<span>피치 Pang 망고 Pang,</span>
-									<span>나주배 소르베,</span>
-									<span>블루베리 파나코타</span>	
-								</div> -->
 							</div>
 							<div class="option_info fr">
 								<div class="count_box">
@@ -99,26 +93,6 @@
 				<c:if test="${empty menuInfoList}">
    			 		<li>주문한 메뉴가 없습니다.</li>
 				</c:if>
-					<li>
-						<div class="selected_menu fl">
-							<div>무슨 맛이야?</div>
-						<!-- 	<div class="taste">맛
-								<span>두바이스타일 초코통통,</span>
-								<span>피치 Pang 망고 Pang,</span>
-								<span>나주배 소르베,</span>
-								<span>블루베리 파나코타</span>	
-							</div> -->
-						</div>
-						<div class="option_info fr">
-							<div class="count_box">
-								주문수량 : <span class="order_num">100</span>개
-							</div>
-							<div class="menu_price">
-								<fmt:formatNumber value="500000" type="number" pattern="#,###"/>
-								<span>원</span>
-							</div>
-						</div>
-					</li>		
 				</ul>
 			</div>
 			<div class="title_txt">결제금액</div>
@@ -155,7 +129,6 @@
 				</form>
 			</div>
 			
-			<!-- 여기 -->
 			<div id="alarm">
 				<div class="title_txt">요청사항</div>
 				<div id="list"></div>

@@ -14,7 +14,6 @@ public class DrinkDetailMenuDto {
 	private String allergens;	// 알레르기
 	private int price;	// 가격
 	
-	
 	public DrinkDetailMenuDto() {
 		
 	}

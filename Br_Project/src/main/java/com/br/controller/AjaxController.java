@@ -56,8 +56,8 @@ public class AjaxController {
 	public JSONArray event(int pageNum) {
 	    System.out.println("event 요청이 들어옴");
 	    System.out.println(pageNum);
-	    return bSvc.selectEvent(pageNum);
 	    
+	    return bSvc.selectEvent(pageNum);
 	}
 	
 	// 배라광장 추천버튼
@@ -65,6 +65,7 @@ public class AjaxController {
 	public boolean increaseLikes(@RequestParam("boardIdx") int boardIdx) {
 		
 		bSvc.increaseLikes(boardIdx);
+		
 		return true;
 	}
 	
@@ -95,13 +96,14 @@ public class AjaxController {
 		} else {
 			session.setAttribute("chatSize", null);
 		}
+		
 		return true;
 	}
 	
 	// ajax 카카오 페이
+	// 파라미터: KakaoPayOrderFormDto 객체 - 상품명(name) / 최종 가격(totalPrice)
 	@RequestMapping("/api/payReady")
     public @ResponseBody KakaoPayReadyDto payReady(@RequestBody KakaoPayOrderFormDto kakaoPayOrder) {
-        
         String name = kakaoPayOrder.getName();
         int totalPrice = kakaoPayOrder.getTotalPrice();
 
@@ -112,13 +114,14 @@ public class AjaxController {
         return readyResponse;
     }
 	
-//	ajax store 필터링
+	//	ajax 매장 필터링
+	// 파라미터: HashMap<String, Object> hmap - 매장 타입(storeTypeBrChecked) / 매장 타입(storeTypeFlavor) / 주차(parkingChecked) / 배달(deliveryChecked) / 픽업(pickupChecked) 
+	// 취식여부(hereChecked) / 해피스테이션(happyStationChecked) / 가챠머신(blindBoxChecked) / 도/시(sel1Selected) / 구/군(sel2Selected) / 매장명(storeSearched)
 	@ResponseBody
 	@RequestMapping(value="/filter/store", method = RequestMethod.POST)
 	public HashMap<String, Object> filteredStore(@RequestBody HashMap<String, Object> hmap) {
-		System.out.println(hmap);
+//		System.out.println(hmap);
 		Boolean storeTypeBrChecked = (Boolean) hmap.get("storeTypeBrChecked");
-		System.out.println("여기?1");
 		Boolean storeTypeFlavor = (Boolean) hmap.get("storeTypeFlavor");
 		Boolean parkingChecked = (Boolean) hmap.get("parkingChecked");
 		Boolean deliveryChecked = (Boolean) hmap.get("deliveryChecked");
@@ -126,26 +129,16 @@ public class AjaxController {
 		Boolean hereChecked = (Boolean) hmap.get("hereChecked");
 		Boolean happyStationChecked = (Boolean) hmap.get("happyStationChecked");
 		Boolean blindBoxChecked = (Boolean) hmap.get("blindBoxChecked");
-		System.out.println("여기?8");
-		System.out.println("storeTypeBrChecked: "+storeTypeBrChecked+"/storeTypeFlavor: "+storeTypeFlavor+"/parkingChecked: "+parkingChecked
-				+"/deliveryChecked: "+deliveryChecked+"/pickupChecked: "+pickupChecked
-				+"/hereChecked: "+hereChecked+"/happyStationChecked: "+happyStationChecked
-				+"/blindBoxChecked: "+blindBoxChecked);
-		String sel1Selected = hmap.get("sel1Selected") != null ? hmap.get("sel1Selected").toString() : null;
-		String sel2Selected = hmap.get("sel2Selected") != null ? hmap.get("sel2Selected").toString() : null;
+		String sel1Selected = hmap.get("sel1Selected") != null && !hmap.get("sel1Selected").toString().trim().isEmpty() ? hmap.get("sel1Selected").toString() : null;
+		String sel2Selected = hmap.get("sel2Selected") != null && !hmap.get("sel2Selected").toString().trim().isEmpty() ? hmap.get("sel2Selected").toString() : null;
 		String storeSearched = hmap.get("storeSearched") != null ? hmap.get("storeSearched").toString() : null;
-		
-		System.out.println("sel1Selected: "+ sel1Selected + " /sel2Selected: "+ sel2Selected + " /storeSearched: "+storeSearched);
 		
 		HashMap<String, Object> response = new HashMap<>();
 		ArrayList<StoreDto> filteredStoreList = sSvc.getFilteredStoreList(storeTypeBrChecked, storeTypeFlavor, parkingChecked, deliveryChecked, pickupChecked, hereChecked, happyStationChecked, blindBoxChecked, sel1Selected, sel2Selected, storeSearched);
+		
 		response.put("filteredStoreList", filteredStoreList);
 		
-//		String sel1Selected = hmap.get("sel1Selected").toString();
-//		String sel2Selected = hmap.get("sel2Selected").toString();
-//		String storeSearched = hmap.get("storeSearched").toString();
-		
-	    
 		return response;
 	}
+	
 }

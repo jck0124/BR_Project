@@ -28,6 +28,7 @@ public class StoreServiceImpl implements StoreService {
 		
 		return storeList;
 	}
+	
 	// 필터링 후 store
 	@Override
 	public ArrayList<StoreDto> getFilteredStoreList(

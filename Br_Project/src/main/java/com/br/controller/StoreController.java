@@ -16,13 +16,14 @@ public class StoreController {
 	StoreServiceImpl sSvc;
 	
 	//수연
+	// 매장 목록 및 상세 정보
 	@RequestMapping("/store_map")
 	public String store(Model model) {
-		
 		if(sSvc.getStoreList() != null && sSvc.getStore() != null) {
 			model.addAttribute("storeList", sSvc.getStoreList());
 			model.addAttribute("selectStore", sSvc.getStore());
 		}
+		
 		return "delivery_store/store_map";
 	}
 	
@@ -32,6 +33,7 @@ public class StoreController {
 		Map<String, Object> products = sSvc.getProducts();
 		model.addAttribute("products", products);
 		model.addAttribute("storeName", storeName);
+		
 		return "delivery_store/order_list";
 	}
 	

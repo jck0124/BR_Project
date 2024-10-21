@@ -20,10 +20,10 @@ public class StoreDaoImpl implements StoreDao {
 	@Autowired
 	SqlSession sqlSession;
 	
-	// 필터링 전 store
+	// 수연
+	// 매장 목록 - 필터링 전
 	@Override
 	public ArrayList<StoreDto> selectStoreList() {
-		
 		List<StoreDto> storeListTemp = sqlSession.selectList("StoreMapper.getAllStore");
 		ArrayList<StoreDto> storeList = new ArrayList<StoreDto>();
 		storeList.addAll(storeListTemp);
@@ -31,16 +31,16 @@ public class StoreDaoImpl implements StoreDao {
 		return storeList;
 	}
 	
-	// 필터링 후 store
+	// 매장 목록 - 필터링 후
+	// 파라미터: HashMap<String, Object> hmap - 매장 타입(storeTypeBrChecked) / 매장 타입(storeTypeFlavor) / 주차(parkingChecked) / 배달(deliveryChecked) / 픽업(pickupChecked) 
+	// 취식여부(hereChecked) / 해피스테이션(happyStationChecked) / 가챠머신(blindBoxChecked) / 도/시(sel1Selected) / 구/군(sel2Selected) / 매장명(storeSearched)
 	@Override
 	public ArrayList<StoreDto> filteredStoreList(HashMap<String, Object> hmap) {
-		
 		List<StoreDto> filteredStoreListTemp = sqlSession.selectList("StoreMapper.getFilteredStore", hmap);
-//		ArrayList<StoreDto> filteredStoreList = new ArrayList<StoreDto>();
-//		filteredStoreList.addAll(filteredStoreListTemp);
 		
 		return new ArrayList<>(filteredStoreListTemp);
 	}
+	
 	// 수빈
 	@Override
 	public ArrayList<SelectStoreDto> selectStore() {
