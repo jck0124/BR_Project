@@ -3,6 +3,7 @@ package com.br.service;
 import java.util.HashMap;
 
 public interface MemberService {
+	
 	// 토큰 받아오기
 	String getAccessToken(String authorize_code);
 	

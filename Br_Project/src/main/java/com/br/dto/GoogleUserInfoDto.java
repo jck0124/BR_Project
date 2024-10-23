@@ -1,15 +1,16 @@
 package com.br.dto;
 
+// 로그인(구글) 정보
 public class GoogleUserInfoDto {
 	
-	private String id;
-	private String pw;
-	private String email;
-	private Boolean verified_email;
-	private String name;
-	private String given_name;
-	private String picture;
-	private String locale;
+	private String id;	// 아이디
+	private String pw;	// 패스워드
+	private String email;	// 이메일
+	private Boolean verified_email;	// 인증 이메일	
+	private String name;	// 이름
+	private String given_name;	// 성
+	private String picture;	// 그림
+	private String locale;	// 지역? 언어?
 	
 	public GoogleUserInfoDto() {
 		

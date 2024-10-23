@@ -11,34 +11,42 @@ import com.nimbusds.jose.shaded.json.JSONArray;
 
 public interface BoardService {
 	
-	// 배라광장
+	// 게시판(배라광장) 게시글 리스트
+	// 파라미터: (orderType) / 현재 페이지(pageNum)
 	PlazaPaginationDto palzaPagination(String orderType, int pageNum);
 	
-	// 배라광장 게시글 작성
+	// 게시판(배라광장) 게시글 작성
+	// 파라미터: 제목(title) / 내용(content) / 작성자 아이디(writerId) / 작성자 이름(writerName) / (showName)
 	void insertPlazaBoard(String title, String content, String writerId, String writerName, String showName);
 	
-	// 배라광장 추천 버튼
+	// 게시판(배라광장) 추천 버튼
+	// 파라미터: 게시글 idx(boardIdx)
 	void increaseLikes(int boardIdx);
 	
-	// 배라광장 자세히 보기
+	// 게시판(배라광장) 자세히 보기
+	// 파라미터: 게시글 idx(boardIdx)
 	PlazaDetailDto showPlazaDetailByBoardIdx(int boardIdx);
 	
-	// 레시피 리스트
+	// 게시판(레시피) 리스트
 	ArrayList<RecipeDto> getRecipeList();
 	
-	// 레시피 등록될 idx
+	// 게시판(레시피) 레시피 idx
 	int getRecipeIdx();
 	
-	// 레시피 이미지
-	RecipeImgDto getRecipeImg(int recipeIdx);
-	
-	// 레시피 insert
+	// 게시판(레시피) 등록
+	// 파라미터: 레시피 idx(recipeIdx) / 카테고리 idx(categoryIdx) / 이미지 URL(imgUrl) / 타이틀(한국)(titleKor) / 타이틀(영어)(titleEng)
 	void insertRecipe(int recipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng);
 	
-	// 이벤트 리스트 보여주기
+	// 게시판(레시피) 이미지
+	// 파라미터: 레시피 idx(recipeIdx)
+	RecipeImgDto getRecipeImg(int recipeIdx);
+	
+	// 게시판(이벤트) 리스트
+	// 파라미터: 현재 페이지(pageNum)
 	JSONArray selectEvent(int pageNum);
 	
-	// event insert
+	// 게시판(이벤트) 등록
+	// 파라미터: 이미지 경로(imgPath) / 종류(topLetter) / 제목(title) / 기간(period)
 	void insertEvent(String imgPath, String topLetter, String title, String period);
 
 }

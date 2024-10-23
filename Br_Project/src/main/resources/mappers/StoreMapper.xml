@@ -21,12 +21,14 @@
  	<select id="getFilteredStore" resultType="com.br.dto.StoreDto">
 		<![CDATA[
 			SELECT store_idx AS storeIdx
-				, store_name AS storeName
-				, address
-				, phone
-				, business_hours AS businessHours
+			    , store_name AS storeName
+			    , latitude
+			    , longitude
+			    , address
+			    , phone
+			    , business_hours AS businessHours
 			FROM store
-			WHERE 1=1			
+			WHERE 1=1		
 		]]>
 		<if test="storeTypeBrChecked and !storeTypeFlavorChecked">
 			AND type_br = 'T'

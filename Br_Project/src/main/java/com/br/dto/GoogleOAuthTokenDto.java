@@ -1,12 +1,13 @@
 package com.br.dto;
 
+// 로그인(구글) 토큰 발급
 public class GoogleOAuthTokenDto {
 
-	private String access_token;
-	private Integer expires_in;
-	private String scope;
-	private String token_type;
-	private String id_token;
+	private String access_token;	// 요청 승인 위한 토큰
+	private Integer expires_in;	// 만료일
+	private String scope;	// 범위
+	private String token_type;	// 반환 토큰 유형
+	private String id_token;	// 아이디 토큰
 	
 	public GoogleOAuthTokenDto() {
 		

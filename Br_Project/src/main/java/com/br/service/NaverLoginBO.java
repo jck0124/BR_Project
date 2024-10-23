@@ -11,6 +11,7 @@ import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service; 
 
+// 로그인(네이버)
 public class NaverLoginBO {	 	
 		/* 인증 요청문을 구성하는 파라미터 */		
 		//client_id: 애플리케이션 등록 후 발급받은 클라이언트 아이디		

@@ -19,9 +19,6 @@ public class GoogleOAuthDto {
 	
 	@Value("${app.google.secret}")
 	private String googleClientSecret;
-
-	
-	
 	
 	public String getGoogleLoginUrl() {
 		return googleLoginUrl;

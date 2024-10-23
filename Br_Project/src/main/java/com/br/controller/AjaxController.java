@@ -41,7 +41,8 @@ public class AjaxController {
 	
 	@Autowired
 	StoreServiceImpl	sSvc;
-	// 배라광장 무한스크롤
+	
+	// 게시판(배라광장) 무한스크롤
 	@RequestMapping(value = "/api/plaza", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<PlazaBoardDto> getPlazaBoardList(
 			@RequestParam(value = "orderType", required = false, defaultValue = "latest") String orderType,
@@ -50,7 +51,7 @@ public class AjaxController {
 		return bSvc.palzaPagination(orderType, pageNum).getBoardList(); 
 	}
 	
-	// 이벤트 무한스크롤 
+	// 게시판(이벤트) 무한스크롤 
 	@RequestMapping(value="/api/event" , produces = "application/json") 
 	@ResponseBody
 	public JSONArray event(int pageNum) {
@@ -60,7 +61,7 @@ public class AjaxController {
 	    return bSvc.selectEvent(pageNum);
 	}
 	
-	// 배라광장 추천버튼
+	// 게시판(배라광장) 추천버튼
 	@RequestMapping("/api/increaseLikes")
 	public boolean increaseLikes(@RequestParam("boardIdx") int boardIdx) {
 		
@@ -120,7 +121,6 @@ public class AjaxController {
 	@ResponseBody
 	@RequestMapping(value="/filter/store", method = RequestMethod.POST)
 	public HashMap<String, Object> filteredStore(@RequestBody HashMap<String, Object> hmap) {
-//		System.out.println(hmap);
 		Boolean storeTypeBrChecked = (Boolean) hmap.get("storeTypeBrChecked");
 		Boolean storeTypeFlavor = (Boolean) hmap.get("storeTypeFlavor");
 		Boolean parkingChecked = (Boolean) hmap.get("parkingChecked");

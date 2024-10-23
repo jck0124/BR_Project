@@ -23,25 +23,26 @@ public class BoardDaoImpl implements BoardDao {
 	SqlSession sqlSession;
 	
 	// 찬균
-	
-	// 배라광장 게시글 리스트 최신순
+	// 게시판(배라광장) 리스트 최신순
 	@Override
 	public ArrayList<PlazaBoardDto> selectPlazaBoardListOrderByLatest() {
 		List<PlazaBoardDto> plazaBoardList = sqlSession.selectList("BoardMapper.selectPlazaBoardList");
+		
 		return new ArrayList<PlazaBoardDto>(plazaBoardList);
 	}
 	
-	// 배라광장 게시글 리스트 추천순 
+	// 게시판(배라광장) 리스트 추천순 
 	@Override
 	public ArrayList<PlazaBoardDto> selectPlazaBoardListOrderByLikes() {
 		List<PlazaBoardDto> plazaBoardList = sqlSession.selectList("selectPlazaBoardListOrderByLikes");
+		
 		return new ArrayList<PlazaBoardDto>(plazaBoardList);
 	}
 	
-	// 배라광장 게시글 작성
+	// 게시판(배라광장) 게시글 작성
+	// 파라미터: 제목(title) / 내용(content) / 작성자 아이디(writerId) / 작성자 이름(writerName) / 이름(showName)
 	@Override
 	public void insertPlaza(String title, String content, String writerId, String writerName, char showName) {
-		
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("title", title);
 		paramMap.put("content", content);
@@ -52,16 +53,17 @@ public class BoardDaoImpl implements BoardDao {
 		sqlSession.insert("BoardMapper.insertPlaza", paramMap);
 	}
 	
-	// 배라광장 게시글 추천
+	// 게시판(배라광장) 게시글 추천
+	// 파라미터: 게시글 idx(boardIdx)
 	@Override
 	public void updatePlazaLikes(int boardIdx) {
-		
 		sqlSession.update("BoardMapper.updatePlazaLikes", boardIdx);
 	}
 	
+	// 게시판(배라광장) 
+	// 파라미터: 게시글 idx(boardIdx)
 	@Override
 	public PlazaDetailDto selectPlazaDtoByBoardIdx(int boardIdx) {
-		
 		return sqlSession.selectOne("BoardMapper.selectPlazaDetailDtoByBoardIdx", boardIdx);
 	}
 	

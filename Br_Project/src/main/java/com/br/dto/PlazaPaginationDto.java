@@ -2,11 +2,12 @@ package com.br.dto;
 
 import java.util.ArrayList;
 
+// 게시판(배라광장)
 public class PlazaPaginationDto {
 	
-	private String orderType;
-	private int totalPageNum;
-	private ArrayList<PlazaBoardDto> boardList;
+	private String orderType;	// 순서
+	private int totalPageNum;	// 전체 페이지 수
+	private ArrayList<PlazaBoardDto> boardList;	// 게시판(배라광장) 객체
 	
 	public PlazaPaginationDto() {
 		

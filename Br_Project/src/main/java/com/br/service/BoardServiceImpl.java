@@ -23,7 +23,8 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDao bDao;
 	
 	
-	// 배라광장 게시글 목록
+	// 게시판(배라광장) 게시글 리스트
+	// 파라미터: (orderType) / 현재 페이지(pageNum)
 	@Override
 	public PlazaPaginationDto palzaPagination(String orderType, int pageNum) {
 
@@ -55,7 +56,8 @@ public class BoardServiceImpl implements BoardService {
 		return new PlazaPaginationDto(orderType, totalPageNum, paginationBoardList);
 	}
 
-	// 배라광장 게시글 작성
+	// 게시판(배라광장) 게시글 작성
+	// 파라미터: 제목(title) / 내용(content) / 작성자 아이디(writerId) / 작성자 이름(writerName) / (showName)
 	@Override
 	public void insertPlazaBoard(String title, String content, String writerId, String writerName, String showName) {
 		
@@ -68,7 +70,8 @@ public class BoardServiceImpl implements BoardService {
 		bDao.insertPlaza(title, content, writerId, writerName, showNameChar);
 	}
 
-	// 배라광장 추천버튼
+	// 게시판(배라광장) 추천버튼
+	// 파라미터: 게시글 idx(boardIdx)
 	@Override
 	public void increaseLikes(int boardIdx) {
 		
@@ -76,7 +79,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	}	
 	
-	// 배라광장 자세히 보기
+	// 게시판(배라광장) 자세히 보기
+	// 파라미터: 게시글 idx(boardIdx)
 	@Override
 	public PlazaDetailDto showPlazaDetailByBoardIdx(int boardIdx) {
 		
@@ -88,19 +92,16 @@ public class BoardServiceImpl implements BoardService {
 		return pDto;
 	}
 	
-	
-	
-	// 레시피 출력
+	// 게시판(레시피) 리스트
 	@Override
 	public ArrayList<RecipeDto> getRecipeList() {
 		ArrayList<RecipeDto> recipeList = new ArrayList<RecipeDto>();
-		// 메서드 실행시 트랜잭션 관리
 		recipeList = bDao.selectRecipeList();
 
 		return recipeList;
 	}
 	
-	// 레시피 idx
+	// 게시판(레시피) 레시피 idx
 	@Override
 	public int getRecipeIdx() {
 		int recipeIdx = bDao.selectRecipeIdx();
@@ -108,19 +109,22 @@ public class BoardServiceImpl implements BoardService {
 		return recipeIdx;
 	}
 	
-	// 레시피 insert
+	// 게시판(레시피) 등록
+	// 파라미터: 레시피 idx(recipeIdx) / 카테고리 idx(categoryIdx) / 이미지 URL(imgUrl) / 타이틀(한국)(titleKor) / 타이틀(영어)(titleEng)
 	@Override
 	public void insertRecipe(int recipeIdx, int categoryIdx, String imgUrl, String titleKor, String titleEng) {
 		bDao.insertRecipe(recipeIdx, categoryIdx, imgUrl, titleKor, titleEng);
 	}
 	
-	// 레시피 이미지
+	// 게시판(레시피) 이미지
+	// 파라미터: 레시피 idx(recipeIdx)
 	@Override
 	public RecipeImgDto getRecipeImg(int recipeIdx) {
 		return bDao.selectRecipeImg(recipeIdx);
 	}
 	
-	// event 게시판 보여주기
+	// 게시판(이벤트) 리스트
+	// 파라미터: 현재 페이지(pageNum)
 	@Override
 	public JSONArray selectEvent(int pageNum) {
 		ArrayList<SelectEventDto> selectEvent = new ArrayList<SelectEventDto>();
@@ -153,10 +157,11 @@ public class BoardServiceImpl implements BoardService {
 		// 이벤트 리스트와 페이지네이션 정보 담기
 		return array;
 	}
-
+	
+	// 게시판(이벤트) 등록
+	// 파라미터: 이미지 경로(imgPath) / 종류(topLetter) / 제목(title) / 기간(period)
 	@Override
 	public void insertEvent(String imgPath, String topLetter, String title, String period) {
-
 		bDao.insertEvent(imgPath, topLetter, title, period);
 	}
 

@@ -54,6 +54,8 @@ public class BoardController {
 	private static final Logger logger = Logger.getLogger(BoardController.class);
 	
 	// 찬균
+	// 게시판(배라광장)
+	// 파라미터: (orderType) / 현재 페이지(pageNum)
 	@RequestMapping("/br_plaza")
 	public String brPlaza(
 			@RequestParam(value = "orderType", required = false, defaultValue = "latest") String orderType,
@@ -69,6 +71,7 @@ public class BoardController {
 		return "br_play/br_plaza";
 	}
 	
+	// 게시판(배라광장)
 	@RequestMapping("/br_plaza_write")
 	public String brPlazaWrite(HttpSession session) {
 		
@@ -79,6 +82,8 @@ public class BoardController {
 		}
 	}
 	
+	// 게시판(배라광장) 등록
+	// 파라미터: 작성자 아이디(writerId) / 작성자 이름(writerName) / 제목(title) / 내용(content) / 동의(agreeement)
 	@RequestMapping("/br_plaza_insert_write")
 	public String brPlazaInsert(
 			@RequestParam(value = "writer_id") String writerId,
@@ -91,6 +96,8 @@ public class BoardController {
 		return "redirect:/br_plaza";
 	}
 	
+	// 게시판(배라광장) 상세
+	// 파라미터: 게시판idx(boardIdx)
 	@RequestMapping("/br_plaza_detail")
 	public String brPlazaDetail(
 				@RequestParam(value = "board_idx") Integer boardIdx,
@@ -103,7 +110,7 @@ public class BoardController {
 	
 	
 	//수연
-	// 레시피 리스트
+	// 게시판(레시피) 리스트
 	@RequestMapping("/br_recipe")
 	public String brRecipe(Model model) {
 		List<RecipeDto> recipeList = bSvc.getRecipeList();
@@ -114,7 +121,7 @@ public class BoardController {
 		return "br_play/br_recipe";
 	}
 	
-	// 레시피 이미지 파일 출력
+	// 게시판(레시피) 이미지 파일 출력
 	@RequestMapping("/br_recipe/img")
 	// 바이트 배열 형태로 이미지 반환
 	public ResponseEntity<byte[]> getRecipeImg(@RequestParam(required = false) Integer recipeIdx) {
@@ -140,7 +147,7 @@ public class BoardController {
 	}
 
 	
-	// 파일 업로드
+	// 게시판(레시피) 파일 업로드
 	@ResponseBody
 	@RequestMapping(value="file", method = RequestMethod.POST)
 	public String fileUpload(MultipartFile file) throws Exception {
@@ -173,7 +180,7 @@ public class BoardController {
 	}
 	
 
-	// 레시피 insert
+	// 게시판(레시피) 등록
 	@RequestMapping("/insert_recipe")
 	public String recipe(
 			@RequestParam int categoryIdx, 

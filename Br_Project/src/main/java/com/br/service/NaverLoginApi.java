@@ -2,7 +2,9 @@ package com.br.service;
 
 // NaverLoginApi는 특정 API의 설정을 제공하는 API 클래스
 import com.github.scribejava.core.builder.api.DefaultApi20; 
+
 public class NaverLoginApi extends DefaultApi20{     
+	
 	protected NaverLoginApi(){    
 		
 	// Singleton 패턴을 위한 내부 클래스

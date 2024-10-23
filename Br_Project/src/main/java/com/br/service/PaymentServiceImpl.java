@@ -14,7 +14,8 @@ import com.br.dto.KakaoPayReadyDto;
 
 @Service 
 public class PaymentServiceImpl implements PaymentService {
-	 // 카카오페이 결제창 연결
+	// 결제(카카오페이) 결제창
+	// 파라미터: 상품명(name) / 상품 총액(totalPrice)
 	@Override
     public KakaoPayReadyDto payReady(String name, int totalPrice) {
     
@@ -45,7 +46,8 @@ public class PaymentServiceImpl implements PaymentService {
         return responseEntity.getBody();
     }
 
-    // 카카오페이 결제 승인
+    // 결제(카카오페이) 승인
+	// 파라미터: 결제 고유번호(tid) / 결제승인 요청 인증 토큰(pgToken)
     // 사용자가 결제 수단을 선택하고 비밀번호를 입력해 결제 인증을 완료한 뒤,
     // 최종적으로 결제 완료 처리를 하는 단계
 	@Override
@@ -67,7 +69,7 @@ public class PaymentServiceImpl implements PaymentService {
         return approveResponse;
     }
     
-    // 카카오페이 측에 요청 시 헤더부에 필요한 값
+    // 결제(카카오페이) 측에 요청 시 헤더부에 필요한 값
     private HttpHeaders getHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "DEV_SECRET_KEY DEVE24EFC6EF4E21C4B9847ABD71C2673EC9BD51");

@@ -1,12 +1,13 @@
 package com.br.dto;
 
+// 게시판(배라광장)
 public class PlazaDetailDto {
 
-	private int boardIdx;
-	private String title;
-	private String content;
-	private String writerName;
-	private char showName;
+	private int boardIdx;	// 게시글 idx
+	private String title;	// 내용
+	private String content;	// 내용
+	private String writerName;	// 작성자
+	private char showName;	// ???
 	
 	
 	public PlazaDetailDto() {

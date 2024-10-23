@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BoardMapper">
 
-	<!-- 배라광장 게시판 -->
+	<!-- 게시판(배라광장) - 게시판 정보를 idx순으로 SELECT -->
 	<select id="selectPlazaBoardList" resultType="com.br.dto.PlazaBoardDto">
 		<![CDATA[
 			SELECT  board_idx AS boardIdx,
@@ -26,7 +26,7 @@
 		]]>
 	</select>
 	
-	<!-- 배라광장 게시판 추천순 -->
+	<!-- 게시판(배라광장) 추천순 -->
 	<select id="selectPlazaBoardListOrderByLikes" resultType="com.br.dto.PlazaBoardDto">
 		<![CDATA[
 			SELECT  board_idx AS boardIdx,
@@ -48,7 +48,8 @@
 		]]>
 	</select>
 	
-	<!--  배라광장 게시판 글쓰기 -->
+	<!--  게시판(배라광장) 글쓰기 -->
+	<!-- 파라미터: 제목(title) / 내용(content) / 작성자 아이디(writerId) / 작성자 이름(writerName) / 이름(showName)-->
 	<insert id="insertPlaza">
 		<![CDATA[
 			INSERT INTO plaza(
@@ -75,7 +76,7 @@
 		]]>
 	</insert>
 	
-	<!-- 배라 광장 추천 -->
+	<!-- 게시판(배라광장) 추천 -->
 	<update id="updatePlazaLikes">
 		<![CDATA[
 			UPDATE  plaza
@@ -86,7 +87,7 @@
 		]]>
 	</update>
 	
-	<!--  배라광장 게시판 자세히 보기 -->
+	<!--  게시판(배라광장) 자세히 보기 -->
 	<select id="selectPlazaDetailDtoByBoardIdx" resultType="com.br.dto.PlazaDetailDto">
 		<![CDATA[
 			SELECT  board_idx AS boardIdx,
@@ -99,7 +100,7 @@
 		]]>
 	</select>
 
-	<!-- 레시피 리스트 -->
+	<!-- 게시판(레시피) 리스트 -->
  	<select id="getAllRecipe" resultType="com.br.dto.RecipeDto">
 		<![CDATA[
 			SELECT r.recipe_idx AS recipeIdx
@@ -113,7 +114,7 @@
 		]]>
 	</select> 
 	
-	<!-- 레시피 insert -->
+	<!-- 게시판(레시피) 등록 -->
 	<insert id="insertRecipeInfo">
 		<![CDATA[
 			INSERT INTO recipe(recipe_idx, category_idx, img_url, title_kor, title_eng)
@@ -121,7 +122,7 @@
 		]]>
 	</insert>
 	
-	<!-- 레시피 이미지 출력 -->
+	<!-- 게시판(레시피) 이미지 출력 -->
 	<select id="imgFile" resultType="com.br.dto.RecipeImgDto">
 		<![CDATA[
 			SELECT recipe_idx AS recipeIdx
@@ -131,7 +132,7 @@
 		]]>
 	</select>
 	
-	<!-- 등록할 recipe_idx -->
+	<!-- 게시판(레시피) idx -->
 	<select id="selectRecipeIdx" resultType="Integer">
 		<![CDATA[
 			SELECT (MAX(recipe_idx) + 1) AS maxRecipeIdx
@@ -139,7 +140,7 @@
 		]]>
 	</select>
 	
-	<!-- 이벤트 보여주기 -->
+	<!-- 게시판(이벤트) 보여주기 -->
 	<select id="selectEvent" resultType="com.br.dto.SelectEventDto">
 		<![CDATA[
 			SELECT t2.*
@@ -154,14 +155,14 @@
 		]]>
 	</select>
 	
-	<!-- 이벤트 페이지네이션 -->
+	<!-- 게시판(이벤트) 페이지네이션 -->
 	<select id="selectLastPageNumber" resultType="Integer" >
 		<![CDATA[
 			SELECT COUNT(*) FROM event
 		]]>
 	</select>
 	
-	<!-- 이벤트 insert -->
+	<!-- 게시판(이벤트) 등록 -->
 	<select id="insertEvent">
 		<![CDATA[
 			INSERT INTO event(img, top_letter, title, period, event_idx)

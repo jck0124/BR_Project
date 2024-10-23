@@ -309,19 +309,22 @@ document.addEventListener("DOMContentLoaded", function() {
 	//marker.setMap(map); // 마커가 지도 위에 표시되도록 설정
     });
 	
-	$(".map_list").click(function(event){
-		event.preventDefault();
-		
-		let lat = $(this).data("lat");
-		let lng = $(this).data("lng");
-		
-		let options = {
-				center: new kakao.maps.LatLng(lat, lng),
-				level: 3
-		}
-		// 지도 인스턴스 업데이트 
-		map.setCenter(options.center);
-	}); 
+	let storeContainer2 = $("#ul_map_container");
+    storeContainer2.on("click", ".map_list", function(event) {
+        event.preventDefault();
+
+        let lat = $(this).data("lat");
+        let lng = $(this).data("lng");
+
+
+        let options = {
+            center: new kakao.maps.LatLng(lat, lng),
+            level: 3
+        };
+        // 지도 인스턴스 업데이트 
+        map.setCenter(options.center);
+    });	
+    
 });
 
 
@@ -746,11 +749,6 @@ $( document ).ready(function(){
     })
    retOption(sel1, "sel1");
 	
-   $(function(){
-	  $("#btn_search").click(function(){
-		  
-	  }); 
-   });
 });
 </script>
 </html>

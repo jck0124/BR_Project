@@ -30,12 +30,10 @@ public class PaymentController {
     	model.addAttribute("totalPrice", totalPrice);
     	if(products != null) {
     		String[] product = products.split(",");
-//    		System.out.println("product의 개수: " + product.length);
     		List<Map<String, String>> menuInfoList = new ArrayList<>();
     		
     		for(String menu : product) {
     			String[] menuInfo = menu.split("/");
-//    			System.out.println("menuInfo: " + Arrays.toString(menuInfo));
     				Map<String, String> menuDetails = new HashMap<String, String>();
     				menuDetails.put("name", menuInfo[0].trim());
     				menuDetails.put("count", menuInfo[1].trim());
@@ -69,12 +67,9 @@ public class PaymentController {
 
     @GetMapping("/pay/completed")
     public String payCompleted(@RequestParam("pg_token") String pgToken) {
-    	
         String tid = KakaoPaySessionUtils.getStringAttributeValue("tid");
-//        log.info("결제승인 요청을 인증하는 토큰: " + pgToken);
-//        log.info("결제 고유번호: " + tid);
 
-        // 카카오 결제 요청하기
+        // 카카오 결제 요청
         KakaoPayApproveDto approveResponse = pSvc.payApprove(tid, pgToken);
 
         return "redirect:/icecream";

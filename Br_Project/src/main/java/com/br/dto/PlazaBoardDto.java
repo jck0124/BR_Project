@@ -1,15 +1,16 @@
 package com.br.dto;
 
+// 게시판(배라광장) 
 public class PlazaBoardDto {
 	
-	private int boardIdx;
-	private String title;
-	private String content;
-	private String writerId;
-	private boolean newMark;
-	private int likes;
-	private String writerName;
-	private boolean showName;
+	private int boardIdx;	// 게시글 idx(boardIdx)
+	private String title;	// 제목(title)
+	private String content;	// 내용(content)
+	private String writerId;	// 작성자(writerId)
+	private boolean newMark;	// 
+	private int likes;	// 좋아요(like)
+	private String writerName;	// 작성자 이름(writerName)
+	private boolean showName;	// 
 	
 	public PlazaBoardDto() {
 		

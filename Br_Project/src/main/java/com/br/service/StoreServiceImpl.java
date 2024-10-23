@@ -20,7 +20,7 @@ public class StoreServiceImpl implements StoreService {
 	@Autowired
 	private StoreDao sDao;
 	
-	// 필터링 전 store
+	// 매장 리스트 - 필터링 전
 	@Override
 	public ArrayList<StoreDto> getStoreList() {
 		ArrayList<StoreDto> storeList = new ArrayList<StoreDto>();
@@ -29,7 +29,9 @@ public class StoreServiceImpl implements StoreService {
 		return storeList;
 	}
 	
-	// 필터링 후 store
+	// 매장 리스트 - 필터링 후
+	// 파라미터: HashMap<String, Object> hmap - 매장 타입(storeTypeBrChecked) / 매장 타입(storeTypeFlavor) / 주차(parkingChecked) / 배달(deliveryChecked) / 픽업(pickupChecked) 
+	// 취식여부(hereChecked) / 해피스테이션(happyStationChecked) / 가챠머신(blindBoxChecked) / 도/시(sel1Selected) / 구/군(sel2Selected) / 매장명(storeSearched)
 	@Override
 	public ArrayList<StoreDto> getFilteredStoreList(
 			Boolean storeTypeBrChecked,
@@ -57,7 +59,10 @@ public class StoreServiceImpl implements StoreService {
 		hmap.put("sel2Selected", sel2Selected);
 		hmap.put("storeSearched", storeSearched);
 		
-//		filteredStoreList
+		for(StoreDto dto : sDao.filteredStoreList(hmap)) {
+			System.out.println(dto.getStoreName() + ", " + dto.getLatitude()+ ", " + dto.getLongitude());
+		}
+
 		return sDao.filteredStoreList(hmap);
 	}
 	@Override

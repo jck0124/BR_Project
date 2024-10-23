@@ -22,6 +22,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	private NaverLoginBO naverLoginBO;
 	
+	// 로그인(네이버)
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
