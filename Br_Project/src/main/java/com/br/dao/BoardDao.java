@@ -44,12 +44,14 @@ public interface BoardDao {
 	
 	// 수빈
 	
-	// 이벤트 목록 
+	// 게시판(이벤트) 리스트 
+	// 파라미터: 현재 페이지번호(pageNum)
 	ArrayList<SelectEventDto> selectEvent(int pageNum);
 	
-	// 이벤트 lastPage
+	// 게시판(이벤트) 마지막 숫자
 	int getLastPageNumber();
 	
-	// 이벤트 insert
+	// 게시판(이벤트) 등록
+	// 파라미터: 이미지 URL(img) / 종류(topLetter) / 제목(title) / 기간(period)
 	void insertEvent(String img, String topLetter, String title, String period);
 }

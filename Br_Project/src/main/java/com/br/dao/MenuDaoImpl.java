@@ -133,14 +133,13 @@ public class MenuDaoImpl implements MenuDao {
 	}
 	
 	// 특정 idx의 아이스크림케이크
-	// 변경 필요
-	// 파라미터: 
+	// 파라미터: 아이스크림케이크idx(cakeIdx)
 	@Override
-	public ShowIceCreamCakeDetailDto showIceCreamCakeDetail(String korName) {
+	public ShowIceCreamCakeDetailDto showIceCreamCakeDetail(int cakeIdx) {
 		
 		// 이전의 pstmt의 역할로 hashmap 사용
-		HashMap<String,String> hmap = new HashMap<String,String>();
-		hmap.put("korName", korName);
+		HashMap<String,Integer> hmap = new HashMap<String, Integer>();
+		hmap.put("cakeIdx", cakeIdx);
 		
 		ShowIceCreamCakeDetailDto cakeDetail = sqlSession.selectOne("MenuMapper.showCakeDetail", hmap);
 		

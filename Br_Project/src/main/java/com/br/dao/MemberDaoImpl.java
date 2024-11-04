@@ -15,6 +15,7 @@ public class MemberDaoImpl implements MemberDao {
 	// 회원 있는지 확인
 	@Override
 	public String IdDuplicationCheck(String email) {
+		
 		HashMap<String, String> hmap = new HashMap<>();
 		hmap.put("loginId", email);
 		
@@ -26,6 +27,7 @@ public class MemberDaoImpl implements MemberDao {
 	// 회원가입
 	@Override
 	public void SignUp(String email, String nickname) {
+		
 		HashMap<String, String> hmap = new HashMap<>();
 		hmap.put("email", email);
 		hmap.put("nickname", nickname);
@@ -53,6 +55,5 @@ public class MemberDaoImpl implements MemberDao {
 			return false;
 		}
 	}
-	
 	
 }

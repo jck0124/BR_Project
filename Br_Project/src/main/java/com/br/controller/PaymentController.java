@@ -27,6 +27,7 @@ public class PaymentController {
     @RequestMapping("/payment")
     public String payment(@RequestParam("totalPrice") Integer totalPrice
     		, @RequestParam("products") String products, Model model) {
+    	
     	model.addAttribute("totalPrice", totalPrice);
     	if(products != null) {
     		String[] product = products.split(",");
@@ -41,30 +42,13 @@ public class PaymentController {
     				menuInfoList.add(menuDetails);
     		}
     		model.addAttribute("menuInfoList", menuInfoList);
-//    		System.out.println("menuInfoList: "+ menuInfoList.toString());
+    		// System.out.println("menuInfoList: "+ menuInfoList.toString());
     	}
+    	
     	return "etc/payment";
     }
     
-//private final KakaoPayService kakaoPayService;
-//    @PostMapping("/pay/ready")
-//    public @ResponseBody KakaoPayReadyDto payReady(@RequestBody KakaoPayOrderFormDto kakaoPayOrder) {
-//        
-//        String name = kakaoPayOrder.getName();
-//        int totalPrice = kakaoPayOrder.getTotalPrice();
-//        
-////        log.info("주문 상품 이름: " + name);
-////        log.info("주문 금액: " + totalPrice);
-//
-//        // 카카오 결제 준비하기
-//        KakaoPayReadyDto readyResponse = ps.payReady(name, totalPrice);
-//        // 세션에 결제 고유번호(tid) 저장
-//        KakaoPaySessionUtils.addAttribute("tid", readyResponse.getTid());
-////        log.info("결제 고유번호: " + readyResponse.getTid());
-//
-//        return readyResponse;
-//    }
-
+    // 결제 성공
     @GetMapping("/pay/completed")
     public String payCompleted(@RequestParam("pg_token") String pgToken) {
         String tid = KakaoPaySessionUtils.getStringAttributeValue("tid");
@@ -74,6 +58,5 @@ public class PaymentController {
 
         return "redirect:/icecream";
     }
-    
     
 }

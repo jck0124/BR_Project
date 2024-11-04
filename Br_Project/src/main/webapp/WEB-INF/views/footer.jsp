@@ -188,20 +188,11 @@
 	$(function() {
 		let loginId = $("input[name='login_id']").val();
 		
-		// 수빈 manager 작업
-		$("#managerPage").click(function(e) {
-			if(loginId!="admin") {
-				alert("관리자만 접근 가능한 페이지 입니다!");
-				e.preventDefault();
-			}
-		});
-		
 		<c:if test="${pageContext.request.requestURI.contains('manager.jsp') || pageContext.request.requestURI.contains('payment.jsp')}">
 		// 알림 채팅
 		let name = "${sessionScope.loginId}";
 		let ws;
 		const url = "ws://localhost:9090/www/alarm";
-		
 		
 		function connect(name) {
 			
@@ -295,14 +286,9 @@
 					print(name, message.content, 'me', 'msg', message.regdate);
 				}
 			});
-			
-
-			
 		}
-		
 		connect(name);
 		</c:if>
 	});
 </script>
-
 </html>

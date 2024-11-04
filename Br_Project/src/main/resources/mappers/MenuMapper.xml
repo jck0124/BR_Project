@@ -131,7 +131,8 @@
 			        FROM (  SELECT  name, 
 			                        img,
 			                        tag,
-			                		background_color AS backgroundColor
+			                		background_color AS backgroundColor,
+			                		cake_idx AS cakeIdx
 			                FROM ice_cream_cake
 			                ORDER BY cake_idx ASC) t1) t2
 			WHERE rnum>=#{startNum} AND rnum<=#{endNum}
@@ -164,9 +165,10 @@
 			        sugar,
 			        protein,
 			        allergy,
-			        info_img AS infoImg
+			        info_img AS infoImg,
+                    cake_idx
 			FROM ice_cream_cake_detail
-			WHERE kor_name = #{korName}
+			WHERE cake_idx = #{cakeIdx}
 		]]>
 	</select>
 </mapper>

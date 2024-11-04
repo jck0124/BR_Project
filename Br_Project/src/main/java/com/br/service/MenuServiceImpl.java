@@ -150,10 +150,10 @@ public class MenuServiceImpl implements MenuService {
 	// 변경 필요
 	// 파라미터: 
 	@Override
-	public ShowIceCreamCakeDetailDto showIceCreamCakeDetail(String korName) {
+	public ShowIceCreamCakeDetailDto showIceCreamCakeDetail(int cakeIdx) {
 		
 		ShowIceCreamCakeDetailDto cakeDetail = new ShowIceCreamCakeDetailDto();
-		cakeDetail = mDao.showIceCreamCakeDetail(korName);
+		cakeDetail = mDao.showIceCreamCakeDetail(cakeIdx);
 		
 		return cakeDetail;
 	}

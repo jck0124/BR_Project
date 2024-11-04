@@ -63,9 +63,6 @@ public class AlarmSocket {
 				}
 			}
 		}
-		
-		
-		
 	}
 	
 	// 접속자를 확인하는 메서드 

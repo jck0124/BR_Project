@@ -53,7 +53,7 @@ public class MenuDaoTest {	// 제일 먼저 해야 하는 것 : 테스트!!!
 	
 	@Test
 	public void testCakeDetail() {
-		ShowIceCreamCakeDetailDto cakeDetail = dao.showIceCreamCakeDetail("해피 버스데이");
+		ShowIceCreamCakeDetailDto cakeDetail = dao.showIceCreamCakeDetail(1);
 		System.out.println(cakeDetail.getKorName());
 	}
 	

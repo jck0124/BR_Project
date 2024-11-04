@@ -1,6 +1,5 @@
 package com.br.controller;
 
-//추가
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -45,8 +44,6 @@ public class HomeController {
     @Autowired
     private GoogleLoginServiceImpl gSvc;
     
-    
-    
     // loginSuccessTemp : 매핑경로 충돌방지, 임시로 Temp 붙임
     @RequestMapping("/loginSuccessTemp")
     public String loginSuccess(HttpSession session,
@@ -61,7 +58,7 @@ public class HomeController {
     	return "redirect:/menu_icecream";
     }
     
-    // 로그인 첫 화면 요청 메소드
+    // 로그인 첫 화면 요청
     @RequestMapping(value = "/loginPage", method = { RequestMethod.GET, RequestMethod.POST })
     public String login(Model model, HttpSession session) {
         return "etc/log_in";
@@ -120,6 +117,7 @@ public class HomeController {
     	session.setAttribute("loginId", email); // 세션 생성
     	return "etc/log_in";
     }
+    
     // 로그아웃
     @RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
     public String logout(HttpSession session) throws IOException {
@@ -127,6 +125,7 @@ public class HomeController {
         return "redirect:menu_icecream";
     }
     
+    // 에러 페이지로 이동
     @RequestMapping("/errorPage")
     public String error() {
     	return "etc/error";
@@ -187,9 +186,4 @@ public class HomeController {
     	return "redirect:/menu_icecream";
     }
     
-  
-    
-    
 }
-	
-

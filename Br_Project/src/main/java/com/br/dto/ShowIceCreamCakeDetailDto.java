@@ -1,6 +1,7 @@
 package com.br.dto;
 
 public class ShowIceCreamCakeDetailDto {
+	private int cakeIdx;
 	private String cakeImg;
     private String backgroundColor;
     private String pinkLetter;
@@ -19,10 +20,11 @@ public class ShowIceCreamCakeDetailDto {
     
     public ShowIceCreamCakeDetailDto() {}
 
-	public ShowIceCreamCakeDetailDto(String cakeImg, String backgroundColor, String pinkLetter, String engName,
-			String korName, String subtitle, int price, int oneTime, int kcal, double fat, int sodium, int sugar,
-			int protein, String allergy, String infoImg) {
+	public ShowIceCreamCakeDetailDto(int cakeIdx, String cakeImg, String backgroundColor, String pinkLetter,
+			String engName, String korName, String subtitle, int price, int oneTime, int kcal, double fat, int sodium,
+			int sugar, int protein, String allergy, String infoImg) {
 		super();
+		this.cakeIdx = cakeIdx;
 		this.cakeImg = cakeImg;
 		this.backgroundColor = backgroundColor;
 		this.pinkLetter = pinkLetter;
@@ -38,6 +40,14 @@ public class ShowIceCreamCakeDetailDto {
 		this.protein = protein;
 		this.allergy = allergy;
 		this.infoImg = infoImg;
+	}
+
+	public int getCakeIdx() {
+		return cakeIdx;
+	}
+
+	public void setCakeIdx(int cakeIdx) {
+		this.cakeIdx = cakeIdx;
 	}
 
 	public String getCakeImg() {

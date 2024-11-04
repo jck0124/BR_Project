@@ -12,6 +12,7 @@ import com.br.service.StoreServiceImpl;
 
 @Controller
 public class StoreController {
+	
 	@Autowired
 	StoreServiceImpl sSvc;
 	

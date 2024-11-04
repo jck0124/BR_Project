@@ -327,7 +327,6 @@ document.addEventListener("DOMContentLoaded", function() {
     
 });
 
-
 //로그인 체크
 $(document).ready(function() {
 	// 동적으로 생성되는 .submit_button 요소에 대해 이벤트 위임 사용
@@ -352,9 +351,7 @@ $(document).ready(function() {
 	});
 });
 
-
 $(function(){
-
 	var option = 1;
 	$("#choose_option_box").hide();
 	$("#choose_option").click(function(){
