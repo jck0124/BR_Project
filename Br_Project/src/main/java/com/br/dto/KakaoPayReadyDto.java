@@ -4,7 +4,7 @@ package com.br.dto;
 public class KakaoPayReadyDto {
 	
     private String tid;	// 결제 고유번호
-    private String next_redirect_pc_url; // 결제 요청 메시기(TMS) 전송을 위한 Redirect URL (카카오 측 제공)
+    private String next_redirect_pc_url; // 결제 요청 메시지(TMS) 전송을 위한 Redirect URL (카카오 측 제공)
     
 	public KakaoPayReadyDto() {
 		

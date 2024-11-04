@@ -71,7 +71,6 @@ public class MenuDaoImpl implements MenuDao {
 	// 아이스크림 마지막 페이지 번호
 	@Override
 	public int getIcecreamLastPageNumber() {
-		
 		int countRet = sqlSession.selectOne("MenuMapper.selectIcecreamLastPageNum");
 		
 		return countRet/10 + (countRet%10>0 ? 1 : 0);
