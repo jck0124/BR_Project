@@ -28,8 +28,11 @@ public class MemberServiceImpl implements MemberService {
 		this.naverLoginBO = naverLoginBO;
 	}
 	
+	// 로그인(카카오) 토큰 발급
+	// 파라미터 : 인증 코드(authorize_code)
     public String getAccessToken(String authorize_code) {
-        String access_Token = "";
+       
+    	String access_Token = "";
         String refresh_Token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
         
@@ -81,10 +84,14 @@ public class MemberServiceImpl implements MemberService {
         } catch (IOException | org.json.simple.parser.ParseException e) {
             e.printStackTrace();
         }
+        
         return access_Token;
     }
     
+    // 로그인(카카오) 카카오 사용자 정보 받아오기
+    // 파라미터: 허용 토큰(access_Token)
     public HashMap<String, Object> getUserInfo(String access_Token) {
+    	
         // 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
         HashMap<String, Object> userInfo = new HashMap<String, Object>();
         String reqURL = "https://kapi.kakao.com/v2/user/me";
@@ -124,21 +131,27 @@ public class MemberServiceImpl implements MemberService {
         } catch (IOException | org.json.simple.parser.ParseException e) {
             e.printStackTrace();
         }
+        
         return userInfo;
     }
     
     // 회원 있는지 확인
+    // 파라미터: 이메일(email)
     public boolean IdDuplicationCheck(String email) {
+    	
     	String loginId = mDao.IdDuplicationCheck(email);
+    	
     	return loginId != null; // 로그인 ID가 존재하면 true 반환
     }
     
     // 회원가입 메서드
+    // 파라미터: 이메일(email), 별명(nickname)
     public void signUp(String email, String nickname) {
     	mDao.SignUp(email, nickname);
     }
     
     // 관리자 여부 체크
+    // 파라미터: 아이디(id)
     @Override
     public boolean adminCheck(String id) {
     	return mDao.adminCheck(id);

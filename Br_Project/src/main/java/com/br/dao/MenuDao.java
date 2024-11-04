@@ -47,8 +47,7 @@ public interface MenuDao {
 	int getLastPageNumber();
 	
 	// 특정 idx의 아이스크림케이크
-	// 변경 필요
-	// 파라미터: 
-	ShowIceCreamCakeDetailDto showIceCreamCakeDetail(String korName);
+	// 파라미터: 아이스크림케이크idx(cakeIdx)
+	ShowIceCreamCakeDetailDto showIceCreamCakeDetail(int cakeIdx);
 	
 }

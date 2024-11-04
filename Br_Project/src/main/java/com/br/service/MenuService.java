@@ -41,5 +41,5 @@ public interface MenuService {
 	// 특정 idx의 아이스크림케이크 상세 페이지
 	// 변경 필요
 	// 파라미터: 
-	ShowIceCreamCakeDetailDto showIceCreamCakeDetail(String korName);
+	ShowIceCreamCakeDetailDto showIceCreamCakeDetail(int cakeIdx);
 }

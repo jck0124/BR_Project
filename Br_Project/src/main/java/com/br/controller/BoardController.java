@@ -212,79 +212,32 @@ public class BoardController {
 	}
 	
 	//수빈
+	// 게시판(이벤트) 리스트
 	@RequestMapping("/event")
 	public String event(HttpServletRequest request, Model model) {
+		
 		int pageNum = 1;
 		try {
 			pageNum = Integer.parseInt(request.getParameter("page"));
 		}catch(Exception e) { }
 		
-		
 		JSONArray result = bSvc.selectEvent(pageNum);
-		
 		if(result != null) {
 			model.addAttribute("selectEvent", result);
-			
 		}
 		model.addAttribute("pageNum", pageNum);
 		
 		return "br_play/event";
 	}
 	
-	// 매니저 board 업로드
+	// 메니저 페이지
 	@RequestMapping("/manager")
 	public String manager() {
-		
 		return "manager/manager";
 	}
 	
-//	// Post 방식으로 파일 업로드 처리 
-//	@PostMapping("/uploadEvent")
-//	public String handleFileUpload(
-//		@RequestParam("topLetter") String topLetter,
-//		@RequestParam("title") String title,
-//		@RequestParam("period") String period,
-//		@RequestParam("img") MultipartFile file,
-//		RedirectAttributes redirectAttributes,
-//		HttpServletRequest request) {
-//		
-//		if(file.isEmpty()) {
-//			redirectAttributes.addFlashAttribute("message", "파일을 선택해주세요.");
-//			return "redirect:/manager";
-//		}
-//		
-//		try {
-//            // 파일 저장 로직
-//			//String uploadDir = "C:/uploads/";
-//			String uploadDir = servletContext.getRealPath("/resources/uploads/");
-//			File directory = new File(uploadDir);
-//			if (!directory.exists()) {
-//			    directory.mkdirs(); // 디렉토리 생성
-//			}
-////            Path path = Paths.get(uploadDir + file.getOriginalFilename());
-////            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-//            
-//			String fileName = file.getOriginalFilename();
-//	        Path path = Paths.get(uploadDir + fileName);
-//	        Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-//
-//	        // 이미지 URL 저장 (예: http://localhost:9090/uploads/파일이름)
-//	        String imgUrl = "http://localhost:9090/uploads/" + fileName;
-//			
-//            // 데이터베이스에 이벤트 정보 삽입
-//            // String imgPath = uploadDir + file.getOriginalFilename(); // 저장한 이미지 경로
-//            bSvc.insertEvent(imgUrl, topLetter, title, period); // 서비스 호출
-//            
-//            // 성공 메시지 추가
-//            redirectAttributes.addFlashAttribute("message", "파일 업로드 성공: " + file.getOriginalFilename());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            redirectAttributes.addFlashAttribute("message", "파일 업로드 실패.");
-//        }
-//
-//        return "redirect:/manager";
-//	}
-	
+	// 매니저 게시판 업로드
+	// 파라미터: 유형(topLetter) / 제목(title) / 기간(period) / 이미지(img)
     @PostMapping("/uploadEvent")
     public String handleFileUpload(
         @RequestParam("topLetter") String topLetter,
@@ -326,6 +279,5 @@ public class BoardController {
 
         return "redirect:/manager";
     }
-	
 	
 }

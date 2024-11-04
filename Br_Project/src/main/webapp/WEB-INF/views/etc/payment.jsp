@@ -19,8 +19,7 @@
 
         // jQuery로 버튼 클릭 이벤트 등록
         $('#toss').on('click', function() {
-            alert("하이");
-            // IMP.request_pay 결제 모듈 호출
+             // IMP.request_pay 결제 모듈 호출
             IMP.request_pay({
                 pg: 'tosspay', // PG사
                 pay_method: 'card', // 결제수단

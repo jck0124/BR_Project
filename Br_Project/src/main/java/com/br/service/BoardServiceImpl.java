@@ -127,22 +127,16 @@ public class BoardServiceImpl implements BoardService {
 	// 파라미터: 현재 페이지(pageNum)
 	@Override
 	public JSONArray selectEvent(int pageNum) {
+		
 		ArrayList<SelectEventDto> selectEvent = new ArrayList<SelectEventDto>();
 		selectEvent = bDao.selectEvent(pageNum);
-//		// 페이지네이션
-		int startNum, endNum;
+
 		int lastPageNum = bDao.getLastPageNumber();
-		endNum = (pageNum / 5 + 1) * 5 - (pageNum % 5 == 0 ? 5 : 0);
+		int endNum = (pageNum / 5 + 1) * 5 - (pageNum % 5 == 0 ? 5 : 0);
 		if (endNum > lastPageNum) {
 			endNum = lastPageNum;
 		}
-		startNum = endNum - 4;
-//
-//		Map<String, Object> result = new HashMap<>();
-//		result.put("selectEvent", selectEvent);
-//		result.put("startNum", startNum);
-//		result.put("endNum", endNum);
-//		result.put("lastPageNum", lastPageNum);
+		int startNum = endNum - 4;
 		
 		JSONArray array = new JSONArray();
 		for(SelectEventDto dto : selectEvent) {
@@ -154,7 +148,6 @@ public class BoardServiceImpl implements BoardService {
 			array.add(obj);
 		}
 		
-		// 이벤트 리스트와 페이지네이션 정보 담기
 		return array;
 	}
 	

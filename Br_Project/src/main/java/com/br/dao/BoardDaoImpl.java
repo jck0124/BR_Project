@@ -115,9 +115,11 @@ public class BoardDaoImpl implements BoardDao {
 	
 	//수빈
 
-	// event 게시판 보여주기
+	// 게시판(이벤트) 리스트 
+	// 파라미터: 현재 페이지번호(pageNum)
 	@Override
 	public ArrayList<SelectEventDto> selectEvent(int pageNum) {
+		
 		int endNum = pageNum * 5;
 		int startNum = endNum -4;
 		
@@ -128,17 +130,21 @@ public class BoardDaoImpl implements BoardDao {
 		List<SelectEventDto> eventsTemp = sqlSession.selectList("BoardMapper.selectEvent", hmap);
 		ArrayList<SelectEventDto> events = new ArrayList<SelectEventDto>();
 		events.addAll(eventsTemp);
+		
 		return events;
 	}
 	
-	// event 페이지네이션
+	// 게시판(이벤트) 마지막 숫자
 	@Override
 	public int getLastPageNumber() {
+		
 		int countRet = sqlSession.selectOne("BoardMapper.selectLastPageNumber");
+		
 		return countRet/4 + (countRet%4>0 ? 1 : 0);
 	}
 
-	// event insert
+	// 게시판(이벤트) 등록
+	// 파라미터: 이미지 URL(img) / 종류(topLetter) / 제목(title) / 기간(period)
 	@Override
 	public void insertEvent(String img, String topLetter, String title, String period) {
 		

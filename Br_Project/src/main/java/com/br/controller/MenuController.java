@@ -106,14 +106,13 @@ public class MenuController {
 	}
 
 	// 메뉴(아이스크림케이크) 상세 페이지 매핑
-	// 변경 필요
-	// 파라미터: 아이스크림케이크 idx
+	// 파라미터: 아이스크림케이크idx(cakeIdx)
 	@RequestMapping("/ice_cream_cake_detail")
-	public String menu_ice_cream_cake_detail(String korName, Model model) {
+	public String menu_ice_cream_cake_detail(int cakeIdx, Model model) {
 		
-		model.addAttribute("korName", korName);
-		if(mSvc.showIceCreamCakeDetail(korName)  != null) {
-			model.addAttribute("cakeDetail", mSvc.showIceCreamCakeDetail(korName));
+		model.addAttribute("cakeIdx", cakeIdx);
+		if(mSvc.showIceCreamCakeDetail(cakeIdx)  != null) {
+			model.addAttribute("cakeDetail", mSvc.showIceCreamCakeDetail(cakeIdx));
 		}
 		
 		return "menu/ice_cream_cake_detail";

@@ -32,7 +32,6 @@ public class AjaxController {
 	@Autowired
 	BoardServiceImpl bSvc;
 	
-	// MemberServiceImpl로 변경 필요
 	@Autowired
 	MemberDaoImpl mDao;
 	
@@ -40,7 +39,7 @@ public class AjaxController {
 	PaymentServiceImpl pSvc;
 	
 	@Autowired
-	StoreServiceImpl	sSvc;
+	StoreServiceImpl sSvc;
 	
 	// 게시판(배라광장) 무한스크롤
 	@RequestMapping(value = "/api/plaza", produces = MediaType.APPLICATION_JSON_VALUE)

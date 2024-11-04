@@ -59,7 +59,7 @@
 	<!-- 상품 -->
 	<div id="product">
 		<c:forEach var="cake" items="${cakesList}">
-			<a href="ice_cream_cake_detail?korName=${cake.name}" class="iceCreamCakeProduct fl">
+			<a href="ice_cream_cake_detail?cakeIdx=${cake.cakeIdx}" class="iceCreamCakeProduct fl">
 				<div class="cakeImg">
 					<div class="tag">${cake.tag}</div>
 					<img src="${cake.img}" alt="아이스크림 케이크"/>
