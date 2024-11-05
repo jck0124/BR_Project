@@ -338,7 +338,6 @@ $(document).ready(function() {
 			success: function(isLoggedIn) {
 				console.log(isLoggedIn); // 값 확인
 				if (isLoggedIn) {
-					alert("로그인 상태입니다.");
 				} else {
 					alert("로그인이 필요합니다.");
 					window.location.href = "loginPage";

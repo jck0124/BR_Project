@@ -36,7 +36,7 @@
 			<a id="btn_naver_login" href="${pageContext.request.contextPath}/naverLogin">
 				<img class="login_logo" src="${pageContext.request.contextPath}/resources/img/naver_logo_login.png">
 			</a>
-			<a id="btn_kakao_login" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=179c8429a668f25b23f83e8fd29c90c5&redirect_uri=http://localhost:9090/www/kakaoLogin">
+			<a id="btn_kakao_login" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=179c8429a668f25b23f83e8fd29c90c5&redirect_uri=http://119.205.221.216:9090/BR_Project/kakaoLogin">
 				<img class="login_logo" src="${pageContext.request.contextPath}/resources/img/kakao_logo_login.png">
 			</a>
 			<a id="btn_google_login" href="${pageContext.request.contextPath}/googleLogin">
