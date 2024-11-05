@@ -46,7 +46,7 @@
 						 data-background-color="${icecream.backgroundColor}">
 							<a class="menu_btn" href="${pageContext.request.contextPath}/icecream_detail?icecreamIdx=${icecream.icecreamIdx}">
 								<span class="menu_info" style="color: ${icecream.textColor};">${icecream.hashtag}</span>
-								<img class="menu_img"src="${icecream.imgUrl}">
+								<img class="menu_img" data-src="${icecream.imgUrl}">
 							</a>
 						</div>
 						<strong class="menu_name">${icecream.nameKor}</strong>
@@ -77,6 +77,8 @@
 
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<!-- jQuery Lazy Load CDN 추가 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.11/jquery.lazy.min.js"></script>
 <!-- 처음 script 위치 설정 <script src="js/header.js"></script> -->
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 <style>
@@ -84,6 +86,8 @@
 </style>
 <script>
 $(function(){
+	$('.menu_btn img').Lazy();
+	
 	$(".menu_info").hide();
 	$('.menu_list_inner_border').css('background-color', ''); 
 	$(".menu_list_inner_border").hover(function() {
