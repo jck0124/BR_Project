@@ -50,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=179c8429a668f25b23f83e8fd29c90c5"); // 본인이 발급받은 key
-            sb.append("&redirect_uri=http://localhost:9090/www/kakaoLogin"); // 본인이 설정한 주소
+            sb.append("&redirect_uri=http://119.205.221.216:9090/BR_Project/kakaoLogin"); // 본인이 설정한 주소
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
