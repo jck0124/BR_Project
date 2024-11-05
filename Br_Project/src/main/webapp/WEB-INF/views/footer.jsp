@@ -192,7 +192,7 @@
 		// 알림 채팅
 		let name = "${sessionScope.loginId}";
 		let ws;
-		const url = "ws://localhost:9090/www/alarm";
+		const url = "ws://119.205.221.216:9090/BR_Project/alarm";
 		
 		function connect(name) {
 			

@@ -264,8 +264,6 @@
 					<!-- 채팅목록 -->
 					<div>새로운 채팅</div>
 					<div class="header_chat_list_container">
-					
-						
 					</div>
 				</c:if>
 				
@@ -287,20 +285,12 @@
 						<input type="button" value="전송"/>										
 					</div>
 				</div>
-				
-				
 			</div>
 			<!-- header_chat -->
-
-
-			
         </div>
         <!-- header_inner 종료 -->
-        
-        
         <input type="hidden" name="admin_check" value="${sessionScope.adminCheck}"/>
     </header>
-
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
@@ -422,7 +412,7 @@ $(function() {
 	}
 	
 	// 채팅 웹소켓
-	let webSocket = new WebSocket("ws://localhost:9090/www/chat");
+	let webSocket = new WebSocket("ws://119.205.221.216:9090/BR_Project/chat");
 	webSocket.onmessage = onMessage;
 	webSocket.onopen = onOpen;
 	webSocket.onerror = onError;
@@ -466,7 +456,6 @@ $(function() {
 			chatScroll();
 		}
 	})
-	
 	
 	// 채팅 도착
 	function onMessage(e) {
@@ -523,7 +512,6 @@ $(function() {
 	function onError() {
 		alert("error");
 	}
-	
 	
 })
 </script>

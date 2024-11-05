@@ -332,7 +332,7 @@ $(document).ready(function() {
 	// 동적으로 생성되는 .submit_button 요소에 대해 이벤트 위임 사용
 	$(document).on('click', '.submit_button', function() {
 		$.ajax({
-			url: "http://localhost:9090/www/api/checkLoginStatus",
+			url: "http://119.205.221.216:9090/BR_Project/api/checkLoginStatus",
 			dataType: "json",
 			type: "GET",
 			success: function(isLoggedIn) {
