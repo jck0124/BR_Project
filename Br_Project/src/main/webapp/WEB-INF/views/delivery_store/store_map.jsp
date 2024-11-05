@@ -153,18 +153,6 @@ $(document).ready(function(){
 	   let sel2Selected = $("#sel2").val();
 	   let storeSearched = $("#store_search").val();
 	   
-	   alert("BR31: " +storeTypeBrChecked
-			   + " 100flavor: " +storeTypeFlavor
-			   + " parking: " +parkingChecked
-			   + " delivery: " +deliveryChecked
-			   + " pickup: " +pickupChecked
-			   + " here: " +hereChecked
-			   + " happySation: " +happyStationChecked
-			   + " blindBoxChecked: " +blindBoxChecked
-			   + " sel1: " +sel1Selected
-			   + " sel2: " +sel2Selected
-			   + " storeName: " + storeSearched
-	   );
 	   let param = {
 			   storeTypeBrChecked: storeTypeBrChecked,
 		        storeTypeFlavor: storeTypeFlavor,
@@ -186,7 +174,6 @@ $(document).ready(function(){
 		  	contentType:'application/json',
 		  	success: function(response) {
 		  		// 확인용
-			   console.log("paramData: "+ paramData),
 		  		console.log("ajax응답: "+ JSON.stringify(response));
 		  		let storeContainer = $("#ul_map_container");
 		  		storeContainer.empty();	// 기존 리스트 비우기
