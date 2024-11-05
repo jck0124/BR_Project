@@ -86,12 +86,6 @@ public class HomeController {
 
         // 1. 로그인 사용자 정보를 읽어온다.
         apiResult = naverLoginBO.getUserProfile(oauthToken); // String 형식의 JSON 데이터
-
-        /** apiResult json 구조		
-          {"resultcode":"00",		 
-          "message":"success",		 
-          "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
- 		**/
         
         // 2. String 형식인 apiResult를 JSON 형태로 바꿈
         JSONParser parser = new JSONParser();
@@ -105,7 +99,6 @@ public class HomeController {
         String email = (String) response_obj.get("email");
         System.out.println("email : "+ email);
         String nickname = (String) response_obj.get("name");
-        System.out.println("name : "+ nickname);
 
         model.addAttribute("result", apiResult);
         
