@@ -71,13 +71,6 @@
 						</a>
 					</li>
 					</c:forEach>
-				
-				<!-- pagination -->
-				<nav class="pagination">
-					<div class="pagination_inner">
-						<span class="pagination_num">1</span>
-					</div>
-				</nav>
 			</div>
 			<div id="chef_pastry" class="tabcontent center">
 				<ul class="card_list">
