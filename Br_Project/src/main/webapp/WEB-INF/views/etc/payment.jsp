@@ -180,32 +180,7 @@
             }
         }).open();
     }
-	/*
-	$(function(){
-		// 웹소켓 연결- 서버
-		function func_on_message(e) {
-			$("#requirement_container").append("<p class='chat'>" + e.data + "</p>");
-		}
-		function func_on_open(e) {
-			$("#requirement_container").append("<p class='chat'>" + e.data + "</p>");
-		}
-		function func_on_error(e) {
-			alert("!");
-		}
-		let webSocket = new WebSocket("ws://localhost:9090/www/alarm");
-		webSocket.onmessage = func_on_message;
-		webSocket.opopen = func_on_open;
-		webSocket.operror = func_on_error;
-		
-		$("#btn_submit_message").click(function() {
-			let msg = $("#input_message").val();
-			alert("payment 페이지에서 보내는 msg : "+ msg);
-			webSocket.send(msg);
-			$("#requirement_container").prepend("<p class='chat'> + 고객 " + msg + "</p>");
-			console.log("WebSocket 연결 성공<- payment에서");
-		});
-	});
-	*/
+	
 	$(function(){
 
 		// 카카오페이 결제 팝업창 연결
@@ -216,9 +191,7 @@
 			// 모든 ,를 찾아 삭제
 			let totalPriceString = $("#total_price").text().replace(/,/g,'');
 			let totalPrice = Number(totalPriceString);
-			alert("totalPrice: "+totalPrice);
 			// 결제 버튼 클릭 시 
-			// 이름/ 배송지... 필수 정보 입력(유효성 검사)
 			
 			// @data 화면에서 입력받을 수 있는 기본 결제 정보만 넘겨주기 (나머지는 뒤에서 처리)
 			// return 카카오톡 결제요청 페이지
