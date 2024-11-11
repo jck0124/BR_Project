@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div style="claer:both"></div>
+	<div style="clear:both"></div>
 	<!-- footer -->
     <footer>
     	<div id="footer" class="center">

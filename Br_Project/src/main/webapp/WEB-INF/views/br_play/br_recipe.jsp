@@ -9,6 +9,14 @@
 	<title>Insert title here</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/br_recipe.css"/>
+	<style>
+		footer {
+			width: 100% !important;
+			height: 593.17px !important;
+			background: #1c1b18 !important;
+			margin-top: 12900px !important;
+		}
+	</style>
 </head>
 <body>
 	<%@ include file="../header.jsp" %>

@@ -56,7 +56,7 @@ public class PaymentController {
         // 카카오 결제 요청
         KakaoPayApproveDto approveResponse = pSvc.payApprove(tid, pgToken);
 
-        return "redirect:/menu_icecream";
+        return "redirect:http://119.205.221.216:9090/BR_Project/menu_icecream";
     }
     
 }
