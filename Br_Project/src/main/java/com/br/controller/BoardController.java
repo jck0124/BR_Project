@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
@@ -152,11 +151,12 @@ public class BoardController {
 	@RequestMapping(value="file", method = RequestMethod.POST)
 	public String fileUpload(MultipartFile file) throws Exception {
 		logger.info("/request/file");
-		logger.info("uploadPath : "+ recipeUploadPath);
+		System.out.println("uploadPath : "+ recipeUploadPath);
 		
 		if (file.isEmpty()) {
 			return "FAIL";
 		}
+		System.out.println("originalFileName: "+ file.getOriginalFilename() + " /size: " + file.getSize() + " /contentType: "+ file.getContentType());
 		
 		logger.info("originalFileName : " + file.getOriginalFilename());
 		logger.info("size : " + file.getSize());
@@ -192,9 +192,11 @@ public class BoardController {
 		
 		String imgUrl;
 		 // 이미지 파일 업로드
+		System.out.println("categoryIdx: "+ categoryIdx + "/titleKor: " + titleKor + "/titleEng: "+ titleEng);
 	    try {
 	        imgUrl = fileUpload(imgPath); // 파일 업로드 메소드 호출
 	    } catch (Exception e) {
+	    	System.out.println("레시피 등록 실패! ㅜㅜ");
 	        // 오류 처리
 	        return "redirect:/error"; // 오류 페이지로 리다이렉트
 	    }

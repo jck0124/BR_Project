@@ -51,6 +51,7 @@ public class PaymentController {
     // 결제 성공
     @GetMapping("/pay/completed")
     public String payCompleted(@RequestParam("pg_token") String pgToken) {
+    	System.out.println("/pay/completed까지 도달 성공!");
         String tid = KakaoPaySessionUtils.getStringAttributeValue("tid");
 
         // 카카오 결제 요청
